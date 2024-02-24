@@ -606,6 +606,38 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &281111977 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7788276750846486890, guid: 5f91ea5f38138490488f4f315890118b, type: 3}
+  m_PrefabInstance: {fileID: 7788276750767736611}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &281111981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 281111977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6960e84d07fb87f47956e7a81d71c4e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ProtocolType: 0
+  m_MaxPacketQueueSize: 128
+  m_MaxPayloadSize: 6144
+  m_HeartbeatTimeoutMS: 500
+  m_ConnectTimeoutMS: 1000
+  m_MaxConnectAttempts: 60
+  m_DisconnectTimeoutMS: 30000
+  ConnectionData:
+    Address: 127.0.0.1
+    Port: 7777
+    ServerListenAddress: 127.0.0.1
+  DebugSimulator:
+    PacketDelayMS: 0
+    PacketJitterMS: 0
+    PacketDropRate: 0
 --- !u!114 &286891001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3067,6 +3099,11 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &1514188212 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 891596909533292088, guid: 60217958ca2e04c7380648fd2f53b11c, type: 3}
+  m_PrefabInstance: {fileID: 891596908218388099}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1570684406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6671,6 +6708,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7788276750846486889, guid: 5f91ea5f38138490488f4f315890118b, type: 3}
+      propertyPath: NetworkConfig.PlayerPrefab
+      value: 
+      objectReference: {fileID: 1514188212}
+    - target: {fileID: 7788276750846486889, guid: 5f91ea5f38138490488f4f315890118b, type: 3}
+      propertyPath: NetworkConfig.NetworkTransport
+      value: 
+      objectReference: {fileID: 281111981}
     - target: {fileID: 7788276750846486890, guid: 5f91ea5f38138490488f4f315890118b, type: 3}
       propertyPath: m_Name
       value: Network Manager
@@ -6679,7 +6724,10 @@ PrefabInstance:
     - {fileID: 7788276750846486895, guid: 5f91ea5f38138490488f4f315890118b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7788276750846486890, guid: 5f91ea5f38138490488f4f315890118b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 281111981}
   m_SourcePrefab: {fileID: 100100000, guid: 5f91ea5f38138490488f4f315890118b, type: 3}
 --- !u!1001 &8002797344885216637
 PrefabInstance:
