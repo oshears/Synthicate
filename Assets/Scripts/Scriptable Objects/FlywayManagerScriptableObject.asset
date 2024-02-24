@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dbc6a06660944a0db933dc2d368b2ee, type: 3}
+  m_Name: FlywayManagerScriptableObject
+  m_EditorClassIdentifier: 
+  NUM_FLYWAY_POINTS: 72
+  playerMaterials:
+  - {fileID: 2100000, guid: 8e34cb5f2d0a72447ab13a50b7e2b635, type: 2}
+  - {fileID: 2100000, guid: 1fe727abbc9789343bf90ec057955094, type: 2}
+  - {fileID: 2100000, guid: be1e87d2e60b63340afc989f1e9e9149, type: 2}
+  - {fileID: 2100000, guid: e21f26da250968e4b948a6a2d8610fb5, type: 2}
+  fullyTranslucentMaterial: {fileID: 2100000, guid: 39cbd81ea9097be4bbe582a6e9c6926d, type: 2}
+  semiTranslucentMaterial: {fileID: 2100000, guid: af70da79507364842a491906cdbc4d91, type: 2}
+  PLAYER_LIGHT_COLORS:
+  - {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 1, a: 1}
+  - {r: 0, g: 1, b: 1, a: 1}
+  beginBuildModeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  endBuildModeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playerBuildEvent:
+    m_PersistentCalls:
+      m_Calls: []

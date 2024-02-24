@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 5446be4b2ea684945b1d20b9c97d3ffe
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - externalMaterial: {instanceID: 0}
+  - fullyTranslucentMaterial: {instanceID: 0}
+  - semiTranslucentMaterial: {instanceID: 0}
+  - outpostMesh: {instanceID: 0}
+  - strongHoldMesh: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

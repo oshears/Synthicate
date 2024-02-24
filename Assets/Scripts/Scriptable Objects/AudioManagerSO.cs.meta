@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 1e9b8b8f0afa041ad829ca8a502e0643
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - mainTheme: {fileID: 8300000, guid: 33ffcca30b7394240a78896071d0bb63, type: 3}
+  - menuSelectionSound: {instanceID: 0}
+  - hackerSound: {instanceID: 0}
+  - nextTurnSound: {instanceID: 0}
+  - buildSound: {instanceID: 0}
+  - influencePointSound: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

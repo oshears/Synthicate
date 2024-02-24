@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5446be4b2ea684945b1d20b9c97d3ffe, type: 3}
+  m_Name: StrongholdManagerScriptableObject
+  m_EditorClassIdentifier: 
+  playerMaterials:
+  - {fileID: 2100000, guid: 5c39a1103ea6d414b8c1253ab07c50ef, type: 2}
+  - {fileID: 2100000, guid: ff01eb5f0ca04e447a9a7652b99d6828, type: 2}
+  - {fileID: 2100000, guid: 1f1d40463c863164f8e53d3414052bb9, type: 2}
+  - {fileID: 2100000, guid: 70aebecd7bfcc524aba4e1e563a78a25, type: 2}
+  externalMaterial: {fileID: 2100000, guid: 24bf18a7029b9c148aedd011ec94bcf4, type: 2}
+  fullyTranslucentMaterial: {fileID: 2100000, guid: 39cbd81ea9097be4bbe582a6e9c6926d, type: 2}
+  semiTranslucentMaterial: {fileID: 2100000, guid: af70da79507364842a491906cdbc4d91, type: 2}
+  outpostMesh: {fileID: 4493585093827132993, guid: 4634f183b927dde43844e172d28040f3, type: 3}
+  strongHoldMesh: {fileID: -2814097049474903946, guid: f0b91195f1893744f9262e2403d25ade, type: 3}

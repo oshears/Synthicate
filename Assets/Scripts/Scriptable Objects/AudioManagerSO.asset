@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e9b8b8f0afa041ad829ca8a502e0643, type: 3}
+  m_Name: AudioManagerSO
+  m_EditorClassIdentifier: 
+  mainTheme: {fileID: 8300000, guid: 33ffcca30b7394240a78896071d0bb63, type: 3}
+  menuSelectionSound: {fileID: 8300000, guid: 7c4637a0e2c4d41a5af34d502c2e3cee, type: 3}
+  hackerSound: {fileID: 8300000, guid: 51c274529c0764525bf25882219fbfa5, type: 3}
+  nextTurnSound: {fileID: 8300000, guid: 956ef4d1208714b0eb0d67bf2428bdeb, type: 3}
+  buildSound: {fileID: 8300000, guid: 4f47d5d9b3d994f0a9406f618d53c33e, type: 3}
+  influencePointSound: {fileID: 8300000, guid: c051d0a6a656f416f9bcb3282510483e, type: 3}
