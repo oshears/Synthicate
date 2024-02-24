@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
-// using Unity.Netcode.Transports.UNET;
-// using Unity.Netcode
+using Unity.Netcode.Transports.UTP;
 
 
 
@@ -24,7 +23,7 @@ namespace Synthicate
 
 		NetworkVariable<int> connectedPlayers = new NetworkVariable<int>();
 
-		// UNetTransport transport;
+		UnityTransport transport;
 
 		enum MenuStates { Main, JoinGame, ClientInLobby, HostGame, Settings, InGame, GameMenu, Inactive };
 		MenuStates state;
@@ -50,7 +49,7 @@ namespace Synthicate
 			//Debug.Log(gameManagerSO.clientStartGameEvent);
 			gameManagerSO.updateMainMenuEvent.AddListener(respondToMainMenuUpdate);
 
-			// transport = NetworkManager.Singleton.gameObject.GetComponent<UNetTransport>();
+			transport = NetworkManager.Singleton.gameObject.GetComponent<UnityTransport>();
 
 		}
 
@@ -226,8 +225,10 @@ namespace Synthicate
 			playMenuSelectionAudio();
 
 			
-			// transport.ConnectAddress = ipAddress;
-			// transport.ConnectPort = int.Parse(port);
+			transport.SetConnectionData(
+				ipAddress,  // The IP address is a string
+				ushort.Parse(port) // The port number is an unsigned short, I have 7777 assigned for Unity Games
+			);
 			NetworkManager.Singleton.OnClientDisconnectCallback += failedConnection => {
 				Debug.Log("Failed to connect to host at: " + ipAddress + ":" + port);
 				NetworkManager.Singleton.Shutdown();
