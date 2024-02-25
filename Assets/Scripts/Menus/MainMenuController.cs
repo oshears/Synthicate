@@ -88,6 +88,8 @@ namespace Synthicate
 
 		private void OnGUI()
 		{
+			return; 
+			
 			// update box sizes
 			float screenScaleX = Screen.width * 0.65f;
 			float screenScaleY = Screen.height * 0.65f;
