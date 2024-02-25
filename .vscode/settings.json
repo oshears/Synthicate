@@ -55,7 +55,7 @@
         "Packages/": true,
         "Logs/": true,
         "Assets/External": true,
-        "Assets/Resources": true
+        "Assets/Resources": true,
     },
     "dotnet.defaultSolution": "Synthicate.sln"
 }

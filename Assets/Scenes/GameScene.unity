@@ -905,6 +905,11 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &396520053 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4844974407417201228, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+  m_PrefabInstance: {fileID: 1701461194}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &410013418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1817,8 +1822,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 813711084}
+  - component: {fileID: 813711085}
   m_Layer: 5
-  m_Name: MainMenuScreen
+  m_Name: Main Menu Screen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1848,6 +1854,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0.000061035156}
   m_SizeDelta: {x: 0.000061035, y: -0.000030518}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &813711085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813711083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a30fa46697e865344971caa4cd369fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  singlePlayerButton: {fileID: 1774987372}
+  multiPlayerButton: {fileID: 1017558604}
+  quitButton: {fileID: 396520053}
+  testButton: {fileID: 1774987374}
 --- !u!114 &827162401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2331,6 +2353,11 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &1017558604 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4844974407417201228, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+  m_PrefabInstance: {fileID: 1249260303}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1018217527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2808,6 +2835,34 @@ PrefabInstance:
       value: 'Multiplayer
 
 '
+      objectReference: {fileID: 0}
+    - target: {fileID: 8218059466840923358, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8218059466840923358, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8218059466840923358, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: 90a81f3ba11d5b04e8c825c89791d49f, type: 2}
+    - target: {fileID: 8218059466840923358, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8218059466840923358, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnMultiPlayerButtonEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 8218059466840923358, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Synthicate.UiScriptableObject, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8218059466840923358, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8965089416482576191, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
       propertyPath: m_Pivot.x
@@ -3468,6 +3523,7 @@ GameObject:
   - component: {fileID: 1646710479}
   - component: {fileID: 1646710478}
   - component: {fileID: 1646710477}
+  - component: {fileID: 1646710481}
   m_Layer: 5
   m_Name: UI Manager
   m_TagString: Untagged
@@ -3558,6 +3614,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1646710481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1646710476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbea7de8f5faa6d488234d6a345b86c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _titleScreen: {fileID: 813711083}
 --- !u!114 &1653591312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3690,6 +3759,34 @@ PrefabInstance:
       value: 'Quit Game
 
 '
+      objectReference: {fileID: 0}
+    - target: {fileID: 8218059466840923358, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8218059466840923358, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8218059466840923358, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: 90a81f3ba11d5b04e8c825c89791d49f, type: 2}
+    - target: {fileID: 8218059466840923358, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8218059466840923358, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnQuitPlayerButtonEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 8218059466840923358, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Synthicate.UiScriptableObject, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8218059466840923358, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8965089416482576191, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
       propertyPath: m_Pivot.x
@@ -3942,11 +4039,27 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &1774987372 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4844974407417201228, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+  m_PrefabInstance: {fileID: 3063208874732014597}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1774987373 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8965089416482576191, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
   m_PrefabInstance: {fileID: 3063208874732014597}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1774987374 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8218059466840923358, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+  m_PrefabInstance: {fileID: 3063208874732014597}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774987372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1792059972
 MonoBehaviour:
   m_ObjectHideFlags: 0
