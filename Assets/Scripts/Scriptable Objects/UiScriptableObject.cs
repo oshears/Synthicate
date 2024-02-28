@@ -11,6 +11,7 @@ namespace Synthicate
 		public UnityEvent singlePlayerButton;
 		public UnityEvent multiPlayerButton;
 		public UnityEvent quitButton;
+		public UnityEvent<bool> setMainMenuActiveEvent;
 		
 		public void OnSinglePlayerButtonEvent()
 		{
@@ -25,6 +26,11 @@ namespace Synthicate
 		public void OnQuitButtonEvent()
 		{
 			quitButton.Invoke();
+		}
+		
+		public void OnSetMainMenuActive(bool active)
+		{
+			setMainMenuActiveEvent.Invoke(active);
 		}
 	}
 }

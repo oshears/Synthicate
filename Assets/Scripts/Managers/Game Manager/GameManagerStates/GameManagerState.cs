@@ -4,25 +4,39 @@ namespace Synthicate {
 
 	public abstract class GameManagerState : IManagerState
 	{
-		protected GameManagerStateMachine _stateMachine;
 		protected GameManager _owner;
+		private GameManagerStateMachine _stateMachine;
 		protected GameManagerSO _gameManagerSO;
 		protected HexManagerScriptableObject _hexManagerSO;
-		// protected PlayerScriptableObject[] _playerScriptableObjects;
+		protected UiScriptableObject _userInterfaceSO;
+		protected PlayerManagerSO[] _playerManagerSOs;
+		protected PlayerManagerSO _clientPlayerManagerSO;
+		protected FlywayManagerScriptableObject _flywayManagerSO;
+		protected StrongholdManagerScriptableObject _strongholdManagerSO;
+		protected DepotManagerScriptableObject _depotManagerSO;
+		protected BoardManagerSO _boardManagerSO;
+		protected AudioManagerSO _audioManagerSO;
 
 		public GameManagerState(GameManager owner)
 		{
 			_owner = owner;
 			_stateMachine = owner.stateMachine;
-			// _uiScriptableObject = owner.uiScriptableObject;
-			// _deckScriptableObject = owner.deckScriptableObject;
-			// _playerScriptableObject = owner.playerScriptableObject;
-			// _npcScriptableObjects = owner.npcScriptableObjects;
-			// _gunScriptableObject = owner.gunScriptableObject;
+			
+			_gameManagerSO = owner.gameManagerSO;
+			_hexManagerSO = owner.hexManagerSO;
+			_userInterfaceSO = owner.userInterfaceSO;
+			_playerManagerSOs = owner.playerManagerSOs;
+			_clientPlayerManagerSO = owner.clientPlayerManagerSO;
+			_flywayManagerSO = owner.flywayManagerSO;
+			_strongholdManagerSO = owner.strongholdManagerSO;
+			_depotManagerSO = owner.depotManagerSO;
+			_boardManagerSO = owner.boardManagerSO;
+			_audioManagerSO = owner.audioManagerSO;
+			
 		}
-		public virtual void Enter() {}
-		public virtual void Execute() {}
-		public virtual void Exit() {}
+		public abstract void Enter();
+		public abstract void Execute();
+		public abstract void Exit();
 		protected void changeState(GameManagerState newState)
 		{
 			_stateMachine.ChangeState(newState);

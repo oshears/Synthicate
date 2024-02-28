@@ -19,8 +19,8 @@ namespace Synthicate
 		
 		void Awake() {
 			singlePlayerButton.GetComponent<Button>().onClick.AddListener(HandleSinglePlayerButtonEvent);
-			singlePlayerButton.GetComponent<Button>().onClick.AddListener(HandleMultiPlayerButtonEvent);
-			singlePlayerButton.GetComponent<Button>().onClick.AddListener(HandleQuitPlayerButtonEvent);
+			multiPlayerButton.GetComponent<Button>().onClick.AddListener(HandleMultiPlayerButtonEvent);
+			quitButton.GetComponent<Button>().onClick.AddListener(HandleQuitPlayerButtonEvent);
 		}
 		
 		void HandleSinglePlayerButtonEvent()

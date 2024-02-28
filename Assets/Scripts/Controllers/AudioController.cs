@@ -8,7 +8,7 @@ namespace Synthicate
     {
 
         public AudioManagerSO audioManager;
-        public GameManagerSO gameManager;
+        public GameManagerSO gameManagerSO;
 
         public AudioSource mainThemeSource;
         public AudioSource sfxSource;
@@ -27,33 +27,33 @@ namespace Synthicate
             mainThemeSource.Play();
 
             // event responders
-            gameManager.nextTurnEvent.AddListener((uint diceValue) =>
-            {
+            // gameManagerSO.nextTurnEvent.AddListener((uint diceValue) =>
+            // {
 
-                sfxSource.clip = audioManager.nextTurnSound;
-                sfxSource.Play();
-            });
+            //     sfxSource.clip = audioManager.nextTurnSound;
+            //     sfxSource.Play();
+            // });
 
-            gameManager.hackerRollEvent.AddListener(() =>
-            {
-                sfxSource.clip = audioManager.hackerSound;
-                sfxSource.Play();
-            });
-            gameManager.playerHackEvent.AddListener(() =>
-            {
-                sfxSource.clip = audioManager.hackerSound;
-                sfxSource.Play();
-            });
-            gameManager.playerCardEvent.AddListener((CardType cardType) =>
-            {
-                sfxSource.clip = audioManager.influencePointSound;
-                sfxSource.Play();
-            });
-            gameManager.playerBuildEvent.AddListener(() =>
-            {
-                sfxSource.clip = audioManager.buildSound;
-                sfxSource.Play();
-            });
+            // gameManagerSO.hackerRollEvent.AddListener(() =>
+            // {
+            //     sfxSource.clip = audioManager.hackerSound;
+            //     sfxSource.Play();
+            // });
+            // gameManagerSO.playerHackEvent.AddListener(() =>
+            // {
+            //     sfxSource.clip = audioManager.hackerSound;
+            //     sfxSource.Play();
+            // });
+            // gameManagerSO.playerCardEvent.AddListener((CardType cardType) =>
+            // {
+            //     sfxSource.clip = audioManager.influencePointSound;
+            //     sfxSource.Play();
+            // });
+            // gameManagerSO.playerBuildEvent.AddListener(() =>
+            // {
+            //     sfxSource.clip = audioManager.buildSound;
+            //     sfxSource.Play();
+            // });
         }
 
         // Update is called once per frame

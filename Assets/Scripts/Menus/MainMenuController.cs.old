@@ -8,7 +8,7 @@ using Unity.Netcode.Transports.UTP;
 
 namespace Synthicate
 {
-	public class MainMenuController : NetworkBehaviour
+	public class MainMenuController_Old : NetworkBehaviour
 	{
 
 		public GameManagerSO gameManagerSO;
@@ -88,7 +88,6 @@ namespace Synthicate
 
 		private void OnGUI()
 		{
-			return; 
 			
 			// update box sizes
 			float screenScaleX = Screen.width * 0.65f;
