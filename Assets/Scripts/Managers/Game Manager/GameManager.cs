@@ -1,12 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.Netcode;
-using Unity.Netcode.Transports.UTP;
+
 
 namespace Synthicate
 {
-	public class GameManager : NetworkBehaviour
+	public class GameManager : MonoBehaviour
 	{
 		public GameManagerStateMachine stateMachine; 
 		
@@ -27,8 +25,9 @@ namespace Synthicate
 		public DepotManagerScriptableObject depotManagerSO;
 		public BoardManagerSO boardManagerSO;
 		public AudioManagerSO audioManagerSO;
+		public GameNetworkManagerScriptableObject gameNetworkManagerSO;
 		
-		UnityTransport transport;
+		// UnityTransport transport;
 
 		void Awake()
 		{
@@ -39,7 +38,7 @@ namespace Synthicate
 		// Start is called before the first frame update
 		void Start()
 		{
-			transport = NetworkManager.Singleton.gameObject.GetComponent<UnityTransport>();
+			// transport = NetworkManager.Singleton.gameObject.GetComponent<UnityTransport>();
 			
 			// current player builds a stronghold
 			// strongholdManagerSO.playerBuildEvent.AddListener((bool validBuild) => {

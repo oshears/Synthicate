@@ -14,6 +14,7 @@ namespace Synthicate {
 		protected DepotManagerScriptableObject _depotManagerSO;
 		protected BoardManagerSO _boardManagerSO;
 		protected AudioManagerSO _audioManagerSO;
+		protected GameNetworkManagerScriptableObject _gameNetworkManagerSO;
 		
 		protected Player _clientPlayer;
 
@@ -30,6 +31,7 @@ namespace Synthicate {
 			_depotManagerSO = owner.depotManagerSO;
 			_boardManagerSO = owner.boardManagerSO;
 			_audioManagerSO = owner.audioManagerSO;
+			_gameNetworkManagerSO = owner.gameNetworkManagerSO;
 			
 			_clientPlayer = _gameManagerSO.clientPlayer;
 			

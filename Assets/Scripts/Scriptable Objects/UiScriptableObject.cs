@@ -9,41 +9,45 @@ namespace Synthicate
 	public class UiScriptableObject : ScriptableObject
 	{
 		public delegate void UserInterfaceEvent();
-		public event UserInterfaceEvent singlePlayerButton;
-		public event UserInterfaceEvent multiPlayerButton;
-		public event UserInterfaceEvent quitButton;
+		
+		#region Title Screen Button Events
+		public event UserInterfaceEvent singlePlayerButtonEvent;
+		public void OnSinglePlayerButton() => singlePlayerButtonEvent.Invoke();
+		public event UserInterfaceEvent hostMultiplayerButtonEvent;
+		public void OnHostMultiplayerButton() => hostMultiplayerButtonEvent.Invoke();
+		public event UserInterfaceEvent joinMultiplayerButtonEvent;
+		public void OnJoinMultiplayerButton() => joinMultiplayerButtonEvent.Invoke();
+		public event UserInterfaceEvent quitGameButtonEvent;
+		public void OnQuitGameButton() => quitGameButtonEvent.Invoke();
+		#endregion
+		
+		#region Multiplayer Lobby Button Events
+		public event UserInterfaceEvent multiplayerStartGameButtonEvent;
+		public void OnMultiplayerStartGameButton() => multiplayerStartGameButtonEvent.Invoke();
+		public event UserInterfaceEvent multiplayerLeaveLobbyButtonEvent;
+		public void OnMultiplayerLeaveLobbyButton() => multiplayerLeaveLobbyButtonEvent.Invoke();
+		
+		#endregion
+		
+		#region Join Multiplayer Button Events
+		public delegate void MultiplayerConnectButtonEventHandler(ConnectionRequest request);
+		public event MultiplayerConnectButtonEventHandler multiplayerConnectButtonEvent;
+		public void OnMultiplayerConnectButton(ConnectionRequest request) => multiplayerConnectButtonEvent.Invoke(request);
+		public event UserInterfaceEvent multiplayerCancelGameButtonEvent;
+		public void OnMultiplayerCancelGameButton() => multiplayerCancelGameButtonEvent.Invoke();
+		#endregion
+		
+		#region Main Menu Events
 		public UnityEvent<bool> setMainMenuActiveEvent;
+		public void OnSetMainMenuActive(bool active) => setMainMenuActiveEvent.Invoke(active);
 		public UnityEvent<bool> setGameMenuActiveEvent;
+		public void OnSetGameMenuActive(bool active) => setGameMenuActiveEvent.Invoke(active);
+		public delegate void UpdateMainMenuScreenEventHandler(UserInterface.MainMenuScreens screenSelection);
+		public event UpdateMainMenuScreenEventHandler UpdateMainMenuScreenEvent;
+		public void OnUpdateMainMenuScreen(UserInterface.MainMenuScreens screenSelection) => UpdateMainMenuScreenEvent.Invoke(screenSelection);
+		#endregion
+		
 		public event UserInterfaceEvent updateUserInterfaceEvent;
-		
-		public void OnSinglePlayerButtonEvent()
-		{
-			singlePlayerButton.Invoke();
-		}
-		
-		public void OnMultiPlayerButtonEvent()
-		{
-			multiPlayerButton.Invoke();
-		}
-		
-		public void OnQuitButtonEvent()
-		{
-			quitButton.Invoke();
-		}
-		
-		public void OnSetMainMenuActive(bool active)
-		{
-			setMainMenuActiveEvent.Invoke(active);
-		}
-		
-		public void OnSetGameMenuActive(bool active)
-		{
-			setGameMenuActiveEvent.Invoke(active);
-		}
-		
-		public void OnUpdateUserInterface()
-		{
-			updateUserInterfaceEvent.Invoke();
-		}
+		public void OnUpdateUserInterface() => updateUserInterfaceEvent.Invoke();
 	}
 }

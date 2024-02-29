@@ -10,13 +10,24 @@ namespace Synthicate
 	{
 		public GameManagerInitState(GameManager owner) : base(owner) 
 		{
-			_userInterfaceSO.singlePlayerButton += SinglePlayerButtonEventHandler;
+			_userInterfaceSO.singlePlayerButtonEvent += SinglePlayerButtonEventHandler;
+			_userInterfaceSO.hostMultiplayerButtonEvent += HostMultiplayerButtonEventHandler;
+			_userInterfaceSO.joinMultiplayerButtonEvent += JoinMultiplayerButtonEventHandler;
+			
+			_userInterfaceSO.multiplayerConnectButtonEvent += MultiplayerConnectButtonEventHandler;
+			_userInterfaceSO.multiplayerCancelGameButtonEvent += MultiplayerCancelGameButtonEventHandler;
+			
+			_userInterfaceSO.multiplayerStartGameButtonEvent += LobbyStartGameButtonEventHandler;
+			_userInterfaceSO.multiplayerLeaveLobbyButtonEvent += LeaveLobbyEventHandler;
 		}
 
 		public override void Enter()
 		{
 			_userInterfaceSO.OnSetMainMenuActive(true);
 			_userInterfaceSO.OnSetGameMenuActive(false);
+			
+			
+			_userInterfaceSO.OnUpdateUserInterface();
 		}
 		
 		public override void Execute()
@@ -26,10 +37,10 @@ namespace Synthicate
 
 		public override void Exit()
 		{
-			_userInterfaceSO.OnSetMainMenuActive(false);
+			
 		}
 		
-		public void SinglePlayerButtonEventHandler()
+		void SinglePlayerButtonEventHandler()
 		{
 			Debug.Log("Starting Singleplayer Game!");
 			
@@ -46,7 +57,8 @@ namespace Synthicate
 				currentPlayer.SetId(0);
 				currentPlayer.Initialize();
 				
-				NetworkManager.Singleton.StartHost();
+				// NetworkManager.Singleton.StartHost();
+				_gameNetworkManagerSO.OnHostGame();
 			}
 
 
@@ -58,11 +70,14 @@ namespace Synthicate
 			
 			// Go to setup state
 			changeState(new GameManagerSetupState(_owner));
+			
+			_userInterfaceSO.OnSetMainMenuActive(false);
 		}
 		
-		public void MultiPlayerButtonEventHandler()
+		void HostMultiplayerButtonEventHandler()
 		{
-			Debug.Log("Starting Multiplayer Game!");
+			Debug.Log("Starting Multiplayer Game as Host!");
+			_userInterfaceSO.OnUpdateMainMenuScreen(UserInterface.MainMenuScreens.LobbyScreen);
 			
 			// uint[] clientIds = new uint[numPlayers];
 			// for (int i = 0; i < numPlayers; i++)
@@ -70,8 +85,37 @@ namespace Synthicate
 			// 	initClientSOsClientRpc(clientIds,new NetworkStringArray(playerNames.ToArray()));
 			// 	clientIds[i] = (uint)NetworkManager.ConnectedClientsIds[i];
 			// } 
+			_gameNetworkManagerSO.OnHostGame();
+		}
+		
+		void JoinMultiplayerButtonEventHandler()
+		{
+			Debug.Log("Starting Multiplayer Game as Client!");
+			_userInterfaceSO.OnUpdateMainMenuScreen(UserInterface.MainMenuScreens.JoinMultiplayerScreen);
+		}
+		
+		#region Join Multiplayer Game Event Handlers
+		void MultiplayerConnectButtonEventHandler(ConnectionRequest request)
+		{
+			_userInterfaceSO.OnUpdateMainMenuScreen(UserInterface.MainMenuScreens.LobbyScreen);
+		}
+		
+		void MultiplayerCancelGameButtonEventHandler()
+		{
+			_userInterfaceSO.OnUpdateMainMenuScreen(UserInterface.MainMenuScreens.TitleScreen);
+		}
+		#endregion
+		
+		#region Multiplayer Lobby Event Handler
+		void LobbyStartGameButtonEventHandler()
+		{
 			
 		}
+		void LeaveLobbyEventHandler()
+		{
+			_userInterfaceSO.OnUpdateMainMenuScreen(UserInterface.MainMenuScreens.TitleScreen);
+		}
+		#endregion
 
 	}
 }

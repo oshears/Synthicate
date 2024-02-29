@@ -32,5 +32,7 @@ namespace Synthicate
 		public static Rect s_tradeMenuArea = new Rect(6 * s_screenBlockWidth, 3 * s_screenBlockHeight, 4 * s_screenBlockWidth, 7 * s_screenBlockHeight);
 		// DEBUG AREA
 		public static Rect s_debugArea = new Rect(6*s_screenBlockWidth,15 * s_screenBlockHeight, 3 * s_screenBlockWidth, s_screenBlockHeight);
+
+		public enum MainMenuScreens{TitleScreen, JoinMultiplayerScreen, LobbyScreen};
 	}
 }
