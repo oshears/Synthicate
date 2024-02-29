@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Unity.Netcode;
+using Unity.Netcode.Transports.UTP;
 
 namespace Synthicate
 {
-	public class GameManagerInitState : GameManagerState
+	public class GameManagerInitState : GameManagerAbstractState
 	{
 		public GameManagerInitState(GameManager owner) : base(owner) 
 		{
@@ -38,9 +40,12 @@ namespace Synthicate
 				// playerManagers[i] = CreateInstance("PlayerManagerSO") as PlayerManagerSO;
 				Player currentPlayer = new Player();
 				_gameManagerSO.AddPlayer(currentPlayer);
-				currentPlayer.setName("Player 1");
-				currentPlayer.setId(0);
-				currentPlayer.init();
+				_gameManagerSO.SetClientPlayer(currentPlayer);
+				currentPlayer.SetName("Player 1");
+				currentPlayer.SetId(0);
+				currentPlayer.Initialize();
+				
+				NetworkManager.Singleton.StartHost();
 			}
 
 

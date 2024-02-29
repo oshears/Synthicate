@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Synthicate
 {
-	public class GameManagerPendingSetupState : GameManagerState
+	public class GameManagerPendingSetupState : GameManagerAbstractState
 	{
 		public GameManagerPendingSetupState(GameManager owner) : base(owner) 
 		{

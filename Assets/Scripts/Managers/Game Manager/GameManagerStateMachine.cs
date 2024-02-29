@@ -8,7 +8,7 @@ namespace Synthicate
     public class GameManagerStateMachine
     {
         GameManager _owner;
-        GameManagerState _currentState;
+        GameManagerAbstractState _currentState;
 
         public GameManagerStateMachine(GameManager owner)
         {
@@ -16,7 +16,7 @@ namespace Synthicate
             // _currentState = new GameManagerInitState(owner);
         }
 
-        public void ChangeState(GameManagerState newState)
+        public void ChangeState(GameManagerAbstractState newState)
         {
             if (_currentState != null)
                 _currentState.Exit();

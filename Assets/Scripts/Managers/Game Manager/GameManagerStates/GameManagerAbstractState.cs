@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Synthicate {
 
-	public abstract class GameManagerState : IManagerState
+	public abstract class GameManagerAbstractState : IManagerState
 	{
 		protected GameManager _owner;
 		private GameManagerStateMachine _stateMachine;
@@ -16,8 +16,10 @@ namespace Synthicate {
 		protected DepotManagerScriptableObject _depotManagerSO;
 		protected BoardManagerSO _boardManagerSO;
 		protected AudioManagerSO _audioManagerSO;
+		
+		protected Player _clientPlayer;
 
-		public GameManagerState(GameManager owner)
+		public GameManagerAbstractState(GameManager owner)
 		{
 			_owner = owner;
 			_stateMachine = owner.stateMachine;
@@ -25,26 +27,26 @@ namespace Synthicate {
 			_gameManagerSO = owner.gameManagerSO;
 			_hexManagerSO = owner.hexManagerSO;
 			_userInterfaceSO = owner.userInterfaceSO;
-			_playerManagerSOs = owner.playerManagerSOs;
-			_clientPlayerManagerSO = owner.clientPlayerManagerSO;
 			_flywayManagerSO = owner.flywayManagerSO;
 			_strongholdManagerSO = owner.strongholdManagerSO;
 			_depotManagerSO = owner.depotManagerSO;
 			_boardManagerSO = owner.boardManagerSO;
 			_audioManagerSO = owner.audioManagerSO;
 			
+			_clientPlayer = _gameManagerSO.clientPlayer;
+			
 		}
 		public abstract void Enter();
 		public abstract void Execute();
 		public abstract void Exit();
-		protected void changeState(GameManagerState newState)
+		protected void changeState(GameManagerAbstractState newState)
 		{
 			_stateMachine.ChangeState(newState);
 		}
 		public virtual void OnGUI()
 		{
 			GUILayout.BeginArea(new Rect(0, 500, 500, 500));
-			GUILayout.Label($"Current GameManagerState: {this}");
+			GUILayout.Label($"Current GameManagerAbstractState: {this}");
 			GUILayout.EndArea();
 		}
 	}

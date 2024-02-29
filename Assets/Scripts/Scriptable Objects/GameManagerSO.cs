@@ -10,7 +10,13 @@ namespace Synthicate
 		public int numPlayers {get; private set;} = 0;
 		
 		public List<Player> playerList;
+		public Player clientPlayer;
 		
+		public UnityEvent<GameEvent> playerEvent;
+		public UnityEvent playerBuildEvent;
+		
+		public UnityEvent startNextTurnEvent;
+				
 		public void Initialize()
 		{
 			playerList = new List<Player>();
@@ -27,6 +33,17 @@ namespace Synthicate
 			this.numPlayers = numPlayers;
 		}
 		
+		public void SetClientPlayer(Player player)
+		{
+			clientPlayer = player;
+		}
+		
+		public uint rollDice() => (uint)(Random.Range(1, 7) + Random.Range(1, 7));
+		
+		public void OnStartNextTurn()
+		{
+			startNextTurnEvent.Invoke();
+		}
 		
 
 

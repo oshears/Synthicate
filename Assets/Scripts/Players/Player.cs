@@ -34,7 +34,7 @@ namespace Synthicate
 		public uint[] getResourceCounts() => resources;
 		public uint getResourceCount(ResourceType type) => resources[(int) type];
 
-		public void init()
+		public void Initialize()
 		{
 			resources = new uint[Global.NUM_RESOURCE_TYPES] { 0, 0, 0, 0, 0 };
 			numOutposts = 0;
@@ -98,9 +98,9 @@ namespace Synthicate
 
 		//public string getName() => "Player " + (clientID + 1);
 		public string getName() => playerName;
-		public void setName(string name) => playerName = name;
+		public void SetName(string name) => playerName = name;
 		public uint getId() => clientID;
-		public void setId(uint id) => clientID = id;
+		public void SetId(uint id) => clientID = id;
 		public bool hasExcess() => getNumResources() > 7;
 
 		public uint getNumResources()

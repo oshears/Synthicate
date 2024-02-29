@@ -57,5 +57,8 @@
         "Assets/External": true,
         "Assets/Resources": true,
     },
-    "dotnet.defaultSolution": "Synthicate.sln"
+    "dotnet.defaultSolution": "Synthicate.sln",
+    "files.associations": {
+        "*.cs.old": "csharp",
+    }
 }
