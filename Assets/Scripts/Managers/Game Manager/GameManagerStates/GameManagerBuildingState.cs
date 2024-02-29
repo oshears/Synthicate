@@ -66,6 +66,8 @@ namespace Synthicate
 				_flywayManagerSO.edgeUpdateRequest.Invoke();
 				GameEvent gameEvent = new GameEvent(GameEventType.Build, _gameManagerSO.clientPlayer + " has built a new flyway!");
 				_gameManagerSO.playerEvent.Invoke(gameEvent);
+				
+				changeState(new GameManagerIdleState(_owner));
 			}
 		}
 		

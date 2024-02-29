@@ -18,6 +18,7 @@ namespace Synthicate
 			_strongholdManagerSO.beginBuildModeForPlayer(_clientPlayer.GetId(), buildPoints, playerBuildPermissions);
 		
 			_userInterfaceSO.OnSetGameMenuActive(true);
+			_userInterfaceSO.OnUpdateUserInterface();
 		}
 		
 		public override void Execute()
