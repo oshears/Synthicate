@@ -58,7 +58,7 @@ namespace Synthicate
 
 		public override void Exit()
 		{
-			
+			_userInterfaceSO.OnUpdateUserInterface();
 		}
 
 		public override void OnGUI()

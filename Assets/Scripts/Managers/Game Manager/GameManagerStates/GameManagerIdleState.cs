@@ -25,6 +25,7 @@ namespace Synthicate
 		public override void Enter()
 		{
 			Debug.Log("Player Resources:");
+			_userInterfaceSO.OnUpdateUserInterface();
 		}
 		
 		public override void Execute()

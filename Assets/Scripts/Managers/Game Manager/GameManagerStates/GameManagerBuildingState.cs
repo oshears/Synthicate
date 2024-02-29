@@ -9,7 +9,8 @@ namespace Synthicate
 		
 		public GameManagerBuildingState(GameManager owner) : base(owner) 
 		{
-
+			_strongholdManagerSO.playerBuildEvent.AddListener(PlayerBuildStrongholdEventHandler);	
+			_flywayManagerSO.playerBuildEvent.AddListener(PlayerBuildFlywayEventHandler);
 		}
 
 		public override void Enter()
@@ -40,6 +41,32 @@ namespace Synthicate
 				changeState(new GameManagerIdleState(_owner));
 			}
 			GUILayout.EndArea();
+		}
+		
+		void PlayerBuildStrongholdEventHandler(bool validBuild)
+		{
+			_strongholdManagerSO.endBuildMode();
+			if (validBuild)
+			{
+				_gameManagerSO.playerBuildEvent.Invoke();
+				_strongholdManagerSO.pointUpdateRequest.Invoke();
+				GameEvent gameEvent = new GameEvent(GameEventType.Build, _gameManagerSO.clientPlayer + " has built a new stronghold or outpost!");
+				_gameManagerSO.playerEvent.Invoke(gameEvent);
+
+				changeState(new GameManagerIdleState(_owner));
+			}
+		}
+		
+		void PlayerBuildFlywayEventHandler(bool validBuild)
+		{
+			_flywayManagerSO.endBuildMode();
+			if (validBuild)
+			{
+				_gameManagerSO.playerBuildEvent.Invoke();
+				_flywayManagerSO.edgeUpdateRequest.Invoke();
+				GameEvent gameEvent = new GameEvent(GameEventType.Build, _gameManagerSO.clientPlayer + " has built a new flyway!");
+				_gameManagerSO.playerEvent.Invoke(gameEvent);
+			}
 		}
 		
 		
