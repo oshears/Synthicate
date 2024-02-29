@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 4042830345649490900}
   - component: {fileID: 8218059466840923358}
   m_Layer: 5
-  m_Name: Button
+  m_Name: SciFi Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

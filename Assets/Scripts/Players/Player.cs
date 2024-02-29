@@ -99,7 +99,7 @@ namespace Synthicate
 		//public string getName() => "Player " + (clientID + 1);
 		public string getName() => playerName;
 		public void SetName(string name) => playerName = name;
-		public uint getId() => clientID;
+		public uint GetId() => clientID;
 		public void SetId(uint id) => clientID = id;
 		public bool hasExcess() => getNumResources() > 7;
 

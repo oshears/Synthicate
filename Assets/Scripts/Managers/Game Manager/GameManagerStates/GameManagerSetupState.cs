@@ -15,7 +15,7 @@ namespace Synthicate
 		{
 			List<uint> buildPoints = _boardManagerSO.getValidSetupPointsFor();
 			BuildPermissions playerBuildPermissions = new BuildPermissions(false, true, false);
-			_strongholdManagerSO.beginBuildModeForPlayer(_gameManagerSO.clientPlayer.getId(), buildPoints, playerBuildPermissions);
+			_strongholdManagerSO.beginBuildModeForPlayer(_clientPlayer.GetId(), buildPoints, playerBuildPermissions);
 		
 			_userInterfaceSO.OnSetGameMenuActive(true);
 		}
@@ -62,9 +62,9 @@ namespace Synthicate
 			// 	playerEvent.Invoke(gameEvent);
 			// }
 			
-			List<uint> buildEdges = _boardManagerSO.getValidEdgesFor(_gameManagerSO.clientPlayer.getId());
+			List<uint> buildEdges = _boardManagerSO.getValidEdgesFor(_clientPlayer.GetId());
 			BuildPermissions playerBuildPermissions = new BuildPermissions(true, false, false);
-			_flywayManagerSO.beginBuildModeForPlayer(_gameManagerSO.clientPlayer.getId(), buildEdges, playerBuildPermissions);
+			_flywayManagerSO.beginBuildModeForPlayer(_clientPlayer.GetId(), buildEdges, playerBuildPermissions);
 		}
 		
 		public void PlayerBuildFlywayEventHandler(bool validBuild)

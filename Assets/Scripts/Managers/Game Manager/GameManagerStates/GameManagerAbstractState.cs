@@ -9,8 +9,6 @@ namespace Synthicate {
 		protected GameManagerSO _gameManagerSO;
 		protected HexManagerScriptableObject _hexManagerSO;
 		protected UiScriptableObject _userInterfaceSO;
-		protected PlayerManagerSO[] _playerManagerSOs;
-		protected PlayerManagerSO _clientPlayerManagerSO;
 		protected FlywayManagerScriptableObject _flywayManagerSO;
 		protected StrongholdManagerScriptableObject _strongholdManagerSO;
 		protected DepotManagerScriptableObject _depotManagerSO;
