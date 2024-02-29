@@ -45,6 +45,11 @@ namespace Synthicate
 			startNextTurnEvent.Invoke();
 		}
 		
+		public void OnDebugIncrementAlltResources()
+		{
+			clientPlayer.debugIncrementAllResources();
+		}
+		
 
 
 	}

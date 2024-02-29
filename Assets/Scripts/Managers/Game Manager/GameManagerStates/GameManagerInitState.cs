@@ -16,6 +16,7 @@ namespace Synthicate
 		public override void Enter()
 		{
 			_userInterfaceSO.OnSetMainMenuActive(true);
+			_userInterfaceSO.OnSetGameMenuActive(false);
 		}
 		
 		public override void Execute()

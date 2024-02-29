@@ -31,8 +31,8 @@ namespace Synthicate
 			for (int i = 0; i < Global.NUM_RESOURCE_TYPES; i++) this.resources[i] += resources[i];
 		}
 
-		public uint[] getResourceCounts() => resources;
-		public uint getResourceCount(ResourceType type) => resources[(int) type];
+		// public uint[] getResourceCounts() => resources;
+		public uint GetResourceCount(ResourceType type) => resources[(int) type];
 
 		public void Initialize()
 		{

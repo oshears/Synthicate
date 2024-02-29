@@ -13,14 +13,28 @@ namespace Synthicate
 		[SerializeField]
 		UiScriptableObject _userInterfaceSO;
 		
+		[SerializeField]
+		GameObject _gameMenuScreen;
+		
 		public void Awake()
 		{
-			_userInterfaceSO.setMainMenuActiveEvent.AddListener(SetMainMenuActiveEvent);
+			_userInterfaceSO.setMainMenuActiveEvent.AddListener(SetMainMenuActiveEventHandler);
+			_userInterfaceSO.setGameMenuActiveEvent.AddListener(SetGameMenuActiveEventHandler);
 		}
 		
-		public void SetMainMenuActiveEvent(bool active)
+		public void Start()
+		{
+			_gameMenuScreen.SetActive(false);
+		}
+		
+		public void SetMainMenuActiveEventHandler(bool active)
 		{
 			_titleScreen.SetActive(active);
+		}
+		
+		public void SetGameMenuActiveEventHandler(bool active)
+		{
+			_gameMenuScreen.SetActive(active);
 		}
 	}
 }

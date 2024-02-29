@@ -24,7 +24,7 @@ namespace Synthicate
 
 		public override void Enter()
 		{
-			
+			Debug.Log("Player Resources:");
 		}
 		
 		public override void Execute()
@@ -86,6 +86,12 @@ namespace Synthicate
 				{
 					// _menuState = MenuState.HackMode;
 					// gameManagerSO.beginClientHackMode();
+					changeState(new GameManagerHackingState(_owner));
+				}
+				if(GUILayout.Button("Debug: Increment All Resources"))
+				{
+					_gameManagerSO.OnDebugIncrementAlltResources();
+					_userInterfaceSO.OnUpdateUserInterface();
 				}
 				if (GUILayout.Button("Close"))
 				{

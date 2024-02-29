@@ -16,6 +16,8 @@ namespace Synthicate
 			List<uint> buildPoints = _boardManagerSO.getValidSetupPointsFor();
 			BuildPermissions playerBuildPermissions = new BuildPermissions(false, true, false);
 			_strongholdManagerSO.beginBuildModeForPlayer(_gameManagerSO.clientPlayer.getId(), buildPoints, playerBuildPermissions);
+		
+			_userInterfaceSO.OnSetGameMenuActive(true);
 		}
 		
 		public override void Execute()
