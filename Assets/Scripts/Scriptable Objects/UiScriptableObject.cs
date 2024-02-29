@@ -8,12 +8,13 @@ namespace Synthicate
 	[CreateAssetMenu(fileName = "UiScriptableObject", menuName = "ScriptableObjects/UiScriptableObject")]
 	public class UiScriptableObject : ScriptableObject
 	{
-		public UnityEvent singlePlayerButton;
-		public UnityEvent multiPlayerButton;
-		public UnityEvent quitButton;
+		public delegate void UserInterfaceEvent();
+		public event UserInterfaceEvent singlePlayerButton;
+		public event UserInterfaceEvent multiPlayerButton;
+		public event UserInterfaceEvent quitButton;
 		public UnityEvent<bool> setMainMenuActiveEvent;
 		public UnityEvent<bool> setGameMenuActiveEvent;
-		public UnityEvent updateUserInterfaceEvent;
+		public event UserInterfaceEvent updateUserInterfaceEvent;
 		
 		public void OnSinglePlayerButtonEvent()
 		{

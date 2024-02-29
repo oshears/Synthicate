@@ -9,34 +9,67 @@ namespace Synthicate
 {
 	public class UiMainMenuController : MonoBehaviour
 	{
+		#region TitleScreen
 		[SerializeField]
-		GameObject singlePlayerButton, multiPlayerButton, quitButton; 
+		GameObject titleScreen;
+		[SerializeField]
+		GameObject singlePlayerButton, hostMultiPlayerButton, joinMultiPlayerButton, quitButton; 
+		#endregion
 		
-		// [SerializeField]
-		// Button testButton;
+		#region JoinMultiPlayerScreen
+		[SerializeField]
+		GameObject joinMultiplayerScreen;
+		[SerializeField]
+		GameObject multiPlayerConnectButton, multiPlayerCancelButton;
+		[SerializeField]
+		GameObject playerNameTextInput, ipAddressTextInput, portAddressTextInput;
+		#endregion 
+		
+		#region MultiPlayerLobbyScreen
+		[SerializeField]
+		GameObject multiplayerLobbyScreen;
+		[SerializeField]
+		GameObject multiPlayerLeaveLobbyButton, multiPlayerStartGameButton;
+		[SerializeField]
+		GameObject[] playerDisplays;
+		[SerializeField]
+		GameObject[] playerNames;
+		#endregion 
+		
+		#region ScriptableObjects
 		[SerializeField]
 		UiScriptableObject uiScriptableObject;
+		#endregion 
 		
 		void Awake() {
-			singlePlayerButton.GetComponent<Button>().onClick.AddListener(HandleSinglePlayerButtonEvent);
-			multiPlayerButton.GetComponent<Button>().onClick.AddListener(HandleMultiPlayerButtonEvent);
-			quitButton.GetComponent<Button>().onClick.AddListener(HandleQuitPlayerButtonEvent);
+			singlePlayerButton.GetComponent<Button>().onClick.AddListener(uiScriptableObject.OnSinglePlayerButtonEvent);
+			// singlePlayerButton.GetComponent<Button>().onClick.AddListener(HandleSinglePlayerButtonEvent);
+			// hostMultiPlayerButton.GetComponent<Button>().onClick.AddListener(HandleHostMultiPlayerButtonEvent);
+			// joinMultiPlayerButton.GetComponent<Button>().onClick.AddListener(HandleJoinMultiPlayerButtonEvent);
+			// quitButton.GetComponent<Button>().onClick.AddListener(HandleQuitPlayerButtonEvent);
 		}
 		
-		void HandleSinglePlayerButtonEvent()
-		{
-			uiScriptableObject.OnSinglePlayerButtonEvent();
-		}
+		// void HandleSinglePlayerButtonEvent()
+		// {
+		// 	uiScriptableObject.OnSinglePlayerButtonEvent();
+		// }
 		
-		void HandleMultiPlayerButtonEvent()
-		{
-			uiScriptableObject.OnMultiPlayerButtonEvent();
-		}
+		// void HandleJoinMultiPlayerButtonEvent()
+		// {
+		// 	uiScriptableObject.OnMultiPlayerButtonEvent();
+		// }
 		
-		void HandleQuitPlayerButtonEvent()
-		{
-			uiScriptableObject.OnQuitButtonEvent();
-		}
+		// void HandleJoinMultiPlayerButtonEvent()
+		// {
+		// 	uiScriptableObject.OnMultiPlayerButtonEvent();
+		// }
+		
+		
+		
+		// void HandleQuitPlayerButtonEvent()
+		// {
+		// 	uiScriptableObject.OnQuitButtonEvent();
+		// }
 		
 	}
 }

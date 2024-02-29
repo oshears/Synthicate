@@ -34,7 +34,7 @@ namespace Synthicate
 		UiScriptableObject userInterfaceSO;
 		
 		void Awake() {
-			userInterfaceSO.updateUserInterfaceEvent.AddListener(UpdateUserInterfaceEventHandler);
+			userInterfaceSO.updateUserInterfaceEvent += UpdateUserInterfaceEventHandler;
 		}
 		
 		void UpdateUserInterfaceEventHandler()

@@ -10,7 +10,7 @@ namespace Synthicate
 	{
 		public GameManagerInitState(GameManager owner) : base(owner) 
 		{
-			_userInterfaceSO.singlePlayerButton.AddListener(SinglePlayerButtonEventHandler);
+			_userInterfaceSO.singlePlayerButton += SinglePlayerButtonEventHandler;
 		}
 
 		public override void Enter()

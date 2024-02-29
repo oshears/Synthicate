@@ -8,10 +8,9 @@ namespace Synthicate
 	public class UiManager : MonoBehaviour
 	{
 		[SerializeField]
-		GameObject _titleScreen;
-		
-		[SerializeField]
 		UiScriptableObject _userInterfaceSO;
+		[SerializeField]
+		GameObject _mainMenuScreen;
 		
 		[SerializeField]
 		GameObject _gameMenuScreen;
@@ -24,12 +23,13 @@ namespace Synthicate
 		
 		public void Start()
 		{
+			_mainMenuScreen.SetActive(true);
 			_gameMenuScreen.SetActive(false);
 		}
 		
 		public void SetMainMenuActiveEventHandler(bool active)
 		{
-			_titleScreen.SetActive(active);
+			_mainMenuScreen.SetActive(active);
 		}
 		
 		public void SetGameMenuActiveEventHandler(bool active)
