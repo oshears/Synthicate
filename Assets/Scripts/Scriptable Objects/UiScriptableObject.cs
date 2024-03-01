@@ -35,6 +35,9 @@ namespace Synthicate
 		public void OnMultiplayerConnectButton(ConnectionRequest request) => multiplayerConnectButtonEvent.Invoke(request);
 		public event UserInterfaceEvent multiplayerCancelGameButtonEvent;
 		public void OnMultiplayerCancelGameButton() => multiplayerCancelGameButtonEvent.Invoke();
+		public delegate void UpdatePlayerDisplaysEventHandler(List<Player> players);
+		public event UpdatePlayerDisplaysEventHandler updatePlayerDisplaysEvent;
+		public void OnUpdatePlayerDisplays(List<Player> players) => updatePlayerDisplaysEvent.Invoke(players); 
 		#endregion
 		
 		#region Main Menu Events

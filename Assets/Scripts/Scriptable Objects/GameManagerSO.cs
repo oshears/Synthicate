@@ -26,6 +26,7 @@ namespace Synthicate
 		public void AddPlayer(Player newPlayer)
 		{
 			playerList.Add(newPlayer);
+			numPlayers++;
 		}
 		 
 		public void SetNumPlayers(int numPlayers)

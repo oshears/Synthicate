@@ -7,9 +7,9 @@ using Unity.Netcode.Transports.UTP;
 namespace Synthicate
 {
 	
-	public class GameNetworkManager : NetworkManager
+	public class NetworkController : NetworkBehaviour
 	{
-		[SerializeField]
+		[SerializeReference]
 		GameNetworkManagerScriptableObject gameNetworkManagerSO;
 		
 		UnityTransport transport;
@@ -27,10 +27,10 @@ namespace Synthicate
 		void HostGameEventHandler()
 		{
 			Debug.Log("Network Manager is starting the host!");
-			StartHost();
+			NetworkManager.Singleton.StartHost();
 			bool serverStarted = transport.StartServer();
 			
-			if(!serverStarted) Debug.LogError("ERROR: Could not start the host server!");
+			if(!serverStarted) Debug.LogError("ERROR: There may have been an issue starting the host server!");
 		}
 		
 	}

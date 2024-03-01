@@ -9,7 +9,7 @@ namespace Synthicate
 	{
 		private string playerName;
 
-		private uint clientID;
+		private uint clientId;
 
 		public uint numOutposts { get; set; }
 		public uint numStrongholds { get; set; }
@@ -23,7 +23,27 @@ namespace Synthicate
 
 		public Player()
 		{
+			resources = new uint[Global.NUM_RESOURCE_TYPES] { 0, 0, 0, 0, 0 };
+			numOutposts = 0;
+			numStrongholds = 0;
+			numFlyways = 0;
+			numHackers = 0;
+			numInfluencePoints = 0;
+			numHackersUsed = 0;
+		}
+		
+		public Player(string playerName, uint playerId)
+		{
+			this.playerName = playerName;
+			clientId = playerId;
 			
+			resources = new uint[Global.NUM_RESOURCE_TYPES] { 0, 0, 0, 0, 0 };
+			numOutposts = 0;
+			numStrongholds = 0;
+			numFlyways = 0;
+			numHackers = 0;
+			numInfluencePoints = 0;
+			numHackersUsed = 0;
 		}
 
 		public void updateResources(uint[] resources)
@@ -36,6 +56,19 @@ namespace Synthicate
 
 		public void Initialize()
 		{
+			resources = new uint[Global.NUM_RESOURCE_TYPES] { 0, 0, 0, 0, 0 };
+			numOutposts = 0;
+			numStrongholds = 0;
+			numFlyways = 0;
+			numHackers = 0;
+			numInfluencePoints = 0;
+			numHackersUsed = 0;
+		}
+		public void Initialize(string playerName, uint playerId)
+		{
+			this.playerName = playerName;
+			clientId = playerId;
+			
 			resources = new uint[Global.NUM_RESOURCE_TYPES] { 0, 0, 0, 0, 0 };
 			numOutposts = 0;
 			numStrongholds = 0;
@@ -99,8 +132,8 @@ namespace Synthicate
 		//public string getName() => "Player " + (clientID + 1);
 		public string getName() => playerName;
 		public void SetName(string name) => playerName = name;
-		public uint GetId() => clientID;
-		public void SetId(uint id) => clientID = id;
+		public uint GetId() => clientId;
+		public void SetId(uint id) => clientId = id;
 		public bool hasExcess() => getNumResources() > 7;
 
 		public uint getNumResources()
