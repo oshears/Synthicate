@@ -3,11 +3,17 @@ using UnityEngine;
 using UnityEngine.Events;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
+using System.Threading.Tasks;
+using System;
 
 namespace Synthicate
 {
+	
 	public class GameManagerMainMenuState : GameManagerAbstractState
 	{
+		bool _waitingForClientReady = false;
+		float _waitTimeForClient = 0;
+	
 		public GameManagerMainMenuState(GameManager owner) : base(owner) 
 		{
 			_userInterfaceSO.singlePlayerButtonEvent += SinglePlayerButtonEventHandler;
@@ -19,6 +25,15 @@ namespace Synthicate
 			
 			_userInterfaceSO.multiplayerStartGameButtonEvent += LobbyStartGameButtonEventHandler;
 			_userInterfaceSO.multiplayerLeaveLobbyButtonEvent += LeaveLobbyEventHandler;
+			
+			_gameNetworkManagerSO.clientConnectedToServer += ClientConnectedToServerEventHandler;
+			_gameNetworkManagerSO.serverRecievedNewClientConnection += ServerRecievedNewClientConnectionEventHandler;
+			
+			_gameNetworkManagerSO.ServerReceivedNewPlayerInfoEvent += ServerReceivedNewPlayerInfoEventHandler;
+			_gameNetworkManagerSO.ClientUpdateAllPlayerListsEvent += ClientUpdateAllPlayerListsEventHandler;
+			
+			_waitingForClientReady = false;
+			_waitTimeForClient = 0;
 		}
 
 		public override void Enter()
@@ -46,16 +61,13 @@ namespace Synthicate
 			
 			_gameManagerSO.Initialize();
 			
-			for (int i = 0; i < _gameManagerSO.numPlayers; i++)
-			{
-				// playerManagers[i] = CreateInstance("PlayerManagerSO") as PlayerManagerSO;
-				Player currentPlayer = new Player("Player 1", 0);
-				_gameManagerSO.AddPlayer(currentPlayer);
-				_gameManagerSO.SetClientPlayer(currentPlayer);
-				
-				// NetworkManager.Singleton.StartHost();
-				_gameNetworkManagerSO.OnHostGame();
-			}
+			// playerManagers[i] = CreateInstance("PlayerManagerSO") as PlayerManagerSO;
+			Player currentPlayer = new Player("Player 1", 0);
+			_gameManagerSO.AddPlayer(currentPlayer);
+			_gameManagerSO.SetClientPlayer(currentPlayer);
+			
+			// NetworkManager.Singleton.StartHost();
+			_gameNetworkManagerSO.OnHostGame("Player 1");
 
 
 			// if (clientPlayerManager.getId() == currentSetupTurn)
@@ -77,18 +89,14 @@ namespace Synthicate
 			
 			_gameManagerSO.Initialize();
 			
-			for (int i = 0; i < _gameManagerSO.numPlayers; i++)
-			{
-				// playerManagers[i] = CreateInstance("PlayerManagerSO") as PlayerManagerSO;
-				Player currentPlayer = new Player("Player 1", 0);
-				_gameManagerSO.AddPlayer(currentPlayer);
-				_gameManagerSO.SetClientPlayer(currentPlayer);
-				
-				// NetworkManager.Singleton.StartHost();
-				_gameNetworkManagerSO.OnHostGame();
-			}
+			// playerManagers[i] = CreateInstance("PlayerManagerSO") as PlayerManagerSO;
+			Player currentPlayer = new Player("Player 1", 0);
+			_gameManagerSO.AddPlayer(currentPlayer);
+			_gameManagerSO.SetClientPlayer(currentPlayer);
 			
-			_userInterfaceSO.OnUpdatePlayerDisplays(_gameManagerSO.playerList);
+			// NetworkManager.Singleton.StartHost();
+			_gameNetworkManagerSO.OnHostGame("Player 1");
+			
 			
 			// uint[] clientIds = new uint[numPlayers];
 			// for (int i = 0; i < numPlayers; i++)
@@ -96,7 +104,6 @@ namespace Synthicate
 			// 	initClientSOsClientRpc(clientIds,new NetworkStringArray(playerNames.ToArray()));
 			// 	clientIds[i] = (uint)NetworkManager.ConnectedClientsIds[i];
 			// } 
-			_gameNetworkManagerSO.OnHostGame();
 		}
 		
 		void JoinMultiplayerButtonEventHandler()
@@ -108,12 +115,25 @@ namespace Synthicate
 		#region Join Multiplayer Game Event Handlers
 		void MultiplayerConnectButtonEventHandler(ConnectionRequest request)
 		{
-			_userInterfaceSO.OnUpdateMainMenuScreen(UserInterface.MainMenuScreens.LobbyScreen);
+			_gameNetworkManagerSO.OnConnectionRequest(request);
+			// _userInterfaceSO.OnUpdateMainMenuScreen(UserInterface.MainMenuScreens.LobbyScreen);
 		}
 		
 		void MultiplayerCancelGameButtonEventHandler()
 		{
 			_userInterfaceSO.OnUpdateMainMenuScreen(UserInterface.MainMenuScreens.TitleScreen);
+		}
+		void ClientConnectedToServerEventHandler()
+		{
+			_userInterfaceSO.OnUpdateMainMenuScreen(UserInterface.MainMenuScreens.LobbyScreen);
+		}
+		void ServerRecievedNewClientConnectionEventHandler()
+		{
+			// Debug.Log("GameManager has processed a new client connection!");
+			// if (_gameNetworkManagerSO.numConnectedClients > 1)
+			// {
+			// 	_userInterfaceSO.OnUpdatePlayerDisplays(_gameManagerSO.playerList);
+			// }
 		}
 		#endregion
 		
@@ -125,6 +145,47 @@ namespace Synthicate
 		void LeaveLobbyEventHandler()
 		{
 			_userInterfaceSO.OnUpdateMainMenuScreen(UserInterface.MainMenuScreens.TitleScreen);
+		}
+		
+		/// <summary>
+		/// This method allows the server to process the new client's name and then send out the updates to all other clients.
+		/// The server also takes this time to update its UI player displays in the lobby menu.
+		/// This is triggered by the RPC event from the client when it sends its name.
+		/// <param name="playerName">The player name sent by the client.</param>
+		/// <param name="clientId">The ulong client ID.</param>
+		/// <returns>void</returns>
+		/// </summary>
+		void ServerReceivedNewPlayerInfoEventHandler(string playerName, ulong clientId)
+		{
+			// Add the new client player to the game manager scriptable object
+			Player newPlayer = new Player(playerName, clientId);
+			_gameManagerSO.AddPlayer(newPlayer);
+			
+			// Update the game lobby screen.
+			_userInterfaceSO.OnUpdatePlayerDisplays(_gameManagerSO.playerList);
+			
+			// Send Updates to All Clients
+			// _gameNetworkManagerSO.OnServerUpdateAllPlayerListsOnClients(_gameManagerSO.playerList);
+			ServerUpdateAllPlayerListsOnClients();
+		}
+		async void ServerUpdateAllPlayerListsOnClients()
+		{
+			// Send Updates to All Clients
+			await WaitForSecondsAsync(1);
+			_gameNetworkManagerSO.OnServerUpdateAllPlayerListsOnClients(_gameManagerSO.playerList);
+		}
+		async Task WaitForSecondsAsync(float delay)
+		{
+			await Task.Delay(TimeSpan.FromSeconds(delay));
+		}
+		
+		void ClientUpdateAllPlayerListsEventHandler(string[] playerNames)
+		{
+			// _gameManagerSO.playerList
+			List<Player> playerList = new List<Player>();
+			for(int i = 0; i < playerNames.Length; i++) playerList.Add(new Player(playerNames[i], (ulong) i));
+			// _userInterfaceSO.OnUpdatePlayerDisplays(_gameManagerSO.playerList);
+			_userInterfaceSO.OnUpdatePlayerDisplays(playerList);
 		}
 		#endregion
 

@@ -60,6 +60,12 @@ namespace Synthicate
 			
 			// Visibility Events
 			uiScriptableObject.UpdateMainMenuScreenEvent += UpdateMainMenuScreenEventHandler;
+			uiScriptableObject.updatePlayerDisplaysEvent += UpdatePlayerDisplaysEventHandler;
+		}
+		
+		void Start()
+		{
+			for (int i = 1; i < playerDisplays.Length; i++) playerDisplays[i].SetActive(false);
 		}
 
 		
@@ -67,10 +73,18 @@ namespace Synthicate
 		
 		void MultiplayerConnectButtonEventHandler()
 		{
-			string player = playerNameTextInput.GetComponent<TMP_InputField>().text;
-			string ip = ipAddressTextInput.GetComponent<TMP_InputField>().text;
-			uint port = uint.Parse(portAddressTextInput.GetComponent<TMP_InputField>().text);
-			ConnectionRequest request = new ConnectionRequest(ip, port, player);
+			ConnectionRequest request;
+			if (ApplicationSettings.IsUnityEditor)
+				request = new ConnectionRequest("127.0.0.1", 7777, "Player 2");
+			else
+			{
+				string player = playerNameTextInput.GetComponent<TMP_InputField>().text;
+				string ip = ipAddressTextInput.GetComponent<TMP_InputField>().text;
+				string port = portAddressTextInput.GetComponent<TMP_InputField>().text;
+				ushort portNum = ushort.Parse(port);
+				request = new ConnectionRequest(ip, portNum, player);
+			}
+			
 			uiScriptableObject.OnMultiplayerConnectButton(request);
 		}
 		
@@ -79,6 +93,16 @@ namespace Synthicate
 			titleScreen.SetActive(screenSelection == UserInterface.MainMenuScreens.TitleScreen);
 			multiplayerLobbyScreen.SetActive(screenSelection == UserInterface.MainMenuScreens.LobbyScreen);
 			joinMultiplayerScreen.SetActive(screenSelection == UserInterface.MainMenuScreens.JoinMultiplayerScreen);
+		}
+		
+		void UpdatePlayerDisplaysEventHandler(List<Player> players)
+		{
+			Debug.Log($"Updating Player Displays with Num Players: {players.Count}");
+			for (int i = 0; i < players.Count; i++)
+			{
+				playerDisplays[i].SetActive(true);
+				playerNames[i].GetComponent<TextMeshProUGUI>().text = players[i].GetName();
+			} 
 		}
 		
 	}

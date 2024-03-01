@@ -3,9 +3,9 @@ namespace Synthicate
 	public class ConnectionRequest
 	{
 		public string ipAddress {get;}
-		public uint port {get;}
+		public ushort port {get;}
 		public string playerName {get;}
-		public ConnectionRequest(string ipAddress, uint port, string playerName)
+		public ConnectionRequest(string ipAddress, ushort port, string playerName)
 		{
 			this.ipAddress = ipAddress;
 			this.port = port;

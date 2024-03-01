@@ -9,6 +9,7 @@ namespace Synthicate
 	{
 		private string playerName;
 
+		private ulong networkClientId;
 		private uint clientId;
 
 		public uint numOutposts { get; set; }
@@ -32,10 +33,11 @@ namespace Synthicate
 			numHackersUsed = 0;
 		}
 		
-		public Player(string playerName, uint playerId)
+		public Player(string playerName, ulong playerId)
 		{
 			this.playerName = playerName;
-			clientId = playerId;
+			networkClientId = playerId;
+			clientId = (uint) playerId;
 			
 			resources = new uint[Global.NUM_RESOURCE_TYPES] { 0, 0, 0, 0, 0 };
 			numOutposts = 0;
@@ -130,7 +132,7 @@ namespace Synthicate
 		public uint getTotalInfluencePoints() => numOutposts + numStrongholds * 2 + numInfluencePoints;
 
 		//public string getName() => "Player " + (clientID + 1);
-		public string getName() => playerName;
+		public string GetName() => playerName;
 		public void SetName(string name) => playerName = name;
 		public uint GetId() => clientId;
 		public void SetId(uint id) => clientId = id;
