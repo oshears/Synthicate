@@ -158,7 +158,8 @@ namespace Synthicate
 		void ServerReceivedNewPlayerInfoEventHandler(string playerName, ulong clientId)
 		{
 			// Add the new client player to the game manager scriptable object
-			Player newPlayer = new Player(playerName, clientId);
+			Player newPlayer = new Player(playerName, _gameManagerSO.playerList.Count);
+			newPlayer.SetNetworkClientId(clientId);
 			_gameManagerSO.AddPlayer(newPlayer);
 			
 			// Update the game lobby screen.
@@ -171,7 +172,7 @@ namespace Synthicate
 		async void ServerUpdateAllPlayerListsOnClients()
 		{
 			// Send Updates to All Clients
-			await WaitForSecondsAsync(1);
+			await WaitForSecondsAsync(0.1f);
 			_gameNetworkManagerSO.OnServerUpdateAllPlayerListsOnClients(_gameManagerSO.playerList);
 		}
 		async Task WaitForSecondsAsync(float delay)
@@ -183,7 +184,7 @@ namespace Synthicate
 		{
 			// _gameManagerSO.playerList
 			List<Player> playerList = new List<Player>();
-			for(int i = 0; i < playerNames.Length; i++) playerList.Add(new Player(playerNames[i], (ulong) i));
+			for(int i = 0; i < playerNames.Length; i++) playerList.Add(new Player(playerNames[i], i));
 			// _userInterfaceSO.OnUpdatePlayerDisplays(_gameManagerSO.playerList);
 			_userInterfaceSO.OnUpdatePlayerDisplays(playerList);
 		}

@@ -105,13 +105,6 @@ namespace Synthicate
 			// GoodbyeServerRpc();
 		}
 		
-		// OYS: NOTE: BUG: For some reason, I need to have the server first call this ServerRpc in order to get the 
-		// client Rpcs to run on all the clients
-		// strangely, all of the other ClientRpc calls from the server seem to work after doing this initial call
-		// I have no idea why this is happening
-		// [ServerRpc(RequireOwnership = false)]
-		// void UpdateAllPlayerListsServerRpc(StringContainer[] playerNames) => UpdateAllPlayerListsClientRpc(playerNames);
-		
 		[ClientRpc]
 		void UpdateAllPlayerListsClientRpc(StringContainer[] playerNames)
 		{

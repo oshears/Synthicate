@@ -10,68 +10,47 @@ namespace Synthicate
 		private string playerName;
 
 		private ulong networkClientId;
-		private uint clientId;
+		private int playerId;
 
-		public uint numOutposts { get; set; }
-		public uint numStrongholds { get; set; }
-		public uint numFlyways { get; set; }
+		public int numOutposts { get; set; }
+		public int numStrongholds { get; set; }
+		public int numFlyways { get; set; }
 
-		public uint[] resources = new uint[Global.NUM_RESOURCE_TYPES] { 0, 0, 0, 0, 0 };
+		public int[] resources = new int[Global.NUM_RESOURCE_TYPES] { 0, 0, 0, 0, 0 };
 
-		uint numHackers;
-		uint numInfluencePoints;
-		uint numHackersUsed;
+		int numHackers;
+		int numInfluencePoints;
+		int numHackersUsed;
 
 		public Player()
 		{
-			resources = new uint[Global.NUM_RESOURCE_TYPES] { 0, 0, 0, 0, 0 };
-			numOutposts = 0;
-			numStrongholds = 0;
-			numFlyways = 0;
-			numHackers = 0;
-			numInfluencePoints = 0;
-			numHackersUsed = 0;
+			InitializeResourceCounts();
 		}
 		
-		public Player(string playerName, ulong playerId)
+		public Player(string playerName, int playerId)
 		{
 			this.playerName = playerName;
-			networkClientId = playerId;
-			clientId = (uint) playerId;
-			
-			resources = new uint[Global.NUM_RESOURCE_TYPES] { 0, 0, 0, 0, 0 };
-			numOutposts = 0;
-			numStrongholds = 0;
-			numFlyways = 0;
-			numHackers = 0;
-			numInfluencePoints = 0;
-			numHackersUsed = 0;
+			this.playerId = playerId;
+			networkClientId = 0;
+			InitializeResourceCounts();
+		}
+		
+		public void SetNetworkClientId(ulong clientId)
+		{
+			networkClientId = clientId;
 		}
 
-		public void updateResources(uint[] resources)
+		public void updateResources(int[] resources)
 		{
 			for (int i = 0; i < Global.NUM_RESOURCE_TYPES; i++) this.resources[i] += resources[i];
 		}
 
-		// public uint[] getResourceCounts() => resources;
-		public uint GetResourceCount(ResourceType type) => resources[(int) type];
+		// public int[] getResourceCounts() => resources;
+		public int GetResourceCount(ResourceType type) => resources[(int) type];
 
-		public void Initialize()
+		public void InitializeResourceCounts()
 		{
-			resources = new uint[Global.NUM_RESOURCE_TYPES] { 0, 0, 0, 0, 0 };
-			numOutposts = 0;
-			numStrongholds = 0;
-			numFlyways = 0;
-			numHackers = 0;
-			numInfluencePoints = 0;
-			numHackersUsed = 0;
-		}
-		public void Initialize(string playerName, uint playerId)
-		{
-			this.playerName = playerName;
-			clientId = playerId;
-			
-			resources = new uint[Global.NUM_RESOURCE_TYPES] { 0, 0, 0, 0, 0 };
+			resources = new int[Global.NUM_RESOURCE_TYPES] { 0, 0, 0, 0, 0 };
 			numOutposts = 0;
 			numStrongholds = 0;
 			numFlyways = 0;
@@ -89,10 +68,10 @@ namespace Synthicate
 		public bool canBuildStronghold() => resources[(int)ResourceType.People] >= 2 && resources[(int)ResourceType.Mech] >= 3;
 		public bool canBuyCard() => resources[(int)ResourceType.Mech] >= 1 && resources[(int)ResourceType.People] >= 1 && resources[(int)ResourceType.Food] >= 1;
 		public bool canUseHacker() => numHackers >= 1;
-		public uint getNumCards() => numHackers + numInfluencePoints;
-		public uint getNumHackers() => numHackers;
-		public uint getNumInfleuncePointCards() => numInfluencePoints;
-		public uint getNumHackersUsed() => numHackersUsed;
+		public int getNumCards() => numHackers + numInfluencePoints;
+		public int getNumHackers() => numHackers;
+		public int getNumInfleuncePointCards() => numInfluencePoints;
+		public int GetNumHackersUsed() => numHackersUsed;
 
 		public void buildFlyway()
 		{
@@ -128,26 +107,26 @@ namespace Synthicate
 			resources[(int)ResourceType.Food]--;
 		}
 
-		public uint getPublicInfluencePoints() => numOutposts + numStrongholds * 2;
-		public uint getTotalInfluencePoints() => numOutposts + numStrongholds * 2 + numInfluencePoints;
+		public int getPublicInfluencePoints() => numOutposts + numStrongholds * 2;
+		public int getTotalInfluencePoints() => numOutposts + numStrongholds * 2 + numInfluencePoints;
 
 		//public string getName() => "Player " + (clientID + 1);
 		public string GetName() => playerName;
 		public void SetName(string name) => playerName = name;
-		public uint GetId() => clientId;
-		public void SetId(uint id) => clientId = id;
+		public int GetId() => playerId;
+		public void SetId(int id) => playerId = id;
 		public bool hasExcess() => getNumResources() > 7;
 
-		public uint getNumResources()
+		public int getNumResources()
 		{
-			uint totalResources = 0;
-			for(int i = 0; i < Global.NUM_RESOURCE_TYPES; i++) totalResources += resources[i];
+			int totalResources = 0;
+			for(int i = 0; i < Global.NUM_RESOURCE_TYPES; i++) totalResources += (int) resources[i];
 			return totalResources;
 		}
 
 		public void randomlyRemoveHalf()
 		{
-			uint numToRemove = getNumResources() / 2;
+			int numToRemove = getNumResources() / 2;
 			for (int i = 0; i < numToRemove; i++)
 			{
 				int resourceToRemove = Random.Range(0, Global.NUM_RESOURCE_TYPES);

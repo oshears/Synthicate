@@ -56,10 +56,10 @@ namespace Synthicate
 	{
 		public uint id;
 		public bool placed;
-		public uint player;
+		public int player;
 		public bool isStronghold;
 
-		public PlayerPoint(uint id, bool placed, uint player, bool isStronghold)
+		public PlayerPoint(uint id, bool placed, int player, bool isStronghold)
 		{
 			this.id = id;
 			this.placed = placed;
@@ -72,9 +72,9 @@ namespace Synthicate
 	{
 		public uint id;
 		public bool placed;
-		public uint player;
+		public int player;
 
-		public PlayerEdge(uint id, bool placed, uint player)
+		public PlayerEdge(uint id, bool placed, int player)
 		{
 			this.id = id;
 			this.placed = placed;

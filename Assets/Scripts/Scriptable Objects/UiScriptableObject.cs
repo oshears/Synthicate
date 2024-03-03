@@ -52,5 +52,8 @@ namespace Synthicate
 		
 		public event UserInterfaceEvent updateUserInterfaceEvent;
 		public void OnUpdateUserInterface() => updateUserInterfaceEvent.Invoke();
+		
+		public event UserInterfaceEvent initializeUserInterfaceEvent;
+		public void OnInitializeUserInterface() => initializeUserInterfaceEvent.Invoke();
 	}
 }

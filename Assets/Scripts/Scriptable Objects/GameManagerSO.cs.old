@@ -133,7 +133,7 @@ namespace Synthicate
 
 			// request updated stronghold/outpost/flyway points when the hex manager finishes updating its resources
 			hexManager.managerSetupResourceResponse.AddListener((List<HexResource> setupResources) => {
-				for (uint player = 0; player < numPlayers; player++)
+				for (int player = 0; player < numPlayers; player++)
 				{
 					uint[] playerResources = boardManager.getResourcesForPlayer(player, setupResources);
 					playerManagers[player].updateResources(playerResources);
@@ -149,7 +149,7 @@ namespace Synthicate
 
 			// update all player resources when board manager announces that player placements have been recorded
 			boardManager.updatePointsResponseEvent.AddListener(() => {
-				for (uint player = 0; player < numPlayers; player++)
+				for (int player = 0; player < numPlayers; player++)
 				{
 					uint[] playerResources = boardManager.getResourcesForPlayer(player, hexManager.getResources());
 					playerManagers[player].updateResources(playerResources);
@@ -160,7 +160,7 @@ namespace Synthicate
 
 			// update all player flyway counts when board manager announces that player flyway placements have been recorded
 			boardManager.updatePointsResponseEvent.AddListener(() => {
-				for (uint player = 0; player < numPlayers; player++) playerManagers[player].numFlyways = boardManager.getNumFlywaysFor(player);
+				for (int player = 0; player < numPlayers; player++) playerManagers[player].numFlyways = boardManager.getNumFlywaysFor(player);
 			});
 
 		} // END onEnable()
@@ -211,8 +211,8 @@ namespace Synthicate
 		public uint getGUITurn() => currentTurn + 1;
 		public bool clientPlayerIsActive() => currentTurn == clientPlayerManager.getId() && state == GameState.Active;
 		public bool isClientPlayerSetupActive() => currentSetupTurn == clientPlayerManager.getId() && inSetupPhase();
-		public uint getPublicInfluencePointsFor(uint player) => playerManagers[player].getPublicInfluencePoints();
-		public string getPlayerName(uint player) => playerManagers[player].getName();
+		public uint getPublicInfluencePointsFor(int player) => playerManagers[player].getPublicInfluencePoints();
+		public string getPlayerName(int player) => playerManagers[player].getName();
 		public uint rollDice() => (uint)(Random.Range(1, 7) + Random.Range(1, 7));
 		public uint getDiceValue() => diceValue;
 		public PlayerManagerSO getCurrentPlayer() => playerManagers[currentTurn];

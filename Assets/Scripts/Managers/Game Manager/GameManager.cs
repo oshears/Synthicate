@@ -121,7 +121,7 @@ namespace Synthicate
 			hexManagerSO.managerSetupResourceResponse.AddListener((List<HexResource> setupResources) => {
 				for (int player = 0; player < gameManagerSO.numPlayers; player++)
 				{
-					uint[] playerResources = boardManagerSO.getResourcesForPlayer((uint) player, setupResources);
+					int[] playerResources = boardManagerSO.getResourcesForPlayer(player, setupResources);
 					gameManagerSO.playerList[player].updateResources(playerResources);
 				}
 				// beginFirstTurn();
@@ -137,16 +137,16 @@ namespace Synthicate
 			boardManagerSO.updatePointsResponseEvent.AddListener(() => {
 				for (int player = 0; player < gameManagerSO.numPlayers; player++)
 				{
-					uint[] playerResources = boardManagerSO.getResourcesForPlayer((uint) player, hexManagerSO.getResources());
+					int[] playerResources = boardManagerSO.getResourcesForPlayer(player, hexManagerSO.getResources());
 					gameManagerSO.playerList[player].updateResources(playerResources);
-					gameManagerSO.playerList[player].numOutposts = boardManagerSO.getNumOutpostsFor((uint) player);
-					gameManagerSO.playerList[player].numStrongholds = boardManagerSO.getNumStrongholdsFor((uint) player);
+					gameManagerSO.playerList[player].numOutposts = boardManagerSO.getNumOutpostsFor(player);
+					gameManagerSO.playerList[player].numStrongholds = boardManagerSO.getNumStrongholdsFor(player);
 				}
 			});
 
 			// update all player flyway counts when board manager announces that player flyway placements have been recorded
 			boardManagerSO.updatePointsResponseEvent.AddListener(() => {
-				for (int player = 0; player < gameManagerSO.numPlayers; player++) gameManagerSO.playerList[player].numFlyways = boardManagerSO.getNumFlywaysFor((uint) player);
+				for (int player = 0; player < gameManagerSO.numPlayers; player++) gameManagerSO.playerList[player].numFlyways = boardManagerSO.getNumFlywaysFor(player);
 			});
 		}
 		

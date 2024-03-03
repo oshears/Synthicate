@@ -10,25 +10,18 @@ namespace Synthicate
 {
 	public class UiGameMenuManager : MonoBehaviour
 	{
+
+		#region Buttons
 		[SerializeField]
-		GameObject powerCounterText;
+		GameObject defaultGameMenu, buildGameMenu;
 		[SerializeField]
-		GameObject peopleCounterText;
-		[SerializeField]
-		GameObject foodCounterText;
-		[SerializeField]
-		GameObject metalCounterText;
-		[SerializeField]
-		GameObject mechCounterText;
-		[SerializeField]
-		GameObject hackerCounterText;
-		[SerializeField]
-		GameObject pointCounterText;
+		GameObject finishTurnButton, buildModeButton, tradeButton, cyberActionButton, cancelButton;
+		#endregion
 		
-		// [SerializeField]
-		// Button testButton;
+		#region Scriptable Objects
 		[SerializeField]
 		GameManagerSO gameManagerSO;
+		#endregion
 		
 		[SerializeField]
 		UiScriptableObject userInterfaceSO;
@@ -39,13 +32,7 @@ namespace Synthicate
 		
 		void UpdateUserInterfaceEventHandler()
 		{
-			powerCounterText.GetComponent<TextMeshProUGUI>().text = $"{gameManagerSO.clientPlayer.GetResourceCount(ResourceType.Power)}";
-			peopleCounterText.GetComponent<TextMeshProUGUI>().text = $"{gameManagerSO.clientPlayer.GetResourceCount(ResourceType.People)}";
-			foodCounterText.GetComponent<TextMeshProUGUI>().text = $"{gameManagerSO.clientPlayer.GetResourceCount(ResourceType.Food)}";
-			metalCounterText.GetComponent<TextMeshProUGUI>().text = $"{gameManagerSO.clientPlayer.GetResourceCount(ResourceType.Metal)}";
-			mechCounterText.GetComponent<TextMeshProUGUI>().text = $"{gameManagerSO.clientPlayer.GetResourceCount(ResourceType.Mech)}";
-			// hackerCounterText.GetComponent<TextMeshProUGUI>().text = gameManagerSO.clientPlayer.GetResourceCount();
-			// pointCounterText.GetComponent<TextMeshProUGUI>().text = gameManagerSO.clientPlayer.GetResourceCount();
+
 		}
 		
 	}

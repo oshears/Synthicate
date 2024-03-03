@@ -12,9 +12,9 @@ namespace Synthicate
         [SerializeField]
         private FlywayManagerScriptableObject flywayManager;
 
-        uint player;
+        int player;
 
-        uint pendingPlayer;
+        int pendingPlayer;
         BuildPermissions pendingPlayerPermissions;
 
         enum FlywayControllerState { Vacant, FlywayAvailable, FlywayPlaced };
@@ -31,7 +31,7 @@ namespace Synthicate
             flywayManager.vacantChangeEvent.AddListener(changeToVacant);
             flywayManager.flywayBuildEvent.AddListener(changeToPlaced);
             flywayManager.playerChangeEvent.AddListener(changeToPlayer);
-            flywayManager.beginBuildModeEvent.AddListener((uint player, List<uint> buildEdges, BuildPermissions permissions) => {
+            flywayManager.beginBuildModeEvent.AddListener((int player, List<uint> buildEdges, BuildPermissions permissions) => {
                 
                 if (!buildEdges.Contains(id)) return;
 
@@ -84,7 +84,7 @@ namespace Synthicate
 
 
 
-        void changeMaterialToPlayer(uint player)
+        void changeMaterialToPlayer(int player)
         {
             Material[] materials = meshRenderer.materials;
             materials[0] = flywayManager.playerMaterials[player];
@@ -139,7 +139,7 @@ namespace Synthicate
 
         
 
-        void changeToPlayer(uint strongholdSelection, uint player)
+        void changeToPlayer(uint strongholdSelection, int player)
         {
             //Debug.Log(strongholdSelection + " : " + player);
             if (strongholdSelection == id || strongholdSelection == flywayManager.NUM_FLYWAY_POINTS)
@@ -188,10 +188,10 @@ namespace Synthicate
         }
 
         [ServerRpc(RequireOwnership = false)]
-        private void requestBuildFlywayServerRpc(uint player) => buildFlywayClientRpc(player);
+        private void requestBuildFlywayServerRpc(int player) => buildFlywayClientRpc(player);
 
         [ClientRpc]
-        private void buildFlywayClientRpc(uint player)
+        private void buildFlywayClientRpc(int player)
         {
             this.player = player;
             setChildrenActive(true);

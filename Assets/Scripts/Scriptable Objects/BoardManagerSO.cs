@@ -50,25 +50,25 @@ namespace Synthicate
 
 
         
-        public uint getNumOutpostsFor(uint player)
+        public int getNumOutpostsFor(int player)
         {
-            uint numOutposts = 0;
+            int numOutposts = 0;
             foreach (PlayerPoint point in points) if (point.player == player && point.placed && !point.isStronghold) numOutposts++;
             return numOutposts;
         }
-        public uint getNumStrongholdsFor(uint player)
+        public int getNumStrongholdsFor(int player)
         {
-            uint numStrongholds = 0;
+            int numStrongholds = 0;
             foreach (PlayerPoint point in points) if (point.player == player && point.placed && point.isStronghold) numStrongholds++;
             return numStrongholds;
         }
-        public uint getNumFlywaysFor(uint player)
+        public int getNumFlywaysFor(int player)
         {
-            uint numFlyways = 0;
+            int numFlyways = 0;
             foreach (PlayerEdge edge in edges) if (edge.player == player && edge.placed) numFlyways++;
             return numFlyways;
         }
-        private List<PlayerPoint> getPlayerPoints(uint player)
+        private List<PlayerPoint> getPlayerPoints(int player)
         {
             List<PlayerPoint> playerPoints = new List<PlayerPoint>();
 
@@ -77,35 +77,35 @@ namespace Synthicate
             return playerPoints;
         }
 
-        private uint[] getResourcesForPoint(uint point, List<HexResource> hexResources)
+        private int[] getResourcesForPoint(uint point, List<HexResource> hexResources)
         {
             //List<uint> list = null;
 
             uint[] validHexes = point_hex_list[(int) point];
 
-            uint[] pointResources = new uint[Global.NUM_RESOURCE_TYPES] {0,0,0,0,0};
+            int[] pointResources = new int[Global.NUM_RESOURCE_TYPES] {0,0,0,0,0};
             foreach (uint hex in validHexes){
                 HexResource hr = hexResources[(int) hex];
                 if (hr.hexType != HexType.Desert)
-                    pointResources[(int)hr.getResource()] += hr.amount;
+                    pointResources[(int)hr.getResource()] += (int) hr.amount;
             }
 
             return pointResources;
         }
 
-        public uint[] getResourcesForPlayer(uint player, List<HexResource> hexResources)
+        public int[] getResourcesForPlayer(int player, List<HexResource> hexResources)
         {
             List<PlayerPoint> playerPoints = getPlayerPoints(player);
 
-            uint[] playerResources = new uint[Global.NUM_RESOURCE_TYPES] { 0, 0, 0, 0, 0 };
+            int[] playerResources = new int[Global.NUM_RESOURCE_TYPES] { 0, 0, 0, 0, 0 };
 
             foreach (PlayerPoint point in playerPoints)
             {
-                uint[] pointResources = getResourcesForPoint(point.id,hexResources);
+                int[] pointResources = getResourcesForPoint(point.id, hexResources);
 
                 for (int resourceId = 0; resourceId < Global.NUM_RESOURCE_TYPES; resourceId++)
                 {
-                    uint resourceGain = point.isStronghold ? pointResources[resourceId] * 2 : pointResources[resourceId];
+                    int resourceGain = point.isStronghold ? pointResources[resourceId] * 2 : pointResources[resourceId];
                     playerResources[resourceId] += resourceGain;
                 }
             }
@@ -136,7 +136,7 @@ namespace Synthicate
             return validPoints;
         }
 
-        public List<uint> getValidPointsFor(uint player)
+        public List<uint> getValidPointsFor(int player)
         {
             List<uint> validPoints = new List<uint>();
 
@@ -166,7 +166,7 @@ namespace Synthicate
             return validPoints;
         }
 
-        public List<uint> getValidEdgesFor(uint player)
+        public List<uint> getValidEdgesFor(int player)
         {
             List<uint> validEdges = new List<uint>();
 
@@ -193,7 +193,7 @@ namespace Synthicate
             return validEdges;
         }
 
-        public bool validDepotForPlayer(uint player, uint depot)
+        public bool validDepotForPlayer(int player, uint depot)
         {
             foreach (PlayerPoint point in getPlayerPoints(player))
             {

@@ -15,9 +15,9 @@ namespace Synthicate
         [SerializeField]
         private StrongholdManagerScriptableObject strongholdManager;
 
-        uint player;
+        int player;
 
-        uint pendingPlayer;
+        int pendingPlayer;
         BuildPermissions pendingPlayerPermissions;
 
         enum StrongholdControllerState {Vacant, OutpostAvailable, Outpost, StrongholdAvailable, Stronghold};
@@ -42,7 +42,7 @@ namespace Synthicate
             strongholdManager.outpostChangeEvent.AddListener(changeToOutpost);
             strongholdManager.strongholdChangeEvent.AddListener(changeToStronghold);
             strongholdManager.playerChangeEvent.AddListener(changeToPlayer);
-            strongholdManager.beginBuildModeEvent.AddListener((uint player, List<uint> buildPoints, BuildPermissions permissions) => {
+            strongholdManager.beginBuildModeEvent.AddListener((int player, List<uint> buildPoints, BuildPermissions permissions) => {
                 if (!buildPoints.Contains(id)) return;
 
                 pendingPlayer = player;
@@ -108,7 +108,7 @@ namespace Synthicate
 
         
 
-        void changeMaterialToPlayer(uint player)
+        void changeMaterialToPlayer(int player)
         {
             Material[] materials = meshRenderer.materials;
             materials[0] = strongholdManager.externalMaterial;
@@ -224,7 +224,7 @@ namespace Synthicate
             state = StrongholdControllerState.Stronghold;
         }
 
-        void changeToPlayer(int strongholdSelection, uint player)
+        void changeToPlayer(int strongholdSelection, int player)
         {
             //Debug.Log(strongholdSelection + " : " + player);
             if (strongholdSelection == id || strongholdSelection == Global.NUM_STRONGHOLD_POINTS)
@@ -240,7 +240,7 @@ namespace Synthicate
             }
         }
 
-        void configureBuildMode(uint player, List<uint> buildPoints)
+        void configureBuildMode(int player, List<uint> buildPoints)
         {
             if (!buildPoints.Contains(id)) return;
 
@@ -326,10 +326,10 @@ namespace Synthicate
         }
 
         [ServerRpc(RequireOwnership = false)]
-        private void requestBuildOutpostServerRpc(uint player) => buildOutpostClientRpc(player);
+        private void requestBuildOutpostServerRpc(int player) => buildOutpostClientRpc(player);
 
         [ClientRpc]
-        private void buildOutpostClientRpc(uint player)
+        private void buildOutpostClientRpc(int player)
         {
             this.player = player;
             setChildrenActive(true);
@@ -340,10 +340,10 @@ namespace Synthicate
         }
 
         [ServerRpc(RequireOwnership = false)]
-        private void requestBuildStrongholdServerRpc(uint player) => buildStrongholdClientRpc(player);
+        private void requestBuildStrongholdServerRpc(int player) => buildStrongholdClientRpc(player);
 
         [ClientRpc]
-        private void buildStrongholdClientRpc(uint player)
+        private void buildStrongholdClientRpc(int player)
         {
             setChildrenActive(true);
             changeMeshToStronghold();

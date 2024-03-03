@@ -17,6 +17,7 @@ namespace Synthicate
 			BuildPermissions playerBuildPermissions = new BuildPermissions(false, true, false);
 			_strongholdManagerSO.beginBuildModeForPlayer(_clientPlayer.GetId(), buildPoints, playerBuildPermissions);
 		
+			_userInterfaceSO.OnInitializeUserInterface();
 			_userInterfaceSO.OnSetGameMenuActive(true);
 			_userInterfaceSO.OnUpdateUserInterface();
 		}

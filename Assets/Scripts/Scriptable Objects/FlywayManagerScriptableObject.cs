@@ -24,7 +24,7 @@ namespace Synthicate
         uint numEdgeUpdateResponses = 0;
 
         [System.NonSerialized]
-        public UnityEvent<uint, uint> playerChangeEvent = new UnityEvent<uint, uint>();
+        public UnityEvent<uint, int> playerChangeEvent = new UnityEvent<uint, int>();
 
         [System.NonSerialized]
         public UnityEvent<uint> flywayBuildEvent = new UnityEvent<uint>();
@@ -33,7 +33,7 @@ namespace Synthicate
         public UnityEvent<uint> vacantChangeEvent = new UnityEvent<uint>();
 
         [System.NonSerialized]
-        public UnityEvent<uint, List<uint>, BuildPermissions> beginBuildModeEvent = new UnityEvent<uint, List<uint>, BuildPermissions>();
+        public UnityEvent<int, List<uint>, BuildPermissions> beginBuildModeEvent = new UnityEvent<int, List<uint>, BuildPermissions>();
 
         [System.NonSerialized]
         public UnityEvent endBuildModeEvent = new UnityEvent();
@@ -65,13 +65,13 @@ namespace Synthicate
 
         public int getNumFlywayPoints() => NUM_FLYWAY_POINTS;
 
-        public void changeToPlayer(uint strongholdSelection, uint player) => playerChangeEvent.Invoke(strongholdSelection,player);
+        public void changeToPlayer(uint strongholdSelection, int player) => playerChangeEvent.Invoke(strongholdSelection, player);
 
         public void changeToFlyway(uint strongholdSelection) => flywayBuildEvent.Invoke(strongholdSelection);
 
         public void changeToVacant(uint strongholdSelection) => vacantChangeEvent.Invoke(strongholdSelection);
 
-        public void beginBuildModeForPlayer(uint player, List<uint> buildEdges, BuildPermissions permissions) => beginBuildModeEvent.Invoke(player, buildEdges, permissions);
+        public void beginBuildModeForPlayer(int player, List<uint> buildEdges, BuildPermissions permissions) => beginBuildModeEvent.Invoke(player, buildEdges, permissions);
 
         public void endBuildMode() => endBuildModeEvent.Invoke();
 

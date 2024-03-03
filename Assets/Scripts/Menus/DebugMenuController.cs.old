@@ -31,7 +31,7 @@ namespace Synthicate
 
         // private stronghold variables
         int strongholdSelection = Global.NUM_STRONGHOLD_POINTS;
-        uint playerSelection = 0;
+        int playerSelection = 0;
 
         // private flyway
         int flywaySelection = Global.NUM_FLYWAY_EDGES;

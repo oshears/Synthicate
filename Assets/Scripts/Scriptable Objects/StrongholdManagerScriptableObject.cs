@@ -24,7 +24,7 @@ namespace Synthicate
         public Color[] PLAYER_LIGHT_COLORS = new Color[4]{Color.yellow, Color.red, Color.blue, Color.cyan};
 
         [System.NonSerialized]
-        public UnityEvent<int, uint> playerChangeEvent;
+        public UnityEvent<int, int> playerChangeEvent;
 
         [System.NonSerialized]
         public UnityEvent<uint> outpostChangeEvent;
@@ -35,7 +35,7 @@ namespace Synthicate
         [System.NonSerialized]
         public UnityEvent<uint> vacantChangeEvent;
 
-        public UnityEvent<uint, List<uint>, BuildPermissions> beginBuildModeEvent;
+        public UnityEvent<int, List<uint>, BuildPermissions> beginBuildModeEvent;
         public UnityEvent endBuildModeEvent;
         public UnityEvent<bool> playerBuildEvent;
 
@@ -48,16 +48,16 @@ namespace Synthicate
 
         private void OnEnable()
         {
-            if (playerChangeEvent == null) playerChangeEvent = new UnityEvent<int, uint>();
-            if (outpostChangeEvent == null) outpostChangeEvent = new UnityEvent<uint>();
-            if (strongholdChangeEvent == null) strongholdChangeEvent = new UnityEvent<uint>();
-            if (vacantChangeEvent == null) vacantChangeEvent = new UnityEvent<uint>();
-            if (beginBuildModeEvent == null) beginBuildModeEvent = new UnityEvent<uint, List<uint>, BuildPermissions>();
-            if (endBuildModeEvent == null) endBuildModeEvent = new UnityEvent();
-            if (playerBuildEvent == null) playerBuildEvent = new UnityEvent<bool>();
-            if (pointUpdateRequest == null) pointUpdateRequest = new UnityEvent();
-            if (pointUpdateResponse == null) pointUpdateResponse = new UnityEvent<PlayerPoint>();
-            if (managerPointUpdateResponse == null) managerPointUpdateResponse = new UnityEvent<List<PlayerPoint>>();
+            // if (playerChangeEvent == null) playerChangeEvent = new UnityEvent<int, int>();
+            // if (outpostChangeEvent == null) outpostChangeEvent = new UnityEvent<uint>();
+            // if (strongholdChangeEvent == null) strongholdChangeEvent = new UnityEvent<uint>();
+            // if (vacantChangeEvent == null) vacantChangeEvent = new UnityEvent<uint>();
+            // if (beginBuildModeEvent == null) beginBuildModeEvent = new UnityEvent<int, List<uint>, BuildPermissions>();
+            // if (endBuildModeEvent == null) endBuildModeEvent = new UnityEvent();
+            // if (playerBuildEvent == null) playerBuildEvent = new UnityEvent<bool>();
+            // if (pointUpdateRequest == null) pointUpdateRequest = new UnityEvent();
+            // if (pointUpdateResponse == null) pointUpdateResponse = new UnityEvent<PlayerPoint>();
+            // if (managerPointUpdateResponse == null) managerPointUpdateResponse = new UnityEvent<List<PlayerPoint>>();
 
             pointUpdateRequest.AddListener(respondToPointUpdateRequest);
             pointUpdateResponse.AddListener(respondToPointUpdateResponse);
@@ -67,7 +67,7 @@ namespace Synthicate
 
         public int getNumStrongholdPoints() => Global.NUM_STRONGHOLD_POINTS;
 
-        public void changeToPlayer(int strongholdSelection, uint player) => playerChangeEvent.Invoke(strongholdSelection,player);
+        public void changeToPlayer(int strongholdSelection, int player) => playerChangeEvent.Invoke(strongholdSelection,player);
 
         public void changeToOutpost(uint strongholdSelection) => outpostChangeEvent.Invoke(strongholdSelection);
 
@@ -75,7 +75,7 @@ namespace Synthicate
 
         public void changeToVacant(uint strongholdSelection) => vacantChangeEvent.Invoke(strongholdSelection);
 
-        public void beginBuildModeForPlayer(uint player, List<uint> buildPoints, BuildPermissions permissions) => beginBuildModeEvent.Invoke(player, buildPoints, permissions);
+        public void beginBuildModeForPlayer(int player, List<uint> buildPoints, BuildPermissions permissions) => beginBuildModeEvent.Invoke(player, buildPoints, permissions);
 
         public void endBuildMode() => endBuildModeEvent.Invoke();
 
