@@ -1,8 +1,13 @@
+using Unity.Netcode;
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using Unity.Netcode.Transports.UTP;
 
 namespace Synthicate {
 
-	public abstract class GameManagerAbstractState : IManagerState
+	// public abstract class GameManagerAbstractState : NetworkBehaviour, IManagerState 
+	public abstract class GameManagerAbstractState : IManagerState 
 	{
 		protected GameManager _owner;
 		private GameManagerStateMachine _stateMachine;
@@ -14,9 +19,14 @@ namespace Synthicate {
 		protected DepotManagerScriptableObject _depotManagerSO;
 		protected BoardManagerSO _boardManagerSO;
 		protected AudioManagerSO _audioManagerSO;
-		protected GameNetworkManagerScriptableObject _gameNetworkManagerSO;
+		// protected GameNetworkManagerScriptableObject _gameNetworkManagerSO;
 		
 		protected Player _clientPlayer;
+		
+		// [SerializeReference]
+		// GameNetworkManagerScriptableObject gameNetworkManagerSO;
+		
+		UnityTransport transport;
 
 		public GameManagerAbstractState(GameManager owner)
 		{
@@ -31,7 +41,7 @@ namespace Synthicate {
 			_depotManagerSO = owner.depotManagerSO;
 			_boardManagerSO = owner.boardManagerSO;
 			_audioManagerSO = owner.audioManagerSO;
-			_gameNetworkManagerSO = owner.gameNetworkManagerSO;
+			// _gameNetworkManagerSO = owner.gameNetworkManagerSO;
 			
 			_clientPlayer = _gameManagerSO.clientPlayer;
 			

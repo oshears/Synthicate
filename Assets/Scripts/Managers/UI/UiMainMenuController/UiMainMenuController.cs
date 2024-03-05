@@ -14,27 +14,27 @@ namespace Synthicate
 		[SerializeField]
 		GameObject titleScreen;
 		[SerializeField]
-		GameObject singlePlayerButton, hostMultiPlayerButton, joinMultiPlayerButton, quitButton; 
+		Button singlePlayerButton, hostMultiPlayerButton, joinMultiPlayerButton, quitButton; 
 		#endregion
 		
 		#region JoinMultiPlayerScreen
 		[SerializeField]
 		GameObject joinMultiplayerScreen;
 		[SerializeField]
-		GameObject multiPlayerConnectButton, multiPlayerCancelButton;
+		Button multiPlayerConnectButton, multiPlayerCancelButton;
 		[SerializeField]
-		GameObject playerNameTextInput, ipAddressTextInput, portAddressTextInput;
+		TMP_InputField playerNameTextInput, ipAddressTextInput, portAddressTextInput;
 		#endregion 
 		
 		#region MultiPlayerLobbyScreen
 		[SerializeField]
 		GameObject multiplayerLobbyScreen;
 		[SerializeField]
-		GameObject multiPlayerLeaveLobbyButton, multiPlayerStartGameButton;
+		Button multiPlayerLeaveLobbyButton, multiPlayerStartGameButton;
 		[SerializeField]
 		GameObject[] playerDisplays;
 		[SerializeField]
-		GameObject[] playerNames;
+		TextMeshProUGUI[] playerNames;
 		#endregion 
 		
 		#region ScriptableObjects
@@ -45,18 +45,18 @@ namespace Synthicate
 		void Awake() {
 			
 			// Title Screen Buttons
-			singlePlayerButton.GetComponent<Button>().onClick.AddListener(uiScriptableObject.OnSinglePlayerButton);
-			hostMultiPlayerButton.GetComponent<Button>().onClick.AddListener(uiScriptableObject.OnHostMultiplayerButton);
-			joinMultiPlayerButton.GetComponent<Button>().onClick.AddListener(uiScriptableObject.OnJoinMultiplayerButton);
-			quitButton.GetComponent<Button>().onClick.AddListener(uiScriptableObject.OnQuitGameButton);
+			singlePlayerButton.onClick.AddListener(uiScriptableObject.OnSinglePlayerButton);
+			hostMultiPlayerButton.onClick.AddListener(uiScriptableObject.OnHostMultiplayerButton);
+			joinMultiPlayerButton.onClick.AddListener(uiScriptableObject.OnJoinMultiplayerButton);
+			quitButton.onClick.AddListener(uiScriptableObject.OnQuitGameButton);
 			
 			// Join Game Buttons
-			multiPlayerConnectButton.GetComponent<Button>().onClick.AddListener(MultiplayerConnectButtonEventHandler);
-			multiPlayerCancelButton.GetComponent<Button>().onClick.AddListener(uiScriptableObject.OnMultiplayerCancelGameButton);
+			multiPlayerConnectButton.onClick.AddListener(MultiplayerConnectButtonEventHandler);
+			multiPlayerCancelButton.onClick.AddListener(uiScriptableObject.OnMultiplayerCancelGameButton);
 			
 			// Lobby Buttons
-			multiPlayerStartGameButton.GetComponent<Button>().onClick.AddListener(uiScriptableObject.OnMultiplayerStartGameButton);
-			multiPlayerLeaveLobbyButton.GetComponent<Button>().onClick.AddListener(uiScriptableObject.OnMultiplayerLeaveLobbyButton);
+			multiPlayerStartGameButton.onClick.AddListener(uiScriptableObject.OnMultiplayerStartGameButton);
+			multiPlayerLeaveLobbyButton.onClick.AddListener(uiScriptableObject.OnMultiplayerLeaveLobbyButton);
 			
 			// Visibility Events
 			uiScriptableObject.UpdateMainMenuScreenEvent += UpdateMainMenuScreenEventHandler;
@@ -78,9 +78,9 @@ namespace Synthicate
 				request = new ConnectionRequest("127.0.0.1", 7777, "Player 2");
 			else
 			{
-				string player = playerNameTextInput.GetComponent<TMP_InputField>().text;
-				string ip = ipAddressTextInput.GetComponent<TMP_InputField>().text;
-				string port = portAddressTextInput.GetComponent<TMP_InputField>().text;
+				string player = playerNameTextInput.text;
+				string ip = ipAddressTextInput.text;
+				string port = portAddressTextInput.text;
 				ushort portNum = ushort.Parse(port);
 				request = new ConnectionRequest(ip, portNum, player);
 			}
@@ -101,7 +101,7 @@ namespace Synthicate
 			for (int i = 0; i < players.Count; i++)
 			{
 				playerDisplays[i].SetActive(true);
-				playerNames[i].GetComponent<TextMeshProUGUI>().text = players[i].GetName();
+				playerNames[i].text = players[i].GetName();
 			} 
 		}
 		

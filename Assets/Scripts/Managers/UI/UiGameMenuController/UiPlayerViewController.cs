@@ -12,29 +12,32 @@ namespace Synthicate
 	{
 		#region Players View
 		[SerializeField]
-		GameObject playerNameTextObject, playerIcon, playerHackerCounter, playerInfluenceCounter;
+		TextMeshProUGUI playerName, playerHackerCounter, playerInfluenceCounter;
+		[SerializeField]
+		Image playerIcon;
+		// GameObject playerNameTextObject, playerIcon, playerHackerCounter, playerInfluenceCounter;
 		#endregion
 		
 		
 		
-		public void SetPlayerName(string playerName)
+		public void SetPlayerName(string name)
 		{
-			playerNameTextObject.GetComponent<TextMeshProUGUI>().text = playerName;
+			playerName.text = name;
 		}
 		
 		public void SetHackerCount(int count)
 		{
-			playerHackerCounter.GetComponent<TextMeshProUGUI>().text = $"{count}";
+			playerHackerCounter.text = $"{count}";
 		}
 		
 		public void SetInfluenceCount(int count)
 		{
-			playerInfluenceCounter.GetComponent<TextMeshProUGUI>().text = $"{count}";
+			playerInfluenceCounter.text = $"{count}";
 		}
 		
 		public void SetPlayerColor(Color color)
 		{
-			playerIcon.GetComponent<Image>().color = color;
+			playerIcon.color = color;
 		}
 	}
 }

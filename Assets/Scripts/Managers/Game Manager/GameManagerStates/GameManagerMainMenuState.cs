@@ -26,11 +26,11 @@ namespace Synthicate
 			_userInterfaceSO.multiplayerStartGameButtonEvent += LobbyStartGameButtonEventHandler;
 			_userInterfaceSO.multiplayerLeaveLobbyButtonEvent += LeaveLobbyEventHandler;
 			
-			_gameNetworkManagerSO.clientConnectedToServer += ClientConnectedToServerEventHandler;
-			_gameNetworkManagerSO.serverRecievedNewClientConnection += ServerRecievedNewClientConnectionEventHandler;
+			// _gameNetworkManagerSO.clientConnectedToServer += ClientConnectedToServerEventHandler;
+			// _gameNetworkManagerSO.serverRecievedNewClientConnection += ServerRecievedNewClientConnectionEventHandler;
 			
-			_gameNetworkManagerSO.ServerReceivedNewPlayerInfoEvent += ServerReceivedNewPlayerInfoEventHandler;
-			_gameNetworkManagerSO.ClientUpdateAllPlayerListsEvent += ClientUpdateAllPlayerListsEventHandler;
+			// _gameNetworkManagerSO.ServerReceivedNewPlayerInfoEvent += ServerReceivedNewPlayerInfoEventHandler;
+			// _gameNetworkManagerSO.ClientUpdateAllPlayerListsEvent += ClientUpdateAllPlayerListsEventHandler;
 			
 			_waitingForClientReady = false;
 			_waitTimeForClient = 0;
@@ -66,8 +66,8 @@ namespace Synthicate
 			_gameManagerSO.AddPlayer(currentPlayer);
 			_gameManagerSO.SetClientPlayer(currentPlayer);
 			
-			// NetworkManager.Singleton.StartHost();
-			_gameNetworkManagerSO.OnHostGame("Player 1");
+			NetworkManager.Singleton.StartHost();
+			// _gameNetworkManagerSO.OnHostGame("Player 1");
 
 
 			// if (clientPlayerManager.getId() == currentSetupTurn)
@@ -95,7 +95,7 @@ namespace Synthicate
 			_gameManagerSO.SetClientPlayer(currentPlayer);
 			
 			// NetworkManager.Singleton.StartHost();
-			_gameNetworkManagerSO.OnHostGame("Player 1");
+			// _gameNetworkManagerSO.OnHostGame("Player 1");
 			
 			
 			// uint[] clientIds = new uint[numPlayers];
@@ -115,7 +115,7 @@ namespace Synthicate
 		#region Join Multiplayer Game Event Handlers
 		void MultiplayerConnectButtonEventHandler(ConnectionRequest request)
 		{
-			_gameNetworkManagerSO.OnConnectionRequest(request);
+			// _gameNetworkManagerSO.OnConnectionRequest(request);
 			// _userInterfaceSO.OnUpdateMainMenuScreen(UserInterface.MainMenuScreens.LobbyScreen);
 		}
 		
@@ -173,7 +173,7 @@ namespace Synthicate
 		{
 			// Send Updates to All Clients
 			await WaitForSecondsAsync(0.1f);
-			_gameNetworkManagerSO.OnServerUpdateAllPlayerListsOnClients(_gameManagerSO.playerList);
+			// _gameNetworkManagerSO.OnServerUpdateAllPlayerListsOnClients(_gameManagerSO.playerList);
 		}
 		async Task WaitForSecondsAsync(float delay)
 		{
@@ -189,6 +189,28 @@ namespace Synthicate
 			_userInterfaceSO.OnUpdatePlayerDisplays(playerList);
 		}
 		#endregion
+		
+		// void ConnectionRequestEventHandler(ConnectionRequest request)
+		// {
+		// 	transport.SetConnectionData(
+		// 		request.ipAddress,  // The IP address is a string
+		// 		request.port // The port number is an unsigned short, I have 7777 assigned for Unity Games
+		// 	);
+		// 	NetworkManager.Singleton.OnClientDisconnectCallback += failedConnection => {
+		// 		Debug.Log("Failed to connect to host at: " + request.ipAddress + ":" + request.port);
+		// 		NetworkManager.Singleton.Shutdown();
+		// 	};
+		// 	NetworkManager.Singleton.OnClientConnectedCallback += succeededConnection => {
+		// 		Debug.Log("Successfully connected to host at: " + request.ipAddress + ":" + request.port);
+		// 		if (!NetworkManager.Singleton.IsServer) gameNetworkManagerSO.OnClientConnectedToServer();
+		// 		// Clients must send their player name to the server
+		// 		SendClientPlayerNameServerRpc(gameNetworkManagerSO.clientPlayerName, NetworkManager.Singleton.LocalClientId);
+		// 	};
+		// 	bool clientStarted = NetworkManager.Singleton.StartClient();
+		// 	if (!clientStarted) Debug.LogError("ERROR: There may have been an issue starting the client!");
+		// }
+		
+		
 
 	}
 }

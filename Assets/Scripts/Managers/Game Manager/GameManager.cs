@@ -25,7 +25,7 @@ namespace Synthicate
 		public DepotManagerScriptableObject depotManagerSO;
 		public BoardManagerSO boardManagerSO;
 		public AudioManagerSO audioManagerSO;
-		public GameNetworkManagerScriptableObject gameNetworkManagerSO;
+		// public GameNetworkManagerScriptableObject gameNetworkManagerSO;
 		
 		// UnityTransport transport;
 
