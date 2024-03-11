@@ -1,3 +1,4 @@
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Synthicate
@@ -21,6 +22,14 @@ namespace Synthicate
 		}
 		
 		
+		[ClientRpc]
+		public void NextPlayerSetupClientRpc(int nextPlayerIndex)
+		{
+			if (nextPlayerIndex == _gameManagerSO.clientPlayer.GetId())
+			{
+				changeState(_owner.setupState);
+			}
+		}
 
 	}
 }

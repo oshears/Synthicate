@@ -16,7 +16,8 @@ namespace Synthicate
 		public UnityEvent playerBuildEvent;
 		
 		public UnityEvent startNextTurnEvent;
-				
+		public int currentPlayerTurn {get; private set;} = 0;
+
 		public void Initialize()
 		{
 			playerList = new List<Player>();
@@ -34,9 +35,9 @@ namespace Synthicate
 			this.numPlayers = numPlayers;
 		}
 		
-		public void SetClientPlayer(Player player)
+		public void SetClientPlayer(int playerId)
 		{
-			clientPlayer = player;
+			clientPlayer = playerList[playerId];
 		}
 		
 		public uint rollDice() => (uint)(Random.Range(1, 7) + Random.Range(1, 7));
@@ -51,7 +52,33 @@ namespace Synthicate
 			clientPlayer.debugIncrementAllResources();
 		}
 		
-
-
+		public bool DoneSetupPhase()
+		{
+			int playerCount = playerList.Count;
+			int outpostsBuilt = 0;
+			int flywaysBuilt = 0;
+			for(int i = 0; i < playerCount; i++)
+			{
+				outpostsBuilt += playerList[i].numOutposts;
+				flywaysBuilt += playerList[i].numFlyways;
+			}
+			return (outpostsBuilt == playerCount * 2) && (outpostsBuilt == playerCount * 2);
+		}
+		
+		public int IncrementAndGetNextPlayerIndex()
+		{
+			currentPlayerTurn = (currentPlayerTurn + 1) % playerList.Count;
+			return currentPlayerTurn;
+		}
+		
+		public void OnPlayerBuiltOutpost()
+		{
+			playerList[currentPlayerTurn].numOutposts++;
+		}
+		public void OnPlayerBuiltFlyway()
+		{
+			playerList[currentPlayerTurn].numFlyways++;
+		}
+		
 	}
 }

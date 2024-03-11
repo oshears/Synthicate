@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Synthicate
@@ -51,6 +52,8 @@ namespace Synthicate
 				_strongholdManagerSO.pointUpdateRequest.Invoke();
 				GameEvent gameEvent = new GameEvent(GameEventType.Build, _gameManagerSO.clientPlayer + " has built a new stronghold or outpost!");
 				_gameManagerSO.playerEvent.Invoke(gameEvent);
+				OnPlayerBuiltOutpostServerRpc();
+				
 
 				// if (!inSetupPhase()) getCurrentPlayer().buildStronghold();
 				//_gameManagerSO.clientPlayer.buildStronghold();
@@ -69,6 +72,14 @@ namespace Synthicate
 			_flywayManagerSO.beginBuildModeForPlayer(_clientPlayer.GetId(), buildEdges, playerBuildPermissions);
 		}
 		
+		[ServerRpc(RequireOwnership = false)]
+		public void OnPlayerBuiltOutpostServerRpc() => OnPlayerBuiltOutpostClientRpc();
+		[ClientRpc]
+		public void OnPlayerBuiltOutpostClientRpc()
+		{
+			_gameManagerSO.OnPlayerBuiltOutpost();
+		}
+		
 		public void PlayerBuildFlywayEventHandler(bool validBuild)
 		{
 			_flywayManagerSO.endBuildMode();
@@ -78,9 +89,27 @@ namespace Synthicate
 				_flywayManagerSO.edgeUpdateRequest.Invoke();
 				GameEvent gameEvent = new GameEvent(GameEventType.Build, _gameManagerSO.clientPlayer + " has built a new flyway!");
 				_gameManagerSO.playerEvent.Invoke(gameEvent);
+				OnPlayerBuiltFlywayServerRpc();
 			}
 			
-			changeState(_owner.diceState);
+			if (_gameManagerSO.DoneSetupPhase())
+			{
+				// changeState(_owner.diceState);
+				Debug.Log("Done with Setup Phase!");
+			}
+			else
+			{
+				_owner.pendingSetupState.NextPlayerSetupClientRpc(_gameManagerSO.IncrementAndGetNextPlayerIndex());
+				changeState(_owner.pendingSetupState);
+			}
+		}
+		
+		[ServerRpc(RequireOwnership = false)]
+		public void OnPlayerBuiltFlywayServerRpc() => OnPlayerBuiltOutpostClientRpc();
+		[ClientRpc]
+		public void OnPlayerBuiltFlywayClientRpc()
+		{
+			_gameManagerSO.OnPlayerBuiltFlyway();
 		}
 
 	}

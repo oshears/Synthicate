@@ -72,6 +72,7 @@ namespace Synthicate
 		void LobbyStartGameButtonEventHandler()
 		{
 			Debug.Log($"Starting Game with {_gameManagerSO.playerList.Count} players!");
+			changeState(_owner.setupState);
 		}
 		
 		void LeaveLobbyEventHandler()

@@ -15,6 +15,8 @@ namespace Synthicate
 		float _waitTimeForClient = 0;
 		
 		string _playerName = "";
+		
+		int _clientId = 0;
 	
 		public override void Enter()
 		{
@@ -30,6 +32,7 @@ namespace Synthicate
 			_waitingForClientReady = false;
 			_waitTimeForClient = 0;
 			_playerName = "";
+			_clientId = 0;
 		}
 		
 		public override void Execute()
@@ -94,8 +97,20 @@ namespace Synthicate
 				List<Player> playerList = new List<Player>();
 				for(int i = 0; i < playerNames.Length; i++) playerList.Add(new Player(playerNamesArry[i], i));
 				_userInterfaceSO.OnUpdatePlayerDisplays(playerList);
+				
+				if (_gameManagerSO.clientPlayer == null) _clientId = playerList.Count - 1;
 			}
-			
+			_gameManagerSO.SetClientPlayer(_clientId); 
+		}
+		
+		[ClientRpc]
+		public void StartGameClientRpc()
+		{
+			if (!NetworkManager.Singleton.IsServer)
+			{
+				Debug.Log($"Starting Game with {_gameManagerSO.playerList.Count} players!");
+				changeState(_owner.pendingSetupState);
+			}
 		}
 		
 		void MultiplayerCancelGameButtonEventHandler()

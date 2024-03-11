@@ -51,7 +51,7 @@ namespace Synthicate
 			// playerManagers[i] = CreateInstance("PlayerManagerSO") as PlayerManagerSO;
 			Player currentPlayer = new Player("Player 1", 0);
 			_gameManagerSO.AddPlayer(currentPlayer);
-			_gameManagerSO.SetClientPlayer(currentPlayer);
+			_gameManagerSO.SetClientPlayer(0);
 			
 			NetworkManager.Singleton.StartHost();
 			// _gameNetworkManagerSO.OnHostGame("Player 1");
@@ -83,7 +83,7 @@ namespace Synthicate
 				// Create host player
 				Player currentPlayer = new Player("Player 1", 0);
 				_gameManagerSO.AddPlayer(currentPlayer);
-				_gameManagerSO.SetClientPlayer(currentPlayer);
+				_gameManagerSO.SetClientPlayer(0);
 				
 			
 				_userInterfaceSO.OnUpdateMainMenuScreen(UserInterface.MainMenuScreens.LobbyScreen);
