@@ -16,11 +16,6 @@ namespace Synthicate
 		
 		string _playerName = "";
 	
-		public GameManagerClientLobbyState(GameManager owner) : base(owner) 
-		{
-			
-		}
-
 		public override void Enter()
 		{
 			_userInterfaceSO.multiplayerConnectButtonEvent += MultiplayerConnectButtonEventHandler;
@@ -48,7 +43,8 @@ namespace Synthicate
 				else
 				{
 					_waitingForClientReady = false;
-					SendClientPlayerNameServerRpc(_playerName, NetworkManager.Singleton.LocalClientId);
+					// SendClientPlayerNameServerRpc(_playerName, NetworkManager.Singleton.LocalClientId);
+					_owner.hostLobbyState.ReceiveClientPlayerNameServerRpc(_playerName, NetworkManager.Singleton.LocalClientId);
 				}
 			}
 			
@@ -84,20 +80,21 @@ namespace Synthicate
 			if (!_connectedToServer) Debug.LogError("ERROR: There may have been an issue starting the client!");
 		}
 		
-		[ServerRpc(RequireOwnership = false)]
-		void SendClientPlayerNameServerRpc(string clientPlayerName, ulong clientId) => _owner.hostLobbyState.ReceiveClientPlayerNameClientRpc(clientPlayerName, clientId);
-		
 		[ClientRpc]
 		public void UpdateAllPlayerListsClientRpc(StringContainer[] playerNames)
 		{
-			string[] playerNamesArry = new string[playerNames.Length];
-			for (int i = 0; i < playerNames.Length; i++)
+			if (!NetworkManager.Singleton.IsServer)
 			{
-				playerNamesArry[i] = playerNames[i].text;
+				string[] playerNamesArry = new string[playerNames.Length];
+				for (int i = 0; i < playerNames.Length; i++)
+				{
+					playerNamesArry[i] = playerNames[i].text;
+				}
+				List<Player> playerList = new List<Player>();
+				for(int i = 0; i < playerNames.Length; i++) playerList.Add(new Player(playerNamesArry[i], i));
+				_userInterfaceSO.OnUpdatePlayerDisplays(playerList);
 			}
-			List<Player> playerList = new List<Player>();
-			for(int i = 0; i < playerNames.Length; i++) playerList.Add(new Player(playerNamesArry[i], i));
-			_userInterfaceSO.OnUpdatePlayerDisplays(playerList);
+			
 		}
 		
 		void MultiplayerCancelGameButtonEventHandler()

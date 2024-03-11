@@ -7,13 +7,9 @@ namespace Synthicate
 	public class GameManagerHackingState : GameManagerAbstractState
 	{
 		
-		public GameManagerHackingState(GameManager owner) : base(owner) 
-		{
-			_hexManagerSO.hackEvent.AddListener(HackEventHandler);
-		}
-
 		public override void Enter()
 		{
+			_hexManagerSO.hackEvent.AddListener(HackEventHandler);
 			// _clientPlayer.useHacker();
 			_hexManagerSO.beginHackModeEvent.Invoke();
 		}

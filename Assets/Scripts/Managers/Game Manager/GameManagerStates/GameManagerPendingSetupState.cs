@@ -4,10 +4,6 @@ namespace Synthicate
 {
 	public class GameManagerPendingSetupState : GameManagerAbstractState
 	{
-		public GameManagerPendingSetupState(GameManager owner) : base(owner) 
-		{
-
-		}
 
 		public override void Enter()
 		{

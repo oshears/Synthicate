@@ -5,14 +5,12 @@ namespace Synthicate
 {
 	public class GameManagerSetupState : GameManagerAbstractState
 	{
-		public GameManagerSetupState(GameManager owner) : base(owner) 
-		{
-			_strongholdManagerSO.playerBuildEvent.AddListener(PlayerBuildStrongholdEventHandler);	
-			_flywayManagerSO.playerBuildEvent.AddListener(PlayerBuildFlywayEventHandler);
-		}
 
 		public override void Enter()
 		{
+			_strongholdManagerSO.playerBuildEvent.AddListener(PlayerBuildStrongholdEventHandler);	
+			_flywayManagerSO.playerBuildEvent.AddListener(PlayerBuildFlywayEventHandler);
+			
 			List<uint> buildPoints = _boardManagerSO.getValidSetupPointsFor();
 			BuildPermissions playerBuildPermissions = new BuildPermissions(false, true, false);
 			_strongholdManagerSO.beginBuildModeForPlayer(_clientPlayer.GetId(), buildPoints, playerBuildPermissions);

@@ -23,11 +23,6 @@ namespace Synthicate {
 		
 		protected UnityTransport _transport;
 
-		public GameManagerAbstractState(GameManager owner)
-		{
-			SetOwner(owner);
-		}
-		
 		public void SetOwner(GameManager owner)
 		{
 			_owner = owner;

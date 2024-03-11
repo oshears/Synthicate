@@ -17,13 +17,9 @@ namespace Synthicate
 		
 		MenuState _menuState;
 		
-		public GameManagerIdleState(GameManager owner) : base(owner) 
-		{
-			_menuState = MenuState.Default;
-		}
-
 		public override void Enter()
 		{
+			_menuState = MenuState.Default;
 			Debug.Log("Player Resources:");
 			_userInterfaceSO.OnUpdateUserInterface();
 		}

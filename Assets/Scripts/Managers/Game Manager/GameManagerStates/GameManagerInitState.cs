@@ -8,10 +8,6 @@ namespace Synthicate
 {
 	public class GameManagerInitState : GameManagerAbstractState
 	{
-		public GameManagerInitState(GameManager owner) : base(owner) 
-		{
-			
-		}
 
 		public override void Enter()
 		{

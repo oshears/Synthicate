@@ -14,20 +14,6 @@ namespace Synthicate
 		bool _waitingForClientReady = false;
 		float _waitTimeForClient = 0;
 	
-		public GameManagerMainMenuState(GameManager owner) : base(owner) 
-		{
-			
-			
-			// _gameNetworkManagerSO.clientConnectedToServer += ClientConnectedToServerEventHandler;
-			// _gameNetworkManagerSO.serverRecievedNewClientConnection += ServerRecievedNewClientConnectionEventHandler;
-			
-			// _gameNetworkManagerSO.ServerReceivedNewPlayerInfoEvent += ServerReceivedNewPlayerInfoEventHandler;
-			// _gameNetworkManagerSO.ClientUpdateAllPlayerListsEvent += ClientUpdateAllPlayerListsEventHandler;
-			
-			_waitingForClientReady = false;
-			_waitTimeForClient = 0;
-		}
-
 		public override void Enter()
 		{
 			_userInterfaceSO.OnSetMainMenuActive(true);
@@ -36,6 +22,9 @@ namespace Synthicate
 			_userInterfaceSO.singlePlayerButtonEvent += SinglePlayerButtonEventHandler;
 			_userInterfaceSO.hostMultiplayerButtonEvent += HostMultiplayerButtonEventHandler;
 			_userInterfaceSO.joinMultiplayerButtonEvent += JoinMultiplayerButtonEventHandler;
+			
+			_waitingForClientReady = false;
+			_waitTimeForClient = 0;
 			
 		}
 		

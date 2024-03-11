@@ -12,11 +12,6 @@ namespace Synthicate
 	public class GameManagerHostLobbyState : GameManagerAbstractState
 	{
 	
-		public GameManagerHostLobbyState(GameManager owner) : base(owner) 
-		{
-			
-		}
-
 		public override void Enter()
 		{
 			_userInterfaceSO.multiplayerStartGameButtonEvent += LobbyStartGameButtonEventHandler;
@@ -53,8 +48,8 @@ namespace Synthicate
 		/// <param name="clientId">The ulong client ID.</param>
 		/// <returns>void</returns>
 		/// </summary>
-		[ClientRpc]
-		public void ReceiveClientPlayerNameClientRpc(string clientPlayerName, ulong clientId)
+		[ServerRpc(RequireOwnership = false)]
+		public void ReceiveClientPlayerNameServerRpc(string clientPlayerName, ulong clientId)
 		{
 			// Add the new client player to the game manager scriptable object
 			Player newPlayer = new Player(clientPlayerName, _gameManagerSO.playerList.Count);

@@ -10,15 +10,13 @@ namespace Synthicate
 		float _diceDelay = 0;
 		bool _diceRollingDone = false;
 		
-		public GameManagerDiceState(GameManager owner) : base(owner) 
+
+		public override void Enter()
 		{
 			_diceValue = 0;
 			_diceDelay = 0;
 			_diceRollingDone = false;
-		}
-
-		public override void Enter()
-		{
+			
 			_diceValue = _gameManagerSO.rollDice();
 			_hexManagerSO.hexSelectionEvent.Invoke(_diceValue);
 			_hexManagerSO.resourceRequest.Invoke(_diceValue);
