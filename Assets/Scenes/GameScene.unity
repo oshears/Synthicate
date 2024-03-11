@@ -7329,10 +7329,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1646710480}
     m_Modifications:
-    - target: {fileID: 1074193672817820472, guid: fcc2efe1920a4e94cb33c3212dc4cab0, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.09893799
-      objectReference: {fileID: 0}
     - target: {fileID: 1971252395434077661, guid: fcc2efe1920a4e94cb33c3212dc4cab0, type: 3}
       propertyPath: m_Name
       value: Main Menu Screen

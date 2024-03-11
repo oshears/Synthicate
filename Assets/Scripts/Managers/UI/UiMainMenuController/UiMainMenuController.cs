@@ -34,7 +34,8 @@ namespace Synthicate
 		[SerializeField]
 		GameObject[] playerDisplays;
 		[SerializeField]
-		TextMeshProUGUI[] playerNames;
+		// TextMeshProUGUI[] playerNames;
+		GameObject[] playerNames;
 		#endregion 
 		
 		#region ScriptableObjects
@@ -74,8 +75,11 @@ namespace Synthicate
 		void MultiplayerConnectButtonEventHandler()
 		{
 			ConnectionRequest request;
+			// Using this approach because editor directives / pragmas aren't supported in VSCode
 			if (ApplicationSettings.IsUnityEditor)
+			{
 				request = new ConnectionRequest("127.0.0.1", 7777, "Player 2");
+			}
 			else
 			{
 				string player = playerNameTextInput.text;
@@ -101,7 +105,8 @@ namespace Synthicate
 			for (int i = 0; i < players.Count; i++)
 			{
 				playerDisplays[i].SetActive(true);
-				playerNames[i].text = players[i].GetName();
+				// playerNames[i].text = players[i].GetName(); // DEBUG: IDK why this wasn't working
+				playerNames[i].GetComponent<TextMeshProUGUI>().text = players[i].GetName();
 			} 
 		}
 		

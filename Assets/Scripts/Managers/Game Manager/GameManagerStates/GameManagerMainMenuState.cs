@@ -18,6 +18,8 @@ namespace Synthicate
 		{
 			_userInterfaceSO.OnSetMainMenuActive(true);
 			_userInterfaceSO.OnSetGameMenuActive(false);
+			_userInterfaceSO.OnUpdateMainMenuScreen(UserInterface.MainMenuScreens.TitleScreen);
+			
 			
 			_userInterfaceSO.singlePlayerButtonEvent += SinglePlayerButtonEventHandler;
 			_userInterfaceSO.hostMultiplayerButtonEvent += HostMultiplayerButtonEventHandler;

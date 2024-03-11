@@ -226,7 +226,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 178916954238960667, guid: 10af24f6e0d66c449850b665f32ecb57, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.098968506
+      value: -0.09893799
       objectReference: {fileID: 0}
     - target: {fileID: 178916954238960667, guid: 10af24f6e0d66c449850b665f32ecb57, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -412,6 +412,10 @@ PrefabInstance:
     - target: {fileID: 5850533650518042647, guid: 649d3644f6b04b74b9b4f1761e69df7f, type: 3}
       propertyPath: m_Name
       value: TitleScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 5850533650518042647, guid: 649d3644f6b04b74b9b4f1761e69df7f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -67,6 +67,7 @@ namespace Synthicate
 			NetworkManager.Singleton.OnClientDisconnectCallback += failedConnection => {
 				Debug.Log("Failed to connect to host at: " + request.ipAddress + ":" + request.port);
 				NetworkManager.Singleton.Shutdown();
+				changeState(_owner.mainMenuState);
 			};
 			NetworkManager.Singleton.OnClientConnectedCallback += succeededConnection => {
 				Debug.Log("Successfully connected to host at: " + request.ipAddress + ":" + request.port);
@@ -107,6 +108,7 @@ namespace Synthicate
 		void LeaveLobbyEventHandler()
 		{
 			_userInterfaceSO.OnUpdateMainMenuScreen(UserInterface.MainMenuScreens.TitleScreen);
+			changeState(_owner.mainMenuState);
 		}
 	}
 }
