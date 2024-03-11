@@ -15,7 +15,7 @@ namespace Synthicate
 
 		public override void Enter()
 		{
-			changeState(new GameManagerMainMenuState(_owner));
+			changeState(_owner.mainMenuState);
 		}
 		
 		public override void Execute()

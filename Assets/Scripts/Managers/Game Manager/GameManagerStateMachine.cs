@@ -7,8 +7,8 @@ namespace Synthicate
 {
     public class GameManagerStateMachine
     {
-        GameManager _owner;
-        GameManagerAbstractState _currentState;
+        public GameManager _owner {get; private set;}
+        public GameManagerAbstractState _currentState {get; private set;}
 
         public GameManagerStateMachine(GameManager owner)
         {

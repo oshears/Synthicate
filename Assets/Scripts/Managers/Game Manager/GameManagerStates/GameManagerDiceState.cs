@@ -48,7 +48,7 @@ namespace Synthicate
 			else if(_diceDelay > 3)
 			{
 				Debug.Log("Moving to idle state.");
-				changeState(new GameManagerIdleState(_owner));
+				changeState(_owner.idleState);
 			}
 			else
 			{
@@ -63,6 +63,8 @@ namespace Synthicate
 
 		public override void OnGUI()
 		{
+			if (!IsActiveState()) return;
+			
 			if (!_diceRollingDone)
 			{
 				GUI.Box(UserInterface.s_instructionArea, "");

@@ -23,16 +23,12 @@ namespace Synthicate
 
         public Color[] PLAYER_LIGHT_COLORS = new Color[4]{Color.yellow, Color.red, Color.blue, Color.cyan};
 
-        [System.NonSerialized]
         public UnityEvent<int, int> playerChangeEvent;
 
-        [System.NonSerialized]
         public UnityEvent<uint> outpostChangeEvent;
 
-        [System.NonSerialized]
         public UnityEvent<uint> strongholdChangeEvent;
 
-        [System.NonSerialized]
         public UnityEvent<uint> vacantChangeEvent;
 
         public UnityEvent<int, List<uint>, BuildPermissions> beginBuildModeEvent;

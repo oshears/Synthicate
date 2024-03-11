@@ -36,6 +36,8 @@ namespace Synthicate
 
 		public override void OnGUI()
 		{
+			if (!IsActiveState()) return;
+			
 			GUI.Box(UserInterface.s_instructionArea, "");
 			GUILayout.BeginArea(UserInterface.s_instructionArea);
 			GUILayout.Label("Place a outpost on the board, then place a flyway on the board.");
@@ -80,7 +82,7 @@ namespace Synthicate
 				_gameManagerSO.playerEvent.Invoke(gameEvent);
 			}
 			
-			changeState(new GameManagerDiceState(_owner));
+			changeState(_owner.diceState);
 		}
 
 	}

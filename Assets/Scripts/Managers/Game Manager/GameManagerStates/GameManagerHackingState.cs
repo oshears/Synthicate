@@ -25,12 +25,13 @@ namespace Synthicate
 
 		public override void Exit()
 		{
-
-
+			_hexManagerSO.hackEvent.RemoveListener(HackEventHandler);
 		}
 
 		public override void OnGUI()
 		{
+			if (!IsActiveState()) return;
+			
 			// GUI.Box(UserInterface.s_gameMenuArea, "");
 
 			// GUILayout.BeginArea(UserInterface.s_gameMenuArea);
@@ -44,7 +45,7 @@ namespace Synthicate
 		void HackEventHandler(uint id)
 		{
 			_hexManagerSO.endHackModeEvent.Invoke();
-			changeState(new GameManagerIdleState(_owner));
+			changeState(_owner.idleState);
 		}
 		
 

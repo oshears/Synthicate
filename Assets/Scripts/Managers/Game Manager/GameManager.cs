@@ -1,13 +1,14 @@
-using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
-
+using System.Collections.Generic;
 
 namespace Synthicate
 {
-	public class GameManager : MonoBehaviour
+	public class GameManager : NetworkBehaviour
 	{
 		public GameManagerStateMachine stateMachine; 
 		
+		[Header("Scriptable Objects")]
 		[SerializeField]
 		public GameManagerSO gameManagerSO;
 		
@@ -28,16 +29,63 @@ namespace Synthicate
 		// public GameNetworkManagerScriptableObject gameNetworkManagerSO;
 		
 		// UnityTransport transport;
+		// [Header("Game Manager States")]
+		[System.NonSerialized] public GameManagerInitState initState;
+		[System.NonSerialized] public GameManagerMainMenuState mainMenuState;
+		[System.NonSerialized] public GameManagerClientLobbyState clientLobbyState;
+		[System.NonSerialized] public GameManagerHostLobbyState hostLobbyState;
+		[System.NonSerialized] public GameManagerSetupState setupState;
+		[System.NonSerialized] public GameManagerPendingSetupState pendingSetupState;
+		[System.NonSerialized] public GameManagerDiceState diceState;
+		[System.NonSerialized] public GameManagerIdleState idleState;
+		[System.NonSerialized] public GameManagerBuildingState buildingState;
+		[System.NonSerialized] public GameManagerHackingState hackingState;
+		
 
 		void Awake()
 		{
-			stateMachine = new GameManagerStateMachine(this);
-			stateMachine.ChangeState(new GameManagerInitState(this));
+			
 		}
+		
 		
 		// Start is called before the first frame update
 		void Start()
 		{
+			stateMachine = new GameManagerStateMachine(this);
+			
+			initState = GetComponent<GameManagerInitState>();
+			initState.SetOwner(this);
+			
+			mainMenuState = GetComponent<GameManagerMainMenuState>();
+			mainMenuState.SetOwner(this);
+			
+			setupState = GetComponent<GameManagerSetupState>();
+			setupState.SetOwner(this);
+			
+			pendingSetupState = GetComponent<GameManagerPendingSetupState>();
+			pendingSetupState.SetOwner(this);
+			
+			diceState = GetComponent<GameManagerDiceState>();
+			diceState.SetOwner(this);
+			
+			idleState = GetComponent<GameManagerIdleState>();
+			idleState.SetOwner(this);
+			
+			buildingState = GetComponent<GameManagerBuildingState>();
+			buildingState.SetOwner(this);
+			
+			hackingState = GetComponent<GameManagerHackingState>();
+			hackingState.SetOwner(this);
+			
+			hostLobbyState = GetComponent<GameManagerHostLobbyState>();
+			hostLobbyState.SetOwner(this);
+			
+			clientLobbyState = GetComponent<GameManagerClientLobbyState>();
+			clientLobbyState.SetOwner(this);
+			
+			stateMachine.ChangeState(initState);
+			
+
 			// transport = NetworkManager.Singleton.gameObject.GetComponent<UnityTransport>();
 			
 			// current player builds a stronghold

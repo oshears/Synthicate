@@ -1,13 +1,12 @@
 using Unity.Netcode;
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Netcode.Transports.UTP;
+using Codice.Client.BaseCommands;
 
 namespace Synthicate {
 
 	// public abstract class GameManagerAbstractState : NetworkBehaviour, IManagerState 
-	public abstract class GameManagerAbstractState : IManagerState 
+	public abstract class GameManagerAbstractState : NetworkBehaviour, IManagerState 
 	{
 		protected GameManager _owner;
 		private GameManagerStateMachine _stateMachine;
@@ -19,16 +18,17 @@ namespace Synthicate {
 		protected DepotManagerScriptableObject _depotManagerSO;
 		protected BoardManagerSO _boardManagerSO;
 		protected AudioManagerSO _audioManagerSO;
-		// protected GameNetworkManagerScriptableObject _gameNetworkManagerSO;
 		
 		protected Player _clientPlayer;
 		
-		// [SerializeReference]
-		// GameNetworkManagerScriptableObject gameNetworkManagerSO;
-		
-		UnityTransport transport;
+		protected UnityTransport _transport;
 
 		public GameManagerAbstractState(GameManager owner)
+		{
+			SetOwner(owner);
+		}
+		
+		public void SetOwner(GameManager owner)
 		{
 			_owner = owner;
 			_stateMachine = owner.stateMachine;
@@ -41,10 +41,8 @@ namespace Synthicate {
 			_depotManagerSO = owner.depotManagerSO;
 			_boardManagerSO = owner.boardManagerSO;
 			_audioManagerSO = owner.audioManagerSO;
-			// _gameNetworkManagerSO = owner.gameNetworkManagerSO;
 			
 			_clientPlayer = _gameManagerSO.clientPlayer;
-			
 		}
 		public abstract void Enter();
 		public abstract void Execute();
@@ -53,8 +51,14 @@ namespace Synthicate {
 		{
 			_stateMachine.ChangeState(newState);
 		}
+		protected bool IsActiveState()
+		{
+			return _stateMachine._currentState.Equals(this);
+		}
 		public virtual void OnGUI()
 		{
+			if (!IsActiveState()) return;
+			
 			GUILayout.BeginArea(new Rect(0, 500, 500, 500));
 			GUILayout.Label($"Current GameManagerAbstractState: {this}");
 			GUILayout.EndArea();

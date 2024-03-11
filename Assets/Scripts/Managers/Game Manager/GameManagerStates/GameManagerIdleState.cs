@@ -40,6 +40,8 @@ namespace Synthicate
 
 		public override void OnGUI()
 		{
+			if (!IsActiveState()) return;
+			
 			if (_menuState == MenuState.Default)
 			{
 				GUI.Box(UserInterface.s_gameMenuArea, "");
@@ -52,7 +54,7 @@ namespace Synthicate
 				if(GUILayout.Button("Next Turn"))
 				{
 					_gameManagerSO.OnStartNextTurn();
-					changeState(new GameManagerDiceState(_owner));
+					changeState(_owner.diceState);
 				}
 				GUILayout.EndArea();
 			}
@@ -68,7 +70,7 @@ namespace Synthicate
 					// _menuState = MenuState.BuildMode;
 
 					// gameManagerSO.beginClientBuildMode();
-					changeState(new GameManagerBuildingState(_owner));
+					changeState(_owner.buildingState);
 				}
 				if (GUILayout.Button("Trade"))
 				{
@@ -87,7 +89,7 @@ namespace Synthicate
 				{
 					// _menuState = MenuState.HackMode;
 					// gameManagerSO.beginClientHackMode();
-					changeState(new GameManagerHackingState(_owner));
+					changeState(_owner.hackingState);
 				}
 				if(GUILayout.Button("Debug: Increment All Resources"))
 				{
@@ -101,7 +103,7 @@ namespace Synthicate
 				if(GUILayout.Button("Next Turn"))
 				{
 					_gameManagerSO.OnStartNextTurn();
-					changeState(new GameManagerDiceState(_owner));
+					changeState(_owner.diceState);
 				}
 				// if(GUILayout.Button("Next Turn")) gameManagerSO.nextTurn();
 				GUILayout.EndArea();

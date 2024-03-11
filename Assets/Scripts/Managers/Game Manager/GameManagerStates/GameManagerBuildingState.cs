@@ -29,16 +29,20 @@ namespace Synthicate
 		{
 			_strongholdManagerSO.endBuildMode();
 			_flywayManagerSO.endBuildMode();
+			_strongholdManagerSO.playerBuildEvent.RemoveListener(PlayerBuildStrongholdEventHandler);	
+			_flywayManagerSO.playerBuildEvent.RemoveListener(PlayerBuildFlywayEventHandler);
 		}
 
 		public override void OnGUI()
 		{
+			if (!IsActiveState()) return;
+			
 			GUI.Box(UserInterface.s_gameMenuArea, "");
 
 			GUILayout.BeginArea(UserInterface.s_gameMenuArea);
 			if(GUILayout.Button("Exit Build Mode"))
 			{
-				changeState(new GameManagerIdleState(_owner));
+				changeState(_owner.idleState);
 			}
 			GUILayout.EndArea();
 		}
@@ -53,7 +57,7 @@ namespace Synthicate
 				GameEvent gameEvent = new GameEvent(GameEventType.Build, _gameManagerSO.clientPlayer + " has built a new stronghold or outpost!");
 				_gameManagerSO.playerEvent.Invoke(gameEvent);
 
-				changeState(new GameManagerIdleState(_owner));
+				changeState(_owner.idleState);
 			}
 		}
 		
@@ -67,7 +71,7 @@ namespace Synthicate
 				GameEvent gameEvent = new GameEvent(GameEventType.Build, _gameManagerSO.clientPlayer + " has built a new flyway!");
 				_gameManagerSO.playerEvent.Invoke(gameEvent);
 				
-				changeState(new GameManagerIdleState(_owner));
+				changeState(_owner.idleState);
 			}
 		}
 		
