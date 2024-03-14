@@ -4,10 +4,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using Unity.Netcode;
 
 namespace Synthicate
 {
-	public class UiNotificationWindow : MonoBehaviour
+	public class UiNotificationWindow : NetworkBehaviour
 	{
 		
 		static float s_DefaultNotificationTime = 5;

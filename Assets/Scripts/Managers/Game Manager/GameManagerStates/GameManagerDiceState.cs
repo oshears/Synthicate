@@ -85,17 +85,18 @@ namespace Synthicate
 		{
 			if (!IsActiveState()) return;
 			
+			Rect diceArea = new Rect(0, Screen.height * 0.25f, Screen.width*0.25f, Screen.height*0.4f);
 			if (!_diceRollingDone)
 			{
-				GUI.Box(UserInterface.s_instructionArea, "");
-				GUILayout.BeginArea(UserInterface.s_instructionArea);
+				GUI.Box(diceArea, "");
+				GUILayout.BeginArea(diceArea);
 				GUILayout.Label("A new value is being hashed...");
 				GUILayout.EndArea();
 			}
 			else
 			{
-				GUI.Box(UserInterface.s_instructionArea, "");
-				GUILayout.BeginArea(UserInterface.s_instructionArea);
+				GUI.Box(diceArea, "");
+				GUILayout.BeginArea(diceArea);
 				GUILayout.Label($"Hashed value was: {(uint) m_diceValue.Value}!");
 				GUILayout.EndArea();
 			}

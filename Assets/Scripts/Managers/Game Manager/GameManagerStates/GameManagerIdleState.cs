@@ -67,7 +67,7 @@ namespace Synthicate
 		}
 		public void TradeButtonEventHandler()
 		{
-			m_GameMenuStateEventChannel.RaiseEvent(GameMenu.Screens.TradeRequesterScreen);
+			changeState(_owner.tradingState);
 		}
 		public void BuildModeButtonEventHandler()
 		{
@@ -90,8 +90,9 @@ namespace Synthicate
 		{
 			if (!IsActiveState()) return;
 			
-			GUILayout.BeginArea(UserInterface.s_gameMenuArea);
-			GUI.Box(UserInterface.s_gameMenuArea, "");
+			Rect screenArea = new Rect(0, Screen.height * 0.25f, Screen.width*0.1f, Screen.height*0.1f);
+			GUILayout.BeginArea(screenArea);
+			GUI.Box(screenArea, "");
 			if(GUILayout.Button("Debug: Increment All Resources"))
 			{
 				_gameManagerSO.OnDebugIncrementAlltResources();

@@ -33,6 +33,9 @@ namespace Synthicate
 			_userInterfaceSO.OnUpdateUserInterface();
 			
 			m_EnablePlayerControllerEventChannel.RaiseEvent(true);
+			
+			m_NotificationEventChannel.RaiseEvent($"{_gameManagerSO.GetCurrentPlayer().GetName()} is setting up!");
+
 		}
 		
 		public override void Execute()

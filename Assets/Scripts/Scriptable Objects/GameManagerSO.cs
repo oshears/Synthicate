@@ -97,6 +97,10 @@ namespace Synthicate
 			}
 		}
 		
+		/// <summary>
+		/// Get the Player object for the player who's turn it is.
+		/// </summary>
+		/// <returns></returns>
 		public Player GetCurrentPlayer()
 		{
 			return playerList[currentPlayerTurn];

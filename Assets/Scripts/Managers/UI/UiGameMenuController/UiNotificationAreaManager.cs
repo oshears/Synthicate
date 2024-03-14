@@ -9,8 +9,12 @@ using UnityEngine.UI;
 
 namespace Synthicate
 {
-	public class UiNotificationAreaManager : UiUpdatableElementMonoBehavior
+	public class UiNotificationAreaManager : NetworkedUserInterfaceElement, IUpdatableUserInterfaceElement
 	{
+		
+		
+		[Header("Notification Prefabs")]
+		
 		[SerializeField]
 		GameObject notificationWindow;
 		
@@ -24,11 +28,12 @@ namespace Synthicate
 		[SerializeField]
 		StringEventChannel m_NotificationEvent;
 		
-		override protected void Awake() {
-			base.Awake();
+		void Awake() {
+
+			userInterfaceSO.initializeUserInterfaceEvent += InitilizeUserInterfaceEventHandler;
+			userInterfaceSO.updateUserInterfaceEvent += UpdateUserInterfaceEventHandler;
 			
 			m_notificationWindows = new List<GameObject>();
-			
 			m_NotificationEvent.OnEventRaised += OnNotificationEventHandler;
 		}
 		
@@ -36,12 +41,12 @@ namespace Synthicate
 			notificationWindow.SetActive(false);
 		}
 		
-		override protected void UpdateUserInterfaceEventHandler()
+		public void UpdateUserInterfaceEventHandler()
 		{
 			
 		}
 		
-		override protected void InitilizeUserInterfaceEventHandler()
+		public void InitilizeUserInterfaceEventHandler()
 		{
 			
 		}
@@ -87,6 +92,7 @@ namespace Synthicate
 		void OnNotificationEventHandler(string notificationText)
 		{
 			GameObject newNotification = Instantiate(notificationWindowPrefab, transform);
+			// newNotification.GetComponent<NetworkObject>().Spawn();
 			newNotification.transform.localPosition = new Vector3(4.33f, 238f + (m_notificationWindows.Count + 1) * -65f, 0);
 			newNotification.GetComponent<UiNotificationWindow>().InitializeNotification(notificationText);
 			m_notificationWindows.Add(newNotification);

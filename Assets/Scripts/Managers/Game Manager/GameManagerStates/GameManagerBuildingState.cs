@@ -65,9 +65,10 @@ namespace Synthicate
 		
 		void PlayerBuildStrongholdEventHandler(bool validBuild)
 		{
-			_strongholdManagerSO.endBuildMode();
+			
 			if (validBuild)
 			{
+				_strongholdManagerSO.endBuildMode();
 				_gameManagerSO.playerBuildEvent.Invoke();
 				_strongholdManagerSO.pointUpdateRequest.Invoke();
 				// GameEvent gameEvent = new GameEvent(GameEventType.Build, _gameManagerSO.clientPlayer + " has built a new stronghold or outpost!");
@@ -76,19 +77,28 @@ namespace Synthicate
 
 				changeState(_owner.idleState);
 			}
+			else
+			{
+				m_NotificationEventChannel.RaiseEvent("Insufficient Resources!");
+			}
 		}
 		
 		void PlayerBuildFlywayEventHandler(bool validBuild)
 		{
-			_flywayManagerSO.endBuildMode();
+			
 			if (validBuild)
 			{
+				_flywayManagerSO.endBuildMode();
 				_gameManagerSO.playerBuildEvent.Invoke();
 				_flywayManagerSO.edgeUpdateRequest.Invoke();
 				// GameEvent gameEvent = new GameEvent(GameEventType.Build, _gameManagerSO.clientPlayer + " has built a new flyway!");
 				// _gameManagerSO.playerEvent.Invoke(gameEvent);
 				
 				changeState(_owner.idleState);
+			}
+			else
+			{
+				m_NotificationEventChannel.RaiseEvent("Insufficient Resources!");
 			}
 		}
 		

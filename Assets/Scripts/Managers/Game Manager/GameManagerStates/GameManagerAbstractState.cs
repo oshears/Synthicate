@@ -49,7 +49,7 @@ namespace Synthicate {
 		{
 			if (!IsActiveState()) return;
 			
-			GUILayout.BeginArea(new Rect(0, 500, 500, 500));
+			GUILayout.BeginArea(new Rect(0, Screen.height * 0.25f, Screen.width*0.1f, Screen.height*0.1f));
 			GUILayout.Label($"Current GameManagerAbstractState: {this}");
 			GUILayout.EndArea();
 		}
