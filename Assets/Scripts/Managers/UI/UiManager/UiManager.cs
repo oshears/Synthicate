@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
 namespace Synthicate
 {
 	
-	public class UiManager : MonoBehaviour
+	public class UiManager : NetworkBehaviour
 	{
 		[SerializeField]
 		UiScriptableObject _userInterfaceSO;

@@ -12,6 +12,9 @@ namespace Synthicate
 	public class GameManagerHostLobbyState : GameManagerAbstractState
 	{
 	
+		[SerializeField]
+		StringEventChannel m_NotificationEventChannel;
+	
 		public override void Enter()
 		{
 			_userInterfaceSO.multiplayerStartGameButtonEvent += LobbyStartGameButtonEventHandler;
@@ -21,6 +24,8 @@ namespace Synthicate
 			_userInterfaceSO.OnSetMainMenuActive(true);
 			_userInterfaceSO.OnSetGameMenuActive(false);
 			_transport  = NetworkManager.Singleton.gameObject.GetComponent<UnityTransport>();
+			
+			m_NotificationEventChannel.RaiseEvent($"You hosted a new game!");
 		}
 		
 		public override void Execute()
@@ -66,6 +71,8 @@ namespace Synthicate
 				playerNames[i] = new StringContainer(_gameManagerSO.playerList[i].GetName());
 			}
 			_owner.clientLobbyState.UpdateAllPlayerListsClientRpc(playerNames);
+			
+			m_NotificationEventChannel.RaiseEvent($"{clientPlayerName} joined the game!");
 		} 
 		
 		

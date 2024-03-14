@@ -370,6 +370,56 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6801915248208283379, guid: 4f13fd23d320d8440820fed4d2511e0d, type: 3}
   m_PrefabInstance: {fileID: 5647859870215272832}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1050771455
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1050771456}
+  - component: {fileID: 1050771457}
+  m_Layer: 5
+  m_Name: Network Debugger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1050771456
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1050771455}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1646710480}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -117.3, y: -14.491499}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1050771457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1050771455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7726ea48f1a5b6549acfdceacac5b5a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NotificationWindowPrefab: {fileID: 7110270170602994281, guid: f3fd9d51ba589d74ab9e34a9610fb692, type: 3}
+  m_NotificationEvent: {fileID: 11400000, guid: b33a419167b067e4f888e09565ac360e, type: 2}
 --- !u!1 &1077127077 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8520594814961387378, guid: 1c80dc4f227a0fd478bdbe2246fd0c46, type: 3}
@@ -634,6 +684,7 @@ RectTransform:
   - {fileID: 591440369}
   - {fileID: 4001103715450791839}
   - {fileID: 4216032457223530701}
+  - {fileID: 1050771456}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2159,6 +2210,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1646710480}
     m_Modifications:
+    - target: {fileID: 137975622292138137, guid: fcc2efe1920a4e94cb33c3212dc4cab0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.0010375977
+      objectReference: {fileID: 0}
     - target: {fileID: 1971252395434077661, guid: fcc2efe1920a4e94cb33c3212dc4cab0, type: 3}
       propertyPath: m_Name
       value: Main Menu Screen
@@ -3076,6 +3131,10 @@ PrefabInstance:
       propertyPath: m_EnablePlayerControllerEventChannel
       value: 
       objectReference: {fileID: 11400000, guid: dc159ece76277b64a84c933d97bfc522, type: 2}
+    - target: {fileID: 4731357589983390029, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
+      propertyPath: m_NotificationEventChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: b33a419167b067e4f888e09565ac360e, type: 2}
     - target: {fileID: 5580459241690480718, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1468592277

@@ -1,6 +1,7 @@
 using Unity.Netcode;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEditor;
 
 namespace Synthicate
 {
@@ -91,7 +92,7 @@ namespace Synthicate
 			tradingState.SetOwner(this);
 			
 			stateMachine.ChangeState(initState);
-			
+
 
 			// transport = NetworkManager.Singleton.gameObject.GetComponent<UnityTransport>();
 			

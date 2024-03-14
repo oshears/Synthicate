@@ -91,8 +91,13 @@ namespace Synthicate
 		
 		void OnNotificationEventHandler(string notificationText)
 		{
-			GameObject newNotification = Instantiate(notificationWindowPrefab, transform);
+			// GameObject newNotification = Instantiate(notificationWindowPrefab, transform);
 			// newNotification.GetComponent<NetworkObject>().Spawn();
+			GameObject notifyWindow = Resources.Load<GameObject>("Prefabs/UI/Game Menu/Notifications/Notification Window");
+			// GameObject newNotification = Instantiate(NetworkManager.GetNetworkPrefabOverride(notifyWindow), transform);
+			GameObject newNotification = Instantiate(notifyWindow, transform);
+			// GameObject newNotification = Instantiate(NetworkManager.GetNetworkPrefabOverride(notificationWindowPrefab), transform);
+			newNotification.GetComponent<NetworkObject>().Spawn();
 			newNotification.transform.localPosition = new Vector3(4.33f, 238f + (m_notificationWindows.Count + 1) * -65f, 0);
 			newNotification.GetComponent<UiNotificationWindow>().InitializeNotification(notificationText);
 			m_notificationWindows.Add(newNotification);
