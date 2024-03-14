@@ -48,28 +48,41 @@ namespace Synthicate
 		{
 			
 			
+			// Increment Buttons
 			for(int i = 0; i < tradeIncrementButtons.Length; i++)
 			{
-				// Increment Buttons
-				tradeIncrementButtons[i].GetComponent<Button>().onClick.AddListener(() => {
-					m_GivingAmounts[i] += 1;
-					tradeOfferAmounts[i].GetComponent<TextMeshProUGUI>().text = $"{m_GivingAmounts[i]}";
-				});
-				// Decrement Buttons
-				tradeIncrementButtons[i].GetComponent<Button>().onClick.AddListener(() => {
-					m_GivingAmounts[i] -= (m_GivingAmounts[i] > 0) ? 1 : 0;
-					tradeOfferAmounts[i].GetComponent<TextMeshProUGUI>().text = $"{m_GivingAmounts[i]}";
-				});
+				IncrementButtonEventSetup(i);
+			}
+			
+			// Decrement Buttons
+			for(int i = 0; i < tradeDecrementButtons.Length; i++)
+			{
+				DecrementButtonEventSetup(i);
 			}
 			
 			m_CancelTradeButton.GetComponent<Button>().onClick.AddListener(() => {
 				ResetCounts();
-				
-				
 				m_CancelTradeEventChannel.RaiseEvent();
-				
 			});
 		}
+		
+		
+		void IncrementButtonEventSetup(int value)
+		{
+			tradeIncrementButtons[value].GetComponent<Button>().onClick.AddListener(() => {
+				m_GivingAmounts[value] += 1;
+				tradeOfferAmounts[value].GetComponent<TextMeshProUGUI>().text = $"{m_GivingAmounts[value]}";
+			});
+		}
+		
+		void DecrementButtonEventSetup(int value)
+		{
+			tradeDecrementButtons[value].GetComponent<Button>().onClick.AddListener(() => {
+				m_GivingAmounts[value] -= (m_GivingAmounts[value] > 0) ? 1 : 0;
+				tradeOfferAmounts[value].GetComponent<TextMeshProUGUI>().text = $"{m_GivingAmounts[value]}";
+			});
+		}
+		
 		
 		override protected void InitilizeUserInterfaceEventHandler()
 		{
