@@ -165,9 +165,9 @@ namespace Synthicate
 
 			// request updated stronghold/outpost/flyway points when the hex manager finishes updating its resources
 			hexManagerSO.managerSetupResourceResponse.AddListener((List<HexResource> setupResources) => {
-				for (int player = 0; player < gameManagerSO.numPlayers; player++)
+				for (int player = 0; player < gameManagerSO.GetNumPlayers(); player++)
 				{
-					int[] playerResources = boardManagerSO.getResourcesForPlayer(player, setupResources);
+					int[] playerResources = boardManagerSO.GetResourcesForPlayer(player, setupResources);
 					gameManagerSO.playerList[player].updateResources(playerResources);
 				}
 				// beginFirstTurn();
@@ -179,20 +179,20 @@ namespace Synthicate
 			// request the board manager to update player flyway placements after the flyway manager collects them
 			flywayManagerSO.managerEdgeUpdateResponse.AddListener((List<PlayerEdge> edges) => boardManagerSO.updateEdgesRequestEvent.Invoke(edges));
 
-			// update all player resources when board manager announces that player placements have been recorded
-			boardManagerSO.updatePointsResponseEvent.AddListener(() => {
-				for (int player = 0; player < gameManagerSO.numPlayers; player++)
-				{
-					int[] playerResources = boardManagerSO.getResourcesForPlayer(player, hexManagerSO.getResources());
-					gameManagerSO.playerList[player].updateResources(playerResources);
-					gameManagerSO.playerList[player].numOutposts = boardManagerSO.getNumOutpostsFor(player);
-					gameManagerSO.playerList[player].numStrongholds = boardManagerSO.getNumStrongholdsFor(player);
-				}
-			});
+			// // update all player resources when board manager announces that player placements have been recorded
+			// boardManagerSO.updatePointsResponseEvent.AddListener(() => {
+			// 	for (int player = 0; player < gameManagerSO.GetNumPlayers(); player++)
+			// 	{
+			// 		int[] playerResources = boardManagerSO.getResourcesForPlayer(player, hexManagerSO.getResources());
+			// 		gameManagerSO.playerList[player].updateResources(playerResources);
+			// 		gameManagerSO.playerList[player].numOutposts = boardManagerSO.getNumOutpostsFor(player);
+			// 		gameManagerSO.playerList[player].numStrongholds = boardManagerSO.getNumStrongholdsFor(player);
+			// 	}
+			// });
 
 			// update all player flyway counts when board manager announces that player flyway placements have been recorded
 			boardManagerSO.updatePointsResponseEvent.AddListener(() => {
-				for (int player = 0; player < gameManagerSO.numPlayers; player++) gameManagerSO.playerList[player].numFlyways = boardManagerSO.getNumFlywaysFor(player);
+				for (int player = 0; player < gameManagerSO.GetNumPlayers(); player++) gameManagerSO.playerList[player].numFlyways = boardManagerSO.GetNumFlywaysFor(player);
 			});
 		}
 		

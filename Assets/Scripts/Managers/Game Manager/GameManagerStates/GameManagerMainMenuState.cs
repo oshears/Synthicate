@@ -18,7 +18,7 @@ namespace Synthicate
 		{
 			_userInterfaceSO.OnSetMainMenuActive(true);
 			_userInterfaceSO.OnSetGameMenuActive(false);
-			_userInterfaceSO.OnUpdateMainMenuScreen(UserInterface.MainMenuScreens.TitleScreen);
+			_userInterfaceSO.OnUpdateMainMenuScreen(MainMenu.Screens.TitleScreen);
 			
 			
 			_userInterfaceSO.singlePlayerButtonEvent += SinglePlayerButtonEventHandler;
@@ -86,7 +86,7 @@ namespace Synthicate
 				_gameManagerSO.SetClientPlayer(0);
 				
 			
-				_userInterfaceSO.OnUpdateMainMenuScreen(UserInterface.MainMenuScreens.LobbyScreen);
+				_userInterfaceSO.OnUpdateMainMenuScreen(MainMenu.Screens.HostLobbyScreen);
 				changeState(_owner.hostLobbyState); 
 			} 
 			else
@@ -99,7 +99,7 @@ namespace Synthicate
 		void JoinMultiplayerButtonEventHandler()
 		{
 			Debug.Log("Starting Multiplayer Game as Client!");
-			_userInterfaceSO.OnUpdateMainMenuScreen(UserInterface.MainMenuScreens.JoinMultiplayerScreen);
+			_userInterfaceSO.OnUpdateMainMenuScreen(MainMenu.Screens.JoinMultiplayerScreen);
 			changeState(_owner.clientLobbyState); 
 		}
 		

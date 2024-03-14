@@ -16,7 +16,7 @@ namespace Synthicate
 		
 		string _playerName = "";
 		
-		int _clientId = 0;
+		int _clientId = -1;
 	
 		public override void Enter()
 		{
@@ -32,7 +32,7 @@ namespace Synthicate
 			_waitingForClientReady = false;
 			_waitTimeForClient = 0;
 			_playerName = "";
-			_clientId = 0;
+			_clientId = -1;
 		}
 		
 		public override void Execute()
@@ -78,7 +78,7 @@ namespace Synthicate
 				// Clients must send their player name to the server
 				_playerName = request.playerName;
 				_waitingForClientReady = true;
-				_userInterfaceSO.OnUpdateMainMenuScreen(UserInterface.MainMenuScreens.LobbyScreen);
+				_userInterfaceSO.OnUpdateMainMenuScreen(MainMenu.Screens.ClientLobbyScreen);
 			};
 			bool _connectedToServer = NetworkManager.Singleton.StartClient();
 			if (!_connectedToServer) Debug.LogError("ERROR: There may have been an issue starting the client!");
@@ -89,18 +89,29 @@ namespace Synthicate
 		{
 			if (!NetworkManager.Singleton.IsServer)
 			{
+				// Extract strings from the StringContainer
 				string[] playerNamesArry = new string[playerNames.Length];
 				for (int i = 0; i < playerNames.Length; i++)
 				{
 					playerNamesArry[i] = playerNames[i].text;
 				}
-				List<Player> playerList = new List<Player>();
-				for(int i = 0; i < playerNames.Length; i++) playerList.Add(new Player(playerNamesArry[i], i));
-				_userInterfaceSO.OnUpdatePlayerDisplays(playerList);
+
+				// Initialize game manager SO using new player list with names list from the server
+				_gameManagerSO.InitializeWithPlayerNames(playerNamesArry);
 				
-				if (_gameManagerSO.clientPlayer == null) _clientId = playerList.Count - 1;
+				// Update the UI Lobby View
+				_userInterfaceSO.OnUpdatePlayerDisplays(_gameManagerSO.playerList);
+				
+				// Set client id if not already assigned
+				if (_clientId == -1)
+				{
+					_clientId = _gameManagerSO.playerList.Count - 1;
+				}
+
+				// Update client player reference
+				_gameManagerSO.SetClientPlayer(_clientId);
 			}
-			_gameManagerSO.SetClientPlayer(_clientId); 
+			 
 		}
 		
 		[ClientRpc]
@@ -109,20 +120,24 @@ namespace Synthicate
 			if (!NetworkManager.Singleton.IsServer)
 			{
 				Debug.Log($"Starting Game with {_gameManagerSO.playerList.Count} players!");
+				
+				_userInterfaceSO.OnSetMainMenuActive(false);
+				_userInterfaceSO.OnSetGameMenuActive(true);
+			
 				changeState(_owner.pendingSetupState);
 			}
 		}
 		
 		void MultiplayerCancelGameButtonEventHandler()
 		{
-			_userInterfaceSO.OnUpdateMainMenuScreen(UserInterface.MainMenuScreens.TitleScreen);
+			_userInterfaceSO.OnUpdateMainMenuScreen(MainMenu.Screens.TitleScreen);
 			if (NetworkManager.Singleton.IsConnectedClient) NetworkManager.Singleton.Shutdown();
 		}
 		
 
 		void LeaveLobbyEventHandler()
 		{
-			_userInterfaceSO.OnUpdateMainMenuScreen(UserInterface.MainMenuScreens.TitleScreen);
+			_userInterfaceSO.OnUpdateMainMenuScreen(MainMenu.Screens.TitleScreen);
 			changeState(_owner.mainMenuState);
 		}
 	}

@@ -18,9 +18,6 @@ namespace Synthicate {
 		protected DepotManagerScriptableObject _depotManagerSO;
 		protected BoardManagerSO _boardManagerSO;
 		protected AudioManagerSO _audioManagerSO;
-		
-		protected Player _clientPlayer;
-		
 		protected UnityTransport _transport;
 
 		public void SetOwner(GameManager owner)
@@ -36,8 +33,6 @@ namespace Synthicate {
 			_depotManagerSO = owner.depotManagerSO;
 			_boardManagerSO = owner.boardManagerSO;
 			_audioManagerSO = owner.audioManagerSO;
-			
-			_clientPlayer = _gameManagerSO.clientPlayer;
 		}
 		public abstract void Enter();
 		public abstract void Execute();

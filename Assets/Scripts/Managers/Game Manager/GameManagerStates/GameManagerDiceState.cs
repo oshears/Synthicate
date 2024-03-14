@@ -17,7 +17,7 @@ namespace Synthicate
 			_diceDelay = 0;
 			_diceRollingDone = false;
 			
-			_diceValue = _gameManagerSO.rollDice();
+			_diceValue = _gameManagerSO.RollDice();
 			_hexManagerSO.hexSelectionEvent.Invoke(_diceValue);
 			_hexManagerSO.resourceRequest.Invoke(_diceValue);
 			// GameEvent gameEvent = new GameEvent(GameEventType.Hack, "The game has begun! " + getCurrentPlayer().getName() + " hashed a " + diceValue);

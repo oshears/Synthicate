@@ -11,9 +11,9 @@ namespace Synthicate
 		{
 			_strongholdManagerSO.playerBuildEvent.AddListener(PlayerBuildStrongholdEventHandler);	
 			_flywayManagerSO.playerBuildEvent.AddListener(PlayerBuildFlywayEventHandler);
-			BuildPermissions playerBuildPermissions = new BuildPermissions(_clientPlayer.canBuildFlyway(), _clientPlayer.canBuildOutpost(), _clientPlayer.canBuildStronghold());
-			_strongholdManagerSO.beginBuildModeForPlayer(_clientPlayer.GetId(), _boardManagerSO.getValidPointsFor(_clientPlayer.GetId()), playerBuildPermissions);
-			_flywayManagerSO.beginBuildModeForPlayer(_clientPlayer.GetId(), _boardManagerSO.getValidEdgesFor(_clientPlayer.GetId()), playerBuildPermissions);
+			BuildPermissions playerBuildPermissions = new BuildPermissions(_gameManagerSO.clientPlayer.canBuildFlyway(), _gameManagerSO.clientPlayer.canBuildOutpost(), _gameManagerSO.clientPlayer.canBuildStronghold());
+			_strongholdManagerSO.beginBuildModeForPlayer(_gameManagerSO.clientPlayer.GetId(), _boardManagerSO.GetValidPointsFor(_gameManagerSO.clientPlayer.GetId()), playerBuildPermissions);
+			_flywayManagerSO.beginBuildModeForPlayer(_gameManagerSO.clientPlayer.GetId(), _boardManagerSO.GetValidEdgesFor(_gameManagerSO.clientPlayer.GetId()), playerBuildPermissions);
 		}
 		
 		public override void Execute()

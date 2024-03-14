@@ -45,30 +45,30 @@ namespace Synthicate
             edges = new List<PlayerEdge>();
             for (uint i = 0; i < Global.NUM_FLYWAY_EDGES; i++) edges.Add(new PlayerEdge(i, false, 0));
             
-            connectBoard();
+            ConnectBoard();
         }
 
 
         
-        public int getNumOutpostsFor(int player)
+        public int GetNumOutpostsFor(int player)
         {
             int numOutposts = 0;
             foreach (PlayerPoint point in points) if (point.player == player && point.placed && !point.isStronghold) numOutposts++;
             return numOutposts;
         }
-        public int getNumStrongholdsFor(int player)
+        public int GetNumStrongholdsFor(int player)
         {
             int numStrongholds = 0;
             foreach (PlayerPoint point in points) if (point.player == player && point.placed && point.isStronghold) numStrongholds++;
             return numStrongholds;
         }
-        public int getNumFlywaysFor(int player)
+        public int GetNumFlywaysFor(int player)
         {
             int numFlyways = 0;
             foreach (PlayerEdge edge in edges) if (edge.player == player && edge.placed) numFlyways++;
             return numFlyways;
         }
-        private List<PlayerPoint> getPlayerPoints(int player)
+        private List<PlayerPoint> GetPlayerPoints(int player)
         {
             List<PlayerPoint> playerPoints = new List<PlayerPoint>();
 
@@ -77,7 +77,7 @@ namespace Synthicate
             return playerPoints;
         }
 
-        private int[] getResourcesForPoint(uint point, List<HexResource> hexResources)
+        private int[] GetResourcesForPoint(uint point, List<HexResource> hexResources)
         {
             //List<uint> list = null;
 
@@ -93,15 +93,15 @@ namespace Synthicate
             return pointResources;
         }
 
-        public int[] getResourcesForPlayer(int player, List<HexResource> hexResources)
+        public int[] GetResourcesForPlayer(int player, List<HexResource> hexResources)
         {
-            List<PlayerPoint> playerPoints = getPlayerPoints(player);
+            List<PlayerPoint> playerPoints = GetPlayerPoints(player);
 
             int[] playerResources = new int[Global.NUM_RESOURCE_TYPES] { 0, 0, 0, 0, 0 };
 
             foreach (PlayerPoint point in playerPoints)
             {
-                int[] pointResources = getResourcesForPoint(point.id, hexResources);
+                int[] pointResources = GetResourcesForPoint(point.id, hexResources);
 
                 for (int resourceId = 0; resourceId < Global.NUM_RESOURCE_TYPES; resourceId++)
                 {
@@ -113,7 +113,7 @@ namespace Synthicate
             return playerResources;
         }
 
-        public List<uint> getValidSetupPointsFor()
+        public List<uint> GetValidSetupPointsFor()
         {
             List<uint> validPoints = new List<uint>();
 
@@ -136,7 +136,7 @@ namespace Synthicate
             return validPoints;
         }
 
-        public List<uint> getValidPointsFor(int player)
+        public List<uint> GetValidPointsFor(int player)
         {
             List<uint> validPoints = new List<uint>();
 
@@ -166,7 +166,7 @@ namespace Synthicate
             return validPoints;
         }
 
-        public List<uint> getValidEdgesFor(int player)
+        public List<uint> GetValidEdgesFor(int player)
         {
             List<uint> validEdges = new List<uint>();
 
@@ -195,7 +195,7 @@ namespace Synthicate
 
         public bool validDepotForPlayer(int player, uint depot)
         {
-            foreach (PlayerPoint point in getPlayerPoints(player))
+            foreach (PlayerPoint point in GetPlayerPoints(player))
             {
                 if (point_depot_list[(int) point.id].Length > 0 && point_depot_list[(int) point.id][0] == depot) return true;
             }
@@ -203,7 +203,7 @@ namespace Synthicate
         }
 
 
-        private void connectBoard()
+        private void ConnectBoard()
         {
             edge_edge_list = new List<uint[]>();
             edge_point_list = new List<uint[]>();

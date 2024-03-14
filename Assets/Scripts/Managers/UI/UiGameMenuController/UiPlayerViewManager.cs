@@ -10,10 +10,8 @@ namespace Synthicate
 {
 	public class UiPlayerViewManager : UiUpdatableElementMonoBehavior
 	{
-		#region Players View
 		[SerializeField]
 		GameObject[] playerViews;
-		#endregion
 		
 		override protected void Awake() {
 			base.Awake();
@@ -36,7 +34,6 @@ namespace Synthicate
 				playerViews[i].SetActive(true);
 				playerViews[i].GetComponent<UiPlayerViewController>().SetPlayerName(gameManagerSO.playerList[i].GetName());
 				playerViews[i].GetComponent<UiPlayerViewController>().SetPlayerColor(i == 0 ? Color.blue : i == 1 ? Color.green : i == 2 ? Color.yellow : Color.red);
-				
 				playerViews[i].GetComponent<UiPlayerViewController>().SetHackerCount(0);
 			}
 		}

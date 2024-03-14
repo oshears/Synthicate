@@ -55,49 +55,7 @@ namespace Synthicate
 
 		private void OnEnable()
 		{
-			// current player builds a stronghold
-			strongholdManager.playerBuildEvent.AddListener((bool validBuild) => {
-				endClientBuildMode();
-				if (validBuild)
-				{
-					playerBuildEvent.Invoke();
-					strongholdManager.pointUpdateRequest.Invoke();
-					GameEvent gameEvent = new GameEvent(GameEventType.Build, getCurrentPlayer().getName() + " has built a new stronghold or outpost!");
-					playerEvent.Invoke(gameEvent);
-
-					if (!inSetupPhase()) getCurrentPlayer().buildStronghold();
-
-					// if in setup mode, let the client build a flyway now
-					if (isClientPlayerSetupActive()) beginClientSetupFlywayBuildMode();
-				}
-				else if (clientPlayerIsActive())
-				{
-					GameEvent gameEvent = new GameEvent(GameEventType.Build, "You do not have enough resources to build an outpost or stronghold here!");
-					playerEvent.Invoke(gameEvent);
-				}
-			});
-
-			// current player builds a flyway
-			flywayManager.playerBuildEvent.AddListener((bool validBuild) => {
-				// TODO: We need to send this response back to the server so that it can command the change on all clients
-				// NOTE: This may already be happening if the stronghold point triggers the event across the network...
-				endClientBuildMode();
-				if (validBuild) {
-					playerBuildEvent.Invoke();
-					flywayManager.edgeUpdateRequest.Invoke();
-					GameEvent gameEvent = new GameEvent(GameEventType.Build, getCurrentPlayer().getName() + " has built a new flyway!");
-					playerEvent.Invoke(gameEvent);
-
-					if (!inSetupPhase()) getCurrentPlayer().buildFlyway();
-
-					// if in setup mode, indicate that the player has finished their turn
-					if (isClientPlayerSetupActive()) nextSetupTurnEvent.Invoke();
-				}
-				else if (clientPlayerIsActive()) {
-					GameEvent gameEvent = new GameEvent(GameEventType.Build, "You do not have enough resources to build a flyway!");
-					playerEvent.Invoke(gameEvent);
-				}
-			});
+			
 
 			// Event that is triggered when a Hex is hacked
 			hexManager.hackEvent.AddListener((uint id) => {

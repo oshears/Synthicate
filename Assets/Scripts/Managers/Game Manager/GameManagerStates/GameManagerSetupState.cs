@@ -7,17 +7,26 @@ namespace Synthicate
 	public class GameManagerSetupState : GameManagerAbstractState
 	{
 
+		[Header("Event Channels")]
+		
+		[SerializeField]
+		GameMenuStateEventChannel m_GameMenuStateEventChannel;
+		
+		[SerializeField]
+		StringEventChannel m_NotificationEventChannel;
+		
 		public override void Enter()
 		{
 			_strongholdManagerSO.playerBuildEvent.AddListener(PlayerBuildStrongholdEventHandler);	
 			_flywayManagerSO.playerBuildEvent.AddListener(PlayerBuildFlywayEventHandler);
 			
-			List<uint> buildPoints = _boardManagerSO.getValidSetupPointsFor();
+			List<uint> buildPoints = _boardManagerSO.GetValidSetupPointsFor();
 			BuildPermissions playerBuildPermissions = new BuildPermissions(false, true, false);
-			_strongholdManagerSO.beginBuildModeForPlayer(_clientPlayer.GetId(), buildPoints, playerBuildPermissions);
-		
+			_strongholdManagerSO.beginBuildModeForPlayer(_gameManagerSO.clientPlayer.GetId(), buildPoints, playerBuildPermissions);
+
+			
 			_userInterfaceSO.OnInitializeUserInterface();
-			_userInterfaceSO.OnSetGameMenuActive(true);
+			m_GameMenuStateEventChannel.RaiseEvent(GameMenu.Screens.PlayerSetupTurnScreen);
 			_userInterfaceSO.OnUpdateUserInterface();
 		}
 		
@@ -50,10 +59,12 @@ namespace Synthicate
 			{
 				_gameManagerSO.playerBuildEvent.Invoke();
 				_strongholdManagerSO.pointUpdateRequest.Invoke();
-				GameEvent gameEvent = new GameEvent(GameEventType.Build, _gameManagerSO.clientPlayer + " has built a new stronghold or outpost!");
-				_gameManagerSO.playerEvent.Invoke(gameEvent);
-				OnPlayerBuiltOutpostServerRpc();
+				// GameEvent gameEvent = new GameEvent(GameEventType.Build, _gameManagerSO.clientPlayer + " has built a new stronghold or outpost!");
+				// _gameManagerSO.playerEvent.Invoke(gameEvent);
+				OnUpdatePlayerBuildCountsServerRpc();
 				
+				// TODO: Maybe the actual flyway can raise this event (avoid the middle man)
+				m_NotificationEventChannel.RaiseEvent("Player built an outpost!");
 
 				// if (!inSetupPhase()) getCurrentPlayer().buildStronghold();
 				//_gameManagerSO.clientPlayer.buildStronghold();
@@ -67,17 +78,17 @@ namespace Synthicate
 			// 	playerEvent.Invoke(gameEvent);
 			// }
 			
-			List<uint> buildEdges = _boardManagerSO.getValidEdgesFor(_clientPlayer.GetId());
+			List<uint> buildEdges = _boardManagerSO.GetValidEdgesFor(_gameManagerSO.clientPlayer.GetId());
 			BuildPermissions playerBuildPermissions = new BuildPermissions(true, false, false);
-			_flywayManagerSO.beginBuildModeForPlayer(_clientPlayer.GetId(), buildEdges, playerBuildPermissions);
+			_flywayManagerSO.beginBuildModeForPlayer(_gameManagerSO.clientPlayer.GetId(), buildEdges, playerBuildPermissions);
 		}
 		
 		[ServerRpc(RequireOwnership = false)]
-		public void OnPlayerBuiltOutpostServerRpc() => OnPlayerBuiltOutpostClientRpc();
+		public void OnUpdatePlayerBuildCountsServerRpc() => OnUpdatePlayerBuildCountsClientRpc();
 		[ClientRpc]
-		public void OnPlayerBuiltOutpostClientRpc()
+		public void OnUpdatePlayerBuildCountsClientRpc()
 		{
-			_gameManagerSO.OnPlayerBuiltOutpost();
+			_gameManagerSO.UpdatePlayerBuildCounts();
 		}
 		
 		public void PlayerBuildFlywayEventHandler(bool validBuild)
@@ -87,30 +98,38 @@ namespace Synthicate
 			{
 				_gameManagerSO.playerBuildEvent.Invoke();
 				_flywayManagerSO.edgeUpdateRequest.Invoke();
-				GameEvent gameEvent = new GameEvent(GameEventType.Build, _gameManagerSO.clientPlayer + " has built a new flyway!");
-				_gameManagerSO.playerEvent.Invoke(gameEvent);
-				OnPlayerBuiltFlywayServerRpc();
+				// GameEvent gameEvent = new GameEvent(GameEventType.Build, _gameManagerSO.clientPlayer + " has built a new flyway!");
+				// _gameManagerSO.playerEvent.Invoke(gameEvent);
+				OnUpdatePlayerBuildCountsServerRpc();
+				
+				// TODO: Maybe the actual flyway can raise this event (avoid the middle man)
+				m_NotificationEventChannel.RaiseEvent("Player built a flyway!");
 			}
 			
 			if (_gameManagerSO.DoneSetupPhase())
 			{
 				// changeState(_owner.diceState);
 				Debug.Log("Done with Setup Phase!");
+				changeState(_owner.idleState);
 			}
 			else
 			{
-				_owner.pendingSetupState.NextPlayerSetupClientRpc(_gameManagerSO.IncrementAndGetNextPlayerIndex());
-				changeState(_owner.pendingSetupState);
+				int currentPlayerTurn = _gameManagerSO.currentPlayerTurn;
+				int nextPlayerTurn =  _gameManagerSO.IncrementAndGetNextPlayerIndex();
+				
+				if (currentPlayerTurn != nextPlayerTurn)
+				{
+					_owner.pendingSetupState.NextPlayerSetupClientRpc(nextPlayerTurn);
+					changeState(_owner.pendingSetupState);
+				}
+				else
+				{
+					changeState(_owner.setupState);
+				}
+				
+				
 			}
 		}
 		
-		[ServerRpc(RequireOwnership = false)]
-		public void OnPlayerBuiltFlywayServerRpc() => OnPlayerBuiltOutpostClientRpc();
-		[ClientRpc]
-		public void OnPlayerBuiltFlywayClientRpc()
-		{
-			_gameManagerSO.OnPlayerBuiltFlyway();
-		}
-
 	}
 }

@@ -72,12 +72,16 @@ namespace Synthicate
 		void LobbyStartGameButtonEventHandler()
 		{
 			Debug.Log($"Starting Game with {_gameManagerSO.playerList.Count} players!");
+			
+			_userInterfaceSO.OnSetMainMenuActive(false);
+			_userInterfaceSO.OnSetGameMenuActive(true);
+			
 			changeState(_owner.setupState);
 		}
 		
 		void LeaveLobbyEventHandler()
 		{
-			_userInterfaceSO.OnUpdateMainMenuScreen(UserInterface.MainMenuScreens.TitleScreen);
+			_userInterfaceSO.OnUpdateMainMenuScreen(MainMenu.Screens.TitleScreen);
 			NetworkManager.Singleton.Shutdown();
 		}
 		

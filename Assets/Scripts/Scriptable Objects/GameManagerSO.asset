@@ -12,71 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ab6aa6c4aec83049a5ff68c6c9e2235, type: 3}
   m_Name: GameManagerSO
   m_EditorClassIdentifier: 
-  hostStartGameEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  nextTurnEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  updateGUIEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  clientBuildModeEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  playerHackEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  playerCardEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  playerTradeRequest:
-    m_PersistentCalls:
-      m_Calls: []
-  playerTradeResponse:
-    m_PersistentCalls:
-      m_Calls: []
-  updateMainMenuEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  endSetupEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  nextSetupTurnEvent:
-    m_PersistentCalls:
-      m_Calls: []
   playerEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  depotTradeEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  depotTradeExecuteEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  disableGUIEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  enableGUIEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  hackerRollEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  debugGiveResourcesEvent:
     m_PersistentCalls:
       m_Calls: []
   playerBuildEvent:
     m_PersistentCalls:
       m_Calls: []
-  currentTurn: 0
-  currentSetupTurn: 0
-  numPlayers: 1
-  flywayManager: {fileID: 11400000, guid: e3540a5a9ee3e4d17a8bef4d6931f7ba, type: 2}
-  strongholdManager: {fileID: 11400000, guid: eea2b338bde6d0d48aa5c9821c73a9f3, type: 2}
-  hexManager: {fileID: 11400000, guid: 5b43385a6bdc7f54aa499ea35a6ee4bd, type: 2}
-  depotManager: {fileID: 11400000, guid: 52ea4eb68d5664b0c84c78adb9930ecc, type: 2}
-  boardManager: {fileID: 11400000, guid: 130ebf288042a43608d686eac5c2ce22, type: 2}
-  audioManager: {fileID: 11400000, guid: d698a1f59378c44e998e71d25e7395f2, type: 2}
-  diceValue: 5
-  state: 0
+  startNextTurnEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  boardManagerSO: {fileID: 11400000, guid: 130ebf288042a43608d686eac5c2ce22, type: 2}
+  hexManagerScriptableObject: {fileID: 11400000, guid: 5b43385a6bdc7f54aa499ea35a6ee4bd, type: 2}

@@ -11,28 +11,61 @@ namespace Synthicate
 	public class UiGameMenuManager : MonoBehaviour
 	{
 
-		#region Buttons
+		[Header("Menus")]
+		
 		[SerializeField]
 		GameObject defaultGameMenu, buildGameMenu;
-		[SerializeField]
-		GameObject finishTurnButton, buildModeButton, tradeButton, cyberActionButton, cancelButton;
-		#endregion
 		
-		#region Scriptable Objects
+		[Header("Buttons")]
+		
+		[SerializeField]
+		GameObject finishTurnButton;
+		
+		[SerializeField]
+		GameObject buildModeButton;
+		
+		[SerializeField]
+		GameObject tradeButton;
+		
+		[SerializeField]
+		GameObject cyberActionButton;
+		
+		[SerializeField]
+		GameObject cancelButton;
+
+
+		[Header("Scriptable Objects")]
+				
 		[SerializeField]
 		GameManagerSO gameManagerSO;
-		#endregion
 		
 		[SerializeField]
 		UiScriptableObject userInterfaceSO;
 		
+		[Header("Event Channels")]
+		[SerializeField]
+		GameMenuStateEventChannel m_GameMenuStateEventChannel;
+		
 		void Awake() {
 			userInterfaceSO.updateUserInterfaceEvent += UpdateUserInterfaceEventHandler;
+			
+			m_GameMenuStateEventChannel.OnEventRaised += GameMenuStateEventChannelHandler;
 		}
 		
 		void UpdateUserInterfaceEventHandler()
 		{
 
+		}
+		
+		void GameMenuStateEventChannelHandler(GameMenu.Screens screen)
+		{
+			bool isClientTurn = screen == GameMenu.Screens.PlayerTurnScreen;
+			// bool isClientSetupTurn = screen == GameMenu.Screens.PlayerSetupTurnScreen;
+			finishTurnButton.SetActive(isClientTurn);
+			buildModeButton.SetActive(isClientTurn);
+			tradeButton.SetActive(isClientTurn);
+			cyberActionButton.SetActive(isClientTurn);
+			cancelButton.SetActive(isClientTurn);
 		}
 		
 	}

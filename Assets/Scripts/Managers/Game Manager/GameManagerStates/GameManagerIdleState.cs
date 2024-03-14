@@ -17,11 +17,18 @@ namespace Synthicate
 		
 		MenuState _menuState;
 		
+		[Header("Event Channels")]
+		
+		[SerializeField]
+		GameMenuStateEventChannel m_GameMenuStateEventChannel;
+		
 		public override void Enter()
 		{
 			_menuState = MenuState.Default;
 			Debug.Log("Player Resources:");
 			_userInterfaceSO.OnUpdateUserInterface();
+			
+			m_GameMenuStateEventChannel.RaiseEvent(GameMenu.Screens.PlayerTurnScreen);
 		}
 		
 		public override void Execute()
@@ -34,6 +41,7 @@ namespace Synthicate
 			
 		}
 
+		/*
 		public override void OnGUI()
 		{
 			if (!IsActiveState()) return;
@@ -108,7 +116,7 @@ namespace Synthicate
 
 			// resource box
 		}
-		
+		 */
 		
 
 	}

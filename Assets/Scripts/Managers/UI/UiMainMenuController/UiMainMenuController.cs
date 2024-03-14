@@ -10,38 +10,35 @@ namespace Synthicate
 {
 	public class UiMainMenuController : MonoBehaviour
 	{
-		#region TitleScreen
+		[Header("Title Screen Game Objects")]
 		[SerializeField]
 		GameObject titleScreen;
 		[SerializeField]
 		Button singlePlayerButton, hostMultiPlayerButton, joinMultiPlayerButton, quitButton; 
-		#endregion
 		
-		#region JoinMultiPlayerScreen
+		
+		[Header("Join Multiplayer Screen Game Objects")]
 		[SerializeField]
 		GameObject joinMultiplayerScreen;
 		[SerializeField]
 		Button multiPlayerConnectButton, multiPlayerCancelButton;
 		[SerializeField]
 		TMP_InputField playerNameTextInput, ipAddressTextInput, portAddressTextInput;
-		#endregion 
 		
-		#region MultiPlayerLobbyScreen
+		[Header("Multiplayer Lobby Screen Game Objects")]
 		[SerializeField]
 		GameObject multiplayerLobbyScreen;
 		[SerializeField]
-		Button multiPlayerLeaveLobbyButton, multiPlayerStartGameButton;
+		GameObject multiPlayerLeaveLobbyButton, multiPlayerStartGameButton;
 		[SerializeField]
 		GameObject[] playerDisplays;
 		[SerializeField]
 		// TextMeshProUGUI[] playerNames;
 		GameObject[] playerNames;
-		#endregion 
 		
-		#region ScriptableObjects
+		[Header("Scriptable Objects")]
 		[SerializeField]
 		UiScriptableObject uiScriptableObject;
-		#endregion 
 		
 		void Awake() {
 			
@@ -56,8 +53,8 @@ namespace Synthicate
 			multiPlayerCancelButton.onClick.AddListener(uiScriptableObject.OnMultiplayerCancelGameButton);
 			
 			// Lobby Buttons
-			multiPlayerStartGameButton.onClick.AddListener(uiScriptableObject.OnMultiplayerStartGameButton);
-			multiPlayerLeaveLobbyButton.onClick.AddListener(uiScriptableObject.OnMultiplayerLeaveLobbyButton);
+			multiPlayerStartGameButton.GetComponent<Button>().onClick.AddListener(uiScriptableObject.OnMultiplayerStartGameButton);
+			multiPlayerLeaveLobbyButton.GetComponent<Button>().onClick.AddListener(uiScriptableObject.OnMultiplayerLeaveLobbyButton);
 			
 			// Visibility Events
 			uiScriptableObject.UpdateMainMenuScreenEvent += UpdateMainMenuScreenEventHandler;
@@ -92,11 +89,14 @@ namespace Synthicate
 			uiScriptableObject.OnMultiplayerConnectButton(request);
 		}
 		
-		void UpdateMainMenuScreenEventHandler(UserInterface.MainMenuScreens screenSelection)
+		void UpdateMainMenuScreenEventHandler(MainMenu.Screens screenSelection)
 		{
-			titleScreen.SetActive(screenSelection == UserInterface.MainMenuScreens.TitleScreen);
-			multiplayerLobbyScreen.SetActive(screenSelection == UserInterface.MainMenuScreens.LobbyScreen);
-			joinMultiplayerScreen.SetActive(screenSelection == UserInterface.MainMenuScreens.JoinMultiplayerScreen);
+			titleScreen.SetActive(screenSelection == MainMenu.Screens.TitleScreen);
+			joinMultiplayerScreen.SetActive(screenSelection == MainMenu.Screens.JoinMultiplayerScreen);
+			multiplayerLobbyScreen.SetActive(screenSelection == MainMenu.Screens.HostLobbyScreen || screenSelection == MainMenu.Screens.ClientLobbyScreen);
+			
+			// Client Lobby Screen
+			multiPlayerStartGameButton.SetActive(screenSelection == MainMenu.Screens.HostLobbyScreen);
 		}
 		
 		void UpdatePlayerDisplaysEventHandler(List<Player> players)

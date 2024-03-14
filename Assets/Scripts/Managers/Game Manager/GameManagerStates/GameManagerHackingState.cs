@@ -10,7 +10,7 @@ namespace Synthicate
 		public override void Enter()
 		{
 			_hexManagerSO.hackEvent.AddListener(HackEventHandler);
-			// _clientPlayer.useHacker();
+			// _gameManagerSO.clientPlayer.useHacker();
 			_hexManagerSO.beginHackModeEvent.Invoke();
 		}
 		

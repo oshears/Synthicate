@@ -33,6 +33,5 @@ namespace Synthicate
 		// DEBUG AREA
 		public static Rect s_debugArea = new Rect(6*s_screenBlockWidth,15 * s_screenBlockHeight, 3 * s_screenBlockWidth, s_screenBlockHeight);
 
-		public enum MainMenuScreens{TitleScreen, JoinMultiplayerScreen, LobbyScreen};
 	}
 }

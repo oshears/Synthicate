@@ -45,9 +45,9 @@ namespace Synthicate
 		public void OnSetMainMenuActive(bool active) => setMainMenuActiveEvent.Invoke(active);
 		public UnityEvent<bool> setGameMenuActiveEvent;
 		public void OnSetGameMenuActive(bool active) => setGameMenuActiveEvent.Invoke(active);
-		public delegate void UpdateMainMenuScreenEventHandler(UserInterface.MainMenuScreens screenSelection);
+		public delegate void UpdateMainMenuScreenEventHandler(MainMenu.Screens screenSelection);
 		public event UpdateMainMenuScreenEventHandler UpdateMainMenuScreenEvent;
-		public void OnUpdateMainMenuScreen(UserInterface.MainMenuScreens screenSelection) => UpdateMainMenuScreenEvent.Invoke(screenSelection);
+		public void OnUpdateMainMenuScreen(MainMenu.Screens screenSelection) => UpdateMainMenuScreenEvent.Invoke(screenSelection);
 		#endregion
 		
 		public event UserInterfaceEvent updateUserInterfaceEvent;

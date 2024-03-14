@@ -10,13 +10,11 @@ namespace Synthicate
 {
 	public class UiPlayerViewController : MonoBehaviour
 	{
-		#region Players View
 		[SerializeField]
 		TextMeshProUGUI playerName, playerHackerCounter, playerInfluenceCounter;
 		[SerializeField]
 		Image playerIcon;
 		// GameObject playerNameTextObject, playerIcon, playerHackerCounter, playerInfluenceCounter;
-		#endregion
 		
 		
 		
