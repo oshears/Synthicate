@@ -7,6 +7,17 @@ namespace Synthicate
 	public class GameManagerBuildingState : GameManagerAbstractState
 	{
 		
+		[Header("Event Channels")]
+		
+		[SerializeField]
+		GameMenuStateEventChannel m_GameMenuStateEventChannel;
+		
+		[SerializeField]
+		EventChannelSO m_CancelButtonEventChannel;
+		
+		[SerializeField]
+		StringEventChannel m_NotificationEventChannel;
+		
 		public override void Enter()
 		{
 			_strongholdManagerSO.playerBuildEvent.AddListener(PlayerBuildStrongholdEventHandler);	
@@ -14,6 +25,10 @@ namespace Synthicate
 			BuildPermissions playerBuildPermissions = new BuildPermissions(_gameManagerSO.clientPlayer.canBuildFlyway(), _gameManagerSO.clientPlayer.canBuildOutpost(), _gameManagerSO.clientPlayer.canBuildStronghold());
 			_strongholdManagerSO.beginBuildModeForPlayer(_gameManagerSO.clientPlayer.GetId(), _boardManagerSO.GetValidPointsFor(_gameManagerSO.clientPlayer.GetId()), playerBuildPermissions);
 			_flywayManagerSO.beginBuildModeForPlayer(_gameManagerSO.clientPlayer.GetId(), _boardManagerSO.GetValidEdgesFor(_gameManagerSO.clientPlayer.GetId()), playerBuildPermissions);
+		
+
+			m_GameMenuStateEventChannel.RaiseEvent(GameMenu.Screens.PlayerBuildModeScreen);
+			m_CancelButtonEventChannel.OnEventRaised += CancelButtonEventHandler;
 		}
 		
 		public override void Execute()
@@ -31,16 +46,21 @@ namespace Synthicate
 
 		public override void OnGUI()
 		{
-			if (!IsActiveState()) return;
+			// if (!IsActiveState()) return;
 			
-			GUI.Box(UserInterface.s_gameMenuArea, "");
+			// GUI.Box(UserInterface.s_gameMenuArea, "");
 
-			GUILayout.BeginArea(UserInterface.s_gameMenuArea);
-			if(GUILayout.Button("Exit Build Mode"))
-			{
-				changeState(_owner.idleState);
-			}
-			GUILayout.EndArea();
+			// GUILayout.BeginArea(UserInterface.s_gameMenuArea);
+			// if(GUILayout.Button("Exit Build Mode"))
+			// {
+			// 	changeState(_owner.idleState);
+			// }
+			// GUILayout.EndArea();
+		}
+		
+		void CancelButtonEventHandler()
+		{
+			changeState(_owner.idleState);
 		}
 		
 		void PlayerBuildStrongholdEventHandler(bool validBuild)
@@ -50,8 +70,9 @@ namespace Synthicate
 			{
 				_gameManagerSO.playerBuildEvent.Invoke();
 				_strongholdManagerSO.pointUpdateRequest.Invoke();
-				GameEvent gameEvent = new GameEvent(GameEventType.Build, _gameManagerSO.clientPlayer + " has built a new stronghold or outpost!");
-				_gameManagerSO.playerEvent.Invoke(gameEvent);
+				// GameEvent gameEvent = new GameEvent(GameEventType.Build, _gameManagerSO.clientPlayer + " has built a new stronghold or outpost!");
+				// _gameManagerSO.playerEvent.Invoke(gameEvent);
+				m_NotificationEventChannel.RaiseEvent($"{_gameManagerSO.GetCurrentPlayer().GetName()} has built a new stronghold or outpost!!");
 
 				changeState(_owner.idleState);
 			}
@@ -64,8 +85,8 @@ namespace Synthicate
 			{
 				_gameManagerSO.playerBuildEvent.Invoke();
 				_flywayManagerSO.edgeUpdateRequest.Invoke();
-				GameEvent gameEvent = new GameEvent(GameEventType.Build, _gameManagerSO.clientPlayer + " has built a new flyway!");
-				_gameManagerSO.playerEvent.Invoke(gameEvent);
+				// GameEvent gameEvent = new GameEvent(GameEventType.Build, _gameManagerSO.clientPlayer + " has built a new flyway!");
+				// _gameManagerSO.playerEvent.Invoke(gameEvent);
 				
 				changeState(_owner.idleState);
 			}

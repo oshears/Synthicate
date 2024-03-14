@@ -15,6 +15,9 @@ namespace Synthicate
 		[SerializeField]
 		StringEventChannel m_NotificationEventChannel;
 		
+		[SerializeField]
+		BoolEventChannel m_EnablePlayerControllerEventChannel;
+		
 		public override void Enter()
 		{
 			_strongholdManagerSO.playerBuildEvent.AddListener(PlayerBuildStrongholdEventHandler);	
@@ -28,6 +31,8 @@ namespace Synthicate
 			_userInterfaceSO.OnInitializeUserInterface();
 			m_GameMenuStateEventChannel.RaiseEvent(GameMenu.Screens.PlayerSetupTurnScreen);
 			_userInterfaceSO.OnUpdateUserInterface();
+			
+			m_EnablePlayerControllerEventChannel.RaiseEvent(true);
 		}
 		
 		public override void Execute()
@@ -110,14 +115,14 @@ namespace Synthicate
 			{
 				// changeState(_owner.diceState);
 				Debug.Log("Done with Setup Phase!");
-				changeState(_owner.idleState);
+				_owner.pendingSetupState.SetDiceStateClientRpc();
+				changeState(_owner.diceState);
 			}
 			else
 			{
-				int currentPlayerTurn = _gameManagerSO.currentPlayerTurn;
 				int nextPlayerTurn =  _gameManagerSO.IncrementAndGetNextPlayerIndex();
 				
-				if (currentPlayerTurn != nextPlayerTurn)
+				if (_gameManagerSO.currentPlayerTurn != nextPlayerTurn)
 				{
 					_owner.pendingSetupState.NextPlayerSetupClientRpc(nextPlayerTurn);
 					changeState(_owner.pendingSetupState);

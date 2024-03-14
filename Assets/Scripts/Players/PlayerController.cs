@@ -7,16 +7,30 @@ namespace Synthicate
 	public class PlayerController : MonoBehaviour
 	{
 		float zoom_speed = 10000.0f;             // zoom speed
-		float rotate_speed_x = 180.0f;              // Rotation speed
+		float rotate_speed_x = 90.0f;              // Rotation speed
 													//public float rotate_speed_x = 2.0f;              // Rotation speed
 
+		bool m_IsEnabled;
+		
 		[SerializeField]
-		GameObject board;
-
+		BoolEventChannel m_EnablePlayerControllerEventChannel;
+		
+		void Awake()
+		{
+			m_IsEnabled = false;
+			
+			m_EnablePlayerControllerEventChannel.OnEventRaised += SetPlayerControllerEventHandler;
+		}
+		
 		void Start()
 		{
 			// board = GameObject.Find("Board");
 
+		}
+		
+		void SetPlayerControllerEventHandler(bool enable)
+		{
+			m_IsEnabled = enable;
 		}
 
 		void Update()
@@ -76,23 +90,24 @@ namespace Synthicate
 
 
 
-			float scrollwheel = Input.GetAxis("Mouse ScrollWheel");
+			// float scrollwheel = Input.GetAxis("Mouse ScrollWheel");
 
-			//zoom with scroll wheel; forward to zoom in, backward to scroll out.
-			Vector3 zoomAmount = transform.forward * zoom_speed * scrollwheel * Time.deltaTime;
-			if (transform.position.y + zoomAmount.y > 40f && transform.position.y + zoomAmount.y < 100f)
-			{
-				transform.Translate(zoomAmount, Space.World);
-			}
+			// //zoom with scroll wheel; forward to zoom in, backward to scroll out.
+			// Vector3 zoomAmount = transform.forward * zoom_speed * scrollwheel * Time.deltaTime;
+			// if (transform.position.y + zoomAmount.y > 40f && transform.position.y + zoomAmount.y < 100f)
+			// {
+			// 	transform.Translate(zoomAmount, Space.World);
+			// }
 
 			//Debug.Log(scrollwheel);
 
 			// Orbit function using right mouse button pressed.
-			if (Input.GetMouseButton(1))
+			if (Input.GetMouseButton(1) && m_IsEnabled)
 			{
-				float rotation_y = Input.GetAxis("Mouse X") * rotate_speed_x * Time.deltaTime;
+				float rotation_y = transform.eulerAngles.y + Input.GetAxis("Mouse X") * rotate_speed_x * Time.deltaTime;
 				//transform.localEulerAngles = new Vector3(0, rotation_y, 0);
-				transform.RotateAround(board.transform.position, Vector3.up, rotation_y);
+				// transform.RotateAround(board.transform.position, Vector3.up, rotation_y);
+				transform.rotation = Quaternion.Euler(0,rotation_y,0);
 			}
 		}
 	}

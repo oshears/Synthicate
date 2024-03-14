@@ -45,13 +45,18 @@ namespace Synthicate
 		{
 			return playerList.Count;
 		}
+		
+		public bool IsClientTurn()
+		{
+			return currentPlayerTurn == clientPlayer.GetId();
+		}
 		 
 		public void SetClientPlayer(int playerId)
 		{
 			clientPlayer = playerList[playerId];
 		}
 		
-		public uint RollDice() => (uint)(Random.Range(1, 7) + Random.Range(1, 7));
+		public int RollDice() => Random.Range(1, 7) + Random.Range(1, 7);
 		
 		public void OnStartNextTurn()
 		{
@@ -90,6 +95,11 @@ namespace Synthicate
 				playerList[player].numOutposts = boardManagerSO.GetNumOutpostsFor(player);
 				playerList[player].numStrongholds = boardManagerSO.GetNumStrongholdsFor(player);
 			}
+		}
+		
+		public Player GetCurrentPlayer()
+		{
+			return playerList[currentPlayerTurn];
 		}
 		
 		

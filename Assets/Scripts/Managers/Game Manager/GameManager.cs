@@ -38,6 +38,7 @@ namespace Synthicate
 		[System.NonSerialized] public GameManagerIdleState idleState;
 		[System.NonSerialized] public GameManagerBuildingState buildingState;
 		[System.NonSerialized] public GameManagerHackingState hackingState;
+		[System.NonSerialized] public GameManagerPendingState pendingState;
 		
 
 		void Awake()
@@ -80,6 +81,9 @@ namespace Synthicate
 			
 			clientLobbyState = GetComponent<GameManagerClientLobbyState>();
 			clientLobbyState.SetOwner(this);
+			
+			pendingState = GetComponent<GameManagerPendingState>();
+			pendingState.SetOwner(this);
 			
 			stateMachine.ChangeState(initState);
 			

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Synthicate
@@ -6,20 +7,28 @@ namespace Synthicate
 	
 	public class GameManagerDiceState : GameManagerAbstractState
 	{
-		uint _diceValue;
 		float _diceDelay = 0;
 		bool _diceRollingDone = false;
 		
+		NetworkVariable<int> m_diceValue = new NetworkVariable<int>();
+		
+		[SerializeField]
+		StringEventChannel m_NotificationEventChannel;
 
 		public override void Enter()
 		{
-			_diceValue = 0;
-			_diceDelay = 0;
-			_diceRollingDone = false;
 			
-			_diceValue = _gameManagerSO.RollDice();
-			_hexManagerSO.hexSelectionEvent.Invoke(_diceValue);
-			_hexManagerSO.resourceRequest.Invoke(_diceValue);
+			if (_gameManagerSO.IsClientTurn())
+			{
+				m_diceValue.Value = _gameManagerSO.RollDice();
+				_diceDelay = 0;
+				_diceRollingDone = false;
+			}
+			
+			
+			// _hexManagerSO.hexSelectionEvent.Invoke(_diceValue);
+			// _hexManagerSO.resourceRequest.Invoke(_diceValue);
+			
 			// GameEvent gameEvent = new GameEvent(GameEventType.Hack, "The game has begun! " + getCurrentPlayer().getName() + " hashed a " + diceValue);
 			// playerEvent.Invoke(gameEvent);
 		}
@@ -32,11 +41,13 @@ namespace Synthicate
 			{
 				if(_diceDelay > 3)
 				{
-					_hexManagerSO.hexSelectionEvent.Invoke(_diceValue);
-					_hexManagerSO.resourceRequest.Invoke(_diceValue);
+					_hexManagerSO.hexSelectionEvent.Invoke((uint) m_diceValue.Value);
+					_hexManagerSO.resourceRequest.Invoke((uint) m_diceValue.Value);
 					
 					_diceRollingDone = true;
 					_diceDelay = 0;
+					
+					m_NotificationEventChannel.RaiseEvent($"Hashed value was: {m_diceValue.Value}!");
 				}
 				else
 				{
@@ -46,7 +57,18 @@ namespace Synthicate
 			else if(_diceDelay > 3)
 			{
 				Debug.Log("Moving to idle state.");
-				changeState(_owner.idleState);
+				
+				// If current client's turn, then go to idle state.
+				if (_gameManagerSO.IsClientTurn())
+				{
+					changeState(_owner.idleState);
+				}
+				// If not current client's turn, then go to pending state.
+				else
+				{
+					changeState(_owner.pendingState);
+				}
+				
 			}
 			else
 			{
@@ -74,12 +96,10 @@ namespace Synthicate
 			{
 				GUI.Box(UserInterface.s_instructionArea, "");
 				GUILayout.BeginArea(UserInterface.s_instructionArea);
-				GUILayout.Label($"Hashed value was: {_diceValue}!.");
+				GUILayout.Label($"Hashed value was: {(uint) m_diceValue.Value}!");
 				GUILayout.EndArea();
 			}
-			
 		}
-		
 		
 
 	}

@@ -8,6 +8,10 @@ namespace Synthicate
 	{
 		public enum Screens {
 			PlayerTurnScreen, 
+			PlayerBuildModeScreen, 
+			TradeInitScreen, 
+			TradeRequesterScreen, 
+			TradeReceiverScreen, 
 			PlayerSetupTurnScreen, 
 			PlayerWaitScreen, 
 		};
