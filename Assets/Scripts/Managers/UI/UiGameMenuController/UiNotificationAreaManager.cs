@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
+using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -29,16 +30,19 @@ namespace Synthicate
 		StringEventChannel m_NotificationEvent;
 		
 		void Awake() {
-
-			userInterfaceSO.initializeUserInterfaceEvent += InitilizeUserInterfaceEventHandler;
-			userInterfaceSO.updateUserInterfaceEvent += UpdateUserInterfaceEventHandler;
-			
 			m_notificationWindows = new List<GameObject>();
 			m_NotificationEvent.OnEventRaised += OnNotificationEventHandler;
 		}
 		
 		void OnEnable() {
 			notificationWindow.SetActive(false);
+			userInterfaceSO.initializeUserInterfaceEvent += InitilizeUserInterfaceEventHandler;
+			userInterfaceSO.updateUserInterfaceEvent += UpdateUserInterfaceEventHandler;
+		}
+		
+		void OnDisable() {
+			userInterfaceSO.initializeUserInterfaceEvent -= InitilizeUserInterfaceEventHandler;
+			userInterfaceSO.updateUserInterfaceEvent -= UpdateUserInterfaceEventHandler;
 		}
 		
 		public void UpdateUserInterfaceEventHandler()
@@ -91,15 +95,30 @@ namespace Synthicate
 		
 		void OnNotificationEventHandler(string notificationText)
 		{
+			RequestNotificationServerRpc(notificationText);
+		}
+		
+		[ServerRpc(RequireOwnership = false)]
+		public void RequestNotificationServerRpc(string notificationText)
+		{
+			NotificationClientRpc(notificationText);
+			
+			// TODO: Fix the network object spawning
+			// What is the limit on the number of network objects that can be spawned?
 			// GameObject newNotification = Instantiate(notificationWindowPrefab, transform);
+			// newNotification.transform.localPosition = new Vector3(4.33f, 238f + (m_notificationWindows.Count + 1) * -65f, 0);
+			// newNotification.GetComponent<UiNotificationWindow>().InitializeNotification(text);
+			// m_notificationWindows.Add(newNotification);
+			// newNotification.SetActive(true);
 			// newNotification.GetComponent<NetworkObject>().Spawn();
-			GameObject notifyWindow = Resources.Load<GameObject>("Prefabs/UI/Game Menu/Notifications/Notification Window");
-			// GameObject newNotification = Instantiate(NetworkManager.GetNetworkPrefabOverride(notifyWindow), transform);
-			GameObject newNotification = Instantiate(notifyWindow, transform);
-			// GameObject newNotification = Instantiate(NetworkManager.GetNetworkPrefabOverride(notificationWindowPrefab), transform);
-			newNotification.GetComponent<NetworkObject>().Spawn();
+		}
+		
+		[ClientRpc]
+		public void NotificationClientRpc(string text)
+		{
+			GameObject newNotification = Instantiate(notificationWindowPrefab, transform);
 			newNotification.transform.localPosition = new Vector3(4.33f, 238f + (m_notificationWindows.Count + 1) * -65f, 0);
-			newNotification.GetComponent<UiNotificationWindow>().InitializeNotification(notificationText);
+			newNotification.GetComponent<UiNotificationWindow>().InitializeNotification(text);
 			m_notificationWindows.Add(newNotification);
 			newNotification.SetActive(true);
 		}

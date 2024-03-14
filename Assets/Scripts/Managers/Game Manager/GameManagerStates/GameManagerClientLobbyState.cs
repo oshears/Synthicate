@@ -17,6 +17,9 @@ namespace Synthicate
 		string _playerName = "";
 		
 		int _clientId = -1;
+		
+		[SerializeField]
+		static float s_ClientConnectTimeDelay = 0.1f;
 	
 		public override void Enter()
 		{
@@ -39,7 +42,7 @@ namespace Synthicate
 		{
 			if (_waitingForClientReady)
 			{
-				if(_waitTimeForClient < 1f)
+				if(_waitTimeForClient < s_ClientConnectTimeDelay)
 				{
 					_waitTimeForClient += Time.deltaTime;
 				}
@@ -121,6 +124,7 @@ namespace Synthicate
 			{
 				Debug.Log($"Starting Game with {_gameManagerSO.playerList.Count} players!");
 				
+				// Enable the game menu
 				_userInterfaceSO.OnSetMainMenuActive(false);
 				_userInterfaceSO.OnSetGameMenuActive(true);
 			

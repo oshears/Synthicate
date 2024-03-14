@@ -8,10 +8,19 @@ namespace Synthicate
 		
 		[SerializeField]
 		BoolEventChannel m_EnablePlayerControllerEventChannel;
+		
+		[SerializeField]
+		GameMenuStateEventChannel m_GameMenuStateEventChannel;
 
 		public override void Enter()
 		{
+			// Enable player panning
 			m_EnablePlayerControllerEventChannel.RaiseEvent(true);
+			
+			// Setup UI
+			_userInterfaceSO.OnInitializeUserInterface();
+			m_GameMenuStateEventChannel.RaiseEvent(GameMenu.Screens.PlayerWaitScreen);
+			_userInterfaceSO.OnUpdateUserInterface();
 		}
 		
 		public override void Execute()
@@ -30,6 +39,9 @@ namespace Synthicate
 		{
 			if (!IsActiveState()) return;
 			
+			Debug.Log($"Moving to setup player: {nextPlayerIndex}");
+			_gameManagerSO.SetCurrentPlayerTurn(nextPlayerIndex);
+			
 			if (nextPlayerIndex == _gameManagerSO.clientPlayer.GetId())
 			{
 				changeState(_owner.setupState);
@@ -44,10 +56,15 @@ namespace Synthicate
 		// 	changeState(_owner.pendingState);
 		// }
 		
+		[ServerRpc(RequireOwnership = false)]
+		public void SetDiceStateServerRpc() => SetDiceStateClientRpc();
+		
 		[ClientRpc]
 		public void SetDiceStateClientRpc()
 		{
 			if (!IsActiveState()) return;
+			
+			Debug.Log("Moving to dice state!");
 			
 			changeState(_owner.diceState);
 		}

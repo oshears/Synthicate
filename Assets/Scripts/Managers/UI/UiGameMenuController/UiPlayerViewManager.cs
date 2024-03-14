@@ -20,15 +20,18 @@ namespace Synthicate
 		void Start()
 		{
 			// Disable all Ui player views
-			for (int i = 0; i < playerViews.Length; i++)
-			{
-				playerViews[i].SetActive(false);
-			}
+			// for (int i = 0; i < playerViews.Length; i++)
+			// {
+			// 	playerViews[i].SetActive(false);
+			// }
 		}
 		
 		override protected void InitilizeUserInterfaceEventHandler()
 		{
-			
+			for (int i = 0; i < playerViews.Length; i++)
+			{
+				playerViews[i].SetActive(false);
+			}
 			for (int i = 0; i < gameManagerSO.playerList.Count; i++)
 			{
 				playerViews[i].SetActive(true);

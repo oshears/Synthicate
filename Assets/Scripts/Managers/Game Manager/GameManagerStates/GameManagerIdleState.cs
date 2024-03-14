@@ -42,14 +42,16 @@ namespace Synthicate
 			_userInterfaceSO.OnUpdateUserInterface();
 			
 			m_GameMenuStateEventChannel.RaiseEvent(GameMenu.Screens.PlayerTurnScreen);
-		}
-		
-		public override void Execute()
-		{
+			
 			m_CyberActionButtionEventChannel.OnEventRaised += CyberActionButtionEventHandler; 
 			m_TradeButtonEventChannel.OnEventRaised += TradeButtonEventHandler; 
 			m_BuildModeButtonEventChannel.OnEventRaised += BuildModeButtonEventHandler; 
 			m_FinishTurnButtonEventChannel.OnEventRaised += FinishTurnButtonEventHandler; 
+		}
+		
+		public override void Execute()
+		{
+			
 		}
 
 		public override void Exit()
@@ -76,14 +78,20 @@ namespace Synthicate
 		
 		public void FinishTurnButtonEventHandler()
 		{
-			IncrementPlayerTurnServerRpc();
-			changeState(_owner.diceState);
+			FinishPlayerTurnServerRpc();
 		}
 		
 		[ServerRpc(RequireOwnership = false)]
-		void IncrementPlayerTurnServerRpc() => IncrementPlayerTurnClientRpc();
+		void FinishPlayerTurnServerRpc() => FinishPlayerTurnClientRpc();
 		[ClientRpc]
-		void IncrementPlayerTurnClientRpc() => _gameManagerSO.IncrementAndGetNextPlayerIndex(); 
+		void FinishPlayerTurnClientRpc()
+		{
+			// Increment to the next player
+			_gameManagerSO.IncrementAndGetNextPlayerIndex(); 
+			
+			// Change client to the dice state
+			changeState(_owner.diceState);
+		}
 
 		
 		public override void OnGUI()

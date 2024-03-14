@@ -25,8 +25,23 @@ namespace Synthicate
 			_userInterfaceSO.OnSetGameMenuActive(false);
 			_transport  = NetworkManager.Singleton.gameObject.GetComponent<UnityTransport>();
 			
+			// TestClientRpc();
+			// TestServerRpc();
+			
 			m_NotificationEventChannel.RaiseEvent($"You hosted a new game!");
 		}
+		
+		// [ServerRpc(RequireOwnership = false)]
+		// private void TestServerRpc()
+		// {
+		// 	Debug.Log("Passed GameManager (ServerRpc)!");
+		// }
+		
+		// [ClientRpc]
+		// private void TestClientRpc()
+		// {
+		// 	Debug.Log("Passed GameManager (ClientRpc)!");
+		// }
 		
 		public override void Execute()
 		{
@@ -80,8 +95,13 @@ namespace Synthicate
 		{
 			Debug.Log($"Starting Game with {_gameManagerSO.playerList.Count} players!");
 			
+			_gameManagerSO.SetCurrentPlayerTurn(0);
+			
+			// Enable the game menu
 			_userInterfaceSO.OnSetMainMenuActive(false);
 			_userInterfaceSO.OnSetGameMenuActive(true);
+			
+			_owner.clientLobbyState.StartGameClientRpc();
 			
 			changeState(_owner.setupState);
 		}
@@ -90,6 +110,7 @@ namespace Synthicate
 		{
 			_userInterfaceSO.OnUpdateMainMenuScreen(MainMenu.Screens.TitleScreen);
 			NetworkManager.Singleton.Shutdown();
+			changeState(_owner.mainMenuState);
 		}
 		
 	}

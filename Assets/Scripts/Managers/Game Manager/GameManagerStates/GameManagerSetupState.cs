@@ -20,20 +20,25 @@ namespace Synthicate
 		
 		public override void Enter()
 		{
+			Debug.Log($"Entering Setup State with Player: {_gameManagerSO.currentPlayerTurn}");
+			
 			_strongholdManagerSO.playerBuildEvent.AddListener(PlayerBuildStrongholdEventHandler);	
 			_flywayManagerSO.playerBuildEvent.AddListener(PlayerBuildFlywayEventHandler);
 			
+			// Configure outpost building spots
 			List<uint> buildPoints = _boardManagerSO.GetValidSetupPointsFor();
 			BuildPermissions playerBuildPermissions = new BuildPermissions(false, true, false);
 			_strongholdManagerSO.beginBuildModeForPlayer(_gameManagerSO.clientPlayer.GetId(), buildPoints, playerBuildPermissions);
 
-			
+			// Setup UI
 			_userInterfaceSO.OnInitializeUserInterface();
 			m_GameMenuStateEventChannel.RaiseEvent(GameMenu.Screens.PlayerSetupTurnScreen);
 			_userInterfaceSO.OnUpdateUserInterface();
 			
+			// Enable player panning
 			m_EnablePlayerControllerEventChannel.RaiseEvent(true);
 			
+			// Send notification to the UI
 			m_NotificationEventChannel.RaiseEvent($"{_gameManagerSO.GetCurrentPlayer().GetName()} is setting up!");
 
 		}
@@ -118,16 +123,17 @@ namespace Synthicate
 			{
 				// changeState(_owner.diceState);
 				Debug.Log("Done with Setup Phase!");
-				_owner.pendingSetupState.SetDiceStateClientRpc();
+				_owner.pendingSetupState.SetDiceStateServerRpc();
 				changeState(_owner.diceState);
 			}
 			else
 			{
 				int nextPlayerTurn =  _gameManagerSO.IncrementAndGetNextPlayerIndex();
-				
-				if (_gameManagerSO.currentPlayerTurn != nextPlayerTurn)
+				Debug.Log($"Performing Setup for Player ID: {nextPlayerTurn}");
+				if (_gameManagerSO.clientPlayer.GetId() != nextPlayerTurn)
 				{
-					_owner.pendingSetupState.NextPlayerSetupClientRpc(nextPlayerTurn);
+					NextPlayerSetupServerRpc(nextPlayerTurn);
+					// _owner.pendingSetupState.NextPlayerSetupClientRpc(nextPlayerTurn);
 					changeState(_owner.pendingSetupState);
 				}
 				else
@@ -138,6 +144,12 @@ namespace Synthicate
 				
 			}
 		}
+		
+		[ServerRpc(RequireOwnership = false)]
+		void NextPlayerSetupServerRpc(int nextPlayerIndex)
+		{
+			_owner.pendingSetupState.NextPlayerSetupClientRpc(nextPlayerIndex);	
+		} 
 		
 	}
 }

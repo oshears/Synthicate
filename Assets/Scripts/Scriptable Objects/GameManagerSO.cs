@@ -87,6 +87,11 @@ namespace Synthicate
 			return currentPlayerTurn;
 		}
 		
+		public void SetCurrentPlayerTurn(int playerTurn)
+		{
+			currentPlayerTurn = playerTurn;
+		}
+		
 		public void UpdatePlayerBuildCounts()
 		{
 			for (int player = 0; player < GetNumPlayers(); player++){
