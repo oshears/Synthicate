@@ -1,7 +1,6 @@
 using Unity.Netcode;
 using UnityEngine;
 using Unity.Netcode.Transports.UTP;
-using Codice.Client.BaseCommands;
 
 namespace Synthicate {
 
@@ -47,11 +46,11 @@ namespace Synthicate {
 		}
 		public virtual void OnGUI()
 		{
-			if (!IsActiveState()) return;
+			// if (!IsActiveState()) return;
 			
-			GUILayout.BeginArea(new Rect(0, Screen.height * 0.25f, Screen.width*0.1f, Screen.height*0.1f));
-			GUILayout.Label($"Current GameManagerAbstractState: {this}");
-			GUILayout.EndArea();
+			// GUILayout.BeginArea(new Rect(0, Screen.height * 0.25f, Screen.width*0.1f, Screen.height*0.1f));
+			// GUILayout.Label($"Current GameManagerAbstractState: {this}");
+			// GUILayout.EndArea();
 		}
 	}
 	

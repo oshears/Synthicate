@@ -65,10 +65,10 @@ namespace Synthicate
 		{
 			if (!IsActiveState()) return;
 			
-			GUI.Box(UserInterface.s_instructionArea, "");
-			GUILayout.BeginArea(UserInterface.s_instructionArea);
-			GUILayout.Label("Place a outpost on the board, then place a flyway on the board.");
-			GUILayout.EndArea();
+			// GUI.Box(UserInterface.s_instructionArea, "");
+			// GUILayout.BeginArea(UserInterface.s_instructionArea);
+			// GUILayout.Label("Place a outpost on the board, then place a flyway on the board.");
+			// GUILayout.EndArea();
 		}
 		
 		public void PlayerBuildStrongholdEventHandler(bool validBuild)

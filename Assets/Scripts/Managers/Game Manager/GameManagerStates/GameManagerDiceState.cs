@@ -149,7 +149,7 @@ namespace Synthicate
 			
 			// Get resources for this player at this dice roll
 			int clientPlayerId = _gameManagerSO.GetClientPlayerId();
-			int[] playerResources = _owner.boardManagerSO.GetResourcesForPlayer(clientPlayerId,  _owner.hexManagerSO.getResources());
+			int[] playerResources = _owner.boardManagerSO.GetResourcesForPlayer(clientPlayerId,  _owner.hexManagerSO.GetResources());
 			
 			// Update resources for this player at this dice roll
 			_gameManagerSO.clientPlayer.UpdateResources(playerResources);
@@ -177,21 +177,21 @@ namespace Synthicate
 		{
 			if (!IsActiveState()) return;
 			
-			Rect diceArea = new Rect(0, Screen.height * 0.25f, Screen.width*0.25f, Screen.height*0.4f);
-			if (m_State == DiceState.HashingValue)
-			{
-				GUI.Box(diceArea, "");
-				GUILayout.BeginArea(diceArea);
-				GUILayout.Label("A new value is being hashed...");
-				GUILayout.EndArea();
-			}
-			else if (m_State == DiceState.DisplayingDice)
-			{
-				GUI.Box(diceArea, "");
-				GUILayout.BeginArea(diceArea);
-				GUILayout.Label($"Hashed value was: {(uint) m_DiceValue}!");
-				GUILayout.EndArea();
-			}
+			// Rect diceArea = new Rect(0, Screen.height * 0.25f, Screen.width*0.25f, Screen.height*0.4f);
+			// if (m_State == DiceState.HashingValue)
+			// {
+			// 	GUI.Box(diceArea, "");
+			// 	GUILayout.BeginArea(diceArea);
+			// 	GUILayout.Label("A new value is being hashed...");
+			// 	GUILayout.EndArea();
+			// }
+			// else if (m_State == DiceState.DisplayingDice)
+			// {
+			// 	GUI.Box(diceArea, "");
+			// 	GUILayout.BeginArea(diceArea);
+			// 	GUILayout.Label($"Hashed value was: {(uint) m_DiceValue}!");
+			// 	GUILayout.EndArea();
+			// }
 		}
 		
 

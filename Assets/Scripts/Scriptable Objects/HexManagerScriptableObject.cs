@@ -76,13 +76,13 @@ namespace Synthicate
             for (int i = 0; i < NUM_HEXES; i++) hexResources.Add(new HexResource());
         }
 
-        public void setHackerCages(uint hexSelection, bool enable) =>
+        public void SetHackerCages(uint hexSelection, bool enable) =>
             hackerCageChangeEvent.Invoke(hexSelection, enable);
 
-        public void setHackerParticles(uint hexSelection, bool enable) =>
+        public void SetHackerParticles(uint hexSelection, bool enable) =>
             hackerParticlesChangeEvent.Invoke(hexSelection, enable);
 
-        public void setHexLights(uint hexSelection, bool enable) =>
+        public void SetHexLights(uint hexSelection, bool enable) =>
             hexLightsChangeEvent.Invoke(hexSelection, enable);
 
         //public void hackEventResponder(uint id)
@@ -99,7 +99,7 @@ namespace Synthicate
             
         //}
 
-        public List<HexResource> getResources() => hexResources;
+        public List<HexResource> GetResources() => hexResources;
         //public List<HexResource> getSetupResources()
         //{
         //    setupResourceRequest.Invoke();

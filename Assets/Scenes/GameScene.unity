@@ -2370,7 +2370,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1971252395434077661, guid: fcc2efe1920a4e94cb33c3212dc4cab0, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5472807881566823959, guid: fcc2efe1920a4e94cb33c3212dc4cab0, type: 3}
       propertyPath: m_IsActive
@@ -3297,6 +3297,10 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 1637076027
       objectReference: {fileID: 0}
+    - target: {fileID: 4193413263193936891, guid: 1b4a73d817b59c24e8aa10065a81848a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3660,7 +3664,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8720617873607435222 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3939828300064737851, guid: 1c80dc4f227a0fd478bdbe2246fd0c46, type: 3}
