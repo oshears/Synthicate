@@ -50,7 +50,7 @@ namespace Synthicate
 			m_DiceDelay = 0;
 			m_State = DiceState.PendingDice;
 			
-			_owner.boardManagerSO.updatePointsResponseEvent.AddListener(UpdateClientResources);
+			_owner.boardManagerSO.updatePointsResponseEvent.AddListener(HashedValueResponseEventHandler);
 			
 			if (_gameManagerSO.IsClientTurn())
 			{
@@ -85,7 +85,7 @@ namespace Synthicate
 					
 					m_DiceDelay = 0;
 					
-					m_NotificationEventChannel.RaiseEvent($"Hashed value was: {m_DiceValue}!");
+					
 					
 					m_State = DiceState.DisplayingDice;
 				}
@@ -126,7 +126,7 @@ namespace Synthicate
 		public override void Exit()
 		{
 			_userInterfaceSO.OnUpdateUserInterface();
-			_owner.boardManagerSO.updatePointsResponseEvent.RemoveListener(UpdateClientResources);
+			_owner.boardManagerSO.updatePointsResponseEvent.RemoveListener(HashedValueResponseEventHandler);
 		}
 		
 		[ServerRpc(RequireOwnership = false)]
@@ -143,8 +143,9 @@ namespace Synthicate
 			m_State = DiceState.HashingValue;
 		}
 		
-		void UpdateClientResources()
+		void HashedValueResponseEventHandler()
 		{
+			m_NotificationEventChannel.RaiseEvent($"Hashed value was: {m_DiceValue}!");
 			
 			// Get resources for this player at this dice roll
 			int clientPlayerId = _gameManagerSO.GetClientPlayerId();

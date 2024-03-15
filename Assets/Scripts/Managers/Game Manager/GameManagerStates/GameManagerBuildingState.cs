@@ -18,6 +18,9 @@ namespace Synthicate
 		[SerializeField]
 		StringEventChannel m_NotificationEventChannel;
 		
+		[SerializeField]
+		StringEventChannel m_LocalNotificationEventChannel;
+		
 		public override void Enter()
 		{
 			_strongholdManagerSO.playerBuildEvent.AddListener(PlayerBuildStrongholdEventHandler);	
@@ -79,7 +82,7 @@ namespace Synthicate
 			}
 			else
 			{
-				m_NotificationEventChannel.RaiseEvent("Insufficient Resources!");
+				m_LocalNotificationEventChannel.RaiseEvent("Insufficient Resources!");
 			}
 		}
 		
@@ -98,7 +101,7 @@ namespace Synthicate
 			}
 			else
 			{
-				m_NotificationEventChannel.RaiseEvent("Insufficient Resources!");
+				m_LocalNotificationEventChannel.RaiseEvent("Insufficient Resources!");
 			}
 		}
 		

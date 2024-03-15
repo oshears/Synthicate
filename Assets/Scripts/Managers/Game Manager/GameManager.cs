@@ -100,10 +100,15 @@ namespace Synthicate
 			});
 
 			// request the board manager to update player stronghold/outpost placements after the stronghold manager collects them
-			strongholdManagerSO.managerPointUpdateResponse.AddListener((List<PlayerPoint> points) => boardManagerSO.updatePointsRequestEvent.Invoke(points));
+			strongholdManagerSO.managerPointUpdateResponse.AddListener((List<PlayerPoint> points) => {
+				boardManagerSO.updatePointsRequestEvent.Invoke(points);
+			});
 
 			// request the board manager to update player flyway placements after the flyway manager collects them
-			flywayManagerSO.managerEdgeUpdateResponse.AddListener((List<PlayerEdge> edges) => boardManagerSO.updateEdgesRequestEvent.Invoke(edges));
+			flywayManagerSO.managerEdgeUpdateResponse.AddListener((List<PlayerEdge> edges) => 
+			{
+				boardManagerSO.updateEdgesRequestEvent.Invoke(edges);
+			});
 
 		}
 		

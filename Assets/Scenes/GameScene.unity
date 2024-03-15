@@ -3470,6 +3470,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 9059947001480104322, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
+      propertyPath: m_LocalNotificationEventChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: 0a7be55c2c03fb34c8b87a029ab675c2, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
