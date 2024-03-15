@@ -40,9 +40,14 @@ namespace Synthicate
 			networkClientId = clientId;
 		}
 
-		public void updateResources(int[] resources)
+		public void UpdateResources(int[] resources)
 		{
 			for (int i = 0; i < Global.NUM_RESOURCE_TYPES; i++) this.resources[i] += resources[i];
+		}
+		
+		public void SetResources(int[] resources)
+		{
+			for (int i = 0; i < Global.NUM_RESOURCE_TYPES; i++) this.resources[i] = resources[i];
 		}
 
 		// public int[] getResourceCounts() => resources;

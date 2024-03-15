@@ -29,9 +29,13 @@ namespace Synthicate
 		[SerializeField]
 		StringEventChannel m_NotificationEvent;
 		
+		[SerializeField]
+		StringEventChannel m_LocalNotificationEvent;
+		
 		void Awake() {
 			m_notificationWindows = new List<GameObject>();
 			m_NotificationEvent.OnEventRaised += OnNotificationEventHandler;
+			m_LocalNotificationEvent.OnEventRaised += OnLocalNotificationEventHandler;
 		}
 		
 		void OnEnable() {
@@ -115,6 +119,15 @@ namespace Synthicate
 		
 		[ClientRpc]
 		public void NotificationClientRpc(string text)
+		{
+			GameObject newNotification = Instantiate(notificationWindowPrefab, transform);
+			newNotification.transform.localPosition = new Vector3(4.33f, 238f + (m_notificationWindows.Count + 1) * -65f, 0);
+			newNotification.GetComponent<UiNotificationWindow>().InitializeNotification(text);
+			m_notificationWindows.Add(newNotification);
+			newNotification.SetActive(true);
+		}
+		
+		void OnLocalNotificationEventHandler(string text)
 		{
 			GameObject newNotification = Instantiate(notificationWindowPrefab, transform);
 			newNotification.transform.localPosition = new Vector3(4.33f, 238f + (m_notificationWindows.Count + 1) * -65f, 0);

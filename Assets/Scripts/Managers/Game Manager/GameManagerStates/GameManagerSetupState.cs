@@ -40,6 +40,9 @@ namespace Synthicate
 			
 			// Send notification to the UI
 			m_NotificationEventChannel.RaiseEvent($"{_gameManagerSO.GetCurrentPlayer().GetName()} is setting up!");
+			
+			// 
+			_owner.hexManagerSO.managerSetupResourceResponse.AddListener(SetupResourceResponseEventHandler);
 
 		}
 		
@@ -52,7 +55,7 @@ namespace Synthicate
 		{
 			_strongholdManagerSO.playerBuildEvent.RemoveListener(PlayerBuildStrongholdEventHandler);	
 			_flywayManagerSO.playerBuildEvent.RemoveListener(PlayerBuildFlywayEventHandler);
-			_hexManagerSO.setupResourceRequest.Invoke();
+			_owner.hexManagerSO.managerSetupResourceResponse.RemoveListener(SetupResourceResponseEventHandler);
 		}
 
 		public override void OnGUI()
@@ -119,6 +122,57 @@ namespace Synthicate
 				m_NotificationEventChannel.RaiseEvent("Player built a flyway!");
 			}
 			
+			
+			_hexManagerSO.setupResourceRequest.Invoke();
+			
+			// if (_gameManagerSO.DoneSetupPhase())
+			// {
+			// 	// changeState(_owner.diceState);
+			// 	Debug.Log("Done with Setup Phase!");
+			// 	_owner.pendingSetupState.SetDiceStateServerRpc();
+			// 	changeState(_owner.diceState);
+			// }
+			// else
+			// {
+			// 	int nextPlayerTurn =  _gameManagerSO.IncrementAndGetNextPlayerIndex();
+			// 	Debug.Log($"Performing Setup for Player ID: {nextPlayerTurn}");
+			// 	if (_gameManagerSO.clientPlayer.GetId() != nextPlayerTurn)
+			// 	{
+			// 		NextPlayerSetupServerRpc(nextPlayerTurn);
+			// 		// _owner.pendingSetupState.NextPlayerSetupClientRpc(nextPlayerTurn);
+			// 		changeState(_owner.pendingSetupState);
+			// 	}
+			// 	else
+			// 	{
+			// 		changeState(_owner.setupState);
+			// 	}
+				
+				
+			// }
+		}
+		
+		void SetupResourceResponseEventHandler(List<HexResource> setupResources)
+		{
+			// For each player
+			// for (int player = 0; player < gameManagerSO.GetNumPlayers(); player++)
+			// {
+			// 	// Get resources for the current player
+			// 	int[] playerResources = boardManagerSO.GetResourcesForPlayer(player, setupResources);
+			
+			// 	// Add the resources to the player's inventory
+			// 	gameManagerSO.playerList[player].updateResources(playerResources);
+			// }
+			
+			int[] playerResources = _owner.boardManagerSO.GetResourcesForPlayer(_gameManagerSO.clientPlayer.GetId(), setupResources);
+			// _gameManagerSO.clientPlayer.updateResources(playerResources);
+			// _gameManagerSO.clientPlayer.UpdateResources(playerResources);
+			_gameManagerSO.clientPlayer.SetResources(playerResources);
+			
+			GoToNextPlayerTurn();
+		}
+		
+		void GoToNextPlayerTurn()
+		{
 			if (_gameManagerSO.DoneSetupPhase())
 			{
 				// changeState(_owner.diceState);
@@ -140,8 +194,6 @@ namespace Synthicate
 				{
 					changeState(_owner.setupState);
 				}
-				
-				
 			}
 		}
 		

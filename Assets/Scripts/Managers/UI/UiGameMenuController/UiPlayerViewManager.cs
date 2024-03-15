@@ -13,6 +13,9 @@ namespace Synthicate
 		[SerializeField]
 		GameObject[] playerViews;
 		
+		[SerializeField]
+		GameObject[] playerTurnIndicators;
+		
 		override protected void Awake() {
 			base.Awake();
 		}
@@ -31,6 +34,7 @@ namespace Synthicate
 			for (int i = 0; i < playerViews.Length; i++)
 			{
 				playerViews[i].SetActive(false);
+				playerTurnIndicators[i].SetActive(false);
 			}
 			for (int i = 0; i < gameManagerSO.playerList.Count; i++)
 			{
@@ -46,6 +50,13 @@ namespace Synthicate
 			for (int i = 0; i < gameManagerSO.playerList.Count; i++)
 			{
 				playerViews[i].GetComponent<UiPlayerViewController>().SetInfluenceCount(gameManagerSO.playerList[i].GetNumHackersUsed());
+				
+				playerTurnIndicators[i].SetActive(false);
+				
+				if (gameManagerSO.currentPlayerTurn == gameManagerSO.playerList[i].GetId())
+				{
+					playerTurnIndicators[i].SetActive(true);
+				}
 			}
 		}
 	}

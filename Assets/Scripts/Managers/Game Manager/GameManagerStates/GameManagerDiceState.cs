@@ -23,6 +23,9 @@ namespace Synthicate
 		[SerializeField]
 		StringEventChannel m_NotificationEventChannel;
 		
+		[SerializeField]
+		StringEventChannel m_LocalNotificationEvent;
+		
 		enum DiceState
 		{
 			PendingDice,
@@ -53,6 +56,15 @@ namespace Synthicate
 			
 			// GameEvent gameEvent = new GameEvent(GameEventType.Hack, "The game has begun! " + getCurrentPlayer().getName() + " hashed a " + diceValue);
 			// playerEvent.Invoke(gameEvent);
+			
+			// update all player resources when board manager announces that player placements have been recorded
+			// _owner.boardManagerSO.updatePointsResponseEvent.AddListener(UpdatePlayerResources); 
+			
+			// request updated stronghold/outpost/flyway points when the hex manager finishes updating its resources
+			// _owner.hexManagerSO.updatePointsResponseEvent.AddListener(UpdatePlayerResources);
+				
+				
+
 		}
 		
 		public override void Execute()
@@ -67,6 +79,7 @@ namespace Synthicate
 					m_DiceDelay = 0;
 					
 					m_NotificationEventChannel.RaiseEvent($"Hashed value was: {m_DiceValue}!");
+					UpdatePlayerResources();
 					
 					m_State = DiceState.DisplayingDice;
 				}
@@ -121,6 +134,37 @@ namespace Synthicate
 		{
 			m_DiceValue = diceValue;
 			m_State = DiceState.HashingValue;
+		}
+		
+		void UpdatePlayerResources()
+		{
+			// int[] playerResources = _owner.boardManagerSO.GetResourcesForPlayer(_gameManagerSO.clientPlayer.GetId(), _owner.hexManagerSO.getResources());
+			// _gameManagerSO.clientPlayer.UpdateResources(playerResources);
+			// _userInterfaceSO.OnUpdateUserInterface();
+			
+			// for(int i = 0; i < playerResources.Length; i++)
+			// {
+			// 	if (playerResources[i] > 0)
+			// 	{
+					
+			// 	}
+			// }
+			for (int player = 0; player < gameManagerSO.GetNumPlayers(); player++)
+			{
+				// Get resources for this player at this dice roll
+				int[] playerResources = boardManagerSO.GetResourcesForPlayer(player, hexManagerSO.getResources());
+				
+				// Update resources for this player at this dice roll
+				gameManagerSO.playerList[player].UpdateResources(playerResources);
+				
+				// Update all player outpost and stronghold counts
+				gameManagerSO.playerList[player].numOutposts = boardManagerSO.GetNumOutpostsFor(player);
+				gameManagerSO.playerList[player].numStrongholds = boardManagerSO.GetNumStrongholdsFor(player);
+				
+				// update all player flyway counts when board manager announces that player flyway placements have been recorded
+				gameManagerSO.playerList[player].numFlyways = boardManagerSO.GetNumFlywaysFor(player);
+			}
+			
 		}
 		
 		public override void OnGUI()
