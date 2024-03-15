@@ -14,8 +14,14 @@ namespace Synthicate
 		// bool m_HashingValue = false;
 		
 		[SerializeField]
-		static int s_DiceRollDelay = 1;
-		static int s_DiceDisplayDelay = 1;
+		[Tooltip("Amount of time that the dice is rolled / hashed for.")]
+		[Range(0, 5)]
+		int m_DiceRollDelay = 1;
+		
+		[SerializeField]
+		[Range(0, 5)]
+		[Tooltip("Amount of time that the dice value is displayed for.")]
+		int m_DiceDisplayDelay = 1;
 		
 		// NetworkVariable<int> m_DiceValue = new NetworkVariable<int>();
 		int m_DiceValue = -1;
@@ -44,6 +50,7 @@ namespace Synthicate
 			m_DiceDelay = 0;
 			m_State = DiceState.PendingDice;
 			
+			_owner.boardManagerSO.updatePointsResponseEvent.AddListener(UpdateClientResources);
 			
 			if (_gameManagerSO.IsClientTurn())
 			{
@@ -71,7 +78,7 @@ namespace Synthicate
 		{
 			if (m_State == DiceState.HashingValue)
 			{
-				if(m_DiceDelay > s_DiceRollDelay)
+				if(m_DiceDelay > m_DiceRollDelay)
 				{
 					_hexManagerSO.hexSelectionEvent.Invoke((uint) m_DiceValue);
 					_hexManagerSO.resourceRequest.Invoke((uint) m_DiceValue);
@@ -79,7 +86,6 @@ namespace Synthicate
 					m_DiceDelay = 0;
 					
 					m_NotificationEventChannel.RaiseEvent($"Hashed value was: {m_DiceValue}!");
-					UpdatePlayerResources();
 					
 					m_State = DiceState.DisplayingDice;
 				}
@@ -90,7 +96,7 @@ namespace Synthicate
 			}
 			else if (m_State == DiceState.DisplayingDice)
 			{
-				if (m_DiceDelay > s_DiceDisplayDelay)
+				if (m_DiceDelay > m_DiceDisplayDelay)
 				{
 					m_State = DiceState.Done;
 				}
@@ -120,6 +126,7 @@ namespace Synthicate
 		public override void Exit()
 		{
 			_userInterfaceSO.OnUpdateUserInterface();
+			_owner.boardManagerSO.updatePointsResponseEvent.RemoveListener(UpdateClientResources);
 		}
 		
 		[ServerRpc(RequireOwnership = false)]
@@ -136,34 +143,32 @@ namespace Synthicate
 			m_State = DiceState.HashingValue;
 		}
 		
-		void UpdatePlayerResources()
+		void UpdateClientResources()
 		{
-			// int[] playerResources = _owner.boardManagerSO.GetResourcesForPlayer(_gameManagerSO.clientPlayer.GetId(), _owner.hexManagerSO.getResources());
-			// _gameManagerSO.clientPlayer.UpdateResources(playerResources);
-			// _userInterfaceSO.OnUpdateUserInterface();
 			
-			// for(int i = 0; i < playerResources.Length; i++)
-			// {
-			// 	if (playerResources[i] > 0)
-			// 	{
-					
-			// 	}
-			// }
-			for (int player = 0; player < gameManagerSO.GetNumPlayers(); player++)
+			// Get resources for this player at this dice roll
+			int clientPlayerId = _gameManagerSO.GetClientPlayerId();
+			int[] playerResources = _owner.boardManagerSO.GetResourcesForPlayer(clientPlayerId,  _owner.hexManagerSO.getResources());
+			
+			// Update resources for this player at this dice roll
+			_gameManagerSO.clientPlayer.UpdateResources(playerResources);
+			
+			// Update all player outpost and stronghold counts
+			_gameManagerSO.clientPlayer.numOutposts =  _owner.boardManagerSO.GetNumOutpostsFor(clientPlayerId);
+			_gameManagerSO.clientPlayer.numStrongholds =  _owner.boardManagerSO.GetNumStrongholdsFor(clientPlayerId);
+			
+			// update all player flyway counts when board manager announces that player flyway placements have been recorded
+			_gameManagerSO.clientPlayer.numFlyways =  _owner.boardManagerSO.GetNumFlywaysFor(clientPlayerId);
+			
+			// Display notifications for collected resources			
+			for(int i = 0; i < playerResources.Length; i++)
 			{
-				// Get resources for this player at this dice roll
-				int[] playerResources = boardManagerSO.GetResourcesForPlayer(player, hexManagerSO.getResources());
-				
-				// Update resources for this player at this dice roll
-				gameManagerSO.playerList[player].UpdateResources(playerResources);
-				
-				// Update all player outpost and stronghold counts
-				gameManagerSO.playerList[player].numOutposts = boardManagerSO.GetNumOutpostsFor(player);
-				gameManagerSO.playerList[player].numStrongholds = boardManagerSO.GetNumStrongholdsFor(player);
-				
-				// update all player flyway counts when board manager announces that player flyway placements have been recorded
-				gameManagerSO.playerList[player].numFlyways = boardManagerSO.GetNumFlywaysFor(player);
+				if (playerResources[i] > 0)
+				{
+					m_LocalNotificationEvent.RaiseEvent($"You recieved {playerResources[i]} {(ResourceType) i}");
+				}
 			}
+			_userInterfaceSO.OnUpdateUserInterface();
 			
 		}
 		

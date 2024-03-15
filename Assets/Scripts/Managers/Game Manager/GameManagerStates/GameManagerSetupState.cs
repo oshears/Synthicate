@@ -16,6 +16,9 @@ namespace Synthicate
 		StringEventChannel m_NotificationEventChannel;
 		
 		[SerializeField]
+		StringEventChannel m_LocalNotificationEvent;
+		
+		[SerializeField]
 		BoolEventChannel m_EnablePlayerControllerEventChannel;
 		
 		public override void Enter()
@@ -153,20 +156,18 @@ namespace Synthicate
 		
 		void SetupResourceResponseEventHandler(List<HexResource> setupResources)
 		{
-			// For each player
-			// for (int player = 0; player < gameManagerSO.GetNumPlayers(); player++)
-			// {
-			// 	// Get resources for the current player
-			// 	int[] playerResources = boardManagerSO.GetResourcesForPlayer(player, setupResources);
-			
-			// 	// Add the resources to the player's inventory
-			// 	gameManagerSO.playerList[player].updateResources(playerResources);
-			// }
-			
 			int[] playerResources = _owner.boardManagerSO.GetResourcesForPlayer(_gameManagerSO.clientPlayer.GetId(), setupResources);
-			// _gameManagerSO.clientPlayer.updateResources(playerResources);
-			// _gameManagerSO.clientPlayer.UpdateResources(playerResources);
 			_gameManagerSO.clientPlayer.SetResources(playerResources);
+			
+			// Display notifications for collected resources
+			for(int i = 0; i < playerResources.Length; i++)
+			{
+				if (playerResources[i] > 0)
+				{
+					m_LocalNotificationEvent.RaiseEvent($"You recieved {playerResources[i]} {(ResourceType) i}");
+				}
+			}
+			_userInterfaceSO.OnUpdateUserInterface();
 			
 			GoToNextPlayerTurn();
 		}

@@ -46,6 +46,11 @@ namespace Synthicate
 			return playerList.Count;
 		}
 		
+		public int GetClientPlayerId()
+		{
+			return clientPlayer.GetId();
+		}
+		
 		public bool IsClientTurn()
 		{
 			return currentPlayerTurn == clientPlayer.GetId();

@@ -99,45 +99,11 @@ namespace Synthicate
 				flywayManagerSO.edgeUpdateRequest.Invoke();
 			});
 
-			// // request updated stronghold/outpost/flyway points when the hex manager finishes updating its resources
-			// hexManagerSO.managerSetupResourceResponse.AddListener((List<HexResource> setupResources) => {
-				
-			// 	// For each player
-			// 	for (int player = 0; player < gameManagerSO.GetNumPlayers(); player++)
-			// 	{
-			// 		// Get resources for the current player
-			// 		int[] playerResources = boardManagerSO.GetResourcesForPlayer(player, setupResources);
-					
-			// 		// Add the resources to the player's inventory
-			// 		gameManagerSO.playerList[player].updateResources(playerResources);
-			// 	}
-
-			// });
-
 			// request the board manager to update player stronghold/outpost placements after the stronghold manager collects them
 			strongholdManagerSO.managerPointUpdateResponse.AddListener((List<PlayerPoint> points) => boardManagerSO.updatePointsRequestEvent.Invoke(points));
 
 			// request the board manager to update player flyway placements after the flyway manager collects them
 			flywayManagerSO.managerEdgeUpdateResponse.AddListener((List<PlayerEdge> edges) => boardManagerSO.updateEdgesRequestEvent.Invoke(edges));
-
-			// update all player resources when board manager announces that player placements have been recorded
-			boardManagerSO.updatePointsResponseEvent.AddListener(() => {
-				for (int player = 0; player < gameManagerSO.GetNumPlayers(); player++)
-				{
-					// Get resources for this player at this dice roll
-					int[] playerResources = boardManagerSO.GetResourcesForPlayer(player, hexManagerSO.getResources());
-					
-					// Update resources for this player at this dice roll
-					gameManagerSO.playerList[player].UpdateResources(playerResources);
-					
-					// Update all player outpost and stronghold counts
-					gameManagerSO.playerList[player].numOutposts = boardManagerSO.GetNumOutpostsFor(player);
-					gameManagerSO.playerList[player].numStrongholds = boardManagerSO.GetNumStrongholdsFor(player);
-					
-					// update all player flyway counts when board manager announces that player flyway placements have been recorded
-					gameManagerSO.playerList[player].numFlyways = boardManagerSO.GetNumFlywaysFor(player);
-				}
-			});
 
 		}
 		
