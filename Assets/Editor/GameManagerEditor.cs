@@ -50,10 +50,12 @@ public class GameManagerEditor : Editor {
 		if(GUILayout.Button("Trigger Hack Event"))
 		{
 			gameManager.hexManagerSO.SetHackerCages(targetHexNum,true);
+			gameManager.hexManagerSO.SetHackerParticles(targetHexNum, true);
 		}
 		if(GUILayout.Button("Clear Hack Event"))
 		{
 			gameManager.hexManagerSO.SetHackerCages(targetHexNum,false);
+			gameManager.hexManagerSO.SetHackerParticles(targetHexNum, false);
 		}
 		GUILayout.EndHorizontal();
 		

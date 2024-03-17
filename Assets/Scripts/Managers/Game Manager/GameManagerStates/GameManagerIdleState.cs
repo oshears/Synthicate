@@ -106,15 +106,15 @@ namespace Synthicate
 				_gameManagerSO.OnDebugIncrementAlltResources();
 				_userInterfaceSO.OnUpdateUserInterface();
 			}
-			if(GUILayout.Button("Hack"))
-			{
+			// if(GUILayout.Button("Hack"))
+			// {
 				// _gameManagerSO.OnDebugIncrementAlltResources();
 				// _userInterfaceSO.OnUpdateUserInterface();
 				// _owner.hexManagerSO.hackEvent.Invoke(13);
-				_owner.hexManagerSO.SetHackerCages(13,true);
-				_owner.hexManagerSO.SetHackerParticles(13,true);
-			}
-			GUILayout.EndArea();
+				// _owner.hexManagerSO.SetHackerCages(13,true);
+				// _owner.hexManagerSO.SetHackerParticles(13,true);
+			// }
+			// GUILayout.EndArea();
 			
 			// if (_menuState == MenuState.Default)
 			// {
