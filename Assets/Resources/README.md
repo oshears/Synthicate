@@ -1,0 +1,1 @@
+Files in this folder are accessible via the `Resource` commands.

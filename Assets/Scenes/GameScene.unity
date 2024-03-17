@@ -182,6 +182,37 @@ RectTransform:
   m_AnchoredPosition: {x: -190.73975, y: -76.37499}
   m_SizeDelta: {x: 31.01648, y: 31.016495}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &149174530
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 149174531}
+  m_Layer: 0
+  m_Name: Debug Editor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &149174531
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 149174530}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -24.022987, y: -152.3644, z: -76.53746}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &194082960 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2840458672506994446, guid: fcc2efe1920a4e94cb33c3212dc4cab0, type: 3}
@@ -962,6 +993,10 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 2899603711
       objectReference: {fileID: 0}
+    - target: {fileID: 2338361026557009796, guid: 688cacec1f08f42e291ea31dfe19ef75, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2559969652705416547, guid: 688cacec1f08f42e291ea31dfe19ef75, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.0921159
@@ -1554,6 +1589,10 @@ PrefabInstance:
       propertyPath: m_TerrainData
       value: 
       objectReference: {fileID: 15600000, guid: 96aa227fc0ed2704b9d0258bef64a9ee, type: 2}
+    - target: {fileID: 7108339241565919044, guid: 688cacec1f08f42e291ea31dfe19ef75, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1fe727abbc9789343bf90ec057955094, type: 2}
     - target: {fileID: 7998412398876880241, guid: 688cacec1f08f42e291ea31dfe19ef75, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 2500029258
@@ -3838,3 +3877,4 @@ SceneRoots:
   - {fileID: 5264193246619134581}
   - {fileID: 1646710480}
   - {fileID: 1899371960}
+  - {fileID: 149174531}

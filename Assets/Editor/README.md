@@ -1,0 +1,1 @@
+Anything in this folder will be excluded from a Unity Build.
