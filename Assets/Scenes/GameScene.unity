@@ -218,6 +218,26 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2840458672506994446, guid: fcc2efe1920a4e94cb33c3212dc4cab0, type: 3}
   m_PrefabInstance: {fileID: 2113272042188109456}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &206748262 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8897379302554462184, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
+  m_PrefabInstance: {fileID: 7584403922057160351}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &206748279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 206748262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d52182da4bd12b245b0144eab94b4362, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_GameMenuStateEventChannel: {fileID: 11400000, guid: ec039f4b9dccc4a479f0c719883be898, type: 2}
+  m_NotificationEventChannel: {fileID: 11400000, guid: b33a419167b067e4f888e09565ac360e, type: 2}
+  m_LocalNotificationEvent: {fileID: 11400000, guid: 0a7be55c2c03fb34c8b87a029ab675c2, type: 2}
 --- !u!1 &233696101 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3298889607874647901, guid: 9ccc2e49ee86d5847838ffc9698d44fb, type: 3}
@@ -2409,7 +2429,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1971252395434077661, guid: fcc2efe1920a4e94cb33c3212dc4cab0, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5472807881566823959, guid: fcc2efe1920a4e94cb33c3212dc4cab0, type: 3}
       propertyPath: m_IsActive
@@ -3506,6 +3526,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8777508312429708221, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
+      propertyPath: m_FixedDiceValue
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8777508312429708221, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
       propertyPath: m_LocalNotificationEvent
       value: 
       objectReference: {fileID: 11400000, guid: 0a7be55c2c03fb34c8b87a029ab675c2, type: 2}
@@ -3520,7 +3544,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8897379302554462184, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 206748279}
   m_SourcePrefab: {fileID: 100100000, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
 --- !u!1001 &8214280420077480836
 PrefabInstance:
@@ -3616,7 +3643,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7913867042485185745, guid: c6068dceae830414db969a3d508682ab, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3703,7 +3730,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8720617873607435222 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3939828300064737851, guid: 1c80dc4f227a0fd478bdbe2246fd0c46, type: 3}
