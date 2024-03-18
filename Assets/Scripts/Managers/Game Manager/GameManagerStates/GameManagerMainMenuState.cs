@@ -63,10 +63,16 @@ namespace Synthicate
 			// updateGUIEvent.Invoke();
 			// updateMainMenuEvent.Invoke(false);
 			
+			_userInterfaceSO.OnSetMainMenuActive(false);
+			
+			
+			_gameManagerSO.SetCurrentPlayerTurn(0);
+			
+			// Enable the game menu
+			_userInterfaceSO.OnSetGameMenuActive(true);
+			
 			// Go to setup state
 			changeState(_owner.setupState);
-			
-			_userInterfaceSO.OnSetMainMenuActive(false);
 		}
 		
 		void HostMultiplayerButtonEventHandler()

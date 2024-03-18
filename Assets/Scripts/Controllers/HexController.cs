@@ -59,8 +59,8 @@ namespace Synthicate
 		// Start is called before the first frame update
 		void Start()
 		{
-			hexManager.beginHackModeEvent.AddListener(configureHackOption);
-			hexManager.endHackModeEvent.AddListener(clearHackOption);
+			hexManager.BeginHackModeEvent.AddListener(configureHackOption);
+			hexManager.EndHackModeEvent.AddListener(clearHackOption);
 			hexManager.resourceRequest.AddListener((uint diceValue) =>
 			{
 				HexResource resourceStruct = new HexResource(id, hexType, (state != HexControllerState.Hacked && diceValue == hexValue) ? 1u : 0u);

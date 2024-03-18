@@ -11,7 +11,7 @@ namespace Synthicate
 		{
 			_hexManagerSO.hackEvent.AddListener(HackEventHandler);
 			// _gameManagerSO.clientPlayer.useHacker();
-			_hexManagerSO.beginHackModeEvent.Invoke();
+			_hexManagerSO.BeginHackModeEvent.Invoke();
 		}
 		
 		public override void Execute()
@@ -40,7 +40,7 @@ namespace Synthicate
 		
 		void HackEventHandler(uint id)
 		{
-			_hexManagerSO.endHackModeEvent.Invoke();
+			_hexManagerSO.EndHackModeEvent.Invoke();
 			changeState(_owner.idleState);
 		}
 		

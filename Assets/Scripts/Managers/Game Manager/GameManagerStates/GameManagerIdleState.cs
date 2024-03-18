@@ -38,7 +38,6 @@ namespace Synthicate
 		public override void Enter()
 		{
 			// _menuState = MenuState.Default;
-			Debug.Log("Player Resources:");
 			_userInterfaceSO.OnUpdateUserInterface();
 			
 			m_GameMenuStateEventChannel.RaiseEvent(GameMenu.Screens.PlayerTurnScreen);
@@ -106,6 +105,7 @@ namespace Synthicate
 				_gameManagerSO.OnDebugIncrementAlltResources();
 				_userInterfaceSO.OnUpdateUserInterface();
 			}
+			GUILayout.EndArea();
 			// if(GUILayout.Button("Hack"))
 			// {
 				// _gameManagerSO.OnDebugIncrementAlltResources();

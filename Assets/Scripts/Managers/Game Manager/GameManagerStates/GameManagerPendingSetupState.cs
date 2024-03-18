@@ -19,7 +19,7 @@ namespace Synthicate
 			
 			// Setup UI
 			_userInterfaceSO.OnInitializeUserInterface();
-			m_GameMenuStateEventChannel.RaiseEvent(GameMenu.Screens.PlayerWaitScreen);
+			m_GameMenuStateEventChannel.RaiseEvent(GameMenu.Screens.PlayerPendingScreen);
 			_userInterfaceSO.OnUpdateUserInterface();
 		}
 		

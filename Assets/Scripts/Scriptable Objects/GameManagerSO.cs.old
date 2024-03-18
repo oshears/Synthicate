@@ -59,7 +59,7 @@ namespace Synthicate
 
 			// Event that is triggered when a Hex is hacked
 			hexManager.hackEvent.AddListener((uint id) => {
-				hexManager.endHackModeEvent.Invoke();
+				hexManager.EndHackModeEvent.Invoke();
 				playerHackEvent.Invoke();
 
 				GameEvent gameEvent = new GameEvent(GameEventType.Hack, getCurrentPlayer().getName() + " has hacked a territory!");
@@ -260,7 +260,7 @@ namespace Synthicate
 				hackerRollEvent.Invoke();
 				
 				// let active player choose a spot to hack
-				if (clientPlayerIsActive()) hexManager.beginHackModeEvent.Invoke();
+				if (clientPlayerIsActive()) hexManager.BeginHackModeEvent.Invoke();
 			}
 			else
 			{
@@ -294,7 +294,7 @@ namespace Synthicate
 				}
 
 				// let active player choose a spot to hack
-				if (clientPlayerIsActive()) hexManager.beginHackModeEvent.Invoke();
+				if (clientPlayerIsActive()) hexManager.BeginHackModeEvent.Invoke();
 
 				// TODO: let active player pick a target to remove resources from
 			}
@@ -327,7 +327,7 @@ namespace Synthicate
 			{
 				//disableGUIEvent.Invoke();
 				clientPlayerManager.useHacker();
-				hexManager.beginHackModeEvent.Invoke();
+				hexManager.BeginHackModeEvent.Invoke();
 			}
 			else
 			{

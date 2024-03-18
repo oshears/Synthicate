@@ -41,6 +41,7 @@ namespace Synthicate
 		[System.NonSerialized] public GameManagerHackingState hackingState;
 		[System.NonSerialized] public GameManagerPendingState pendingState;
 		[System.NonSerialized] public GameManagerTradingState tradingState;
+		[System.NonSerialized] public GameManagerDiceHackingState m_DiceHackingState;
 		
 		
 
@@ -90,6 +91,9 @@ namespace Synthicate
 			
 			tradingState = GetComponent<GameManagerTradingState>();
 			tradingState.SetOwner(this);
+			
+			m_DiceHackingState = GetComponent<GameManagerDiceHackingState>();
+			m_DiceHackingState.SetOwner(this);
 			
 			stateMachine.ChangeState(initState);
 

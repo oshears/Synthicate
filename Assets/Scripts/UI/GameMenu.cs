@@ -13,7 +13,9 @@ namespace Synthicate
 			TradeRequesterScreen, 
 			TradeReceiverScreen, 
 			PlayerSetupTurnScreen, 
-			PlayerWaitScreen, 
+			PlayerPendingScreen, 
+			PlayerDiceHackScreen,
+			PlayerHackScreen,
 		};
 	}
 }

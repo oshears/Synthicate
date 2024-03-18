@@ -24,7 +24,16 @@ namespace Synthicate
 		int m_DiceDisplayDelay = 1;
 		
 		// NetworkVariable<int> m_DiceValue = new NetworkVariable<int>();
+		[SerializeField]
 		int m_DiceValue = -1;
+		
+		[SerializeField]
+		[Range(1, 12)]
+		public int m_FixedDiceValue = 1;
+		[SerializeField]
+		public bool m_UsingFixedDice = false;
+		
+		[Header("Event Channels")]
 		
 		[SerializeField]
 		StringEventChannel m_NotificationEventChannel;
@@ -50,11 +59,18 @@ namespace Synthicate
 			m_DiceDelay = 0;
 			m_State = DiceState.PendingDice;
 			
-			_owner.boardManagerSO.updatePointsResponseEvent.AddListener(HashedValueResponseEventHandler);
+			_owner.boardManagerSO.updatePointsResponseEvent.AddListener(UpdatePointsResponseEventHandler);
 			
 			if (_gameManagerSO.IsClientTurn())
 			{
-				UpdateDiceRollServerRpc(_gameManagerSO.RollDice());
+				if (m_UsingFixedDice)
+				{
+					UpdateDiceRollServerRpc(m_FixedDiceValue);
+				}
+				else
+				{
+					UpdateDiceRollServerRpc(_gameManagerSO.RollDice());
+				}
 			}
 			
 			
@@ -85,8 +101,6 @@ namespace Synthicate
 					
 					m_DiceDelay = 0;
 					
-					
-					
 					m_State = DiceState.DisplayingDice;
 				}
 				else
@@ -108,7 +122,12 @@ namespace Synthicate
 			else if (m_State == DiceState.Done)
 			{
 				// If current client's turn, then go to idle state.
-				if (_gameManagerSO.IsClientTurn())
+				if (_gameManagerSO.IsClientTurn() && m_DiceValue == 7)
+				{
+					Debug.Log("Moving to hacking state.");
+					changeState(_owner.m_DiceHackingState);
+				}
+				else if (_gameManagerSO.IsClientTurn())
 				{
 					Debug.Log("Moving to idle state.");
 					changeState(_owner.idleState);
@@ -126,7 +145,7 @@ namespace Synthicate
 		public override void Exit()
 		{
 			_userInterfaceSO.OnUpdateUserInterface();
-			_owner.boardManagerSO.updatePointsResponseEvent.RemoveListener(HashedValueResponseEventHandler);
+			_owner.boardManagerSO.updatePointsResponseEvent.RemoveListener(UpdatePointsResponseEventHandler);
 		}
 		
 		[ServerRpc(RequireOwnership = false)]
@@ -143,7 +162,7 @@ namespace Synthicate
 			m_State = DiceState.HashingValue;
 		}
 		
-		void HashedValueResponseEventHandler()
+		void UpdatePointsResponseEventHandler()
 		{
 			m_NotificationEventChannel.RaiseEvent($"Hashed value was: {m_DiceValue}!");
 			

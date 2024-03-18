@@ -13,7 +13,7 @@ namespace Synthicate
         public DepotManagerScriptableObject depotManager;
 
         public enum DepotState {Active,Inactive};
-        DepotState depotState = DepotState.Active;
+        DepotState depotState = DepotState.Inactive;
 
         Transform depotIndicatorTransform;
         MeshRenderer depotIndicatorRenderer;

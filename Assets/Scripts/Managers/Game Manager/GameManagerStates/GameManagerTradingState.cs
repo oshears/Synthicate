@@ -21,7 +21,6 @@ namespace Synthicate
 		public override void Enter()
 		{
 			// _menuState = MenuState.Default;
-			Debug.Log("Player Resources:");
 			_userInterfaceSO.OnUpdateUserInterface();
 			
 			// TODO: Need to add the logic for the Trade Init Screen and the Trade Requester / Receiver Screen
