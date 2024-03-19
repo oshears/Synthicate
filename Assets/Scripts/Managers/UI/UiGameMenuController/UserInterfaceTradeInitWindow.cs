@@ -15,6 +15,9 @@ namespace Synthicate
 		UiPlayerSelectButton[] m_PlayerButtons;
 		
 		[SerializeField]
+		GameObject[] m_PlayerButtonCanvas;
+		
+		[SerializeField]
 		TextMeshProUGUI m_TitleText;
 		
 		[SerializeField]
@@ -26,19 +29,49 @@ namespace Synthicate
 		TradeInitEventChannel m_InitiateTradeEventChannel;
 		
 		[SerializeField]
-		EventChannelSO m_SelectTradePartnerEventChannel;
+		IntEventChannel m_SelectTradePartnerEventChannel;
 		
 		[Header("Scriptable Objects")]
 		
 		[SerializeField]
 		UiScriptableObject m_UiScriptableObject;
+		
+		[SerializeField]
 		GameManagerSO m_GameManagerSO;
 		
+		public void Awake()
+		{
+			m_InitiateTradeEventChannel.OnEventRaised += InitiateTradeEventHandler;
+		}
+		
+		public void OnEnable()
+		{
+			DisableAllButtons();
+			
+			for(int i = 0; i < m_PlayerButtons.Length; i++)
+			{
+				SetupButton(i);
+			}
+		}
+		
+		public void OnDisable()
+		{
+			for(int i = 0; i < m_PlayerButtons.Length; i++)
+			{
+				m_PlayerButtons[i].m_Button.onClick.RemoveAllListeners();
+			}
+		}
 		
 		public void Start()
 		{
-			m_InitiateTradeEventChannel.OnEventRaised += InitiateTradeEventHandler;
-			DisableAllButtons();
+			
+		}
+		
+		public void SetupButton(int i)
+		{
+			m_PlayerButtons[i].m_Button.onClick.AddListener(() => {  
+				m_SelectTradePartnerEventChannel.RaiseEvent(i);
+			});
 		}
 
 		public void InitiateTradeEventHandler(TradeInitWindowType windowType)
@@ -60,10 +93,22 @@ namespace Synthicate
 			{
 				if (m_GameManagerSO.clientPlayer.GetId() != m_GameManagerSO.playerList[i].GetId())
 				{
-					m_PlayerButtons[i].gameObject.SetActive(true);
+					m_PlayerButtonCanvas[i].SetActive(true);
 					m_PlayerButtons[i].SetPlayerName(m_GameManagerSO.playerList[i].GetName());
 				}
 			}
+			
+			// DEBUG: Just for testing
+			for(int i = 0; i < 3; i++)
+			{
+				Debug.Log($"Enabling Trade Init Player: {i}");
+				if (m_PlayerButtonCanvas[i].activeSelf == false)
+				{
+					m_PlayerButtonCanvas[i].SetActive(true);
+					m_PlayerButtons[i].SetPlayerName($"Dummy Player {i}");
+				}
+			}
+			// END DEBUG:
 			
 		}
 		
@@ -71,7 +116,7 @@ namespace Synthicate
 		{
 			for(int i = 0; i < m_PlayerButtons.Length; i++)
 			{
-				m_PlayerButtons[i].gameObject.SetActive(false);
+				m_PlayerButtonCanvas[i].SetActive(false);
 			}
 		}
 	}

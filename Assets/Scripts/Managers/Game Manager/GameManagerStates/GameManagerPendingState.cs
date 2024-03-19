@@ -16,7 +16,7 @@ namespace Synthicate
 		{
 			_userInterfaceSO.OnUpdateUserInterface();
 			
-			m_GameMenuStateEventChannel.RaiseEvent(GameMenu.Screens.PlayerPendingScreen);
+			m_GameMenuStateEventChannel.RaiseEvent(GameMenuType.PlayerPendingScreen);
 		}
 		
 		public override void Execute()

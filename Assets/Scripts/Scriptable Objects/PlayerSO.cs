@@ -5,7 +5,8 @@ using UnityEngine.Events;
 
 namespace Synthicate
 {
-	public class Player
+	[CreateAssetMenu(fileName = "Player Scriptable Object", menuName = "ScriptableObjects/Player Scriptable Object")]
+	public class Player : ScriptableObject
 	{
 		private string playerName;
 

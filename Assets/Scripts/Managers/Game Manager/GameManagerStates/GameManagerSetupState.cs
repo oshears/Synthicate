@@ -35,7 +35,7 @@ namespace Synthicate
 
 			// Setup UI
 			_userInterfaceSO.OnInitializeUserInterface();
-			m_GameMenuStateEventChannel.RaiseEvent(GameMenu.Screens.PlayerSetupTurnScreen);
+			m_GameMenuStateEventChannel.RaiseEvent(GameMenuType.PlayerSetupTurnScreen);
 			_userInterfaceSO.OnUpdateUserInterface();
 			
 			// Enable player panning

@@ -40,7 +40,7 @@ namespace Synthicate
 			// _menuState = MenuState.Default;
 			_userInterfaceSO.OnUpdateUserInterface();
 			
-			m_GameMenuStateEventChannel.RaiseEvent(GameMenu.Screens.PlayerTurnScreen);
+			m_GameMenuStateEventChannel.RaiseEvent(GameMenuType.PlayerTurnScreen);
 			
 			m_CyberActionButtionEventChannel.OnEventRaised += CyberActionButtionEventHandler; 
 			m_TradeButtonEventChannel.OnEventRaised += TradeButtonEventHandler; 

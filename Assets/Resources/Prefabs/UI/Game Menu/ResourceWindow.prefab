@@ -427,6 +427,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5075730777062242923}
+  - component: {fileID: 1911460780029445353}
   m_Layer: 5
   m_Name: ResourceWindow
   m_TagString: Untagged
@@ -455,6 +456,27 @@ RectTransform:
   m_AnchoredPosition: {x: 282.11853, y: 172.88075}
   m_SizeDelta: {x: 487, y: 478}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1911460780029445353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2850812840316500283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52177479392fc3042a1cd3889f92265a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManagerSO: {fileID: 11400000, guid: f222b367bb47bc140bb8cc26d5fc6f28, type: 2}
+  userInterfaceSO: {fileID: 11400000, guid: 90a81f3ba11d5b04e8c825c89791d49f, type: 2}
+  powerCounterText: {fileID: 1930672466277898719}
+  peopleCounterText: {fileID: 8622611622690539973}
+  foodCounterText: {fileID: 1626642917714733001}
+  metalCounterText: {fileID: 4834093809014734909}
+  mechCounterText: {fileID: 7762468266029115594}
+  hackerCounterText: {fileID: 8576249766353643347}
+  pointCounterText: {fileID: 3298889607874647901}
 --- !u!1 &2883904799726321609
 GameObject:
   m_ObjectHideFlags: 0

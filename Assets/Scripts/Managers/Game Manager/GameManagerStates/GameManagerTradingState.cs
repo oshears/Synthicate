@@ -24,7 +24,7 @@ namespace Synthicate
 			_userInterfaceSO.OnUpdateUserInterface();
 			
 			// TODO: Need to add the logic for the Trade Init Screen and the Trade Requester / Receiver Screen
-			m_GameMenuStateEventChannel.RaiseEvent(GameMenu.Screens.TradeRequesterScreen);
+			m_GameMenuStateEventChannel.RaiseEvent(GameMenuType.TradeRequesterScreen);
 			
 			m_TradeCanceledEventChannel.OnEventRaised += TradeCanceledEventHandler;
 		}

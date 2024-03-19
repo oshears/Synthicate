@@ -12,7 +12,7 @@ namespace Synthicate
 	{
 		
 		[SerializeField]
-		Button m_Button;
+		public Button m_Button;
 		
 		[SerializeField]
 		TextMeshProUGUI m_ButtonText;
@@ -24,6 +24,11 @@ namespace Synthicate
 		public void SetPlayerName(string name)
 		{
 			m_ButtonText.text = name;
+		}
+		
+		public void SetPlayerImage(Sprite sprite)
+		{
+			m_PlayerImage.sprite = sprite;
 		}
 		
 	}

@@ -30,7 +30,7 @@ namespace Synthicate
 			_flywayManagerSO.beginBuildModeForPlayer(_gameManagerSO.clientPlayer.GetId(), _boardManagerSO.GetValidEdgesFor(_gameManagerSO.clientPlayer.GetId()), playerBuildPermissions);
 		
 
-			m_GameMenuStateEventChannel.RaiseEvent(GameMenu.Screens.PlayerBuildModeScreen);
+			m_GameMenuStateEventChannel.RaiseEvent(GameMenuType.PlayerBuildModeScreen);
 			m_CancelButtonEventChannel.OnEventRaised += CancelButtonEventHandler;
 		}
 		

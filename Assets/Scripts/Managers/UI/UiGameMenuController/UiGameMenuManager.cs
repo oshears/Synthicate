@@ -100,34 +100,39 @@ namespace Synthicate
 
 		}
 		
-		void GameMenuStateEventChannelHandler(GameMenu.Screens screen)
+		void GameMenuStateEventChannelHandler(GameMenuType screen)
 		{
 			DisableCanvases();
 			DisableMenuButtons();
 			
-			if (screen == GameMenu.Screens.PlayerTurnScreen)
+			if (screen == GameMenuType.PlayerTurnScreen)
 			{
 				finishTurnButton.SetActive(true);
 				buildModeButton.SetActive(true);
 				tradeButton.SetActive(true);
 				cyberActionButton.SetActive(true);
 			}
-			else if (screen == GameMenu.Screens.PlayerBuildModeScreen)
+			else if (screen == GameMenuType.PlayerBuildModeScreen)
 			{
 				m_BuildGameMenu.SetActive(true);
 				cancelButton.SetActive(true);
 			}
-			else if (screen  == GameMenu.Screens.TradeInitScreen)
+			else if (screen  == GameMenuType.TradeInitScreen)
 			{
 				m_TradeInitMenu.SetActive(true);
 			}
-			else if (screen  == GameMenu.Screens.TradeRequesterScreen)
+			else if (screen  == GameMenuType.TradeRequesterScreen)
 			{
 				m_TradeMenu.SetActive(true);
 			}
-			else if (screen  == GameMenu.Screens.TradeReceiverScreen)
+			else if (screen  == GameMenuType.TradeReceiverScreen)
 			{
 				m_TradeMenu.SetActive(true);
+			}
+			else if (screen  == GameMenuType.PlayerDiceHackTargetScreen)
+			{
+				// m_TradeMenu.SetActive(true);
+				m_TradeInitMenu.SetActive(true);
 			}
 			
 		}
