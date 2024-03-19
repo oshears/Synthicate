@@ -13,11 +13,14 @@ namespace Synthicate
 
 		[Header("Menus")]
 		
-		[SerializeField]
-		GameObject m_DefaultGameMenu;
+		// [SerializeField]
+		// GameObject m_DefaultGameMenu;
 		
-		[SerializeField]
-		GameObject m_BuildGameMenu;
+		// [SerializeField]
+		// GameObject m_CancelGameMenu;
+		
+		// [SerializeField]
+		// GameObject m_CyberActionGameMenu;
 		
 		[SerializeField]
 		GameObject m_TradeInitMenu;
@@ -41,6 +44,9 @@ namespace Synthicate
 		
 		[SerializeField]
 		GameObject cancelButton;
+		
+		[SerializeField]
+		GameObject hackButton;
 
 
 		[Header("Scriptable Objects")]
@@ -71,6 +77,9 @@ namespace Synthicate
 		[SerializeField]
 		EventChannelSO m_FinishTurnButtonEventChannel; 
 		
+		[SerializeField]
+		EventChannelSO m_HackButtonEventChannel;
+		
 		
 		void Awake() {
 			userInterfaceSO.updateUserInterfaceEvent += UpdateUserInterfaceEventHandler;
@@ -83,12 +92,12 @@ namespace Synthicate
 			tradeButton.GetComponent<Button>().onClick.AddListener(m_TradeButtonEventChannel.RaiseEvent);
 			buildModeButton.GetComponent<Button>().onClick.AddListener(m_BuildModeButtonEventChannel.RaiseEvent);
 			finishTurnButton.GetComponent<Button>().onClick.AddListener(m_FinishTurnButtonEventChannel.RaiseEvent);
+			hackButton.GetComponent<Button>().onClick.AddListener(m_HackButtonEventChannel.RaiseEvent);
 		}
 		
 		void Start()
 		{
-			m_DefaultGameMenu.SetActive(true);
-			m_BuildGameMenu.SetActive(false);
+			// m_DefaultGameMenu.SetActive(true);
 			m_TradeInitMenu.SetActive(false);
 			m_TradeMenu.SetActive(false);
 			
@@ -114,7 +123,6 @@ namespace Synthicate
 			}
 			else if (screen == GameMenuType.PlayerBuildModeScreen)
 			{
-				m_BuildGameMenu.SetActive(true);
 				cancelButton.SetActive(true);
 			}
 			else if (screen  == GameMenuType.TradeInitScreen)
@@ -134,6 +142,17 @@ namespace Synthicate
 				// m_TradeMenu.SetActive(true);
 				m_TradeInitMenu.SetActive(true);
 			}
+			else if (screen  == GameMenuType.CyberActions)
+			{
+				// m_CyberActionGameMenu.SetActive(true);
+				finishTurnButton.SetActive(true);
+				hackButton.SetActive(true);
+				cancelButton.SetActive(true);
+			}
+			else if (screen == GameMenuType.PlayerHackScreen)
+			{
+				cancelButton.SetActive(true);
+			}
 			
 		}
 		
@@ -143,13 +162,14 @@ namespace Synthicate
 			buildModeButton.SetActive(false);
 			tradeButton.SetActive(false);
 			cyberActionButton.SetActive(false);
+			hackButton.SetActive(false);
 			cancelButton.SetActive(false);
 		}
 		
 		void DisableCanvases()
 		{
-			m_DefaultGameMenu.SetActive(true);
-			m_BuildGameMenu.SetActive(false);
+			// m_DefaultGameMenu.SetActive(true);
+			// m_CyberActionGameMenu.SetActive(false);
 			m_TradeInitMenu.SetActive(false);
 			m_TradeMenu.SetActive(false);
 		}

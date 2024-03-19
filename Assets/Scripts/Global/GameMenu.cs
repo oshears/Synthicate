@@ -15,5 +15,6 @@ namespace Synthicate
 		PlayerDiceHackScreen,
 		PlayerDiceHackTargetScreen,
 		PlayerHackScreen,
+		CyberActions,
 	};
 }

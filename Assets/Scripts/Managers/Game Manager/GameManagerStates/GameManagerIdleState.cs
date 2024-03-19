@@ -8,15 +8,13 @@ namespace Synthicate
 	public class GameManagerIdleState : GameManagerAbstractState
 	{
 		
-		// public enum MenuState
-		// {
-		// 	Default,
-		// 	Expanded,
-		// 	Build,
-		// 	Hack,	
-		// }
+		public enum MenuState
+		{
+			Default,
+			Expanded,
+		}
 		
-		// MenuState _menuState;
+		MenuState m_MenuState;
 		
 		[Header("Event Channels")]
 		
@@ -35,6 +33,12 @@ namespace Synthicate
 		[SerializeField]
 		EventChannelSO m_FinishTurnButtonEventChannel;
 		
+		[SerializeField]
+		EventChannelSO m_HackButtonEventChannel;
+		
+		[SerializeField]
+		EventChannelSO m_CancelButtonEventChannel;
+		
 		public override void Enter()
 		{
 			// _menuState = MenuState.Default;
@@ -46,6 +50,10 @@ namespace Synthicate
 			m_TradeButtonEventChannel.OnEventRaised += TradeButtonEventHandler; 
 			m_BuildModeButtonEventChannel.OnEventRaised += BuildModeButtonEventHandler; 
 			m_FinishTurnButtonEventChannel.OnEventRaised += FinishTurnButtonEventHandler; 
+			m_HackButtonEventChannel.OnEventRaised += HackButtonEventHandler;
+			m_CancelButtonEventChannel.OnEventRaised += CancelButtonEventHandler;
+			
+			m_MenuState = MenuState.Default;
 		}
 		
 		public override void Execute()
@@ -59,12 +67,19 @@ namespace Synthicate
 			m_TradeButtonEventChannel.OnEventRaised -= TradeButtonEventHandler; 
 			m_BuildModeButtonEventChannel.OnEventRaised -= BuildModeButtonEventHandler; 
 			m_FinishTurnButtonEventChannel.OnEventRaised -= FinishTurnButtonEventHandler; 
+			m_HackButtonEventChannel.OnEventRaised -= HackButtonEventHandler;
+			m_CancelButtonEventChannel.OnEventRaised -= CancelButtonEventHandler;
 		}
 		
 
 		public void CyberActionButtionEventHandler()
 		{
-			
+			m_MenuState	= MenuState.Expanded;
+			m_GameMenuStateEventChannel.RaiseEvent(GameMenuType.CyberActions);
+		}
+		public void HackButtonEventHandler()
+		{
+			changeState(_owner.hackingState);
 		}
 		public void TradeButtonEventHandler()
 		{
@@ -73,6 +88,15 @@ namespace Synthicate
 		public void BuildModeButtonEventHandler()
 		{
 			changeState(_owner.buildingState);
+		}
+		
+		public void CancelButtonEventHandler()
+		{
+			if (m_MenuState == MenuState.Expanded)
+			{
+				m_MenuState = MenuState.Default;
+				m_GameMenuStateEventChannel.RaiseEvent(GameMenuType.PlayerTurnScreen);
+			}
 		}
 		
 		public void FinishTurnButtonEventHandler()

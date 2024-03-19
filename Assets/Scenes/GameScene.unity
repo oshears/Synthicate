@@ -196,6 +196,42 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3661858852008452939, guid: 4f13fd23d320d8440820fed4d2511e0d, type: 3}
   m_PrefabInstance: {fileID: 5647859870215272832}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &438982500
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 438982501}
+  m_Layer: 5
+  m_Name: Cyber Actions Game Menu
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &438982501
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 438982500}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1950598288}
+  m_Father: {fileID: 4216032457223530701}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -344, y: -155.70001}
+  m_SizeDelta: {x: 87.599976, y: 93.8}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &591440368
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,6 +403,11 @@ MonoBehaviour:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7913867042485185745, guid: c6068dceae830414db969a3d508682ab, type: 3}
   m_PrefabInstance: {fileID: 8214280420077480836}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1563996178 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4844974407417201228, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+  m_PrefabInstance: {fileID: 1950598287}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1646710476
 GameObject:
@@ -1273,6 +1314,112 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1950598287
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 438982501}
+    m_Modifications:
+    - target: {fileID: 4844974407417201228, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+      propertyPath: m_Name
+      value: Hacker Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 8080379163869728694, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+      propertyPath: m_text
+      value: Hack
+      objectReference: {fileID: 0}
+    - target: {fileID: 8965089416482576191, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8965089416482576191, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8965089416482576191, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8965089416482576191, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8965089416482576191, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8965089416482576191, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8965089416482576191, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 438
+      objectReference: {fileID: 0}
+    - target: {fileID: 8965089416482576191, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 198
+      objectReference: {fileID: 0}
+    - target: {fileID: 8965089416482576191, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8965089416482576191, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8965089416482576191, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8965089416482576191, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8965089416482576191, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8965089416482576191, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8965089416482576191, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8965089416482576191, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8965089416482576191, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 13.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8965089416482576191, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8965089416482576191, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8965089416482576191, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+--- !u!224 &1950598288 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8965089416482576191, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+  m_PrefabInstance: {fileID: 1950598287}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1979740646
 GameObject:
   m_ObjectHideFlags: 0
@@ -2015,12 +2162,12 @@ GameObject:
   m_Component:
   - component: {fileID: 3018874467633647132}
   m_Layer: 5
-  m_Name: Build Mode Game Menu
+  m_Name: Cancel Button Holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4216032457223530701
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2035,6 +2182,7 @@ RectTransform:
   m_Children:
   - {fileID: 945987618584054501}
   - {fileID: 3018874467633647132}
+  - {fileID: 438982501}
   - {fileID: 2175361036329740497}
   - {fileID: 8720617873607435222}
   - {fileID: 2662252721911903978}
@@ -2798,10 +2946,42 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3015980900386204742, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
+      propertyPath: m_LocalNotificationEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 0a7be55c2c03fb34c8b87a029ab675c2, type: 2}
+    - target: {fileID: 3015980900386204742, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
+      propertyPath: m_CancelButtonEventChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: 57308c59ef5fb154aad63c2d18cb3e9a, type: 2}
+    - target: {fileID: 3015980900386204742, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
+      propertyPath: m_NotificationEventChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: b33a419167b067e4f888e09565ac360e, type: 2}
+    - target: {fileID: 3015980900386204742, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
+      propertyPath: m_GameMenuStateEventChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: ec039f4b9dccc4a479f0c719883be898, type: 2}
+    - target: {fileID: 3015980900386204742, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
+      propertyPath: m_InitiateTradeEventChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: 70705098476921e4790d1cbc328332c6, type: 2}
+    - target: {fileID: 3015980900386204742, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
+      propertyPath: m_SelectTradePartnerEventChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: aa6bc985d0df11a479c90c61228fffb9, type: 2}
     - target: {fileID: 5580459241690480718, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1468592277
       objectReference: {fileID: 0}
+    - target: {fileID: 5648193008044322631, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
+      propertyPath: m_HackButtonEventChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: 005b8cef32c23bf45b677b2e3d048dd3, type: 2}
+    - target: {fileID: 5648193008044322631, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
+      propertyPath: m_CancelButtonEventChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: 57308c59ef5fb154aad63c2d18cb3e9a, type: 2}
     - target: {fileID: 6613997871162150201, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
       propertyPath: m_LocalNotificationEvent
       value: 
@@ -3081,8 +3261,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f24fe7e71d2a149439caff686118fde0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_DefaultGameMenu: {fileID: 2921109537425861909}
-  m_BuildGameMenu: {fileID: 4144761245804574252}
   m_TradeInitMenu: {fileID: 1432580421}
   m_TradeMenu: {fileID: 334215493}
   finishTurnButton: {fileID: 741510077}
@@ -3090,6 +3268,7 @@ MonoBehaviour:
   tradeButton: {fileID: 2073541577}
   cyberActionButton: {fileID: 1852294515}
   cancelButton: {fileID: 325092174}
+  hackButton: {fileID: 1563996178}
   gameManagerSO: {fileID: 11400000, guid: f222b367bb47bc140bb8cc26d5fc6f28, type: 2}
   userInterfaceSO: {fileID: 11400000, guid: 90a81f3ba11d5b04e8c825c89791d49f, type: 2}
   m_GameMenuStateEventChannel: {fileID: 11400000, guid: ec039f4b9dccc4a479f0c719883be898, type: 2}
@@ -3098,6 +3277,7 @@ MonoBehaviour:
   m_TradeButtonEventChannel: {fileID: 11400000, guid: c38089dbd852da149a04b2a49451a79d, type: 2}
   m_BuildModeButtonEventChannel: {fileID: 11400000, guid: ef47b5c7698e6114c91da9fc06ac4de4, type: 2}
   m_FinishTurnButtonEventChannel: {fileID: 11400000, guid: 7549a3fb366978b4e8e4562e7a1c3022, type: 2}
+  m_HackButtonEventChannel: {fileID: 11400000, guid: 005b8cef32c23bf45b677b2e3d048dd3, type: 2}
 --- !u!1001 &9114084596254116238
 PrefabInstance:
   m_ObjectHideFlags: 0
