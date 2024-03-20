@@ -164,28 +164,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2840458672506994446, guid: fcc2efe1920a4e94cb33c3212dc4cab0, type: 3}
   m_PrefabInstance: {fileID: 2113272042188109456}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &206748262 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8897379302554462184, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
-  m_PrefabInstance: {fileID: 7584403922057160351}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &206748279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 206748262}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d52182da4bd12b245b0144eab94b4362, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_GameMenuStateEventChannel: {fileID: 11400000, guid: ec039f4b9dccc4a479f0c719883be898, type: 2}
-  m_NotificationEventChannel: {fileID: 11400000, guid: b33a419167b067e4f888e09565ac360e, type: 2}
-  m_LocalNotificationEvent: {fileID: 11400000, guid: 0a7be55c2c03fb34c8b87a029ab675c2, type: 2}
-  m_InitiateTradeEventChannel: {fileID: 11400000, guid: 70705098476921e4790d1cbc328332c6, type: 2}
-  m_SelectTradePartnerEventChannel: {fileID: 11400000, guid: aa6bc985d0df11a479c90c61228fffb9, type: 2}
 --- !u!1 &325092174 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4844974407417201228, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
@@ -2946,46 +2924,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3015980900386204742, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
-      propertyPath: m_LocalNotificationEvent
-      value: 
-      objectReference: {fileID: 11400000, guid: 0a7be55c2c03fb34c8b87a029ab675c2, type: 2}
-    - target: {fileID: 3015980900386204742, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
-      propertyPath: m_CancelButtonEventChannel
-      value: 
-      objectReference: {fileID: 11400000, guid: 57308c59ef5fb154aad63c2d18cb3e9a, type: 2}
-    - target: {fileID: 3015980900386204742, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
-      propertyPath: m_NotificationEventChannel
-      value: 
-      objectReference: {fileID: 11400000, guid: b33a419167b067e4f888e09565ac360e, type: 2}
-    - target: {fileID: 3015980900386204742, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
-      propertyPath: m_GameMenuStateEventChannel
-      value: 
-      objectReference: {fileID: 11400000, guid: ec039f4b9dccc4a479f0c719883be898, type: 2}
-    - target: {fileID: 3015980900386204742, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
-      propertyPath: m_InitiateTradeEventChannel
-      value: 
-      objectReference: {fileID: 11400000, guid: 70705098476921e4790d1cbc328332c6, type: 2}
-    - target: {fileID: 3015980900386204742, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
-      propertyPath: m_SelectTradePartnerEventChannel
-      value: 
-      objectReference: {fileID: 11400000, guid: aa6bc985d0df11a479c90c61228fffb9, type: 2}
     - target: {fileID: 5580459241690480718, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1468592277
       objectReference: {fileID: 0}
-    - target: {fileID: 5648193008044322631, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
-      propertyPath: m_HackButtonEventChannel
-      value: 
-      objectReference: {fileID: 11400000, guid: 005b8cef32c23bf45b677b2e3d048dd3, type: 2}
-    - target: {fileID: 5648193008044322631, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
-      propertyPath: m_CancelButtonEventChannel
-      value: 
-      objectReference: {fileID: 11400000, guid: 57308c59ef5fb154aad63c2d18cb3e9a, type: 2}
-    - target: {fileID: 6613997871162150201, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
-      propertyPath: m_LocalNotificationEvent
-      value: 
-      objectReference: {fileID: 11400000, guid: 0a7be55c2c03fb34c8b87a029ab675c2, type: 2}
     - target: {fileID: 8431327441687865967, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
       propertyPath: m_LocalPosition.x
       value: -21.273735
@@ -3026,29 +2968,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8777508312429708221, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
-      propertyPath: m_FixedDiceValue
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8777508312429708221, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
-      propertyPath: m_LocalNotificationEvent
-      value: 
-      objectReference: {fileID: 11400000, guid: 0a7be55c2c03fb34c8b87a029ab675c2, type: 2}
     - target: {fileID: 8897379302554462184, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
       propertyPath: m_Name
       value: Game Manager
       objectReference: {fileID: 0}
-    - target: {fileID: 9059947001480104322, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
-      propertyPath: m_LocalNotificationEventChannel
-      value: 
-      objectReference: {fileID: 11400000, guid: 0a7be55c2c03fb34c8b87a029ab675c2, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8897379302554462184, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 206748279}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
 --- !u!1001 &8214280420077480836
 PrefabInstance:

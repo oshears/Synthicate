@@ -39,6 +39,12 @@ namespace Synthicate
 		[SerializeField]
 		EventChannelSO m_CancelButtonEventChannel;
 		
+		[SerializeField]
+		DepotSelectedEventChannel m_DepotSelectedEventChannel;
+		
+		[SerializeField]
+		BoolEventChannel m_EnableDepotSelectionEventChannel;
+		
 		public override void Enter()
 		{
 			// _menuState = MenuState.Default;
@@ -52,8 +58,12 @@ namespace Synthicate
 			m_FinishTurnButtonEventChannel.OnEventRaised += FinishTurnButtonEventHandler; 
 			m_HackButtonEventChannel.OnEventRaised += HackButtonEventHandler;
 			m_CancelButtonEventChannel.OnEventRaised += CancelButtonEventHandler;
+			m_DepotSelectedEventChannel.OnEventRaised += DepotSelectedEventHandler;
 			
 			m_MenuState = MenuState.Default;
+			
+			// _depotManagerSO.
+			m_EnableDepotSelectionEventChannel.RaiseEvent(true);
 		}
 		
 		public override void Execute()
@@ -69,6 +79,9 @@ namespace Synthicate
 			m_FinishTurnButtonEventChannel.OnEventRaised -= FinishTurnButtonEventHandler; 
 			m_HackButtonEventChannel.OnEventRaised -= HackButtonEventHandler;
 			m_CancelButtonEventChannel.OnEventRaised -= CancelButtonEventHandler;
+			m_DepotSelectedEventChannel.OnEventRaised -= DepotSelectedEventHandler;
+			
+			m_EnableDepotSelectionEventChannel.RaiseEvent(false);
 		}
 		
 
@@ -97,6 +110,11 @@ namespace Synthicate
 				m_MenuState = MenuState.Default;
 				m_GameMenuStateEventChannel.RaiseEvent(GameMenuType.PlayerTurnScreen);
 			}
+		}
+		
+		void DepotSelectedEventHandler(DepotSelection depotSelection)
+		{
+			Debug.Log("Begining to handle depot selection for:" + depotSelection);
 		}
 		
 		public void FinishTurnButtonEventHandler()
@@ -130,86 +148,6 @@ namespace Synthicate
 				_userInterfaceSO.OnUpdateUserInterface();
 			}
 			GUILayout.EndArea();
-			// if(GUILayout.Button("Hack"))
-			// {
-				// _gameManagerSO.OnDebugIncrementAlltResources();
-				// _userInterfaceSO.OnUpdateUserInterface();
-				// _owner.hexManagerSO.hackEvent.Invoke(13);
-				// _owner.hexManagerSO.SetHackerCages(13,true);
-				// _owner.hexManagerSO.SetHackerParticles(13,true);
-			// }
-			// GUILayout.EndArea();
-			
-			// if (_menuState == MenuState.Default)
-			// {
-			// 	GUI.Box(UserInterface.s_gameMenuArea, "");
-			// 	// game menu box
-			// 	GUILayout.BeginArea(UserInterface.s_gameMenuArea);
-			// 	//GUILayout.Label("Current Turn: Player " + gameManagerSO.getGUITurn());
-			// 	if (GUILayout.Button("Menu")){
-			// 		_menuState = MenuState.Expanded;
-			// 	}
-			// 	if(GUILayout.Button("Next Turn"))
-			// 	{
-			// 		_gameManagerSO.OnStartNextTurn();
-			// 		changeState(_owner.diceState);
-			// 	}
-			// 	GUILayout.EndArea();
-			// }
-			// else if (_menuState == MenuState.Expanded)
-			// {
-			// 	GUI.Box(UserInterface.s_expandedGameMenu, "");
-
-			// 	// game menu box
-			// 	GUILayout.BeginArea(UserInterface.s_expandedGameMenu);
-			// 	//GUILayout.Label("Current Turn: Player " + gameManagerSO.getGUITurn());
-			// 	if (GUILayout.Button("Build"))
-			// 	{
-			// 		// _menuState = MenuState.BuildMode;
-
-			// 		// gameManagerSO.beginClientBuildMode();
-			// 		changeState(_owner.buildingState);
-			// 	}
-			// 	if (GUILayout.Button("Trade"))
-			// 	{
-			// 		// tradeRequestSelection = 0;
-			// 		// tradeRequestSlider = 1f;
-			// 		// tradeOfferSelection = 0;
-			// 		// tradeOfferSlider = 1f;
-			// 		// _menuState = MenuState.TradeRequest;
-			// 	}
-			// 	if(GUILayout.Button("Event Card"))
-			// 	{
-			// 		// _menuState = MenuState.Active;
-			// 		// gameManagerSO.clientRequestEventCard();
-			// 	}
-			// 	if (GUILayout.Button("Hack"))
-			// 	{
-			// 		// _menuState = MenuState.HackMode;
-			// 		// gameManagerSO.beginClientHackMode();
-			// 		changeState(_owner.hackingState);
-			// 	}
-			// 	if(GUILayout.Button("Debug: Increment All Resources"))
-			// 	{
-			// 		_gameManagerSO.OnDebugIncrementAlltResources();
-			// 		_userInterfaceSO.OnUpdateUserInterface();
-			// 	}
-			// 	if (GUILayout.Button("Close"))
-			// 	{
-			// 		_menuState = MenuState.Default;
-			// 	}
-			// 	if(GUILayout.Button("Next Turn"))
-			// 	{
-			// 		_gameManagerSO.OnStartNextTurn();
-			// 		changeState(_owner.diceState);
-			// 	}
-			// 	// if(GUILayout.Button("Next Turn")) gameManagerSO.nextTurn();
-			// 	GUILayout.EndArea();
-			// }
-			
-			
-			
-			// resource box
 		}
 		 
 		
