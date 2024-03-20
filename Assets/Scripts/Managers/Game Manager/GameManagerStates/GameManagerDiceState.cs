@@ -25,11 +25,11 @@ namespace Synthicate
 		
 		// NetworkVariable<int> m_DiceValue = new NetworkVariable<int>();
 		[SerializeField]
-		int m_DiceValue = 7;
+		int m_DiceValue = 1;
 		
 		[SerializeField]
 		[Range(1, 12)]
-		public int m_FixedDiceValue = 7;
+		public int m_FixedDiceValue = 1;
 		
 		[SerializeField]
 		public bool m_UsingFixedDice = false;

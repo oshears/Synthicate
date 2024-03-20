@@ -15,8 +15,13 @@ namespace Synthicate
 		public enum DepotState {Active,Inactive};
 		DepotState depotState = DepotState.Inactive;
 
+		[SerializeField]
 		Transform depotIndicatorTransform;
+		
+		[SerializeField]
 		MeshRenderer depotIndicatorRenderer;
+		
+		[SerializeField]
 		Transform selectionCubeTransform;
 		//BoxCollider depotCollider;
 
@@ -31,6 +36,7 @@ namespace Synthicate
 		void Awake()
 		{
 			m_EnableDepotSelectionEventChannel.OnEventRaised += EnableDepotSelectionEventHandler;
+			depotState = DepotState.Inactive;
 		}
 
 
@@ -40,10 +46,10 @@ namespace Synthicate
 			//for (int i = 0; i < transform.childCount; i++) Debug.Log(transform.GetChild(i).tag);
 
 
-			depotIndicatorTransform = transform.GetChild(0);
-			Debug.Assert(depotIndicatorTransform != null, "Could not find indicator transform for depot" + id);
-			depotIndicatorRenderer = depotIndicatorTransform.GetChild(0).GetComponent<MeshRenderer>();
-			Debug.Assert(depotIndicatorRenderer != null, "Could not find indicator mesh renderer for depot" + id);
+			// depotIndicatorTransform = transform.GetChild(0);
+			// Debug.Assert(depotIndicatorTransform != null, "Could not find indicator transform for depot" + id);
+			// depotIndicatorRenderer = depotIndicatorTransform.GetChild(0).GetComponent<MeshRenderer>();
+			// Debug.Assert(depotIndicatorRenderer != null, "Could not find indicator mesh renderer for depot" + id);
 
 			Material[] mats = depotIndicatorRenderer.materials;
 			switch (depotResource) { 
@@ -71,7 +77,7 @@ namespace Synthicate
 			}
 			depotIndicatorRenderer.materials = mats;
 
-			selectionCubeTransform = Global.FindChildTransformsWithTag(transform, "selection_cube");
+			// selectionCubeTransform = Global.FindChildTransformsWithTag(transform, "selection_cube");
 
 			//depotCollider = GetComponent<BoxCollider>();
 			if (depotResource == ResourceType.Any) tradeAmount = 3;
@@ -105,7 +111,10 @@ namespace Synthicate
 		private void OnMouseUpAsButton()
 		{
 			// depotManager.playerClickEvent.Invoke(id, depotResource, tradeAmount);
-			m_DepotSelectedEventChannel.RaiseEvent(new DepotSelection((int) id, depotResource, (int) tradeAmount));
+			if (depotState == DepotState.Active)
+			{
+				m_DepotSelectedEventChannel.RaiseEvent(new DepotSelection((int) id, depotResource, (int) tradeAmount));
+			}
 		}
 		
 		void EnableDepotSelectionEventHandler(bool enable)

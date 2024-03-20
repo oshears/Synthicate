@@ -17,9 +17,9 @@ public class GameManagerDiceStateEditor : Editor {
 	
 	// HexController[] hexList;
 	
-	string m_FixedDiceValueString = "7";
-	int m_FixedDiceValue = 7;
-	bool m_UsingFixedDiceValue = true;
+	string m_FixedDiceValueString = "1";
+	int m_FixedDiceValue = 1;
+	bool m_UsingFixedDiceValue = false;
 	
 	void OnEnable()
 	{
