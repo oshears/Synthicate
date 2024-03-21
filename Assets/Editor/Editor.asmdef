@@ -1,9 +1,11 @@
 {
-    "name": "Global",
+    "name": "Editor",
     "rootNamespace": "",
     "references": [
-        "GUID:3b8ed52f1b5c64994af4c4e0aa4b6c4b",
-        "GUID:1491147abca9d7d4bb7105af628b223e"
+        "Managers",
+        "Controllers",
+        "Unity.Netcode.Runtime",
+        "ScriptableObjects"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
