@@ -5,7 +5,8 @@
         "Managers",
         "Controllers",
         "Unity.Netcode.Runtime",
-        "ScriptableObjects"
+        "ScriptableObjects",
+        "GameManager"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
