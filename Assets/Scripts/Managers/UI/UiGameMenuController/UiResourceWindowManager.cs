@@ -10,26 +10,38 @@ namespace Synthicate
 {
 	public class UiResourceWindowManager : UiUpdatableElementMonoBehavior
 	{
-		#region Player Resource Counters
 		[SerializeField]
 		GameObject powerCounterText;
+		
 		[SerializeField]
 		GameObject peopleCounterText;
+		
 		[SerializeField]
 		GameObject foodCounterText;
+		
 		[SerializeField]
 		GameObject metalCounterText;
+		
 		[SerializeField]
 		GameObject mechCounterText;
+		
 		[SerializeField]
 		GameObject hackerCounterText;
+		
 		[SerializeField]
 		GameObject pointCounterText;
-		#endregion
+		
+		[Header("Event Channels")]
+		
+		[SerializeField]
+		EventChannelSO m_UpdateUiEventChannel;
 		
 		override protected void Awake() {
 			base.Awake();
+			m_UpdateUiEventChannel.OnEventRaised += UpdateUserInterfaceEventHandler;
 		}
+		
+		
 		
 		override protected void InitilizeUserInterfaceEventHandler()
 		{

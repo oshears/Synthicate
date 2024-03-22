@@ -28,6 +28,12 @@ namespace Synthicate
 		[SerializeField]
 		GameObject m_TradeMenu;
 		
+		[SerializeField]
+		GameObject m_DepotTradeMenu;
+		
+		[SerializeField]
+		GameObject m_AnyDepotTradeMeu;
+		
 		[Header("Buttons")]
 		
 		[SerializeField]
@@ -153,6 +159,14 @@ namespace Synthicate
 			{
 				cancelButton.SetActive(true);
 			}
+			else if (screen == GameMenuType.DepotTrade)
+			{
+				m_DepotTradeMenu.SetActive(true);
+			}
+			else if (screen == GameMenuType.AnyDepotTrade)
+			{
+				m_AnyDepotTradeMeu.SetActive(true);
+			}
 			
 		}
 		
@@ -172,6 +186,8 @@ namespace Synthicate
 			// m_CyberActionGameMenu.SetActive(false);
 			m_TradeInitMenu.SetActive(false);
 			m_TradeMenu.SetActive(false);
+			m_AnyDepotTradeMeu.SetActive(false);
+			m_DepotTradeMenu.SetActive(false);
 		}
 		
 	}

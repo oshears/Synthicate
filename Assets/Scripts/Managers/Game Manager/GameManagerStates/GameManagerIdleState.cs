@@ -12,6 +12,7 @@ namespace Synthicate
 		{
 			Default,
 			Expanded,
+			DepotTrade
 		}
 		
 		MenuState m_MenuState;
@@ -45,6 +46,15 @@ namespace Synthicate
 		[SerializeField]
 		BoolEventChannelSO m_EnableDepotSelectionEventChannel;
 		
+		[SerializeField]
+		EventChannelSO m_TradeExecutedEventChannel;
+		
+		[SerializeField]
+		EventChannelSO m_CancelTradeEventChannel;
+		
+		[SerializeField]
+		EventChannelSO m_UpdateUiEventChannel;
+		
 		public override void Enter()
 		{
 			// _menuState = MenuState.Default;
@@ -59,6 +69,8 @@ namespace Synthicate
 			m_HackButtonEventChannel.OnEventRaised += HackButtonEventHandler;
 			m_CancelButtonEventChannel.OnEventRaised += CancelButtonEventHandler;
 			m_DepotSelectedEventChannel.OnEventRaised += DepotSelectedEventHandler;
+			m_TradeExecutedEventChannel.OnEventRaised += TradeExecutedEventHandler;
+			m_CancelTradeEventChannel.OnEventRaised += CancelTradeEventHandler;
 			
 			m_MenuState = MenuState.Default;
 			
@@ -80,6 +92,7 @@ namespace Synthicate
 			m_HackButtonEventChannel.OnEventRaised -= HackButtonEventHandler;
 			m_CancelButtonEventChannel.OnEventRaised -= CancelButtonEventHandler;
 			m_DepotSelectedEventChannel.OnEventRaised -= DepotSelectedEventHandler;
+			m_TradeExecutedEventChannel.OnEventRaised -= TradeExecutedEventHandler;
 			
 			m_EnableDepotSelectionEventChannel.RaiseEvent(false);
 		}
@@ -103,18 +116,34 @@ namespace Synthicate
 			changeState(_owner.buildingState);
 		}
 		
+		public void TradeExecutedEventHandler()
+		{
+			m_MenuState = MenuState.Default;
+			m_GameMenuStateEventChannel.RaiseEvent(GameMenuType.PlayerTurnScreen);
+			m_EnableDepotSelectionEventChannel.RaiseEvent(true);
+			m_UpdateUiEventChannel.RaiseEvent();
+		}
+		
 		public void CancelButtonEventHandler()
 		{
-			if (m_MenuState == MenuState.Expanded)
-			{
-				m_MenuState = MenuState.Default;
-				m_GameMenuStateEventChannel.RaiseEvent(GameMenuType.PlayerTurnScreen);
-			}
+			m_MenuState = MenuState.Default;
+			m_GameMenuStateEventChannel.RaiseEvent(GameMenuType.PlayerTurnScreen);
+			m_EnableDepotSelectionEventChannel.RaiseEvent(true);
+		}
+		
+		public void CancelTradeEventHandler()
+		{
+			m_MenuState = MenuState.Default;
+			m_GameMenuStateEventChannel.RaiseEvent(GameMenuType.PlayerTurnScreen);
+			m_EnableDepotSelectionEventChannel.RaiseEvent(true);
 		}
 		
 		void DepotSelectedEventHandler(DepotSelection depotSelection)
 		{
 			Debug.Log("Begining to handle depot selection for:" + depotSelection);
+			m_MenuState = MenuState.DepotTrade;
+			m_GameMenuStateEventChannel.RaiseEvent(GameMenuType.DepotTrade);
+			m_EnableDepotSelectionEventChannel.RaiseEvent(false);
 		}
 		
 		public void FinishTurnButtonEventHandler()

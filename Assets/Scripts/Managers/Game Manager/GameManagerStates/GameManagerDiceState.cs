@@ -42,6 +42,9 @@ namespace Synthicate
 		[SerializeField]
 		StringEventChannel m_LocalNotificationEvent;
 		
+		[SerializeField]
+		EventChannelSO m_UpdateUiEventChannel;
+		
 		enum DiceState
 		{
 			PendingDice,
@@ -145,7 +148,7 @@ namespace Synthicate
 
 		public override void Exit()
 		{
-			_userInterfaceSO.OnUpdateUserInterface();
+			m_UpdateUiEventChannel.RaiseEvent();
 			_owner.boardManagerSO.updatePointsResponseEvent.RemoveListener(UpdatePointsResponseEventHandler);
 		}
 		
@@ -189,7 +192,8 @@ namespace Synthicate
 					m_LocalNotificationEvent.RaiseEvent($"You recieved {playerResources[i]} {(ResourceType) i}");
 				}
 			}
-			_userInterfaceSO.OnUpdateUserInterface();
+			// m_UpdateUiEventChannel.RaiseEvent();
+			m_UpdateUiEventChannel.RaiseEvent();
 			
 		}
 		

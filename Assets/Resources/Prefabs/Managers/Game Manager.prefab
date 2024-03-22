@@ -195,10 +195,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cf97ab6f0594554cada9418223d6662, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_GameMenuStateEventChannel: {fileID: 11400000, guid: ec039f4b9dccc4a479f0c719883be898, type: 2}
+  m_GameMenuStateEventChannel: {fileID: 11400000, guid: 8d791a9ed7c5d9c44844b28f23f7079f, type: 2}
   m_CancelButtonEventChannel: {fileID: 11400000, guid: 57308c59ef5fb154aad63c2d18cb3e9a, type: 2}
-  m_NotificationEventChannel: {fileID: 11400000, guid: b33a419167b067e4f888e09565ac360e, type: 2}
-  m_LocalNotificationEventChannel: {fileID: 11400000, guid: 0a7be55c2c03fb34c8b87a029ab675c2, type: 2}
+  m_NotificationEventChannel: {fileID: 11400000, guid: 4e830648922f5ec4ea620d04c504e41e, type: 2}
+  m_LocalNotificationEventChannel: {fileID: 11400000, guid: 1df2ed59eb70a6f48afd5cd3ac87f442, type: 2}
 --- !u!114 &8777508312429708221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,10 +214,10 @@ MonoBehaviour:
   m_DiceRollDelay: 1
   m_DiceDisplayDelay: 1
   m_DiceValue: 7
-  m_FixedDiceValue: 7
-  m_UsingFixedDice: 1
-  m_NotificationEventChannel: {fileID: 11400000, guid: b33a419167b067e4f888e09565ac360e, type: 2}
-  m_LocalNotificationEvent: {fileID: 11400000, guid: 0a7be55c2c03fb34c8b87a029ab675c2, type: 2}
+  m_FixedDiceValue: 1
+  m_UsingFixedDice: 0
+  m_NotificationEventChannel: {fileID: 11400000, guid: 4e830648922f5ec4ea620d04c504e41e, type: 2}
+  m_LocalNotificationEvent: {fileID: 11400000, guid: 1df2ed59eb70a6f48afd5cd3ac87f442, type: 2}
 --- !u!114 &3015980900386204742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,11 +230,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c389902f357348445a61f63ed8251610, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_GameMenuStateEventChannel: {fileID: 11400000, guid: ec039f4b9dccc4a479f0c719883be898, type: 2}
-  m_NotificationEventChannel: {fileID: 11400000, guid: b33a419167b067e4f888e09565ac360e, type: 2}
-  m_LocalNotificationEvent: {fileID: 11400000, guid: 0a7be55c2c03fb34c8b87a029ab675c2, type: 2}
+  m_GameMenuStateEventChannel: {fileID: 11400000, guid: 8d791a9ed7c5d9c44844b28f23f7079f, type: 2}
+  m_NotificationEventChannel: {fileID: 11400000, guid: 4e830648922f5ec4ea620d04c504e41e, type: 2}
+  m_LocalNotificationEvent: {fileID: 11400000, guid: 1df2ed59eb70a6f48afd5cd3ac87f442, type: 2}
   m_InitiateTradeEventChannel: {fileID: 11400000, guid: 70705098476921e4790d1cbc328332c6, type: 2}
-  m_SelectTradePartnerEventChannel: {fileID: 11400000, guid: aa6bc985d0df11a479c90c61228fffb9, type: 2}
+  m_SelectTradePartnerEventChannel: {fileID: 11400000, guid: e70fb640cf088204caa823908f34647b, type: 2}
   m_CancelButtonEventChannel: {fileID: 11400000, guid: 57308c59ef5fb154aad63c2d18cb3e9a, type: 2}
 --- !u!114 &5648193008044322631
 MonoBehaviour:
@@ -248,15 +248,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ebd2c71c65c42c46bae0b203cc876c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_GameMenuStateEventChannel: {fileID: 11400000, guid: ec039f4b9dccc4a479f0c719883be898, type: 2}
+  m_GameMenuStateEventChannel: {fileID: 11400000, guid: 8d791a9ed7c5d9c44844b28f23f7079f, type: 2}
   m_CyberActionButtionEventChannel: {fileID: 11400000, guid: 35773eb8c507fde4e90f296bffb5ceec, type: 2}
   m_TradeButtonEventChannel: {fileID: 11400000, guid: c38089dbd852da149a04b2a49451a79d, type: 2}
   m_BuildModeButtonEventChannel: {fileID: 11400000, guid: ef47b5c7698e6114c91da9fc06ac4de4, type: 2}
   m_FinishTurnButtonEventChannel: {fileID: 11400000, guid: 7549a3fb366978b4e8e4562e7a1c3022, type: 2}
   m_HackButtonEventChannel: {fileID: 11400000, guid: 005b8cef32c23bf45b677b2e3d048dd3, type: 2}
   m_CancelButtonEventChannel: {fileID: 11400000, guid: 57308c59ef5fb154aad63c2d18cb3e9a, type: 2}
-  m_DepotSelectedEventChannel: {fileID: 11400000, guid: 033cdf2edef04db44bb2bae73dc93a42, type: 2}
-  m_EnableDepotSelectionEventChannel: {fileID: 11400000, guid: d82b78bc39826974ca4827568643a9e7, type: 2}
+  m_DepotSelectedEventChannel: {fileID: 11400000, guid: d692b578c5aab0e46ac6a6610e93184f, type: 2}
+  m_EnableDepotSelectionEventChannel: {fileID: 11400000, guid: 71543654c39f0f7439f39c03d4fee9a2, type: 2}
+  m_TradeExecutedEventChannel: {fileID: 0}
 --- !u!114 &8440567385624590959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,7 +295,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EnablePlayerControllerEventChannel: {fileID: 11400000, guid: dc159ece76277b64a84c933d97bfc522, type: 2}
-  m_GameMenuStateEventChannel: {fileID: 11400000, guid: ec039f4b9dccc4a479f0c719883be898, type: 2}
+  m_GameMenuStateEventChannel: {fileID: 11400000, guid: 8d791a9ed7c5d9c44844b28f23f7079f, type: 2}
 --- !u!114 &6613997871162150201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,9 +308,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07fc89273915941459723b6dcf80f415, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_GameMenuStateEventChannel: {fileID: 11400000, guid: ec039f4b9dccc4a479f0c719883be898, type: 2}
-  m_NotificationEventChannel: {fileID: 11400000, guid: b33a419167b067e4f888e09565ac360e, type: 2}
-  m_LocalNotificationEvent: {fileID: 11400000, guid: 0a7be55c2c03fb34c8b87a029ab675c2, type: 2}
+  m_GameMenuStateEventChannel: {fileID: 11400000, guid: 8d791a9ed7c5d9c44844b28f23f7079f, type: 2}
+  m_NotificationEventChannel: {fileID: 11400000, guid: 4e830648922f5ec4ea620d04c504e41e, type: 2}
+  m_LocalNotificationEvent: {fileID: 11400000, guid: 1df2ed59eb70a6f48afd5cd3ac87f442, type: 2}
   m_EnablePlayerControllerEventChannel: {fileID: 11400000, guid: dc159ece76277b64a84c933d97bfc522, type: 2}
 --- !u!114 &4731357589983390029
 MonoBehaviour:
@@ -323,7 +324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf7388ea4f4352640a576d806bba9f2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_NotificationEventChannel: {fileID: 11400000, guid: b33a419167b067e4f888e09565ac360e, type: 2}
+  m_NotificationEventChannel: {fileID: 11400000, guid: 4e830648922f5ec4ea620d04c504e41e, type: 2}
 --- !u!114 &5789155924460992300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -348,7 +349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b15abc847b0875e4eaaece3c33d418c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_GameMenuStateEventChannel: {fileID: 11400000, guid: ec039f4b9dccc4a479f0c719883be898, type: 2}
+  m_GameMenuStateEventChannel: {fileID: 11400000, guid: 8d791a9ed7c5d9c44844b28f23f7079f, type: 2}
 --- !u!114 &3806882121532177772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -361,7 +362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26dac007a3396804f821a13a2fe06fc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_GameMenuStateEventChannel: {fileID: 11400000, guid: ec039f4b9dccc4a479f0c719883be898, type: 2}
+  m_GameMenuStateEventChannel: {fileID: 11400000, guid: 8d791a9ed7c5d9c44844b28f23f7079f, type: 2}
   m_TradeCanceledEventChannel: {fileID: 11400000, guid: 6133831592bf8c94dab3c191053428ba, type: 2}
 --- !u!114 &5806520543045075778
 MonoBehaviour:
@@ -375,8 +376,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d52182da4bd12b245b0144eab94b4362, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_GameMenuStateEventChannel: {fileID: 11400000, guid: ec039f4b9dccc4a479f0c719883be898, type: 2}
-  m_NotificationEventChannel: {fileID: 11400000, guid: b33a419167b067e4f888e09565ac360e, type: 2}
-  m_LocalNotificationEvent: {fileID: 11400000, guid: 0a7be55c2c03fb34c8b87a029ab675c2, type: 2}
+  m_GameMenuStateEventChannel: {fileID: 11400000, guid: 8d791a9ed7c5d9c44844b28f23f7079f, type: 2}
+  m_NotificationEventChannel: {fileID: 11400000, guid: 4e830648922f5ec4ea620d04c504e41e, type: 2}
+  m_LocalNotificationEvent: {fileID: 11400000, guid: 1df2ed59eb70a6f48afd5cd3ac87f442, type: 2}
   m_InitiateTradeEventChannel: {fileID: 11400000, guid: 70705098476921e4790d1cbc328332c6, type: 2}
-  m_SelectTradePartnerEventChannel: {fileID: 11400000, guid: aa6bc985d0df11a479c90c61228fffb9, type: 2}
+  m_SelectTradePartnerEventChannel: {fileID: 11400000, guid: e70fb640cf088204caa823908f34647b, type: 2}

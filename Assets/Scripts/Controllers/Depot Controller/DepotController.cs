@@ -93,7 +93,13 @@ namespace Synthicate
 
 			GameObject mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
 
-			if (mainCamera != null) depotIndicatorTransform.rotation = Quaternion.LookRotation((depotIndicatorTransform.position - mainCamera.transform.position) * Time.deltaTime);
+			if (mainCamera != null) 
+			{
+				Quaternion rotateToCamera = Quaternion.LookRotation((depotIndicatorTransform.position - mainCamera.transform.position) * Time.deltaTime);
+				Quaternion newRotation = Quaternion.Euler(rotateToCamera.eulerAngles + Vector3.right * 180);
+				depotIndicatorTransform.rotation = newRotation;
+			}
+			
 		}
 
 		void SetSelectionCube(bool enable) => selectionCubeTransform.gameObject.SetActive(enable);
@@ -120,6 +126,7 @@ namespace Synthicate
 		void EnableDepotSelectionEventHandler(bool enable)
 		{
 			depotState = enable ? DepotState.Active : DepotState.Inactive;
+			if (enable == false) SetSelectionCube(false);
 		}
 	}
 }

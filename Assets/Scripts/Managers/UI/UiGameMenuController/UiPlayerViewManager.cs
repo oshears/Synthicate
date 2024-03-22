@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 
 
@@ -16,8 +17,15 @@ namespace Synthicate
 		[SerializeField]
 		GameObject[] playerTurnIndicators;
 		
+		[Header("Event Channels")]
+		
+		[SerializeField]
+		EventChannelSO m_UpdateUiEventChannel;
+		
 		override protected void Awake() {
 			base.Awake();
+			
+			m_UpdateUiEventChannel.OnEventRaised += UpdateUserInterfaceEventHandler;
 		}
 		
 		void Start()

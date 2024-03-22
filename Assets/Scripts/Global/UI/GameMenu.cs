@@ -16,5 +16,7 @@ namespace Synthicate
 		PlayerDiceHackTargetScreen,
 		PlayerHackScreen,
 		CyberActions,
+		DepotTrade,
+		AnyDepotTrade,
 	};
 }

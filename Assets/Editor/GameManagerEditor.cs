@@ -66,6 +66,40 @@ public class GameManagerEditor : Editor {
 		}
 		GUILayout.EndHorizontal();
 		
+		
+		GUILayout.BeginHorizontal();
+		GUILayout.Label($"Resources:");
+		for (int i = 0; i < 5; i++)
+		{
+			if (gameManager.gameManagerSO.clientPlayer == null)
+			{
+				GUILayout.Label($"null");
+			}
+			else
+			{
+				GUILayout.Label($"{gameManager.gameManagerSO.clientPlayer.resources[i]}");
+			}
+		}
+		GUILayout.EndHorizontal();
+		
+		
+		GUILayout.BeginHorizontal();
+		if(GUILayout.Button("Increment All Resources"))
+		{
+			for (int i = 0; i < gameManager.gameManagerSO.clientPlayer.resources.Length; i++)
+			{
+				gameManager.gameManagerSO.clientPlayer.resources[i]++;
+			}
+		}
+		if(GUILayout.Button("Decrement All Resources"))
+		{
+			for (int i = 0; i < gameManager.gameManagerSO.clientPlayer.resources.Length; i++)
+			{
+				gameManager.gameManagerSO.clientPlayer.resources[i]--;
+			}
+		}
+		GUILayout.EndHorizontal();
+		
 		// if(GUILayout.Button("Toggle Hacker"))
 		// {
 		// 	m_HackerEnabled = !m_HackerEnabled;

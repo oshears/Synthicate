@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 namespace Synthicate
 {
-	[CreateAssetMenu(menuName = "Events/Int Event Channel", fileName = "IntEventChannelSO")]
+	[CreateAssetMenu(menuName = "Events/IntEventChannelSO", fileName = "IntEventChannelSO")]
 	public class IntEventChannelSO : GenericEventChannelSO<int> 
 	{
 		
