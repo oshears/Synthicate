@@ -50,12 +50,14 @@ namespace Synthicate
 		void IncrementAmount()
 		{
 			m_Amount++;
+			m_AmountText.text = $"{m_Amount}";
 			e_AmountChanged.Invoke();
 		}
 		
 		void DecrementAmount()
 		{
 			m_Amount = (m_Amount <= 0) ? 0 : m_Amount - 1;
+			m_AmountText.text = $"{m_Amount}";
 			e_AmountChanged.Invoke();
 		}
 		

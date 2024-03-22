@@ -32,6 +32,11 @@ namespace Synthicate
 		[SerializeField]
 		TextMeshProUGUI m_InvalidTradeText;
 		
+		[Header("Depot Resource Icon")]
+		
+		[SerializeField]
+		Image m_DepotResourceImage;
+		
 		[Header("Event Channels")]
 		
 		[SerializeField]

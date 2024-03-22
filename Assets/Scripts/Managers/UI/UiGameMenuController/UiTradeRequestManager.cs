@@ -21,26 +21,36 @@ namespace Synthicate
 		[SerializeField]
 		UserInterfaceIncrementer[] m_ResourceIncrementers;
 		
+		[Header("Invalid Trade Text")]
+		[SerializeField]
+		TextMeshProUGUI m_InvalidTradeText;
+		
 		[Header("Confirmed Icons")]
 
 		[SerializeField]
-		GameObject m_PeerTradeConfirmedIcon;
+		Image m_PeerTradeConfirmedIcon;
 		
 		[SerializeField]
-		GameObject m_ClientTradeConfirmedIcon;
+		Image m_ClientTradeConfirmedIcon;
 		
 		[Header("Buttons")]
 		
 		[SerializeField]
-		GameObject m_ClientTradeConfirmedButton;
+		Button m_ClientTradeConfirmedButton;
 
 		[SerializeField]
-		GameObject m_CancelTradeButton;
+		Button m_CancelTradeButton;
 		
 		[Header("Event Channels")]
 		
 		[SerializeField]
 		EventChannelSO m_CancelTradeEventChannel;
+		
+		[Header("Scriptable Object")]
+		
+		[SerializeField]
+		GameManagerSO m_GameManagerSO;
+		
 		
 		int[] m_GivingAmounts;
 		int[] m_ReceivingAmounts;
@@ -50,6 +60,11 @@ namespace Synthicate
 			
 			m_GivingAmounts = new int[]{0, 0, 0, 0, 0};
 			m_ReceivingAmounts = new int[]{0, 0, 0, 0, 0};
+			
+			foreach(UserInterfaceIncrementer incr in m_ResourceIncrementers)
+			{
+				incr.e_AmountChanged += IncrementerAmountChanged;
+			}
 		}
 		
 		
@@ -70,28 +85,16 @@ namespace Synthicate
 			// 	DecrementButtonEventSetup(i);
 			// }
 			
-			m_CancelTradeButton.GetComponent<Button>().onClick.AddListener(() => {
+			m_ClientTradeConfirmedButton.onClick.AddListener(() => {
+				
+				Debug.Log("Confirm Clicked!");
+				
+			});
+			
+			m_CancelTradeButton.onClick.AddListener(() => {
 				ResetCounts();
 				m_CancelTradeEventChannel.RaiseEvent();
 			});
-		}
-		
-		
-		void IncrementButtonEventSetup(int value)
-		{
-			// tradeIncrementButtons[value].GetComponent<Button>().onClick.AddListener(() => {
-			// 	m_GivingAmounts[value] += 1;
-			// 	tradeOfferAmounts[value].GetComponent<TextMeshProUGUI>().text = $"{m_GivingAmounts[value]}";
-			// });
-		
-		}
-		
-		void DecrementButtonEventSetup(int value)
-		{
-			// tradeDecrementButtons[value].GetComponent<Button>().onClick.AddListener(() => {
-			// 	m_GivingAmounts[value] -= (m_GivingAmounts[value] > 0) ? 1 : 0;
-			// 	tradeOfferAmounts[value].GetComponent<TextMeshProUGUI>().text = $"{m_GivingAmounts[value]}";
-			// });
 		}
 		
 		
@@ -105,8 +108,15 @@ namespace Synthicate
 			
 		}
 		
+		void IncrementerAmountChanged()
+		{
+			
+		}
+		
 		void ResetCounts()
 		{
+			m_InvalidTradeText.text = "";
+			
 			m_GivingAmounts = new int[]{0, 0, 0, 0, 0};
 			m_ReceivingAmounts = new int[]{0, 0, 0, 0, 0};
 			

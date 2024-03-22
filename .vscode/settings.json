@@ -56,11 +56,10 @@
         "Logs/": true,
         "Assets/External": true,
         "Assets/Resources": true,
-        "**/*.asmdef": true,
-        "**/*.csproj": true
+        "**/*.asmdef": true
     },
     "dotnet.defaultSolution": "Synthicate.sln",
     "files.associations": {
-        "*.cs.old": "csharp",
+        "*.cs.old": "csharp"
     }
 }

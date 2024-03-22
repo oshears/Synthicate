@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 844c91f5a310164468e877686b055db2, type: 3}
+  m_Script: {fileID: 11500000, guid: 69308cae4d58dc6439813d957109e9f6, type: 3}
   m_Name: Enable Player Controller Event Channel
   m_EditorClassIdentifier: 
