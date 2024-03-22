@@ -40,10 +40,10 @@ namespace Synthicate
 		EventChannelSO m_CancelButtonEventChannel;
 		
 		[SerializeField]
-		DepotSelectedEventChannel m_DepotSelectedEventChannel;
+		DepotSelectedEventChannelSO m_DepotSelectedEventChannel;
 		
 		[SerializeField]
-		BoolEventChannel m_EnableDepotSelectionEventChannel;
+		BoolEventChannelSO m_EnableDepotSelectionEventChannel;
 		
 		public override void Enter()
 		{

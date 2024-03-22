@@ -23,7 +23,7 @@ namespace Synthicate
 		TradeInitEventChannel m_InitiateTradeEventChannel;
 		
 		[SerializeField]
-		IntEventChannel m_SelectTradePartnerEventChannel;
+		IntEventChannelSO m_SelectTradePartnerEventChannel;
 
 		public override void Enter()
 		{

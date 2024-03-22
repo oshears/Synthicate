@@ -19,7 +19,7 @@ namespace Synthicate
 		StringEventChannel m_LocalNotificationEvent;
 		
 		[SerializeField]
-		BoolEventChannel m_EnablePlayerControllerEventChannel;
+		BoolEventChannelSO m_EnablePlayerControllerEventChannel;
 		
 		public override void Enter()
 		{

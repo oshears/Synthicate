@@ -86,7 +86,7 @@ namespace Synthicate
 			// }
 			
 			m_ClientTradeConfirmedButton.onClick.AddListener(() => {
-				
+				m_InvalidTradeText.text = "Insufficient Resources!";
 				Debug.Log("Confirm Clicked!");
 				
 			});

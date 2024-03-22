@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using Unity.Netcode;
+using Mono.Cecil;
 
 namespace Synthicate
 {
@@ -43,7 +44,7 @@ namespace Synthicate
 		EventChannelSO m_CancelTradeEventChannel;
 		
 		[SerializeField]
-		DepotSelectedEventChannel m_DepotSelectedEventChannel;
+		DepotSelectedEventChannelSO m_DepotSelectedEventChannel;
 		
 		[Header("Scriptable Objects")]
 		
@@ -55,6 +56,9 @@ namespace Synthicate
 		
 		int m_GivingAmount;
 		int[] m_ReceivingAmounts;
+		
+		ResourceType m_TradeResource;
+		int m_RequiredAmount;
 		
 		void Awake() {
 			m_ReceivingAmounts = new int[]{0, 0, 0, 0, 0};
@@ -80,6 +84,31 @@ namespace Synthicate
 				// ResetCounts();
 				Debug.Log($"Giving: {m_GivingAmount}");
 				Debug.Log($"Receiving: {m_ReceivingAmounts}");
+				
+				if (m_TradeResource != ResourceType.Any)
+				{
+					int totalRequiredAmount = 0;
+					
+					foreach (int receivingAmount in m_ReceivingAmounts)
+					{
+						totalRequiredAmount += receivingAmount;
+					}
+					
+					if (m_GameManagerSO.clientPlayer.resources[(int) m_TradeResource] >= totalRequiredAmount)
+					{
+						m_GameManagerSO.clientPlayer.resources[(int) m_TradeResource] -= totalRequiredAmount;
+						
+						for(int i = 0; i < m_ReceivingAmounts.Length; i++)
+						{
+							m_GameManagerSO.clientPlayer.resources[i] += m_ReceivingAmounts[i];
+						}
+					}
+					else
+					{
+						Debug.Log("Client does not have enough resources for this trade!");
+					}
+				}
+				
 				m_InvalidTradeText.text = "Insufficient Resources!";
 			});
 			
@@ -104,6 +133,8 @@ namespace Synthicate
 		
 		void DepotSelectedEventHandler(DepotSelection selection)
 		{
+			m_TradeResource = selection.Resource;
+			m_RequiredAmount = selection.RequiredAmount;
 			ResetCounts();
 		}
 

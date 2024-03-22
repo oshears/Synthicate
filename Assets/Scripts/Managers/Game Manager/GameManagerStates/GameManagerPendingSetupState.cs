@@ -7,7 +7,7 @@ namespace Synthicate
 	{
 		
 		[SerializeField]
-		BoolEventChannel m_EnablePlayerControllerEventChannel;
+		BoolEventChannelSO m_EnablePlayerControllerEventChannel;
 		
 		[SerializeField]
 		GameMenuStateEventChannel m_GameMenuStateEventChannel;

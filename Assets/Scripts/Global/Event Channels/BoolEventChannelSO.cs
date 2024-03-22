@@ -3,8 +3,8 @@ using UnityEngine.Events;
 
 namespace Synthicate
 {
-	[CreateAssetMenu(menuName = "Events/Bool Event Channel", fileName = "BoolEventChannel")]
-	public class BoolEventChannel : GenericEventChannelSO<bool> 
+	[CreateAssetMenu(menuName = "Events/Bool Event Channel", fileName = "BoolEventChannelSO")]
+	public class BoolEventChannelSO : GenericEventChannelSO<bool> 
 	{
 		
 	}

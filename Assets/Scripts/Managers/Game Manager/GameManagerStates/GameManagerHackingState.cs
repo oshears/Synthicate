@@ -22,7 +22,7 @@ namespace Synthicate
 		TradeInitEventChannel m_InitiateTradeEventChannel;
 		
 		[SerializeField]
-		IntEventChannel m_SelectTradePartnerEventChannel;
+		IntEventChannelSO m_SelectTradePartnerEventChannel;
 		
 		[SerializeField]
 		EventChannelSO m_CancelButtonEventChannel;

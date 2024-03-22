@@ -29,7 +29,7 @@ namespace Synthicate
 		[Header("Event Channels")]
 		
 		[SerializeField]
-		DepotSelectedEventChannel m_DepotSelectedEventChannel;
+		DepotSelectedEventChannelSO m_DepotSelectedEventChannel;
 		
 		void OnEnable()
 		{

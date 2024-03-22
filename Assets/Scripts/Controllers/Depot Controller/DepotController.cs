@@ -28,10 +28,10 @@ namespace Synthicate
 		private uint tradeAmount = 2;
 		
 		[SerializeField]
-		DepotSelectedEventChannel m_DepotSelectedEventChannel;
+		DepotSelectedEventChannelSO m_DepotSelectedEventChannel;
 		
 		[SerializeField]
-		BoolEventChannel m_EnableDepotSelectionEventChannel;
+		BoolEventChannelSO m_EnableDepotSelectionEventChannel;
 		
 		void Awake()
 		{

@@ -3,8 +3,8 @@ using UnityEngine.Events;
 
 namespace Synthicate
 {
-	[CreateAssetMenu(menuName = "Events/Int Event Channel", fileName = "IntEventChannel")]
-	public class IntEventChannel : GenericEventChannelSO<int> 
+	[CreateAssetMenu(menuName = "Events/Int Event Channel", fileName = "IntEventChannelSO")]
+	public class IntEventChannelSO : GenericEventChannelSO<int> 
 	{
 		
 	}

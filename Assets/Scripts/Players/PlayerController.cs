@@ -13,7 +13,7 @@ namespace Synthicate
 		bool m_IsEnabled;
 		
 		[SerializeField]
-		BoolEventChannel m_EnablePlayerControllerEventChannel;
+		BoolEventChannelSO m_EnablePlayerControllerEventChannel;
 		
 		void Awake()
 		{
