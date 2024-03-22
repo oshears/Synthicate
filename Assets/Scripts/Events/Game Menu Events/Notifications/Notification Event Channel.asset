@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 552642f93b61c1c41acaf11f5fc1bb0e, type: 3}
-  m_Name: Init Trade Player Select Event Channel
+  m_Script: {fileID: 11500000, guid: f828b40bb3d4117409867fca730622d8, type: 3}
+  m_Name: Notification Event Channel
   m_EditorClassIdentifier: 

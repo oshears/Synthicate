@@ -56,7 +56,8 @@
         "Logs/": true,
         "Assets/External": true,
         "Assets/Resources": true,
-        "**/*.asmdef": true
+        "**/*.asmdef": true,
+        "**/*.csproj": true
     },
     "dotnet.defaultSolution": "Synthicate.sln",
     "files.associations": {

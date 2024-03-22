@@ -54,8 +54,11 @@ MonoBehaviour:
   depotResource: 0
   id: 0
   depotManager: {fileID: 11400000, guid: 52ea4eb68d5664b0c84c78adb9930ecc, type: 2}
-  m_DepotSelectedEventChannel: {fileID: 11400000, guid: 033cdf2edef04db44bb2bae73dc93a42, type: 2}
-  m_EnableDepotSelectionEventChannel: {fileID: 11400000, guid: d82b78bc39826974ca4827568643a9e7, type: 2}
+  depotIndicatorTransform: {fileID: 6232361624918260458}
+  depotIndicatorRenderer: {fileID: 5059485477105074565}
+  selectionCubeTransform: {fileID: 2378089854565095330}
+  m_DepotSelectedEventChannel: {fileID: 11400000, guid: d692b578c5aab0e46ac6a6610e93184f, type: 2}
+  m_EnableDepotSelectionEventChannel: {fileID: 11400000, guid: 71543654c39f0f7439f39c03d4fee9a2, type: 2}
 --- !u!65 &2195481734734981404
 BoxCollider:
   m_ObjectHideFlags: 0

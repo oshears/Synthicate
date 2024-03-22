@@ -1,0 +1,66 @@
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
+using Unity.Netcode;
+
+namespace Synthicate
+{
+	public class UserInterfaceDepotTradeWindow_old : MonoBehaviour
+	{
+		
+		[Header("Buttons")]
+		
+		[SerializeField]
+		Button m_ConfirmTradeButton;
+		
+		[SerializeField]
+		Button m_CancelTradeButton;
+		
+		[SerializeField]
+		TextMeshProUGUI requiredAmount;
+		
+		[SerializeField]
+		Image requestedResource;
+		Image offeredResource;
+		
+		[Header("Event Channels")]
+		
+		[SerializeField]
+		DepotSelectedEventChannel m_DepotSelectedEventChannel;
+		
+		void OnEnable()
+		{
+			m_ConfirmTradeButton.onClick.AddListener(ConfirmTradeButtonEventHandler);
+			m_CancelTradeButton.onClick.AddListener(CancelTradeButtonEventHandler);
+			m_DepotSelectedEventChannel.OnEventRaised += DepotSelectedEventHandler;
+		}
+		
+		void OnDisable()
+		{
+			m_ConfirmTradeButton.onClick.RemoveAllListeners();
+			m_CancelTradeButton.onClick.RemoveAllListeners();
+			m_DepotSelectedEventChannel.OnEventRaised -= DepotSelectedEventHandler;
+			
+		}
+		
+		void DepotSelectedEventHandler(DepotSelection selection)
+		{
+			requiredAmount.text = $"{selection.RequiredAmount}";
+		}
+		
+		
+		void ConfirmTradeButtonEventHandler()
+		{
+			
+		}
+		
+		void CancelTradeButtonEventHandler()
+		{
+			
+		}
+		
+	}
+}

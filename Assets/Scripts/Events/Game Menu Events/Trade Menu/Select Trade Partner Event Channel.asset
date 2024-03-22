@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 114b66bae06317442af643b60e53f020, type: 3}
-  m_Name: NotificationEvent
+  m_Script: {fileID: 11500000, guid: c1b58ee408e53a94293b44d9544c3b04, type: 3}
+  m_Name: Select Trade Partner Event Channel
   m_EditorClassIdentifier: 

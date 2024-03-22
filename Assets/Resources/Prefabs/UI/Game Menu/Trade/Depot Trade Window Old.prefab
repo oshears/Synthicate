@@ -161,7 +161,7 @@ GameObject:
   - component: {fileID: 8319257063249573700}
   - component: {fileID: 4820400576855637193}
   m_Layer: 5
-  m_Name: Depot Trade Window
+  m_Name: Depot Trade Window Old
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

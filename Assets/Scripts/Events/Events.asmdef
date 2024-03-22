@@ -1,9 +1,8 @@
 {
-    "name": "Players",
+    "name": "Events",
     "rootNamespace": "",
     "references": [
-        "GUID:fd7ba70f2b860af4c9a957049b43caf7",
-        "GUID:f6617909cff34dc45b80b88fb15b14b5"
+        "GUID:fd7ba70f2b860af4c9a957049b43caf7"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

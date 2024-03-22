@@ -206,6 +206,7 @@ GameObject:
   - component: {fileID: 9135393633564694676}
   - component: {fileID: 2191754649559224435}
   - component: {fileID: 885844604193187420}
+  - component: {fileID: 1149747536808405771}
   m_Layer: 5
   m_Name: Incrementer with Icon
   m_TagString: Untagged
@@ -220,7 +221,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2319530034183815817}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -272,6 +273,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1149747536808405771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2319530034183815817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db32836f1fe2c5e468049e5fc03c332e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IncrementButton: {fileID: 882515536912997982}
+  m_DecrementButton: {fileID: 8079396550378841073}
+  m_AmountText: {fileID: 2528184372787929147}
+  resourceIcon: {fileID: 885844604193187420}
 --- !u!1 &2616054452527427469
 GameObject:
   m_ObjectHideFlags: 0
