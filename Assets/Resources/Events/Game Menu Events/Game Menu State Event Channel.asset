@@ -10,5 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62ac7c4c0c0bd004297d1342ca49c610, type: 3}
-  m_Name: GameMenuStateEventChannel
+  m_Name: Game Menu State Event Channel
   m_EditorClassIdentifier: 
