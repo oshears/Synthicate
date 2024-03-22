@@ -210,37 +210,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManagerSO: {fileID: 11400000, guid: f222b367bb47bc140bb8cc26d5fc6f28, type: 2}
   userInterfaceSO: {fileID: 11400000, guid: 90a81f3ba11d5b04e8c825c89791d49f, type: 2}
-  initiateTradePlayerButtons: []
-  initiateTradePlayerIcons: []
-  tradeIncrementButtons:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  tradeDecrementButtons:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  tradeOfferAmounts:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  peerTradeAmounts:
-  - {fileID: 8581012640850095284}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  m_PeerTradeConfirmedIcon: {fileID: 1290416429827733356}
+  m_ResourceIncrementers: []
+  m_InvalidTradeText: {fileID: 0}
+  m_PeerTradeConfirmedIcon: {fileID: 5927254480533416718}
   m_ClientTradeConfirmedIcon: {fileID: 0}
-  m_ClientTradeConfirmedButton: {fileID: 3551816366021590432}
-  m_CancelTradeButton: {fileID: 1129356909095064385}
+  m_ClientTradeConfirmedButton: {fileID: 34394012874072882}
+  m_CancelTradeButton: {fileID: 4511743875569569235}
   m_CancelTradeEventChannel: {fileID: 11400000, guid: 6133831592bf8c94dab3c191053428ba, type: 2}
+  m_GameManagerSO: {fileID: 0}
 --- !u!1 &2507363656628628108
 GameObject:
   m_ObjectHideFlags: 0
@@ -988,16 +965,22 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
---- !u!1 &1129356909095064385 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4844974407417201228, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
-  m_PrefabInstance: {fileID: 5517057624552018189}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &3529383940437984818 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8965089416482576191, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
   m_PrefabInstance: {fileID: 5517057624552018189}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4511743875569569235 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8218059466840923358, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+  m_PrefabInstance: {fileID: 5517057624552018189}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6490263245700045490
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1102,11 +1085,6 @@ PrefabInstance:
 --- !u!224 &8427198674508581200 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3378087313124070370, guid: 28375c6cc99e7794285bf8db66d09426, type: 3}
-  m_PrefabInstance: {fileID: 6490263245700045490}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8581012640850095284 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3244823193335641606, guid: 28375c6cc99e7794285bf8db66d09426, type: 3}
   m_PrefabInstance: {fileID: 6490263245700045490}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8247877243600420844
@@ -1238,13 +1216,19 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+--- !u!114 &34394012874072882 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8218059466840923358, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
+  m_PrefabInstance: {fileID: 8247877243600420844}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1016755734712051923 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8965089416482576191, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
-  m_PrefabInstance: {fileID: 8247877243600420844}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &3551816366021590432 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4844974407417201228, guid: 8dc83f5f80a5b2c4abeb137d5486194a, type: 3}
   m_PrefabInstance: {fileID: 8247877243600420844}
   m_PrefabAsset: {fileID: 0}

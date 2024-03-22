@@ -359,7 +359,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5592604187828916188
 RectTransform:
   m_ObjectHideFlags: 0
@@ -408,7 +408,7 @@ MonoBehaviour:
   m_TitleText: {fileID: 7153173262449597235}
   m_DescriptionText: {fileID: 8649887134423889465}
   m_InitiateTradeEventChannel: {fileID: 11400000, guid: 70705098476921e4790d1cbc328332c6, type: 2}
-  m_SelectTradePartnerEventChannel: {fileID: 11400000, guid: aa6bc985d0df11a479c90c61228fffb9, type: 2}
+  m_SelectTradePartnerEventChannel: {fileID: 11400000, guid: e70fb640cf088204caa823908f34647b, type: 2}
   m_UiScriptableObject: {fileID: 11400000, guid: 90a81f3ba11d5b04e8c825c89791d49f, type: 2}
   m_GameManagerSO: {fileID: 11400000, guid: f222b367bb47bc140bb8cc26d5fc6f28, type: 2}
 --- !u!1001 &2580271387595827709
