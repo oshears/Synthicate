@@ -10,13 +10,15 @@ namespace Synthicate {
 		#region Scriptable Objects
 		[SerializeField]
 		protected GameManagerSO gameManagerSO;
-		[SerializeField]
-		protected UiScriptableObject userInterfaceSO;
+		
+		[SerializeField] protected EventChannelSO m_InitializeUserInterfaceEventChannel;
+		[SerializeField] protected EventChannelSO m_UpdateUserInterfaceEventChannel;
+		
 		#endregion
 		
 		protected virtual void Awake() {
-			userInterfaceSO.initializeUserInterfaceEvent += InitilizeUserInterfaceEventHandler;
-			userInterfaceSO.updateUserInterfaceEvent += UpdateUserInterfaceEventHandler;
+			m_InitializeUserInterfaceEventChannel.OnEventRaised += InitilizeUserInterfaceEventHandler;
+			m_UpdateUserInterfaceEventChannel.OnEventRaised += UpdateUserInterfaceEventHandler;
 		}
 		
 		protected abstract void UpdateUserInterfaceEventHandler();

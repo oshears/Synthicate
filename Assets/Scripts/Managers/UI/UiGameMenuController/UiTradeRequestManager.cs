@@ -42,7 +42,7 @@ namespace Synthicate
 		
 		[SerializeField] EventChannelSO m_CancelTradeEventChannel;
 		[SerializeField] EventChannelSO m_PeerTradeRequestConfirmedEventChannel;
-		[SerializeField] BoolEventChannelSO m_ClientTradeRequestConfirmedEventChannel;
+		[SerializeField] EventChannelSO m_ClientTradeRequestConfirmedEventChannel;
 		[SerializeField] EventChannelSO m_TradeExecutedEventChannel;
 		[SerializeField] IntArrayEventChannelSO m_ClientTradeAmountsUpdatedEventChannel;
 		[SerializeField] IntArrayEventChannelSO m_PeerTradeAmountsUpdatedEventChannel;
@@ -127,15 +127,13 @@ namespace Synthicate
 				m_InvalidTradeText.text = "";
 				SetClientConfirmedIconVisible(true);
 				SetPeerConfirmedIconVisible(false);
-				m_ClientTradeRequestConfirmedEventChannel.RaiseEvent(true);
+				m_ClientTradeRequestConfirmedEventChannel.RaiseEvent();
 			}
 			else if (m_NewState == TradeState.PeerConfirmed)
 			{
 				SetClientConfirmedIconVisible(false);
 				SetPeerConfirmedIconVisible(true);
 			}
-			
-			
 		}
 		
 		void TradeConfirmedButtonClick()

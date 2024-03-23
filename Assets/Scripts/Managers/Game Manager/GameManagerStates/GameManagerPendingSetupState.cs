@@ -5,12 +5,12 @@ namespace Synthicate
 {
 	public class GameManagerPendingSetupState : GameManagerAbstractState
 	{
+		[Header("Event Channels")]
+		[SerializeField] BoolEventChannelSO m_EnablePlayerControllerEventChannel;
 		
-		[SerializeField]
-		BoolEventChannelSO m_EnablePlayerControllerEventChannel;
-		
-		[SerializeField]
-		GameMenuStateEventChannel m_GameMenuStateEventChannel;
+		[SerializeField] GameMenuStateEventChannel m_GameMenuStateEventChannel;
+		[SerializeField] EventChannelSO m_InitializeUiEventChannel;
+		[SerializeField] EventChannelSO m_UpdateUiEventChannel;
 
 		public override void Enter()
 		{
@@ -18,9 +18,9 @@ namespace Synthicate
 			m_EnablePlayerControllerEventChannel.RaiseEvent(true);
 			
 			// Setup UI
-			_userInterfaceSO.OnInitializeUserInterface();
+			m_InitializeUiEventChannel.RaiseEvent();
 			m_GameMenuStateEventChannel.RaiseEvent(GameMenuType.PlayerPendingScreen);
-			_userInterfaceSO.OnUpdateUserInterface();
+			m_UpdateUiEventChannel.RaiseEvent();
 		}
 		
 		public override void Execute()

@@ -101,9 +101,9 @@ namespace Synthicate
 			_userInterfaceSO.OnSetMainMenuActive(false);
 			_userInterfaceSO.OnSetGameMenuActive(true);
 			
-			_owner.clientLobbyState.StartGameClientRpc();
 			
-			changeState(_owner.setupState);
+			_owner.clientLobbyState.StartGameClientRpc(_gameManagerSO.m_SkipSetup);
+			changeState(_gameManagerSO.m_SkipSetup ? _owner.idleState : _owner.setupState);
 		}
 		
 		void LeaveLobbyEventHandler()

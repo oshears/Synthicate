@@ -95,15 +95,15 @@ namespace Synthicate
 			}
 			
 			// DEBUG: Just for testing
-			for(int i = 0; i < 3; i++)
-			{
-				Debug.Log($"Enabling Trade Init Player: {i}");
-				if (m_PlayerButtonCanvas[i].activeSelf == false)
-				{
-					m_PlayerButtonCanvas[i].SetActive(true);
-					m_PlayerButtons[i].SetPlayerName($"Dummy Player {i}");
-				}
-			}
+			// for(int i = 0; i < 3; i++)
+			// {
+			// 	Debug.Log($"Enabling Trade Init Player: {i}");
+			// 	if (m_PlayerButtonCanvas[i].activeSelf == false)
+			// 	{
+			// 		m_PlayerButtonCanvas[i].SetActive(true);
+			// 		m_PlayerButtons[i].SetPlayerName($"Dummy Player {i}");
+			// 	}
+			// }
 			// END DEBUG:
 			
 		}

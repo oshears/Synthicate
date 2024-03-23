@@ -92,9 +92,12 @@ namespace Synthicate
 		[SerializeField]
 		EventChannelSO m_BuyEventCardEventChannel;
 		
+		[SerializeField]
+		EventChannelSO m_UpdateUiEventChannel;
+		
 		
 		void Awake() {
-			userInterfaceSO.updateUserInterfaceEvent += UpdateUserInterfaceEventHandler;
+			m_UpdateUiEventChannel.OnEventRaised += UpdateUserInterfaceEventHandler;
 			
 			m_GameMenuStateEventChannel.OnEventRaised += GameMenuStateEventChannelHandler;
 			
@@ -141,6 +144,7 @@ namespace Synthicate
 			else if (screen  == GameMenuType.TradeInitScreen)
 			{
 				m_TradeInitMenu.SetActive(true);
+				cancelButton.SetActive(true);
 			}
 			else if (screen  == GameMenuType.TradeRequesterScreen)
 			{

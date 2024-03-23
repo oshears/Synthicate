@@ -118,7 +118,7 @@ namespace Synthicate
 		}
 		
 		[ClientRpc]
-		public void StartGameClientRpc()
+		public void StartGameClientRpc(bool skipSetup = false)
 		{
 			if (!NetworkManager.Singleton.IsServer)
 			{
@@ -127,8 +127,8 @@ namespace Synthicate
 				// Enable the game menu
 				_userInterfaceSO.OnSetMainMenuActive(false);
 				_userInterfaceSO.OnSetGameMenuActive(true);
-			
-				changeState(_owner.pendingSetupState);
+
+				changeState(skipSetup ? _owner.pendingState : _owner.pendingSetupState);
 			}
 		}
 		

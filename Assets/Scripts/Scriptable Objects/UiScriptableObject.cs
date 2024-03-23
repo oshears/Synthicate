@@ -54,10 +54,5 @@ namespace Synthicate
 		public void OnUpdateMainMenuScreen(MainMenu.Screens screenSelection) => UpdateMainMenuScreenEvent.Invoke(screenSelection);
 		#endregion
 		
-		public event UserInterfaceEvent updateUserInterfaceEvent;
-		public void OnUpdateUserInterface() => updateUserInterfaceEvent.Invoke();
-		
-		public event UserInterfaceEvent initializeUserInterfaceEvent;
-		public void OnInitializeUserInterface() => initializeUserInterfaceEvent.Invoke();
 	}
 }

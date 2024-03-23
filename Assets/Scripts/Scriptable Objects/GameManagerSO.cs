@@ -23,6 +23,8 @@ namespace Synthicate
 		[SerializeField]
 		public HexManagerScriptableObject hexManagerScriptableObject;
 
+		public bool m_SkipSetup = false;
+		
 		public void Initialize()
 		{
 			playerList = new List<Player>();

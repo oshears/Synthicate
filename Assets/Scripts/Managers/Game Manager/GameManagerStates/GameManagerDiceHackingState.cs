@@ -10,20 +10,18 @@ namespace Synthicate
 		
 		[Header("Event Channels")]
 		
-		[SerializeField]
-		GameMenuStateEventChannel m_GameMenuStateEventChannel;
+		[SerializeField] GameMenuStateEventChannel m_GameMenuStateEventChannel;
 		
-		[SerializeField]
-		StringEventChannel m_NotificationEventChannel;
+		[SerializeField] StringEventChannel m_NotificationEventChannel;
 		
-		[SerializeField]
-		StringEventChannel m_LocalNotificationEvent;
+		[SerializeField] StringEventChannel m_LocalNotificationEvent;
 		
-		[SerializeField]
-		TradeInitEventChannel m_InitiateTradeEventChannel;
+		[SerializeField] TradeInitEventChannel m_InitiateTradeEventChannel;
 		
-		[SerializeField]
-		IntEventChannelSO m_SelectTradePartnerEventChannel;
+		[SerializeField] IntEventChannelSO m_SelectTradePartnerEventChannel;
+		
+		[SerializeField] EventChannelSO m_UpdateUiEventChannel;
+		
 
 		public override void Enter()
 		{
@@ -60,7 +58,7 @@ namespace Synthicate
 		{
 			// UpdateHexStatesServerRpc(selectedHex);
 			m_NotificationEventChannel.RaiseEvent($"{_gameManagerSO.clientPlayer.GetName()} hacked a territory!");
-			_userInterfaceSO.OnUpdateUserInterface();
+			m_UpdateUiEventChannel.RaiseEvent();
 			_hexManagerSO.EndHackModeEvent.Invoke();
 			// changeState(_owner.idleState);
 			m_GameMenuStateEventChannel.RaiseEvent(GameMenuType.PlayerDiceHackTargetScreen);

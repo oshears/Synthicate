@@ -27,7 +27,6 @@ namespace Synthicate
 		public override void Enter()
 		{
 			// _menuState = MenuState.Default;
-			// _userInterfaceSO.OnUpdateUserInterface();
 			
 			// TODO: Need to add the logic for the Trade Init Screen and the Trade Requester / Receiver Screen
 			m_GameMenuStateEventChannel.RaiseEvent(GameMenuType.TradeRequesterScreen);

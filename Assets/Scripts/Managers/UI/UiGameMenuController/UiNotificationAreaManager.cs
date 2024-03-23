@@ -15,21 +15,18 @@ namespace Synthicate
 		
 		[Header("Notification Prefabs")]
 		
-		[SerializeField]
-		GameObject notificationWindow;
+		[SerializeField] GameObject notificationWindow;
 		
-		[SerializeField]
-		GameObject notificationWindowPrefab;
+		[SerializeField] GameObject notificationWindowPrefab;
 		
 		List<GameObject> m_notificationWindows;
 		
 		[Header("Event Channels")]
 		
-		[SerializeField]
-		StringEventChannel m_NotificationEvent;
-		
-		[SerializeField]
-		StringEventChannel m_LocalNotificationEvent;
+		[SerializeField] StringEventChannel m_NotificationEvent;
+		[SerializeField] StringEventChannel m_LocalNotificationEvent;
+		[SerializeField] EventChannelSO m_UpdateUserInterfaceEventChannel;
+		[SerializeField] EventChannelSO m_InitializeUserInterfaceEventChannel;
 		
 		void Awake() {
 			m_notificationWindows = new List<GameObject>();
@@ -39,13 +36,13 @@ namespace Synthicate
 		
 		void OnEnable() {
 			notificationWindow.SetActive(false);
-			userInterfaceSO.initializeUserInterfaceEvent += InitilizeUserInterfaceEventHandler;
-			userInterfaceSO.updateUserInterfaceEvent += UpdateUserInterfaceEventHandler;
+			m_InitializeUserInterfaceEventChannel.OnEventRaised += InitilizeUserInterfaceEventHandler;
+			m_UpdateUserInterfaceEventChannel.OnEventRaised += UpdateUserInterfaceEventHandler;
 		}
 		
 		void OnDisable() {
-			userInterfaceSO.initializeUserInterfaceEvent -= InitilizeUserInterfaceEventHandler;
-			userInterfaceSO.updateUserInterfaceEvent -= UpdateUserInterfaceEventHandler;
+			m_InitializeUserInterfaceEventChannel.OnEventRaised -= InitilizeUserInterfaceEventHandler;
+			m_UpdateUserInterfaceEventChannel.OnEventRaised-= UpdateUserInterfaceEventHandler;
 		}
 		
 		public void UpdateUserInterfaceEventHandler()

@@ -72,7 +72,14 @@ namespace Synthicate
 			_userInterfaceSO.OnSetGameMenuActive(true);
 			
 			// Go to setup state
-			changeState(_owner.setupState);
+			if (_gameManagerSO.m_SkipSetup)
+			{
+				changeState(_owner.setupState);
+			}
+			else
+			{
+				changeState(_owner.setupState);
+			}
 		}
 		
 		void HostMultiplayerButtonEventHandler()

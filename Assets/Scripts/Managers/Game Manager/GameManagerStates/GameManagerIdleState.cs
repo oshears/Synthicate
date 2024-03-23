@@ -46,7 +46,7 @@ namespace Synthicate
 		public override void Enter()
 		{
 			// _menuState = MenuState.Default;
-			_userInterfaceSO.OnUpdateUserInterface();
+			m_UpdateUiEventChannel.RaiseEvent();
 			
 			m_GameMenuStateEventChannel.RaiseEvent(GameMenuType.PlayerTurnScreen);
 			
@@ -169,7 +169,7 @@ namespace Synthicate
 			if(GUILayout.Button("Debug: Increment All Resources"))
 			{
 				_gameManagerSO.OnDebugIncrementAlltResources();
-				_userInterfaceSO.OnUpdateUserInterface();
+				m_UpdateUiEventChannel.RaiseEvent();
 			}
 			GUILayout.EndArea();
 		}

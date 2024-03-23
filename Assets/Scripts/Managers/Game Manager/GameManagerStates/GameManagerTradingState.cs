@@ -14,6 +14,7 @@ namespace Synthicate
 		
 		[SerializeField] GameMenuStateEventChannel m_GameMenuStateEventChannel;
 		[SerializeField] EventChannelSO m_TradeCanceledEventChannel;
+		[SerializeField] EventChannelSO m_CancelButtonEventChannel;
 		[SerializeField] EventChannelSO m_UpdateUiEventChannel;
 		[SerializeField] IntEventChannelSO m_SelectTradePartnerEventChannel;
 		[SerializeField] EventChannelSO m_TradeExecutedEventChannel;
@@ -27,7 +28,6 @@ namespace Synthicate
 		public override void Enter()
 		{
 			// _menuState = MenuState.Default;
-			// _userInterfaceSO.OnUpdateUserInterface();
 			
 			// TODO: Need to add the logic for the Trade Init Screen and the Trade Requester / Receiver Screen
 			// m_GameMenuStateEventChannel.RaiseEvent(GameMenuType.TradeRequesterScreen);
@@ -38,6 +38,7 @@ namespace Synthicate
 			m_TradeExecutedEventChannel.OnEventRaised += TradeExecutedEventHandler;
 			m_ClientTradeRequestConfirmedEventChannel.OnEventRaised += ClientTradeRequestConfirmedEventHandler;
 			m_ClientTradeAmountsUpdatedEventChannel.OnEventRaised += ClientTradeAmountsUpdatedEventHandler;
+			m_CancelButtonEventChannel.OnEventRaised += CancelButtonEventHandler;
 		}
 		
 		public override void Execute()
@@ -52,6 +53,11 @@ namespace Synthicate
 			m_TradeExecutedEventChannel.OnEventRaised -= TradeExecutedEventHandler;
 			m_ClientTradeRequestConfirmedEventChannel.OnEventRaised -= ClientTradeRequestConfirmedEventHandler;
 			m_ClientTradeAmountsUpdatedEventChannel.OnEventRaised -= ClientTradeAmountsUpdatedEventHandler;
+		}
+		
+		void CancelButtonEventHandler()
+		{
+			changeState(_owner.idleState);
 		}
 		
 		void TradeCanceledEventHandler()

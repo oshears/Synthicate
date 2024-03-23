@@ -9,17 +9,16 @@ namespace Synthicate
 
 		[Header("Event Channels")]
 		
-		[SerializeField]
-		GameMenuStateEventChannel m_GameMenuStateEventChannel;
+		[SerializeField] GameMenuStateEventChannel m_GameMenuStateEventChannel;
 		
-		[SerializeField]
-		StringEventChannel m_NotificationEventChannel;
+		[SerializeField] StringEventChannel m_NotificationEventChannel;
 		
-		[SerializeField]
-		StringEventChannel m_LocalNotificationEvent;
+		[SerializeField] StringEventChannel m_LocalNotificationEvent;
 		
-		[SerializeField]
-		BoolEventChannelSO m_EnablePlayerControllerEventChannel;
+		[SerializeField] BoolEventChannelSO m_EnablePlayerControllerEventChannel;
+		
+		[SerializeField] EventChannelSO m_InitializeUserInterfaceEventChannel;
+		[SerializeField] EventChannelSO m_UpdateUserInterfaceEventChannel;
 		
 		public override void Enter()
 		{
@@ -34,9 +33,9 @@ namespace Synthicate
 			_strongholdManagerSO.beginBuildModeForPlayer(_gameManagerSO.clientPlayer.GetId(), buildPoints, playerBuildPermissions);
 
 			// Setup UI
-			_userInterfaceSO.OnInitializeUserInterface();
+			m_InitializeUserInterfaceEventChannel.RaiseEvent();
 			m_GameMenuStateEventChannel.RaiseEvent(GameMenuType.PlayerSetupTurnScreen);
-			_userInterfaceSO.OnUpdateUserInterface();
+			m_UpdateUserInterfaceEventChannel.RaiseEvent();
 			
 			// Enable player panning
 			m_EnablePlayerControllerEventChannel.RaiseEvent(true);
@@ -167,7 +166,7 @@ namespace Synthicate
 					m_LocalNotificationEvent.RaiseEvent($"You recieved {playerResources[i]} {(ResourceType) i}");
 				}
 			}
-			_userInterfaceSO.OnUpdateUserInterface();
+			m_UpdateUserInterfaceEventChannel.RaiseEvent();
 			
 			GoToNextPlayerTurn();
 		}

@@ -18,10 +18,10 @@ public class GameManagerEditor : Editor {
 	
 	// HexController[] hexList;
 	
-	[SerializeField]
-	bool m_HackerEnabled = false;
-	[SerializeField]
-	bool m_TranslucentViewEnabled = false;
+	[SerializeField] bool m_HackerEnabled = false;
+	[SerializeField] bool m_TranslucentViewEnabled = false;
+	
+	bool m_SkipSetup = true;
 	
 	string targetHex = "0";
 	uint targetHexNum = 0;
@@ -99,6 +99,13 @@ public class GameManagerEditor : Editor {
 			}
 		}
 		GUILayout.EndHorizontal();
+		
+		GUILayout.BeginHorizontal();
+		// GUILayout.Label("Skip Setup:");
+		m_SkipSetup = GUILayout.Toggle(m_SkipSetup,"Skip Setup");
+		gameManager.gameManagerSO.m_SkipSetup = m_SkipSetup;
+		GUILayout.EndHorizontal();
+		
 		
 		// if(GUILayout.Button("Toggle Hacker"))
 		// {
