@@ -97,20 +97,6 @@ namespace Synthicate
 		{
 			
 			
-			// // Increment Buttons
-			// for(int i = 0; i < tradeIncrementButtons.Length; i++)
-			// {
-			// 	IncrementButtonEventSetup(i);
-			// }
-			
-			// // Decrement Buttons
-			// for(int i = 0; i < tradeDecrementButtons.Length; i++)
-			// {
-			// 	DecrementButtonEventSetup(i);
-			// }
-			
-			
-			
 		}
 		
 		void ChangeState(TradeState m_NewState)
@@ -145,9 +131,7 @@ namespace Synthicate
 				
 				if (m_TradeState == TradeState.PeerConfirmed)
 				{
-					m_GameManagerSO.clientPlayer.RemoveResources(m_GivingAmounts);
-					m_GameManagerSO.clientPlayer.AddResources(m_ReceivingAmounts);
-					m_TradeExecutedEventChannel.RaiseEvent();
+					ExecuteTrade();
 				}
 				else
 				{
@@ -165,6 +149,13 @@ namespace Synthicate
 		{
 			ResetCounts();
 			m_CancelTradeEventChannel.RaiseEvent();
+		}
+		
+		void ExecuteTrade()
+		{
+			m_GameManagerSO.clientPlayer.RemoveResources(m_GivingAmounts);
+			m_GameManagerSO.clientPlayer.AddResources(m_ReceivingAmounts);
+			m_TradeExecutedEventChannel.RaiseEvent();
 		}
 		
 		

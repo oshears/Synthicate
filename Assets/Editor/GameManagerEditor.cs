@@ -107,7 +107,8 @@ public class GameManagerEditor : Editor {
 		GUILayout.EndHorizontal();
 		
 		GUILayout.BeginHorizontal();
-		GUILayout.Label($"Current Game Manager State: {gameManager.stateMachine._currentState}");
+		GameManagerAbstractState currentState = gameManager.stateMachine._currentState;
+		if (currentState != null) GUILayout.Label($"Current Game Manager State: {currentState}");
 		GUILayout.EndHorizontal();
 		
 		
