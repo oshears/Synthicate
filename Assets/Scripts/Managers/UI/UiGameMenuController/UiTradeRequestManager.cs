@@ -61,6 +61,7 @@ namespace Synthicate
 			NoneConfirmed,
 			ClientConfirmed,
 			PeerConfirmed,
+			TradeExecuted
 		}
 		
 		TradeState m_TradeState = TradeState.NoneConfirmed;
@@ -77,9 +78,10 @@ namespace Synthicate
 				incr.e_AmountChanged += IncrementerAmountChanged;
 			}
 			
+			foreach(TextMeshProUGUI textObject in m_PeerResources) textObject.text = "0";
+			
 			m_ClientTradeConfirmedButton.onClick.AddListener(TradeConfirmedButtonClick);
 			m_CancelTradeButton.onClick.AddListener(TradeCanceledButtonClick);
-			
 			m_PeerTradeRequestConfirmedEventChannel.OnEventRaised += PeerTradeRequestConfirmedEventHandler ;
 			m_PeerTradeAmountsUpdatedEventChannel.OnEventRaised += PeerTradeAmountsUpdatedEventHandler ;
 			
@@ -89,6 +91,14 @@ namespace Synthicate
 			m_ReceivingAmounts = new int[]{0, 0, 0, 0, 0};
 			
 			ChangeState(TradeState.NoneConfirmed);
+		}
+		
+		void OnDisable()
+		{
+			m_ClientTradeConfirmedButton.onClick.RemoveListener(TradeConfirmedButtonClick);
+			m_CancelTradeButton.onClick.RemoveListener(TradeCanceledButtonClick);
+			m_PeerTradeRequestConfirmedEventChannel.OnEventRaised -= PeerTradeRequestConfirmedEventHandler ;
+			m_PeerTradeAmountsUpdatedEventChannel.OnEventRaised -= PeerTradeAmountsUpdatedEventHandler ;
 		}
 		
 		
@@ -118,6 +128,12 @@ namespace Synthicate
 			{
 				SetClientConfirmedIconVisible(false);
 				SetPeerConfirmedIconVisible(true);
+			}
+			else if (m_NewState == TradeState.TradeExecuted)
+			{
+				m_InvalidTradeText.text = "";
+				SetClientConfirmedIconVisible(false);
+				SetPeerConfirmedIconVisible(false);
 			}
 		}
 		
@@ -156,6 +172,7 @@ namespace Synthicate
 			m_GameManagerSO.clientPlayer.RemoveResources(m_GivingAmounts);
 			m_GameManagerSO.clientPlayer.AddResources(m_ReceivingAmounts);
 			m_TradeExecutedEventChannel.RaiseEvent();
+			ChangeState(TradeState.TradeExecuted);
 		}
 		
 		
@@ -217,7 +234,14 @@ namespace Synthicate
 		
 		void PeerTradeRequestConfirmedEventHandler()
 		{
-			ChangeState(TradeState.PeerConfirmed);
+			if (m_TradeState == TradeState.ClientConfirmed)
+			{
+				ExecuteTrade();
+			}
+			else
+			{
+				ChangeState(TradeState.PeerConfirmed);
+			}
 		}
 		
 		void PeerTradeAmountsUpdatedEventHandler(int[] peerAmounts)

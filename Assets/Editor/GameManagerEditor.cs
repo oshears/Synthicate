@@ -106,10 +106,14 @@ public class GameManagerEditor : Editor {
 		gameManager.gameManagerSO.m_SkipSetup = m_SkipSetup;
 		GUILayout.EndHorizontal();
 		
-		GUILayout.BeginHorizontal();
-		GameManagerAbstractState currentState = gameManager.stateMachine._currentState;
-		if (currentState != null) GUILayout.Label($"Current Game Manager State: {currentState}");
-		GUILayout.EndHorizontal();
+		if (gameManager.stateMachine != null && gameManager.stateMachine._currentState != null)
+		{
+			GUILayout.BeginHorizontal();
+			GameManagerAbstractState currentState = gameManager.stateMachine._currentState;
+			if (currentState != null) GUILayout.Label($"Current Game Manager State: {currentState}");
+			GUILayout.EndHorizontal();
+		}
+		
 		
 		
 		// if(GUILayout.Button("Toggle Hacker"))
