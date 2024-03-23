@@ -19,41 +19,29 @@ namespace Synthicate
 		
 		[Header("Event Channels")]
 		
-		[SerializeField]
-		GameMenuStateEventChannel m_GameMenuStateEventChannel;
+		[SerializeField] GameMenuStateEventChannel m_GameMenuStateEventChannel;
 		
-		[SerializeField]
-		EventChannelSO m_CyberActionButtionEventChannel;
+		[SerializeField] EventChannelSO m_CyberActionButtionEventChannel;
 		
-		[SerializeField]
-		EventChannelSO m_TradeButtonEventChannel;
+		[SerializeField] EventChannelSO m_TradeButtonEventChannel;
 		
-		[SerializeField]
-		EventChannelSO m_BuildModeButtonEventChannel;
+		[SerializeField] EventChannelSO m_BuildModeButtonEventChannel;
 		
-		[SerializeField]
-		EventChannelSO m_FinishTurnButtonEventChannel;
+		[SerializeField] EventChannelSO m_FinishTurnButtonEventChannel;
 		
-		[SerializeField]
-		EventChannelSO m_HackButtonEventChannel;
+		[SerializeField] EventChannelSO m_HackButtonEventChannel;
 		
-		[SerializeField]
-		EventChannelSO m_CancelButtonEventChannel;
+		[SerializeField] EventChannelSO m_CancelButtonEventChannel;
 		
-		[SerializeField]
-		DepotSelectedEventChannelSO m_DepotSelectedEventChannel;
+		[SerializeField] DepotSelectedEventChannelSO m_DepotSelectedEventChannel;
 		
-		[SerializeField]
-		BoolEventChannelSO m_EnableDepotSelectionEventChannel;
+		[SerializeField] BoolEventChannelSO m_EnableDepotSelectionEventChannel;
 		
-		[SerializeField]
-		EventChannelSO m_TradeExecutedEventChannel;
+		[SerializeField] EventChannelSO m_TradeExecutedEventChannel;
 		
-		[SerializeField]
-		EventChannelSO m_CancelTradeEventChannel;
+		[SerializeField] EventChannelSO m_CancelTradeEventChannel;
 		
-		[SerializeField]
-		EventChannelSO m_UpdateUiEventChannel;
+		[SerializeField] EventChannelSO m_UpdateUiEventChannel;
 		
 		public override void Enter()
 		{

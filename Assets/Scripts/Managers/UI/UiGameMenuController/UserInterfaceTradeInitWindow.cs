@@ -11,33 +11,29 @@ namespace Synthicate
 	public class UserInterfaceTradeInitWindow : MonoBehaviour
 	{
 		
-		[SerializeField]
-		UiPlayerSelectButton[] m_PlayerButtons;
+		[Header("Player Select Buttons")]
 		
-		[SerializeField]
-		GameObject[] m_PlayerButtonCanvas;
+		[SerializeField] UiPlayerSelectButton[] m_PlayerButtons;
 		
-		[SerializeField]
-		TextMeshProUGUI m_TitleText;
+		[SerializeField] GameObject[] m_PlayerButtonCanvas;
 		
-		[SerializeField]
-		TextMeshProUGUI m_DescriptionText;
+		[Header("Text Displays")]
+		
+		[SerializeField] TextMeshProUGUI m_TitleText;
+		
+		[SerializeField] TextMeshProUGUI m_DescriptionText;
 		
 		[Header("Event Channels")]
 		
-		[SerializeField]
-		TradeInitEventChannel m_InitiateTradeEventChannel;
+		[SerializeField] TradeInitEventChannel m_InitiateTradeEventChannel;
 		
-		[SerializeField]
-		IntEventChannelSO m_SelectTradePartnerEventChannel;
+		[SerializeField] IntEventChannelSO m_SelectTradePartnerEventChannel;
 		
 		[Header("Scriptable Objects")]
 		
-		[SerializeField]
-		UiScriptableObject m_UiScriptableObject;
+		[SerializeField] UiScriptableObject m_UiScriptableObject;
 		
-		[SerializeField]
-		GameManagerSO m_GameManagerSO;
+		[SerializeField] GameManagerSO m_GameManagerSO;
 		
 		public void Awake()
 		{

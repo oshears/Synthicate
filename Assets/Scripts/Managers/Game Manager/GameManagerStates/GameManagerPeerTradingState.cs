@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Synthicate
 {
-	public class GameManagerTradingState : GameManagerAbstractState
+	public class GameManagerPeerTradingState : GameManagerAbstractState
 	{
 		
 
@@ -15,7 +15,7 @@ namespace Synthicate
 		[SerializeField] GameMenuStateEventChannel m_GameMenuStateEventChannel;
 		[SerializeField] EventChannelSO m_TradeCanceledEventChannel;
 		[SerializeField] EventChannelSO m_UpdateUiEventChannel;
-		[SerializeField] IntEventChannelSO m_SelectTradePartnerEventChannel;
+		// [SerializeField] IntEventChannelSO m_SelectTradePartnerEventChannel;
 		[SerializeField] EventChannelSO m_TradeExecutedEventChannel;
 		[SerializeField] BoolEventChannelSO m_PeerTradeRequestConfirmedEventChannel;
 		[SerializeField] BoolEventChannelSO m_ClientTradeRequestConfirmedEventChannel;
@@ -28,11 +28,10 @@ namespace Synthicate
 			// _userInterfaceSO.OnUpdateUserInterface();
 			
 			// TODO: Need to add the logic for the Trade Init Screen and the Trade Requester / Receiver Screen
-			// m_GameMenuStateEventChannel.RaiseEvent(GameMenuType.TradeRequesterScreen);
-			m_GameMenuStateEventChannel.RaiseEvent(GameMenuType.TradeInitScreen);
+			m_GameMenuStateEventChannel.RaiseEvent(GameMenuType.TradeRequesterScreen);
 			
 			m_TradeCanceledEventChannel.OnEventRaised += TradeCanceledEventHandler;
-			m_SelectTradePartnerEventChannel.OnEventRaised += SelectTradePartnerEventHandler;
+			// m_SelectTradePartnerEventChannel.OnEventRaised += SelectTradePartnerEventHandler;
 			m_TradeExecutedEventChannel.OnEventRaised += TradeExecutedEventHandler;
 			m_ClientTradeRequestConfirmedEventChannel.OnEventRaised += ClientTradeRequestConfirmedEventChannel;
 		}
@@ -44,36 +43,26 @@ namespace Synthicate
 
 		public override void Exit()
 		{
-			m_TradeCanceledEventChannel.OnEventRaised -= TradeCanceledEventHandler;
-			m_SelectTradePartnerEventChannel.OnEventRaised -= SelectTradePartnerEventHandler;
-			m_TradeExecutedEventChannel.OnEventRaised -= TradeExecutedEventHandler;
-			m_ClientTradeRequestConfirmedEventChannel.OnEventRaised -= ClientTradeRequestConfirmedEventChannel;
-			
-			changeState(_owner.idleState);
+			changeState(_owner.pendingState);
 		}
 		
 		void TradeCanceledEventHandler()
 		{
-			_owner.m_PeerTradingState.PeerCancelTradeServerRpc();
-			changeState(_owner.idleState);
+			_owner.tradingState.PeerCancelTradeServerRpc();
+			changeState(_owner.pendingSetupState);
 		}
-
-		void SelectTradePartnerEventHandler(int targetClientId)
-		{
-			_owner.pendingState.InitiateTradeRequestServerRpc(targetClientId);
-			
-			m_GameMenuStateEventChannel.RaiseEvent(GameMenuType.TradeRequesterScreen);
-		}
-
+		
+		
 		void TradeExecutedEventHandler()
 		{
-			changeState(_owner.idleState);
+			changeState(_owner.pendingState);
 		}
 		
 		void ClientTradeRequestConfirmedEventChannel(bool confirmed)
 		{
-			_owner.m_PeerTradingState.PeerTradeRequestConfirmedServerRpc(confirmed);
+			_owner.tradingState.PeerTradeRequestConfirmedServerRpc(confirmed);
 		}
+		
 		
 		[ServerRpc(RequireOwnership = false)]
 		public void PeerTradeRequestConfirmedServerRpc(bool confirmed) => PeerTradeRequestConfirmedClientRpc(confirmed);
@@ -92,8 +81,9 @@ namespace Synthicate
 		public void PeerCancelTradeClientRpc()
 		{
 			if(!IsActiveState()) return;
-			changeState(_owner.idleState);
+			changeState(_owner.pendingState);
 		}
+
 
 	}
 }

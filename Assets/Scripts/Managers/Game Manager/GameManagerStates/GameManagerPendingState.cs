@@ -28,6 +28,18 @@ namespace Synthicate
 		{
 			
 		}
+		
+		[ServerRpc(RequireOwnership = false)]
+		public void InitiateTradeRequestServerRpc(int clientId) => InitiateTradeRequestClientRpc(clientId);
+		
+		[ClientRpc]
+		void InitiateTradeRequestClientRpc(int clientId)
+		{
+			if (clientId == _gameManagerSO.GetClientPlayerId())
+			{
+				changeState(_owner.m_PeerTradingState);
+			}
+		}
 
 	}
 }

@@ -10,46 +10,40 @@ namespace Synthicate
 {
 	public class UiTradeRequestManager : UiUpdatableElementMonoBehavior
 	{
-		// [SerializeField]
-		// GameObject[] initiateTradePlayerButtons, initiateTradePlayerIcons;
+		// [SerializeField] // GameObject[] initiateTradePlayerButtons, initiateTradePlayerIcons;
 
-		// [SerializeField]
-		// GameObject[] tradeIncrementButtons, tradeDecrementButtons, tradeOfferAmounts, peerTradeAmounts;
+		// [SerializeField] // GameObject[] tradeIncrementButtons, tradeDecrementButtons, tradeOfferAmounts, peerTradeAmounts;
 		
 		[Header("Resource Incrementers")]
 		
-		[SerializeField]
-		UserInterfaceIncrementer[] m_ResourceIncrementers;
+		[SerializeField] UserInterfaceIncrementer[] m_ResourceIncrementers;
 		
 		[Header("Invalid Trade Text")]
-		[SerializeField]
-		TextMeshProUGUI m_InvalidTradeText;
+		[SerializeField] TextMeshProUGUI m_InvalidTradeText;
 		
 		[Header("Confirmed Icons")]
 
-		[SerializeField]
-		Image m_PeerTradeConfirmedIcon;
+		[SerializeField] Image m_PeerTradeConfirmedIcon;
 		
-		[SerializeField]
-		Image m_ClientTradeConfirmedIcon;
+		[SerializeField] Image m_ClientTradeConfirmedIcon;
 		
 		[Header("Buttons")]
 		
-		[SerializeField]
-		Button m_ClientTradeConfirmedButton;
+		[SerializeField] Button m_ClientTradeConfirmedButton;
 
-		[SerializeField]
-		Button m_CancelTradeButton;
+		[SerializeField] Button m_CancelTradeButton;
 		
 		[Header("Event Channels")]
 		
-		[SerializeField]
-		EventChannelSO m_CancelTradeEventChannel;
+		[SerializeField] EventChannelSO m_CancelTradeEventChannel;
+		[SerializeField] BoolEventChannelSO m_PeerTradeRequestConfirmedEventChannel;
+		[SerializeField] BoolEventChannelSO m_ClientTradeRequestConfirmedEventChannel;
+		[SerializeField] EventChannelSO m_TradeExecutedEventChannel;
+		
 		
 		[Header("Scriptable Object")]
 		
-		[SerializeField]
-		GameManagerSO m_GameManagerSO;
+		[SerializeField] GameManagerSO m_GameManagerSO;
 		
 		
 		int[] m_GivingAmounts;
@@ -86,7 +80,7 @@ namespace Synthicate
 			// }
 			
 			m_ClientTradeConfirmedButton.onClick.AddListener(() => {
-				m_InvalidTradeText.text = "Insufficient Resources!";
+				// m_InvalidTradeText.text = "Insufficient Resources!";
 				Debug.Log("Confirm Clicked!");
 				
 			});

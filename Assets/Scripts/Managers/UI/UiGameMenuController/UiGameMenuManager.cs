@@ -53,6 +53,9 @@ namespace Synthicate
 		
 		[SerializeField]
 		GameObject hackButton;
+		
+		[SerializeField]
+		GameObject m_BuyEventCardButton;
 
 
 		[Header("Scriptable Objects")]
@@ -86,6 +89,9 @@ namespace Synthicate
 		[SerializeField]
 		EventChannelSO m_HackButtonEventChannel;
 		
+		[SerializeField]
+		EventChannelSO m_BuyEventCardEventChannel;
+		
 		
 		void Awake() {
 			userInterfaceSO.updateUserInterfaceEvent += UpdateUserInterfaceEventHandler;
@@ -99,6 +105,7 @@ namespace Synthicate
 			buildModeButton.GetComponent<Button>().onClick.AddListener(m_BuildModeButtonEventChannel.RaiseEvent);
 			finishTurnButton.GetComponent<Button>().onClick.AddListener(m_FinishTurnButtonEventChannel.RaiseEvent);
 			hackButton.GetComponent<Button>().onClick.AddListener(m_HackButtonEventChannel.RaiseEvent);
+			m_BuyEventCardButton.GetComponent<Button>().onClick.AddListener(m_BuyEventCardEventChannel.RaiseEvent);
 		}
 		
 		void Start()
@@ -153,6 +160,7 @@ namespace Synthicate
 				// m_CyberActionGameMenu.SetActive(true);
 				finishTurnButton.SetActive(true);
 				hackButton.SetActive(true);
+				m_BuyEventCardButton.SetActive(true);
 				cancelButton.SetActive(true);
 			}
 			else if (screen == GameMenuType.PlayerHackScreen)
@@ -177,6 +185,7 @@ namespace Synthicate
 			tradeButton.SetActive(false);
 			cyberActionButton.SetActive(false);
 			hackButton.SetActive(false);
+			m_BuyEventCardButton.SetActive(false);
 			cancelButton.SetActive(false);
 		}
 		
