@@ -142,7 +142,14 @@ namespace Synthicate
 		{
 			Debug.Log("Begining to handle depot selection for:" + depotSelection);
 			m_MenuState = MenuState.DepotTrade;
-			m_GameMenuStateEventChannel.RaiseEvent(GameMenuType.DepotTrade);
+			if (depotSelection.Resource == ResourceType.Any)
+			{
+				m_GameMenuStateEventChannel.RaiseEvent(GameMenuType.AnyDepotTrade);
+			}
+			else
+			{
+				m_GameMenuStateEventChannel.RaiseEvent(GameMenuType.DepotTrade);
+			}
 			m_EnableDepotSelectionEventChannel.RaiseEvent(false);
 		}
 		
