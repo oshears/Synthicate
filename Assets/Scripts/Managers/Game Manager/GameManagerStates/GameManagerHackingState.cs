@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEditor;
 using UnityEngine;
 
@@ -29,6 +30,8 @@ namespace Synthicate
 			TargetSelect
 		}
 		HackState m_State;
+		
+		int m_HackedPlayer;
 		
 		public override void Enter()
 		{
@@ -74,21 +77,37 @@ namespace Synthicate
 		
 		public void SelectTradePartnerEventHandler(int selectedPlayer)
 		{
+			// Save hacked player id
+			m_HackedPlayer = selectedPlayer;
+			
 			// Decrement a random resource from the target
-			ResourceType takenResourceType = _owner.pendingState.TakeRandomResourceFromPeerServerRpc(selectedPlayer);
-			
-			string clientname = _gameManagerSO.GetClientPlayerName();
-			string peerName = _gameManagerSO.playerList[selectedPlayer].GetName();
-			
-			if (takenResourceType != ResourceType.Any && takenResourceType != ResourceType.None)
+			_owner.pendingState.TakeRandomResourceFromPeerServerRpc(selectedPlayer);
+		}
+		
+		[ServerRpc(RequireOwnership = false)]
+		public void GiveResourceToCurrentPlayerServerRpc(ResourceType resourceType)
+		{
+			GiveResourceToCurrentPlayerClientRpc(resourceType);
+		}
+		
+		[ClientRpc]
+		public void GiveResourceToCurrentPlayerClientRpc(ResourceType resourceType)
+		{
+			if (_gameManagerSO.IsClientTurn())
 			{
-				m_NotificationEventChannel.RaiseEvent($"{clientname} took a resource  from {peerName}.");
-				_gameManagerSO.clientPlayer.AddResources(takenResourceType,1);
+				string clientname = _gameManagerSO.GetClientPlayerName();
+				string peerName = _gameManagerSO.playerList[m_HackedPlayer].GetName();
 				
-			}
-			else
-			{
-				m_NotificationEventChannel.RaiseEvent($"{clientname} could not take any resources from {peerName}.");
+				if (resourceType != ResourceType.Any && resourceType != ResourceType.None)
+				{
+					m_NotificationEventChannel.RaiseEvent($"{clientname} took a resource  from {peerName}.");
+					_gameManagerSO.clientPlayer.AddResources(resourceType,1);
+					
+				}
+				else
+				{
+					m_NotificationEventChannel.RaiseEvent($"{clientname} could not take any resources from {peerName}.");
+				}
 			}
 			
 			// Change to idle state

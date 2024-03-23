@@ -43,7 +43,7 @@ namespace Synthicate
 		}
 		
 		[ServerRpc(RequireOwnership = false)]
-		public ResourceType TakeRandomResourceFromPeerServerRpc(int clientId) {
+		public void TakeRandomResourceFromPeerServerRpc(int clientId) {
 			ClientRpcParams clientRpcParams = new ClientRpcParams
 			{
 				Send = new ClientRpcSendParams
@@ -52,18 +52,21 @@ namespace Synthicate
 				}
 			};
 		
-			return TakeRandomResourceFromPeerClientRpc(clientRpcParams);
+			TakeRandomResourceFromPeerClientRpc(clientRpcParams);
 		}
 		
 		[ClientRpc]
-		public ResourceType TakeRandomResourceFromPeerClientRpc(ClientRpcParams clientRpcParams = default)
+		public void TakeRandomResourceFromPeerClientRpc(ClientRpcParams clientRpcParams = default)
 		{
 			if(!IsActiveState()){
 				Debug.LogError("Error! This client received the RPC and wasn't in the pending state!");
-				return ResourceType.None;
+				// return ResourceType.None;
 			}
 			
-			return _gameManagerSO.clientPlayer.RemoveRandomResource();
+			ResourceType resourceToGive = _gameManagerSO.clientPlayer.RemoveRandomResource();
+			
+			_owner.m_DiceHackingState.GiveResourceToCurrentPlayerServerRpc(resourceToGive);
+			_owner.hackingState.GiveResourceToCurrentPlayerServerRpc(resourceToGive);
 		}
 		
 
