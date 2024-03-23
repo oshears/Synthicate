@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Codice.Client.GameUI.Checkin;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -18,14 +19,18 @@ namespace Synthicate
 		
 		[SerializeField] UserInterfaceIncrementer[] m_ResourceIncrementers;
 		
+		[Header("Peer Resources")]
+		
+		[SerializeField] TextMeshProUGUI[] m_PeerResources;
+		
 		[Header("Invalid Trade Text")]
 		[SerializeField] TextMeshProUGUI m_InvalidTradeText;
 		
 		[Header("Confirmed Icons")]
 
-		[SerializeField] Image m_PeerTradeConfirmedIcon;
+		[SerializeField] GameObject m_PeerTradeConfirmedIcon;
 		
-		[SerializeField] Image m_ClientTradeConfirmedIcon;
+		[SerializeField] GameObject m_ClientTradeConfirmedIcon;
 		
 		[Header("Buttons")]
 		
@@ -36,9 +41,11 @@ namespace Synthicate
 		[Header("Event Channels")]
 		
 		[SerializeField] EventChannelSO m_CancelTradeEventChannel;
-		[SerializeField] BoolEventChannelSO m_PeerTradeRequestConfirmedEventChannel;
+		[SerializeField] EventChannelSO m_PeerTradeRequestConfirmedEventChannel;
 		[SerializeField] BoolEventChannelSO m_ClientTradeRequestConfirmedEventChannel;
 		[SerializeField] EventChannelSO m_TradeExecutedEventChannel;
+		[SerializeField] IntArrayEventChannelSO m_ClientTradeAmountsUpdatedEventChannel;
+		[SerializeField] IntArrayEventChannelSO m_PeerTradeAmountsUpdatedEventChannel;
 		
 		
 		[Header("Scriptable Object")]
@@ -49,16 +56,39 @@ namespace Synthicate
 		int[] m_GivingAmounts;
 		int[] m_ReceivingAmounts;
 		
+		enum TradeState
+		{
+			NoneConfirmed,
+			ClientConfirmed,
+			PeerConfirmed,
+		}
+		
+		TradeState m_TradeState = TradeState.NoneConfirmed;
+		
 		override protected void Awake() {
 			base.Awake();
 			
-			m_GivingAmounts = new int[]{0, 0, 0, 0, 0};
-			m_ReceivingAmounts = new int[]{0, 0, 0, 0, 0};
-			
+		}
+		
+		void OnEnable()
+		{
 			foreach(UserInterfaceIncrementer incr in m_ResourceIncrementers)
 			{
 				incr.e_AmountChanged += IncrementerAmountChanged;
 			}
+			
+			m_ClientTradeConfirmedButton.onClick.AddListener(TradeConfirmedButtonClick);
+			m_CancelTradeButton.onClick.AddListener(TradeCanceledButtonClick);
+			
+			m_PeerTradeRequestConfirmedEventChannel.OnEventRaised += PeerTradeRequestConfirmedEventHandler ;
+			m_PeerTradeAmountsUpdatedEventChannel.OnEventRaised += PeerTradeAmountsUpdatedEventHandler ;
+			
+			
+			
+			m_GivingAmounts = new int[]{0, 0, 0, 0, 0};
+			m_ReceivingAmounts = new int[]{0, 0, 0, 0, 0};
+			
+			ChangeState(TradeState.NoneConfirmed);
 		}
 		
 		
@@ -79,16 +109,63 @@ namespace Synthicate
 			// 	DecrementButtonEventSetup(i);
 			// }
 			
-			m_ClientTradeConfirmedButton.onClick.AddListener(() => {
-				// m_InvalidTradeText.text = "Insufficient Resources!";
-				Debug.Log("Confirm Clicked!");
-				
-			});
 			
-			m_CancelTradeButton.onClick.AddListener(() => {
-				ResetCounts();
-				m_CancelTradeEventChannel.RaiseEvent();
-			});
+			
+		}
+		
+		void ChangeState(TradeState m_NewState)
+		{
+			m_TradeState = m_NewState;
+			
+			if (m_NewState == TradeState.NoneConfirmed)
+			{
+				SetClientConfirmedIconVisible(false);
+				SetPeerConfirmedIconVisible(false);
+			}
+			else if (m_NewState == TradeState.ClientConfirmed)
+			{
+				m_InvalidTradeText.text = "";
+				SetClientConfirmedIconVisible(true);
+				SetPeerConfirmedIconVisible(false);
+				m_ClientTradeRequestConfirmedEventChannel.RaiseEvent(true);
+			}
+			else if (m_NewState == TradeState.PeerConfirmed)
+			{
+				SetClientConfirmedIconVisible(false);
+				SetPeerConfirmedIconVisible(true);
+			}
+			
+			
+		}
+		
+		void TradeConfirmedButtonClick()
+		{
+			Debug.Log("Trade Confirm Clicked!");
+			
+			if (m_GameManagerSO.clientPlayer.HasSufficientResources(m_GivingAmounts))
+			{
+				if (m_TradeState == TradeState.PeerConfirmed)
+				{
+					m_GameManagerSO.clientPlayer.RemoveResources(m_GivingAmounts);
+					m_GameManagerSO.clientPlayer.AddResources(m_ReceivingAmounts);
+					m_TradeExecutedEventChannel.RaiseEvent();
+				}
+				else
+				{
+					ChangeState(TradeState.ClientConfirmed);
+				}
+			}
+			else
+			{
+				m_InvalidTradeText.text = "Insufficient Resources!";
+			}
+			
+		}
+		
+		void TradeCanceledButtonClick()
+		{
+			ResetCounts();
+			m_CancelTradeEventChannel.RaiseEvent();
 		}
 		
 		
@@ -104,23 +181,64 @@ namespace Synthicate
 		
 		void IncrementerAmountChanged()
 		{
+			// Update giving amounts array
+			for(int i = 0; i < m_ResourceIncrementers.Length; i++)
+			{
+				m_GivingAmounts[i] = m_ResourceIncrementers[i].GetAmount();
+			}
 			
+			// Tell the peer that the client amounts have changed and provide the new values
+			m_ClientTradeAmountsUpdatedEventChannel.RaiseEvent(m_GivingAmounts);
+			
+			// Clear the confirmed state if the client previous confirmed the trade
+			if (m_TradeState == TradeState.ClientConfirmed)
+			{
+				ChangeState(TradeState.NoneConfirmed);
+			}
+		}
+		
+		void ResetWindow()
+		{
+			ChangeState(TradeState.NoneConfirmed);
+			m_InvalidTradeText.text = "";
+			ResetCounts();
 		}
 		
 		void ResetCounts()
 		{
-			m_InvalidTradeText.text = "";
-			
 			m_GivingAmounts = new int[]{0, 0, 0, 0, 0};
 			m_ReceivingAmounts = new int[]{0, 0, 0, 0, 0};
 			
 			for(int i = 0; i < m_ResourceIncrementers.Length; i++)
 			{
-				// tradeOfferAmounts[i].GetComponent<TextMeshProUGUI>().text = "0";
-				// peerTradeAmounts[i].GetComponent<TextMeshProUGUI>().text = "0";
 				m_ResourceIncrementers[i].ResetAmount();
 			}
 		}
 		
+		void SetClientConfirmedIconVisible(bool visible)
+		{
+			m_ClientTradeConfirmedIcon.SetActive(visible);
+		}
+		
+		void SetPeerConfirmedIconVisible(bool visible)
+		{
+			m_PeerTradeConfirmedIcon.SetActive(visible);
+		}
+		
+		void PeerTradeRequestConfirmedEventHandler()
+		{
+			ChangeState(TradeState.PeerConfirmed);
+		}
+		
+		void PeerTradeAmountsUpdatedEventHandler(int[] peerAmounts)
+		{
+			for(int i = 0; i < m_ResourceIncrementers.Length; i++)
+			{
+				m_ReceivingAmounts[i] = peerAmounts[i];
+				m_PeerResources[i].text = $"{peerAmounts[i]}";
+			}
+			
+			ChangeState(TradeState.NoneConfirmed);
+		}
 	}
 }

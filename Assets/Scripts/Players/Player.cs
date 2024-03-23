@@ -177,6 +177,29 @@ namespace Synthicate
 		{
 			resources[(int) resourceType] -= resourceAmount;
 		}
+		
+		public void RemoveResources(int[] resources)
+		{
+			if(resources.Length < Global.NUM_RESOURCE_TYPES)
+			{
+				Debug.LogError($"Resources provided is less than {Global.NUM_RESOURCE_TYPES}");
+			}
+			
+			for(int i = 0; i < Global.NUM_RESOURCE_TYPES; i++)
+			{
+				RemoveResources((ResourceType) i, resources[i]);
+			}
+		}
+		
+		public bool HasSufficientResources(int[] resources)
+		{
+			for(int i = 0; i < Global.NUM_RESOURCE_TYPES; i++)
+			{
+				if (this.resources[i] < resources[i]) return false;
+			}
+			
+			return true;
+		}
 	}
 
 	

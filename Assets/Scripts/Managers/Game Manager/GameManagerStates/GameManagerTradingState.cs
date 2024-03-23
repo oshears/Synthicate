@@ -17,8 +17,10 @@ namespace Synthicate
 		[SerializeField] EventChannelSO m_UpdateUiEventChannel;
 		[SerializeField] IntEventChannelSO m_SelectTradePartnerEventChannel;
 		[SerializeField] EventChannelSO m_TradeExecutedEventChannel;
-		[SerializeField] BoolEventChannelSO m_PeerTradeRequestConfirmedEventChannel;
-		[SerializeField] BoolEventChannelSO m_ClientTradeRequestConfirmedEventChannel;
+		[SerializeField] EventChannelSO m_PeerTradeRequestConfirmedEventChannel;
+		[SerializeField] EventChannelSO m_ClientTradeRequestConfirmedEventChannel;
+		[SerializeField] IntArrayEventChannelSO m_ClientTradeAmountsUpdatedEventChannel;
+		[SerializeField] IntArrayEventChannelSO m_PeerTradeAmountsUpdatedEventChannel;
 		
 		
 		
@@ -34,7 +36,8 @@ namespace Synthicate
 			m_TradeCanceledEventChannel.OnEventRaised += TradeCanceledEventHandler;
 			m_SelectTradePartnerEventChannel.OnEventRaised += SelectTradePartnerEventHandler;
 			m_TradeExecutedEventChannel.OnEventRaised += TradeExecutedEventHandler;
-			m_ClientTradeRequestConfirmedEventChannel.OnEventRaised += ClientTradeRequestConfirmedEventChannel;
+			m_ClientTradeRequestConfirmedEventChannel.OnEventRaised += ClientTradeRequestConfirmedEventHandler;
+			m_ClientTradeAmountsUpdatedEventChannel.OnEventRaised += ClientTradeAmountsUpdatedEventHandler;
 		}
 		
 		public override void Execute()
@@ -47,9 +50,8 @@ namespace Synthicate
 			m_TradeCanceledEventChannel.OnEventRaised -= TradeCanceledEventHandler;
 			m_SelectTradePartnerEventChannel.OnEventRaised -= SelectTradePartnerEventHandler;
 			m_TradeExecutedEventChannel.OnEventRaised -= TradeExecutedEventHandler;
-			m_ClientTradeRequestConfirmedEventChannel.OnEventRaised -= ClientTradeRequestConfirmedEventChannel;
-			
-			changeState(_owner.idleState);
+			m_ClientTradeRequestConfirmedEventChannel.OnEventRaised -= ClientTradeRequestConfirmedEventHandler;
+			m_ClientTradeAmountsUpdatedEventChannel.OnEventRaised -= ClientTradeAmountsUpdatedEventHandler;
 		}
 		
 		void TradeCanceledEventHandler()
@@ -70,19 +72,34 @@ namespace Synthicate
 			changeState(_owner.idleState);
 		}
 		
-		void ClientTradeRequestConfirmedEventChannel(bool confirmed)
+		void ClientTradeRequestConfirmedEventHandler()
 		{
-			_owner.m_PeerTradingState.PeerTradeRequestConfirmedServerRpc(confirmed);
+			_owner.m_PeerTradingState.PeerTradeRequestConfirmedServerRpc();
+		}
+		
+		void ClientTradeAmountsUpdatedEventHandler(int[] resources)
+		{
+			_owner.m_PeerTradingState.UpdatePeerAmountsServerRpc(resources);
 		}
 		
 		[ServerRpc(RequireOwnership = false)]
-		public void PeerTradeRequestConfirmedServerRpc(bool confirmed) => PeerTradeRequestConfirmedClientRpc(confirmed);
+		public void UpdatePeerAmountsServerRpc(int[] resources) => UpdatePeerAmountsClientRpc(resources);
 		
 		[ClientRpc]
-		public void PeerTradeRequestConfirmedClientRpc(bool confirmed)
+		public void UpdatePeerAmountsClientRpc(int[] resources)
 		{
 			if(!IsActiveState()) return;
-			m_PeerTradeRequestConfirmedEventChannel.RaiseEvent(confirmed);
+			m_PeerTradeAmountsUpdatedEventChannel.RaiseEvent(resources);
+		}
+		
+		[ServerRpc(RequireOwnership = false)]
+		public void PeerTradeRequestConfirmedServerRpc() => PeerTradeRequestConfirmedClientRpc();
+		
+		[ClientRpc]
+		public void PeerTradeRequestConfirmedClientRpc()
+		{
+			if(!IsActiveState()) return;
+			m_PeerTradeRequestConfirmedEventChannel.RaiseEvent();
 		}
 		
 		[ServerRpc(RequireOwnership = false)]
