@@ -83,7 +83,7 @@ namespace Synthicate
 			m_PeerTradeRequestConfirmedEventChannel.OnEventRaised += PeerTradeRequestConfirmedEventHandler ;
 			m_PeerTradeAmountsUpdatedEventChannel.OnEventRaised += PeerTradeAmountsUpdatedEventHandler ;
 			
-			
+			m_InvalidTradeText.text = "";
 			
 			m_GivingAmounts = new int[]{0, 0, 0, 0, 0};
 			m_ReceivingAmounts = new int[]{0, 0, 0, 0, 0};
@@ -127,7 +127,6 @@ namespace Synthicate
 				m_InvalidTradeText.text = "";
 				SetClientConfirmedIconVisible(true);
 				SetPeerConfirmedIconVisible(false);
-				m_ClientTradeRequestConfirmedEventChannel.RaiseEvent();
 			}
 			else if (m_NewState == TradeState.PeerConfirmed)
 			{
@@ -142,6 +141,8 @@ namespace Synthicate
 			
 			if (m_GameManagerSO.clientPlayer.HasSufficientResources(m_GivingAmounts))
 			{
+				m_ClientTradeRequestConfirmedEventChannel.RaiseEvent();
+				
 				if (m_TradeState == TradeState.PeerConfirmed)
 				{
 					m_GameManagerSO.clientPlayer.RemoveResources(m_GivingAmounts);
