@@ -9,7 +9,7 @@ using Mono.Cecil;
 
 namespace Synthicate
 {
-	public class UserInterfaceDepotTradeWindow : NetworkBehaviour
+	public class UserInterfaceDepotTradeWindow : MonoBehaviour
 	{
 		
 		[Header("Trade Increment / Decrement Buttons")]
@@ -61,7 +61,6 @@ namespace Synthicate
 		int[] m_ReceivingAmounts;
 		
 		ResourceType m_TradeResource;
-		int m_RequiredAmount;
 		
 		void Awake() {
 			m_ReceivingAmounts = new int[]{0, 0, 0, 0, 0};
@@ -81,57 +80,55 @@ namespace Synthicate
 		
 		void Start()
 		{
+			m_ClientTradeConfirmedButton.onClick.AddListener(ClientTradeConfirmedButtonEventHandler);
+			m_CancelTradeButton.onClick.AddListener(CancelTradeButtonEventHandler);
+		}
+		
+		void CancelTradeButtonEventHandler()
+		{
+			ResetCounts();
+			m_CancelTradeEventChannel.RaiseEvent();
+		}
+		
+		void ClientTradeConfirmedButtonEventHandler()
+		{
+			// ResetCounts();
+			Debug.Log($"Giving: {m_GivingAmount}");
+			Debug.Log($"Receiving: {m_ReceivingAmounts}");
 			
-			m_ClientTradeConfirmedButton.onClick.AddListener(() => 
+			// If trading at a standard depot
+			if (m_TradeResource != ResourceType.Any)
 			{
-				// ResetCounts();
-				Debug.Log($"Giving: {m_GivingAmount}");
-				Debug.Log($"Receiving: {m_ReceivingAmounts}");
+				// Calculate total number of resources a player must give
+				// int totalRequiredAmount = 0;
+				// foreach (int receivingAmount in m_ReceivingAmounts)
+				// {
+				// 	totalRequiredAmount += receivingAmount;
+				// }
 				
-				// If trading at a standard depot
-				if (m_TradeResource != ResourceType.Any)
+				// Check that the player has the required number of resources for the trade
+				if (m_GameManagerSO.clientPlayer.resources[(int) m_TradeResource] >= m_GivingAmount)
 				{
-					// Calculate total number of resources a player must give
-					// int totalRequiredAmount = 0;
-					// foreach (int receivingAmount in m_ReceivingAmounts)
-					// {
-					// 	totalRequiredAmount += receivingAmount;
-					// }
 					
-					// Check that the player has the required number of resources for the trade
-					if (m_GameManagerSO.clientPlayer.resources[(int) m_TradeResource] >= m_GivingAmount)
-					{
-						
-						// Remove the resources from the player's inventory
-						Debug.Log("Requested Resource: " + m_TradeResource);
-						m_GameManagerSO.clientPlayer.resources[(int) m_TradeResource] -= m_GivingAmount;
-						
-						// Give the new resources to the player
-						for(int i = 0; i < m_ReceivingAmounts.Length; i++)
-						{
-							m_GameManagerSO.clientPlayer.resources[i] += m_ReceivingAmounts[i];
-						}
-						
-						// Raise trade executed event
-						ResetCounts();
-						m_TradeExecutedEventChannel.RaiseEvent();
-					}
-					else
-					{
-						Debug.Log("Client does not have enough resources for this trade!");
-						m_InvalidTradeText.text = "Insufficient Resources!";
-					}
+					// Remove the resources from the player's inventory
+					Debug.Log("Requested Resource: " + m_TradeResource);
+					m_GameManagerSO.clientPlayer.RemoveResources(m_TradeResource,m_GivingAmount);
+					
+					// Give the new resources to the player
+					m_GameManagerSO.clientPlayer.AddResources(m_ReceivingAmounts);
+					
+					// Raise trade executed event
+					ResetCounts();
+					m_TradeExecutedEventChannel.RaiseEvent();
 				}
-				
-				m_InvalidTradeText.text = "Insufficient Resources!";
-			});
+				else
+				{
+					Debug.Log("Client does not have enough resources for this trade!");
+					m_InvalidTradeText.text = "Insufficient Resources!";
+				}
+			}
 			
-			m_CancelTradeButton.onClick.AddListener(() => {
-				ResetCounts();
-				m_CancelTradeEventChannel.RaiseEvent();
-			});
-			
-			
+			m_InvalidTradeText.text = "Insufficient Resources!";
 		}
 		
 		void IncrementerAmountChanged()
@@ -147,15 +144,17 @@ namespace Synthicate
 		
 		void DepotSelectedEventHandler(DepotSelection selection)
 		{
-			m_TradeResource = selection.Resource;
-			m_RequiredAmount = selection.RequiredAmount;
 			ResetCounts();
+			m_TradeResource = selection.Resource;
+			tradeOfferAmount.text = $"{selection.RequiredAmount}";
+			m_DepotResourceImage.sprite = m_UserInterfaceScriptableObject.ResourceSprites[(int) selection.Resource];
 		}
 
 		
 		void ResetCounts()
 		{
 			m_InvalidTradeText.text = "";
+			tradeOfferAmount.text = "";
 			
 			m_GivingAmount = 0;
 			m_ReceivingAmounts = new int[]{0, 0, 0, 0, 0};

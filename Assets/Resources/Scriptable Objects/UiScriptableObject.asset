@@ -12,3 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38faadc9b1344a941b58916ca7254ec2, type: 3}
   m_Name: UiScriptableObject
   m_EditorClassIdentifier: 
+  ResourceSprites:
+  - {fileID: 21300000, guid: 4f495136687392a4894265ec32b6002c, type: 3}
+  - {fileID: 21300000, guid: ba14c73f70b0bbc48afcd5b759ebb318, type: 3}
+  - {fileID: 21300000, guid: 75a0eb6f9f456404c9b2e744f5c8c52f, type: 3}
+  - {fileID: 21300000, guid: fbfbfcee82e6208449323e2534a9ce18, type: 3}
+  - {fileID: 21300000, guid: 693579efa5b84574891c312553ddffd4, type: 3}
+  setMainMenuActiveEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  setGameMenuActiveEvent:
+    m_PersistentCalls:
+      m_Calls: []

@@ -164,11 +164,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1979619978821395496}
   - {fileID: 7891335343726673220}
   - {fileID: 4387203679554073036}
-  - {fileID: 9038039854551191507}
-  - {fileID: 1979619978821395496}
   - {fileID: 5378557150079547280}
+  - {fileID: 9038039854551191507}
   m_Father: {fileID: 7973605926354882844}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -185,7 +185,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7973605926354882844}
-  - component: {fileID: 1937572025117905212}
   - component: {fileID: 7185863661492362030}
   m_Layer: 5
   m_Name: Depot Trade Window
@@ -221,26 +220,6 @@ RectTransform:
   m_AnchoredPosition: {x: -0.000011444, y: -43}
   m_SizeDelta: {x: 240.967, y: 341.0579}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1937572025117905212
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5145080292936267209}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1841085935
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!114 &7185863661492362030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,11 +233,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   depotResourceIncrementers:
+  - {fileID: 7659159178636629943}
   - {fileID: 2067274274442661595}
   - {fileID: 5607460718031798867}
-  - {fileID: 891246584954469452}
-  - {fileID: 7659159178636629943}
   - {fileID: 4294094745971819535}
+  - {fileID: 891246584954469452}
   tradeOfferAmount: {fileID: 7071781804019526060}
   m_ClientTradeConfirmedButton: {fileID: 466533878878447367}
   m_CancelTradeButton: {fileID: 8202779486520212341}
@@ -266,6 +245,7 @@ MonoBehaviour:
   m_DepotResourceImage: {fileID: 559082074719406566}
   m_CancelTradeEventChannel: {fileID: 11400000, guid: 6133831592bf8c94dab3c191053428ba, type: 2}
   m_DepotSelectedEventChannel: {fileID: 11400000, guid: d692b578c5aab0e46ac6a6610e93184f, type: 2}
+  m_TradeExecutedEventChannel: {fileID: 11400000, guid: e92fd0f8d7e695f4086206c7f3456d78, type: 2}
   m_UserInterfaceScriptableObject: {fileID: 11400000, guid: 90a81f3ba11d5b04e8c825c89791d49f, type: 2}
   m_GameManagerSO: {fileID: 11400000, guid: f222b367bb47bc140bb8cc26d5fc6f28, type: 2}
 --- !u!1 &5436378539099300662

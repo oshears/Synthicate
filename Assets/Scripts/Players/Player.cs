@@ -154,6 +154,29 @@ namespace Synthicate
 		{
 			for (int i = 0; i < Global.NUM_RESOURCE_TYPES; i++) resources[i] += 1;
 		}
+		
+		public void AddResources(ResourceType resourceType, int resourceAmount)
+		{
+			resources[(int) resourceType] += resourceAmount;
+		}
+		
+		public void AddResources(int[] resources)
+		{
+			if(resources.Length < Global.NUM_RESOURCE_TYPES)
+			{
+				Debug.LogError($"Resources provided is less than {Global.NUM_RESOURCE_TYPES}");
+			}
+			
+			for(int i = 0; i < Global.NUM_RESOURCE_TYPES; i++)
+			{
+				AddResources((ResourceType) i, resources[i]);
+			}
+		}
+		
+		public void RemoveResources(ResourceType resourceType, int resourceAmount)
+		{
+			resources[(int) resourceType] -= resourceAmount;
+		}
 	}
 
 	

@@ -8,6 +8,10 @@ namespace Synthicate
 	[CreateAssetMenu(fileName = "UiScriptableObject", menuName = "ScriptableObjects/UiScriptableObject")]
 	public class UiScriptableObject : ScriptableObject
 	{
+		
+		[SerializeField]
+		public Sprite[] ResourceSprites;
+		
 		public delegate void UserInterfaceEvent();
 		
 		#region Title Screen Button Events

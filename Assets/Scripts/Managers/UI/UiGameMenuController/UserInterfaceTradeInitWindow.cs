@@ -8,7 +8,7 @@ using Unity.Netcode;
 
 namespace Synthicate
 {
-	public class UserInterfaceTradeInitWindow : NetworkBehaviour
+	public class UserInterfaceTradeInitWindow : MonoBehaviour
 	{
 		
 		[SerializeField]

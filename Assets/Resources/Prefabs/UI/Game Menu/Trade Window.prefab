@@ -68,11 +68,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6527290101509129249}
   - {fileID: 354700599616369130}
   - {fileID: 1132843592748528252}
-  - {fileID: 4700931474182913059}
-  - {fileID: 6527290101509129249}
   - {fileID: 4642775694308702356}
+  - {fileID: 4700931474182913059}
   m_Father: {fileID: 7276030140150338126}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -143,11 +143,11 @@ MonoBehaviour:
   gameManagerSO: {fileID: 11400000, guid: f222b367bb47bc140bb8cc26d5fc6f28, type: 2}
   userInterfaceSO: {fileID: 11400000, guid: 90a81f3ba11d5b04e8c825c89791d49f, type: 2}
   m_ResourceIncrementers:
+  - {fileID: 3145305375574947774}
   - {fileID: 8493770207048041077}
   - {fileID: 9118490096889168355}
-  - {fileID: 3462943844944138172}
-  - {fileID: 3145305375574947774}
   - {fileID: 3557204569596562187}
+  - {fileID: 3462943844944138172}
   m_InvalidTradeText: {fileID: 1603852537256480679}
   m_PeerTradeConfirmedIcon: {fileID: 4528327015463055592}
   m_ClientTradeConfirmedIcon: {fileID: 2037947254182032586}
