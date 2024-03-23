@@ -41,6 +41,31 @@ namespace Synthicate
 				changeState(_owner.m_PeerTradingState);
 			}
 		}
+		
+		[ServerRpc(RequireOwnership = false)]
+		public ResourceType TakeRandomResourceFromPeerServerRpc(int clientId) {
+			ClientRpcParams clientRpcParams = new ClientRpcParams
+			{
+				Send = new ClientRpcSendParams
+				{
+					TargetClientIds = new ulong[]{(ulong) clientId}
+				}
+			};
+		
+			return TakeRandomResourceFromPeerClientRpc(clientRpcParams);
+		}
+		
+		[ClientRpc]
+		public ResourceType TakeRandomResourceFromPeerClientRpc(ClientRpcParams clientRpcParams = default)
+		{
+			if(!IsActiveState()){
+				Debug.LogError("Error! This client received the RPC and wasn't in the pending state!");
+				return ResourceType.None;
+			}
+			
+			return _gameManagerSO.clientPlayer.RemoveRandomResource();
+		}
+		
 
 	}
 }

@@ -118,6 +118,11 @@ namespace Synthicate
 			return playerList[currentPlayerTurn];
 		}
 		
+		public string GetClientPlayerName()
+		{
+			return clientPlayer.GetName();
+		}
+		
 		
 		// public void OnPlayerBuiltOutpost()
 		// {

@@ -14,7 +14,7 @@ namespace Synthicate
 	}
 			
 	public enum HexType { City, Powerplant, Scrapyard, Mine, Outlands, Desert };
-	public enum ResourceType { People, Power, Mech, Metal, Food, Any };
+	public enum ResourceType { People, Power, Mech, Metal, Food, Any, None };
 	public enum GameEventType { Build, Trade, Hack, Roll, Info, Influence, Card };
 	public enum CardType { Hacker, Influence};
 

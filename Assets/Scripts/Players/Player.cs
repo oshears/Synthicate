@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Synthicate
 {
@@ -189,6 +187,28 @@ namespace Synthicate
 			{
 				RemoveResources((ResourceType) i, resources[i]);
 			}
+		}
+		
+		/// <summary>
+		/// Randomly pick one of the available resources that the player has to remove
+		/// </summary>
+		/// <returns></returns>
+		public ResourceType RemoveRandomResource()
+		{
+			List<ResourceType> resourceOptions = new List<ResourceType>();
+			
+			for(int i = 0; i < resources.Length; i++)
+			{
+				if (resources[i] > 0) resourceOptions.Add((ResourceType) i);
+			}
+			
+			if (resourceOptions.Count == 0) return ResourceType.None;
+			
+			ResourceType resourceTypeToRemovoe = resourceOptions[Random.Range(0, resourceOptions.Count)];
+			RemoveResources(resourceTypeToRemovoe,1);
+			
+			return resourceTypeToRemovoe;
+			
 		}
 		
 		public bool HasSufficientResources(int[] resources)

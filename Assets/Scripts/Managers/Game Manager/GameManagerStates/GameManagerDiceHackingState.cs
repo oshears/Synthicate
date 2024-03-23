@@ -68,13 +68,29 @@ namespace Synthicate
 		public void SelectTradePartnerEventHandler(int selectedPlayer)
 		{
 			// Decrement a random resource from the target
+			ResourceType takenResourceType = _owner.pendingState.TakeRandomResourceFromPeerServerRpc(selectedPlayer);
+			
+			string clientname = _gameManagerSO.GetClientPlayerName();
+			string peerName = _gameManagerSO.playerList[selectedPlayer].GetName();
+			
+			if (takenResourceType != ResourceType.Any && takenResourceType != ResourceType.None)
+			{
+				m_NotificationEventChannel.RaiseEvent($"{clientname} took a resource  from {peerName}.");
+				_gameManagerSO.clientPlayer.AddResources(takenResourceType,1);
+				
+			}
+			else
+			{
+				m_NotificationEventChannel.RaiseEvent($"{clientname} could not take any resources from {peerName}.");
+			}
 			
 			// Incrmeent the client's resources
 			// _gameManagerSO.clientPlayer.
-			for(int i = 0; i < 5; i++)
-			{
-				_gameManagerSO.clientPlayer.resources[i]++;
-			}		
+			// for(int i = 0; i < 5; i++)
+			// {
+			// 	_gameManagerSO.clientPlayer.resources[i]++;
+			// }	
+			
 			
 			// Change to idle state
 			changeState(_owner.idleState);
