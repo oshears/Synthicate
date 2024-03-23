@@ -11,34 +11,25 @@ namespace Synthicate
 	public class UiMainMenuController : MonoBehaviour
 	{
 		[Header("Title Screen Game Objects")]
-		[SerializeField]
-		GameObject titleScreen;
-		[SerializeField]
-		Button singlePlayerButton, hostMultiPlayerButton, joinMultiPlayerButton, quitButton; 
+		[SerializeField] GameObject titleScreen;
+		[SerializeField] Button singlePlayerButton, hostMultiPlayerButton, joinMultiPlayerButton, quitButton; 
 		
 		
 		[Header("Join Multiplayer Screen Game Objects")]
-		[SerializeField]
-		GameObject joinMultiplayerScreen;
-		[SerializeField]
-		Button multiPlayerConnectButton, multiPlayerCancelButton;
-		[SerializeField]
-		TMP_InputField playerNameTextInput, ipAddressTextInput, portAddressTextInput;
+		[SerializeField] GameObject joinMultiplayerScreen;
+		[SerializeField] Button multiPlayerConnectButton, multiPlayerCancelButton;
+		[SerializeField] TMP_InputField playerNameTextInput, ipAddressTextInput, portAddressTextInput;
 		
 		[Header("Multiplayer Lobby Screen Game Objects")]
-		[SerializeField]
-		GameObject multiplayerLobbyScreen;
-		[SerializeField]
-		GameObject multiPlayerLeaveLobbyButton, multiPlayerStartGameButton;
-		[SerializeField]
-		GameObject[] playerDisplays;
-		[SerializeField]
-		// TextMeshProUGUI[] playerNames;
+		[SerializeField] GameObject multiplayerLobbyScreen;
+		[SerializeField] GameObject multiPlayerLeaveLobbyButton, multiPlayerStartGameButton;
+		[SerializeField] GameObject[] playerDisplays;
+		[SerializeField] // TextMeshProUGUI[] playerNames;
 		GameObject[] playerNames;
 		
 		[Header("Scriptable Objects")]
-		[SerializeField]
-		UiScriptableObject uiScriptableObject;
+		[SerializeField] UiScriptableObject uiScriptableObject;
+		[SerializeField] GameMenuStateEventChannel m_GameMenuStateEventChannel;
 		
 		void Awake() {
 			
@@ -59,6 +50,8 @@ namespace Synthicate
 			// Visibility Events
 			uiScriptableObject.UpdateMainMenuScreenEvent += UpdateMainMenuScreenEventHandler;
 			uiScriptableObject.updatePlayerDisplaysEvent += UpdatePlayerDisplaysEventHandler;
+			
+			m_GameMenuStateEventChannel.OnEventRaised += GameMenuStateEventHandler;
 		}
 		
 		void Start()
@@ -108,6 +101,22 @@ namespace Synthicate
 				// playerNames[i].text = players[i].GetName(); // DEBUG: IDK why this wasn't working
 				playerNames[i].GetComponent<TextMeshProUGUI>().text = players[i].GetName();
 			} 
+		}
+		
+		void GameMenuStateEventHandler(GameMenuType gameMenu)
+		{
+			if (gameMenu == GameMenuType.MainMenu)
+			{
+				titleScreen.SetActive(true);
+				joinMultiplayerScreen.SetActive(false);
+				multiplayerLobbyScreen.SetActive(false);
+			}
+			else
+			{
+				titleScreen.SetActive(false);
+				joinMultiplayerScreen.SetActive(false);
+				multiplayerLobbyScreen.SetActive(false);
+			}
 		}
 		
 	}

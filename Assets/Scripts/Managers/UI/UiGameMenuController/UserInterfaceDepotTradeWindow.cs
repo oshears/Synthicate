@@ -144,6 +144,8 @@ namespace Synthicate
 		
 		void DepotSelectedEventHandler(DepotSelection selection)
 		{
+			if (selection.Resource == ResourceType.Any) return;
+			
 			ResetCounts();
 			m_TradeResource = selection.Resource;
 			tradeOfferAmount.text = $"{selection.RequiredAmount}";

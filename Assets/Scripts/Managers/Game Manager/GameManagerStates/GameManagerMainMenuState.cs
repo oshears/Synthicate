@@ -11,23 +11,17 @@ namespace Synthicate
 	
 	public class GameManagerMainMenuState : GameManagerAbstractState
 	{
-		bool _waitingForClientReady = false;
-		float _waitTimeForClient = 0;
+		[SerializeField] GameMenuStateEventChannel m_GameMenuStateEventChannel;
 	
 		public override void Enter()
 		{
-			_userInterfaceSO.OnSetMainMenuActive(true);
-			_userInterfaceSO.OnSetGameMenuActive(false);
+			m_GameMenuStateEventChannel.RaiseEvent(GameMenuType.MainMenu);
 			_userInterfaceSO.OnUpdateMainMenuScreen(MainMenu.Screens.TitleScreen);
 			
 			
 			_userInterfaceSO.singlePlayerButtonEvent += SinglePlayerButtonEventHandler;
 			_userInterfaceSO.hostMultiplayerButtonEvent += HostMultiplayerButtonEventHandler;
 			_userInterfaceSO.joinMultiplayerButtonEvent += JoinMultiplayerButtonEventHandler;
-			
-			_waitingForClientReady = false;
-			_waitTimeForClient = 0;
-			
 		}
 		
 		public override void Execute()
@@ -54,27 +48,13 @@ namespace Synthicate
 			_gameManagerSO.SetClientPlayer(0);
 			
 			NetworkManager.Singleton.StartHost();
-			// _gameNetworkManagerSO.OnHostGame("Player 1");
-
-
-			// if (clientPlayerManager.getId() == currentSetupTurn)
-			// 	beginClientSetupStrongholdBuildMode();
-
-			// updateGUIEvent.Invoke();
-			// updateMainMenuEvent.Invoke(false);
-			
-			_userInterfaceSO.OnSetMainMenuActive(false);
-			
 			
 			_gameManagerSO.SetCurrentPlayerTurn(0);
-			
-			// Enable the game menu
-			_userInterfaceSO.OnSetGameMenuActive(true);
 			
 			// Go to setup state
 			if (_gameManagerSO.m_SkipSetup)
 			{
-				changeState(_owner.setupState);
+				changeState(_owner.idleState);
 			}
 			else
 			{

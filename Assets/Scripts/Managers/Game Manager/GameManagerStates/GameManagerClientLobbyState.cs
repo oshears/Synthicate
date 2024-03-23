@@ -27,9 +27,6 @@ namespace Synthicate
 			_userInterfaceSO.multiplayerCancelGameButtonEvent += MultiplayerCancelGameButtonEventHandler;
 			_userInterfaceSO.multiplayerLeaveLobbyButtonEvent += LeaveLobbyEventHandler;
 			
-			_userInterfaceSO.OnSetMainMenuActive(true);
-			_userInterfaceSO.OnSetGameMenuActive(false);
-			
 			_transport  = NetworkManager.Singleton.gameObject.GetComponent<UnityTransport>();
 			
 			_waitingForClientReady = false;
@@ -124,10 +121,6 @@ namespace Synthicate
 			{
 				Debug.Log($"Starting Game with {_gameManagerSO.playerList.Count} players!");
 				
-				// Enable the game menu
-				_userInterfaceSO.OnSetMainMenuActive(false);
-				_userInterfaceSO.OnSetGameMenuActive(true);
-
 				changeState(skipSetup ? _owner.pendingState : _owner.pendingSetupState);
 			}
 		}

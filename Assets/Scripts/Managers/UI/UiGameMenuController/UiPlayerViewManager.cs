@@ -11,16 +11,13 @@ namespace Synthicate
 {
 	public class UiPlayerViewManager : UiUpdatableElementMonoBehavior
 	{
-		[SerializeField]
-		GameObject[] playerViews;
+		[SerializeField] GameObject[] playerViews;
 		
-		[SerializeField]
-		GameObject[] playerTurnIndicators;
+		[SerializeField] GameObject[] playerTurnIndicators;
 		
 		[Header("Event Channels")]
 		
-		[SerializeField]
-		EventChannelSO m_UpdateUiEventChannel;
+		[SerializeField] EventChannelSO m_UpdateUiEventChannel;
 		
 		override protected void Awake() {
 			base.Awake();

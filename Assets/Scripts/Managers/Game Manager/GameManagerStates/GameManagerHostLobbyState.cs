@@ -21,8 +21,6 @@ namespace Synthicate
 			_userInterfaceSO.multiplayerLeaveLobbyButtonEvent += LeaveLobbyEventHandler;
 			NetworkManager.Singleton.OnClientConnectedCallback += ClientConnectedEventHandler;
 			
-			_userInterfaceSO.OnSetMainMenuActive(true);
-			_userInterfaceSO.OnSetGameMenuActive(false);
 			_transport  = NetworkManager.Singleton.gameObject.GetComponent<UnityTransport>();
 			
 			// TestClientRpc();
@@ -96,11 +94,6 @@ namespace Synthicate
 			Debug.Log($"Starting Game with {_gameManagerSO.playerList.Count} players!");
 			
 			_gameManagerSO.SetCurrentPlayerTurn(0);
-			
-			// Enable the game menu
-			_userInterfaceSO.OnSetMainMenuActive(false);
-			_userInterfaceSO.OnSetGameMenuActive(true);
-			
 			
 			_owner.clientLobbyState.StartGameClientRpc(_gameManagerSO.m_SkipSetup);
 			changeState(_gameManagerSO.m_SkipSetup ? _owner.idleState : _owner.setupState);

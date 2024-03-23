@@ -5,6 +5,8 @@ using UnityEngine;
 namespace Synthicate
 {
 	public enum GameMenuType {
+		MainMenu,
+		Hidden,
 		PlayerTurnScreen, 
 		PlayerBuildModeScreen, 
 		TradeInitScreen, 

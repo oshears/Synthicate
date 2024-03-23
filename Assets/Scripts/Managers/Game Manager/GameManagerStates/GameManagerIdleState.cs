@@ -41,11 +41,13 @@ namespace Synthicate
 		
 		[SerializeField] EventChannelSO m_CancelTradeEventChannel;
 		
+		[SerializeField] EventChannelSO m_InitializeUiEventChannel;
 		[SerializeField] EventChannelSO m_UpdateUiEventChannel;
 		
 		public override void Enter()
 		{
 			// _menuState = MenuState.Default;
+			m_InitializeUiEventChannel.RaiseEvent();
 			m_UpdateUiEventChannel.RaiseEvent();
 			
 			m_GameMenuStateEventChannel.RaiseEvent(GameMenuType.PlayerTurnScreen);

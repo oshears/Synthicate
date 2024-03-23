@@ -13,88 +13,66 @@ namespace Synthicate
 
 		[Header("Menus")]
 		
-		// [SerializeField]
-		// GameObject m_DefaultGameMenu;
+		// [SerializeField] // GameObject m_DefaultGameMenu;
 		
-		// [SerializeField]
-		// GameObject m_CancelGameMenu;
+		// [SerializeField] // GameObject m_CancelGameMenu;
 		
-		// [SerializeField]
-		// GameObject m_CyberActionGameMenu;
+		// [SerializeField] // GameObject m_CyberActionGameMenu;
 		
-		[SerializeField]
-		GameObject m_TradeInitMenu;
+		[SerializeField] GameObject m_TradeInitMenu;
 		
-		[SerializeField]
-		GameObject m_TradeMenu;
+		[SerializeField] GameObject m_TradeMenu;
 		
-		[SerializeField]
-		GameObject m_DepotTradeMenu;
+		[SerializeField] GameObject m_DepotTradeMenu;
 		
-		[SerializeField]
-		GameObject m_AnyDepotTradeMeu;
+		[SerializeField] GameObject m_AnyDepotTradeMeu;
+		
+		[Header("Windows")]
+		[SerializeField] GameObject m_PlayersView;
+		[SerializeField] GameObject m_PlayerResourceView;
 		
 		[Header("Buttons")]
 		
-		[SerializeField]
-		GameObject finishTurnButton;
+		[SerializeField] GameObject finishTurnButton;
 		
-		[SerializeField]
-		GameObject buildModeButton;
+		[SerializeField] GameObject buildModeButton;
 		
-		[SerializeField]
-		GameObject tradeButton;
+		[SerializeField] GameObject tradeButton;
 		
-		[SerializeField]
-		GameObject cyberActionButton;
+		[SerializeField] GameObject cyberActionButton;
 		
-		[SerializeField]
-		GameObject cancelButton;
+		[SerializeField] GameObject cancelButton;
 		
-		[SerializeField]
-		GameObject hackButton;
+		[SerializeField] GameObject hackButton;
 		
-		[SerializeField]
-		GameObject m_BuyEventCardButton;
+		[SerializeField] GameObject m_BuyEventCardButton;
 
 
 		[Header("Scriptable Objects")]
 				
-		[SerializeField]
-		GameManagerSO gameManagerSO;
+		[SerializeField] GameManagerSO gameManagerSO;
 		
-		[SerializeField]
-		UiScriptableObject userInterfaceSO;
+		[SerializeField] UiScriptableObject userInterfaceSO;
 		
 		[Header("Event Channels")]
 		
-		[SerializeField]
-		GameMenuStateEventChannel m_GameMenuStateEventChannel;
+		[SerializeField] GameMenuStateEventChannel m_GameMenuStateEventChannel;
 		
-		[SerializeField]
-		EventChannelSO m_CancelButtonEventChannel;
+		[SerializeField] EventChannelSO m_CancelButtonEventChannel;
 		
-		[SerializeField]
-		EventChannelSO m_CyberActionButtionEventChannel;
+		[SerializeField] EventChannelSO m_CyberActionButtionEventChannel;
 		
-		[SerializeField]
-		EventChannelSO m_TradeButtonEventChannel;
+		[SerializeField] EventChannelSO m_TradeButtonEventChannel;
 		
-		[SerializeField]
-		EventChannelSO m_BuildModeButtonEventChannel;
+		[SerializeField] EventChannelSO m_BuildModeButtonEventChannel;
 		
-		[SerializeField]
-		EventChannelSO m_FinishTurnButtonEventChannel; 
+		[SerializeField] EventChannelSO m_FinishTurnButtonEventChannel; 
 		
-		[SerializeField]
-		EventChannelSO m_HackButtonEventChannel;
+		[SerializeField] EventChannelSO m_HackButtonEventChannel;
 		
-		[SerializeField]
-		EventChannelSO m_BuyEventCardEventChannel;
+		[SerializeField] EventChannelSO m_BuyEventCardEventChannel;
 		
-		[SerializeField]
-		EventChannelSO m_UpdateUiEventChannel;
-		
+		[SerializeField] EventChannelSO m_UpdateUiEventChannel;
 		
 		void Awake() {
 			m_UpdateUiEventChannel.OnEventRaised += UpdateUserInterfaceEventHandler;
@@ -116,7 +94,7 @@ namespace Synthicate
 			// m_DefaultGameMenu.SetActive(true);
 			m_TradeInitMenu.SetActive(false);
 			m_TradeMenu.SetActive(false);
-			
+			SetViewsVisible(false);
 			DisableMenuButtons();
 		}
 		
@@ -130,7 +108,17 @@ namespace Synthicate
 			DisableCanvases();
 			DisableMenuButtons();
 			
-			if (screen == GameMenuType.PlayerTurnScreen)
+			SetViewsVisible(true);
+			
+			if (screen == GameMenuType.MainMenu)
+			{
+				SetViewsVisible(false);
+			}
+			else if (screen == GameMenuType.Hidden)
+			{
+				SetViewsVisible(false);
+			}
+			else if (screen == GameMenuType.PlayerTurnScreen)
 			{
 				finishTurnButton.SetActive(true);
 				buildModeButton.SetActive(true);
@@ -201,6 +189,12 @@ namespace Synthicate
 			m_TradeMenu.SetActive(false);
 			m_AnyDepotTradeMeu.SetActive(false);
 			m_DepotTradeMenu.SetActive(false);
+		}
+		
+		void SetViewsVisible(bool visible)
+		{
+			m_PlayersView.SetActive(visible);
+			m_PlayerResourceView.SetActive(visible);
 		}
 		
 	}

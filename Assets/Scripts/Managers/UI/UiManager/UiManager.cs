@@ -18,14 +18,14 @@ namespace Synthicate
 		
 		public void Awake()
 		{
-			_userInterfaceSO.setMainMenuActiveEvent.AddListener(SetMainMenuActiveEventHandler);
-			_userInterfaceSO.setGameMenuActiveEvent.AddListener(SetGameMenuActiveEventHandler);
+			// _userInterfaceSO.setMainMenuActiveEvent.AddListener(SetMainMenuActiveEventHandler);
+			// _userInterfaceSO.setGameMenuActiveEvent.AddListener(SetGameMenuActiveEventHandler);
 		}
 		
 		public void Start()
 		{
-			_mainMenuScreen.SetActive(true);
-			_gameMenuScreen.SetActive(false);
+			// _mainMenuScreen.SetActive(true);
+			// _gameMenuScreen.SetActive(false);
 		}
 		
 		public void SetMainMenuActiveEventHandler(bool active)
