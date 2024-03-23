@@ -22,6 +22,7 @@ namespace Synthicate
 		[SerializeField] EventChannelSO m_ClientTradeRequestConfirmedEventChannel;
 		[SerializeField] IntArrayEventChannelSO m_ClientTradeAmountsUpdatedEventChannel;
 		[SerializeField] IntArrayEventChannelSO m_PeerTradeAmountsUpdatedEventChannel;
+		[SerializeField] TradeInitEventChannel m_InitiateTradeEventChannel;
 		
 		
 		
@@ -32,6 +33,7 @@ namespace Synthicate
 			// TODO: Need to add the logic for the Trade Init Screen and the Trade Requester / Receiver Screen
 			// m_GameMenuStateEventChannel.RaiseEvent(GameMenuType.TradeRequesterScreen);
 			m_GameMenuStateEventChannel.RaiseEvent(GameMenuType.TradeInitScreen);
+			m_InitiateTradeEventChannel.RaiseEvent(TradeInitWindowType.Standard);
 			
 			m_TradeCanceledEventChannel.OnEventRaised += TradeCanceledEventHandler;
 			m_SelectTradePartnerEventChannel.OnEventRaised += SelectTradePartnerEventHandler;
@@ -53,6 +55,7 @@ namespace Synthicate
 			m_TradeExecutedEventChannel.OnEventRaised -= TradeExecutedEventHandler;
 			m_ClientTradeRequestConfirmedEventChannel.OnEventRaised -= ClientTradeRequestConfirmedEventHandler;
 			m_ClientTradeAmountsUpdatedEventChannel.OnEventRaised -= ClientTradeAmountsUpdatedEventHandler;
+			m_CancelButtonEventChannel.OnEventRaised -= CancelButtonEventHandler;
 		}
 		
 		void CancelButtonEventHandler()

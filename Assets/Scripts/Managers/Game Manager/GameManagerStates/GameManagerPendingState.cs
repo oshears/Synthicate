@@ -10,10 +10,11 @@ namespace Synthicate
 		
 		[SerializeField] GameMenuStateEventChannel m_GameMenuStateEventChannel;
 		[SerializeField] EventChannelSO m_UpdateUserInterfaceEventChannel;
-		
+		[SerializeField] EventChannelSO m_InitializeUiEventChannel;
 
 		public override void Enter()
 		{
+			m_InitializeUiEventChannel.RaiseEvent();
 			m_UpdateUserInterfaceEventChannel.RaiseEvent();
 			
 			m_GameMenuStateEventChannel.RaiseEvent(GameMenuType.PlayerPendingScreen);

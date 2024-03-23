@@ -53,7 +53,7 @@ namespace Synthicate
 		void TradeCanceledEventHandler()
 		{
 			_owner.tradingState.PeerCancelTradeServerRpc();
-			changeState(_owner.pendingSetupState);
+			changeState(_owner.pendingState);
 		}
 		
 		

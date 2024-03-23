@@ -106,6 +106,10 @@ public class GameManagerEditor : Editor {
 		gameManager.gameManagerSO.m_SkipSetup = m_SkipSetup;
 		GUILayout.EndHorizontal();
 		
+		GUILayout.BeginHorizontal();
+		GUILayout.Label($"Current Game Manager State: {gameManager.stateMachine._currentState}");
+		GUILayout.EndHorizontal();
+		
 		
 		// if(GUILayout.Button("Toggle Hacker"))
 		// {

@@ -42,7 +42,7 @@ namespace Synthicate
 		[SerializeField] EventChannelSO m_CancelTradeEventChannel;
 		
 		[SerializeField] EventChannelSO m_InitializeUiEventChannel;
-		[SerializeField] EventChannelSO m_UpdateUiEventChannel;
+		[SerializeField] EventChannelSO m_UpdateUiEventChannel;		
 		
 		public override void Enter()
 		{
@@ -83,6 +83,8 @@ namespace Synthicate
 			m_CancelButtonEventChannel.OnEventRaised -= CancelButtonEventHandler;
 			m_DepotSelectedEventChannel.OnEventRaised -= DepotSelectedEventHandler;
 			m_TradeExecutedEventChannel.OnEventRaised -= TradeExecutedEventHandler;
+			m_CancelTradeEventChannel.OnEventRaised -= CancelTradeEventHandler;
+			
 			
 			m_EnableDepotSelectionEventChannel.RaiseEvent(false);
 		}

@@ -173,7 +173,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.09828186}
+  m_AnchoredPosition: {x: 0, y: -0.09829712}
   m_SizeDelta: {x: 0.00012207031, y: 0.19625854}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &139688992
@@ -431,7 +431,7 @@ MonoBehaviour:
   m_TradeExecutedEventChannel: {fileID: 11400000, guid: e92fd0f8d7e695f4086206c7f3456d78, type: 2}
   m_PeerTradeRequestConfirmedEventChannel: {fileID: 11400000, guid: d4935e2dd51827b4d8e479533a716814, type: 2}
   m_ClientTradeRequestConfirmedEventChannel: {fileID: 11400000, guid: 8fa334b43c375cb4596e181dc26e75c6, type: 2}
-  m_ClientTradeAmountsUpdatedEventChannel: {fileID: 11400000, guid: 6dcd4d55ab6c60c4ab9622096b3a969f, type: 2}
+  m_ClientTradeAmountsUpdatedEventChannel: {fileID: 11400000, guid: 95f0811371ef1b146addfe40cc8bd8cb, type: 2}
   m_PeerTradeAmountsUpdatedEventChannel: {fileID: 11400000, guid: 6dcd4d55ab6c60c4ab9622096b3a969f, type: 2}
 --- !u!1 &591440368
 GameObject:
@@ -584,7 +584,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 4.030365, y: 0.09991455}
+  m_AnchoredPosition: {x: 4.0303345, y: 0.09991455}
   m_SizeDelta: {x: 8.060974, y: 0.1977539}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &772327765
@@ -729,7 +729,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000076293945}
+  m_AnchoredPosition: {x: 0, y: -0.000061035156}
   m_SizeDelta: {x: 0.000061035156, y: -0.00018310547}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1462172699
@@ -3156,6 +3156,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: e92fd0f8d7e695f4086206c7f3456d78, type: 2}
     - target: {fileID: 5251935953400249301, guid: 4f13fd23d320d8440820fed4d2511e0d, type: 3}
+      propertyPath: m_UpdateUserInterfaceEventChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: 29c8b666a6a2c994ba4cc049e8007d0d, type: 2}
+    - target: {fileID: 5251935953400249301, guid: 4f13fd23d320d8440820fed4d2511e0d, type: 3}
+      propertyPath: m_InitializeUserInterfaceEventChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: 76f204bb582c581469253ad23d04b62f, type: 2}
+    - target: {fileID: 5251935953400249301, guid: 4f13fd23d320d8440820fed4d2511e0d, type: 3}
       propertyPath: m_PeerTradeAmountsUpdatedEventChannel
       value: 
       objectReference: {fileID: 11400000, guid: 6dcd4d55ab6c60c4ab9622096b3a969f, type: 2}
@@ -3543,6 +3551,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 57308c59ef5fb154aad63c2d18cb3e9a, type: 2}
     - target: {fileID: 3806882121532177772, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
+      propertyPath: m_InitiateTradeEventChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: 70705098476921e4790d1cbc328332c6, type: 2}
+    - target: {fileID: 3806882121532177772, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
       propertyPath: m_TradeExecutedEventChannel
       value: 
       objectReference: {fileID: 11400000, guid: e92fd0f8d7e695f4086206c7f3456d78, type: 2}
@@ -3566,6 +3578,10 @@ PrefabInstance:
       propertyPath: m_ClientTradeRequestConfirmedEventChannel
       value: 
       objectReference: {fileID: 11400000, guid: 8fa334b43c375cb4596e181dc26e75c6, type: 2}
+    - target: {fileID: 4519063144442943532, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
+      propertyPath: m_InitializeUiEventChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: 76f204bb582c581469253ad23d04b62f, type: 2}
     - target: {fileID: 4519063144442943532, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
       propertyPath: m_UpdateUserInterfaceEventChannel
       value: 
