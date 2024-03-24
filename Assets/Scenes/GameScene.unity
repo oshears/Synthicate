@@ -2001,14 +2001,22 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 1841085935
       objectReference: {fileID: 0}
+    - target: {fileID: 4857476200570928304, guid: 2588f1076bfc15a449a7d8e4fd2458d5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5145080292936267209, guid: 2588f1076bfc15a449a7d8e4fd2458d5, type: 3}
       propertyPath: m_Name
       value: Depot Trade Window
       objectReference: {fileID: 0}
     - target: {fileID: 5145080292936267209, guid: 2588f1076bfc15a449a7d8e4fd2458d5, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7185863661492362030, guid: 2588f1076bfc15a449a7d8e4fd2458d5, type: 3}
+      propertyPath: m_DepotTradeView
+      value: 
+      objectReference: {fileID: 96195354706635620}
     - target: {fileID: 7185863661492362030, guid: 2588f1076bfc15a449a7d8e4fd2458d5, type: 3}
       propertyPath: m_DepotResourceImage
       value: 
@@ -2102,6 +2110,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2588f1076bfc15a449a7d8e4fd2458d5, type: 3}
+--- !u!1 &96195354706635620 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4857476200570928304, guid: 2588f1076bfc15a449a7d8e4fd2458d5, type: 3}
+  m_PrefabInstance: {fileID: 96195354706635619}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &204685492368303458
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3606,6 +3619,10 @@ PrefabInstance:
       propertyPath: m_TradeExecutedEventChannel
       value: 
       objectReference: {fileID: 11400000, guid: e92fd0f8d7e695f4086206c7f3456d78, type: 2}
+    - target: {fileID: 5648193008044322631, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
+      propertyPath: m_EnablePlayerControllerEventChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: dc159ece76277b64a84c933d97bfc522, type: 2}
     - target: {fileID: 5806520543045075778, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
       propertyPath: m_UpdateUiEventChannel
       value: 

@@ -197,11 +197,8 @@ namespace Synthicate
 			// Tell the peer that the client amounts have changed and provide the new values
 			m_ClientTradeAmountsUpdatedEventChannel.RaiseEvent(m_GivingAmounts);
 			
-			// Clear the confirmed state if the client previous confirmed the trade
-			if (m_TradeState == TradeState.ClientConfirmed)
-			{
-				ChangeState(TradeState.NoneConfirmed);
-			}
+			// Clear the confirmed state (for both peers)
+			ChangeState(TradeState.NoneConfirmed);
 		}
 		
 		void ResetWindow()

@@ -23,7 +23,7 @@ namespace Synthicate
 		
 		[SerializeField] GameObject m_TradeMenu;
 		
-		[SerializeField] GameObject m_DepotTradeMenu;
+		[SerializeField] UserInterfaceDepotTradeWindow m_DepotTradeMenu;
 		
 		[SerializeField] GameObject m_AnyDepotTradeMeu;
 		

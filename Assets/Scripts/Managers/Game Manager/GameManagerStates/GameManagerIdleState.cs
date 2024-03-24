@@ -43,6 +43,7 @@ namespace Synthicate
 		
 		[SerializeField] EventChannelSO m_InitializeUiEventChannel;
 		[SerializeField] EventChannelSO m_UpdateUiEventChannel;		
+		[SerializeField] BoolEventChannelSO m_EnablePlayerControllerEventChannel;
 		
 		public override void Enter()
 		{
@@ -66,6 +67,9 @@ namespace Synthicate
 			
 			// _depotManagerSO.
 			m_EnableDepotSelectionEventChannel.RaiseEvent(true);
+			
+			// Enable player panning
+			m_EnablePlayerControllerEventChannel.RaiseEvent(true);
 		}
 		
 		public override void Execute()

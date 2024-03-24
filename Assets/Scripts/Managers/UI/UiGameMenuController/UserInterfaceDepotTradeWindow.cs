@@ -11,6 +11,8 @@ namespace Synthicate
 {
 	public class UserInterfaceDepotTradeWindow : MonoBehaviour
 	{
+		[Header("Trade Window")]
+		[SerializeField] GameObject m_DepotTradeView;
 		
 		[Header("Trade Increment / Decrement Buttons")]
 		
@@ -74,14 +76,21 @@ namespace Synthicate
 		
 		void OnEnable()
 		{
+			m_ClientTradeConfirmedButton.onClick.AddListener(ClientTradeConfirmedButtonEventHandler);
+			m_CancelTradeButton.onClick.AddListener(CancelTradeButtonEventHandler);
+			
 			ResetCounts();
+			tradeOfferAmount.text = $"{m_GivingAmount}";
+			m_DepotResourceImage.sprite = m_UserInterfaceScriptableObject.ResourceSprites[(int) m_TradeResource];
 		}
 		
 		
 		void Start()
 		{
-			m_ClientTradeConfirmedButton.onClick.AddListener(ClientTradeConfirmedButtonEventHandler);
-			m_CancelTradeButton.onClick.AddListener(CancelTradeButtonEventHandler);
+			
+			
+			tradeOfferAmount.text = $"{m_GivingAmount}";
+			m_DepotResourceImage.sprite = m_UserInterfaceScriptableObject.ResourceSprites[(int) m_TradeResource];
 		}
 		
 		void CancelTradeButtonEventHandler()
@@ -148,15 +157,17 @@ namespace Synthicate
 			
 			ResetCounts();
 			m_TradeResource = selection.Resource;
-			tradeOfferAmount.text = $"{selection.RequiredAmount}";
-			m_DepotResourceImage.sprite = m_UserInterfaceScriptableObject.ResourceSprites[(int) selection.Resource];
+			m_GivingAmount = selection.RequiredAmount;
+			
+			tradeOfferAmount.text = $"{m_GivingAmount}";
+			m_DepotResourceImage.sprite = m_UserInterfaceScriptableObject.ResourceSprites[(int) m_TradeResource];
 		}
 
 		
 		void ResetCounts()
 		{
 			m_InvalidTradeText.text = "";
-			tradeOfferAmount.text = "";
+			// tradeOfferAmount.text = "";
 			
 			m_GivingAmount = 0;
 			m_ReceivingAmounts = new int[]{0, 0, 0, 0, 0};
@@ -165,6 +176,11 @@ namespace Synthicate
 			{
 				depotResourceIncrementers[i].ResetAmount();
 			}
+		}
+		
+		public void SetActive(bool active)
+		{
+			m_DepotTradeView.SetActive(active);
 		}
 	}
 }
