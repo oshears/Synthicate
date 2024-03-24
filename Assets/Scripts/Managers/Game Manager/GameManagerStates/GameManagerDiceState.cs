@@ -13,37 +13,34 @@ namespace Synthicate
 		
 		// bool m_HashingValue = false;
 		
-		[SerializeField]
+		[SerializeField] 
 		[Tooltip("Amount of time that the dice is rolled / hashed for.")]
 		[Range(0, 5)]
 		int m_DiceRollDelay = 1;
 		
-		[SerializeField]
+		[SerializeField] 
 		[Range(0, 5)]
 		[Tooltip("Amount of time that the dice value is displayed for.")]
 		int m_DiceDisplayDelay = 1;
 		
 		// NetworkVariable<int> m_DiceValue = new NetworkVariable<int>();
-		[SerializeField]
-		int m_DiceValue = 1;
+		[SerializeField] int m_DiceValue = 1;
 		
 		[SerializeField]
 		[Range(1, 12)]
-		public int m_FixedDiceValue = 1;
+		public int m_FixedDiceValue = 7;
 		
-		[SerializeField]
-		public bool m_UsingFixedDice = false;
+		[SerializeField] public bool m_UsingFixedDice = true;
 		
 		[Header("Event Channels")]
 		
-		[SerializeField]
-		StringEventChannel m_NotificationEventChannel;
+		[SerializeField] StringEventChannel m_NotificationEventChannel;
 		
-		[SerializeField]
-		StringEventChannel m_LocalNotificationEvent;
+		[SerializeField] StringEventChannel m_LocalNotificationEvent;
 		
-		[SerializeField]
-		EventChannelSO m_UpdateUiEventChannel;
+		[SerializeField] EventChannelSO m_UpdateUiEventChannel;
+		
+		[SerializeField] GameMenuStateEventChannel m_GameMenuStateEventChannel;
 		
 		enum DiceState
 		{
@@ -58,6 +55,8 @@ namespace Synthicate
 		public override void Enter()
 		{
 			// m_DiceValue.OnValueChanged += DiceValueChangedEventHandler;
+			
+			m_GameMenuStateEventChannel.RaiseEvent(GameMenuType.PlayerPendingScreen);
 			
 			m_DiceValue = -1;
 			m_DiceDelay = 0;

@@ -59,8 +59,8 @@ namespace Synthicate
 		public void TakeRandomResourceFromPeerClientRpc(ClientRpcParams clientRpcParams = default)
 		{
 			if(!IsActiveState()){
-				Debug.LogError("Error! This client received the RPC and wasn't in the pending state!");
-				// return ResourceType.None;
+				Debug.LogError("Error! This client received the RPC when it wasn't supposed to!");
+				return;
 			}
 			
 			ResourceType resourceToGive = _gameManagerSO.clientPlayer.RemoveRandomResource();

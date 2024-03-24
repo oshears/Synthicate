@@ -93,6 +93,8 @@ namespace Synthicate
 		[ClientRpc]
 		public void GiveResourceToCurrentPlayerClientRpc(ResourceType resourceType)
 		{
+			if (!IsActiveState()) return;
+			
 			if (_gameManagerSO.IsClientTurn())
 			{
 				string clientname = _gameManagerSO.GetClientPlayerName();

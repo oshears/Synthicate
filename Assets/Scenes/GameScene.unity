@@ -3663,9 +3663,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8777508312429708221, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
+      propertyPath: m_FixedDiceValue
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8777508312429708221, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
+      propertyPath: m_UsingFixedDice
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8777508312429708221, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
       propertyPath: m_UpdateUiEventChannel
       value: 
       objectReference: {fileID: 11400000, guid: 29c8b666a6a2c994ba4cc049e8007d0d, type: 2}
+    - target: {fileID: 8777508312429708221, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
+      propertyPath: m_GameMenuStateEventChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: 8d791a9ed7c5d9c44844b28f23f7079f, type: 2}
     - target: {fileID: 8897379302554462184, guid: 5a26addf41a6fb648804328c16ee2920, type: 3}
       propertyPath: m_Name
       value: Game Manager
